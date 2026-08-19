@@ -1,0 +1,57 @@
+2025-09-01 17:14:30,002 | INFO | repair.ranger-clubhouse-web-master | Starting analysis for ranger-clubhouse-web-master
+2025-09-01 17:14:30,002 | INFO | repair.ranger-clubhouse-web-master | Starting breaking change analysis for -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master
+2025-09-01 17:14:30,002 | INFO | repair.ranger-clubhouse-web-master | ============================================================
+2025-09-01 17:14:30,002 | INFO | repair.ranger-clubhouse-web-master | BEGIN pattern 0 (pattern_0)
+2025-09-01 17:14:30,002 | DEBUG | repair.ranger-clubhouse-web-master | Pattern payload: {"type": "call", "pattern": "read {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 17:14:30,953 | INFO | repair.ranger-clubhouse-web-master | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master
+2025-09-01 17:14:30,953 | DEBUG | repair.ranger-clubhouse-web-master | Parsed detection output: [{'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 6, 'column': 0, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 7, 'column': 0, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 11, 'column': 0, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 13, 'column': 0, 'confidence': 'high'}]
+2025-09-01 17:14:30,953 | DEBUG | repair.ranger-clubhouse-web-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1084b6200>, {'tests/test-helper.js': defaultdict(<class 'list'>, {0: [{'line': 6, 'column': 0, 'confidence': 'high'}, {'line': 7, 'column': 0, 'confidence': 'high'}, {'line': 11, 'column': 0, 'confidence': 'high'}, {'line': 13, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 17:14:30,953 | INFO | repair.ranger-clubhouse-web-master | New context extracted from -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js
+2025-09-01 17:14:30,954 | INFO | repair.ranger-clubhouse-web-master | New context extracted from -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js
+2025-09-01 17:14:30,954 | INFO | repair.ranger-clubhouse-web-master | New context extracted from -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js
+2025-09-01 17:14:30,954 | INFO | repair.ranger-clubhouse-web-master | New context extracted from -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js
+2025-09-01 17:14:41,969 | DEBUG | repair.ranger-clubhouse-web-master | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import { setupEmberOnerrorValidation } from 'ember-qunit';\nimport { loadTests } from 'ember-qunit/test-loader';\n\n// Enable global Ember.onError validation during tests\nsetupEmberOnerrorValidation();\n\n// Explicitly load all test modules\nloadTests();\n\n// Start the test runner\nstart();",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:14:41,971 | INFO | repair.ranger-clubhouse-web-master | Replaced code in -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js at [378, 386]
+2025-09-01 17:14:50,905 | DEBUG | repair.ranger-clubhouse-web-master | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import { setupEmberOnerrorValidation } from 'ember-qunit';\nimport { loadTests } from 'ember-qunit/test-loader';\n\n// ensure global error validation is enabled before loading tests\nsetupEmberOnerrorValidation();\nloadTests();",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:14:50,909 | INFO | repair.ranger-clubhouse-web-master | Replaced code in -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js at [365, 376]
+2025-09-01 17:14:56,368 | DEBUG | repair.ranger-clubhouse-web-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the entire test entry file (e.g., tests/test-helper.js) including any calls to start(), loadTests(), or setupEmberOnerrorValidation(), so we can determine if explicit invocations need to be added per the v9.0.0 upgrade.",
+  "dependencies": []
+}
+2025-09-01 17:14:56,368 | DEBUG | repair.ranger-clubhouse-web-master | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 17:15:11,209 | DEBUG | repair.ranger-clubhouse-web-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the full test entry file (e.g., tests/test-helper.js) including where `start()` is called so that we can insert the required calls to `setupEmberOnerrorValidation()` and `loadTests()` in the correct order.",
+  "dependencies": []
+}
+2025-09-01 17:15:11,211 | DEBUG | repair.ranger-clubhouse-web-master | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 17:15:11,211 | INFO | repair.ranger-clubhouse-web-master | Whole mode item: -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js
+2025-09-01 17:15:27,459 | DEBUG | repair.ranger-clubhouse-web-master | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "import Application from 'clubhouse/app';\nimport config from 'clubhouse/config/environment';\nimport * as QUnit from 'qunit';\nimport { setApplication } from '@ember/test-helpers';\nimport { setup } from 'qunit-dom';\nimport { start, setupEmberOnerrorValidation } from 'ember-qunit';\nimport { loadTests } from 'ember-qunit/test-loader';\n\nsetApplication(Application.create(config.APP));\nsetup(QUnit.assert);\n\n// Enable global Ember.onError validation during tests\nsetupEmberOnerrorValidation();\n\n// Explicitly load all test modules\nloadTests();\n\n// Start the test runner\nstart();", 'additional_req': '', 'dependencies': []}
+2025-09-01 17:15:27,461 | INFO | repair.ranger-clubhouse-web-master | Replace whole file: -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js
+2025-09-01 17:15:27,462 | INFO | repair.ranger-clubhouse-web-master | Whole mode item: -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/tests/test-helper.js
+2025-09-01 17:15:27,463 | DEBUG | repair.ranger-clubhouse-web-master | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/package.json
+2025-09-01 17:15:27,463 | INFO | repair.ranger-clubhouse-web-master | END pattern 0 (pattern_0)
+2025-09-01 17:15:27,463 | INFO | repair.ranger-clubhouse-web-master | ============================================================
+2025-09-01 17:15:27,463 | INFO | repair.ranger-clubhouse-web-master | BEGIN pattern 0 (pattern_0)
+2025-09-01 17:15:27,463 | DEBUG | repair.ranger-clubhouse-web-master | Pattern payload: {"type": "call", "pattern": "write {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 17:15:28,482 | INFO | repair.ranger-clubhouse-web-master | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master
+2025-09-01 17:15:28,482 | DEBUG | repair.ranger-clubhouse-web-master | Parsed detection output: []
+2025-09-01 17:15:28,482 | DEBUG | repair.ranger-clubhouse-web-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1084b6340>, {})
+2025-09-01 17:15:28,482 | DEBUG | repair.ranger-clubhouse-web-master | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/package.json
+2025-09-01 17:15:28,482 | INFO | repair.ranger-clubhouse-web-master | END pattern 0 (pattern_0)
+2025-09-01 17:15:28,483 | DEBUG | repair.ranger-clubhouse-web-master | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ranger-clubhouse-web-master/package.json
+2025-09-01 17:15:28,483 | INFO | repair.ranger-clubhouse-web-master | token consumed 25783
+2025-09-01 17:15:28,483 | INFO | repair.ranger-clubhouse-web-master | parse consumption time: 56.49551370739937

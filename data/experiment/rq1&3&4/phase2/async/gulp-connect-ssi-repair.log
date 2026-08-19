@@ -1,0 +1,85 @@
+2025-08-30 20:58:50,687 | INFO | repair.gulp-connect-ssi | Starting analysis for gulp-connect-ssi
+2025-08-30 20:58:50,687 | INFO | repair.gulp-connect-ssi | Starting breaking change analysis for /async/results/gpt-4.1/gulp-connect-ssi
+2025-08-30 20:58:50,688 | INFO | repair.gulp-connect-ssi | ============================================================
+2025-08-30 20:58:50,688 | INFO | repair.gulp-connect-ssi | BEGIN pattern 0 (pattern_0)
+2025-08-30 20:58:50,688 | DEBUG | repair.gulp-connect-ssi | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{each,concat,detect,every,filter,groupBy,map,mapValues,reduce,reject,some,transform,times,auto,compose,seq,whilst,until,forever,parallel,race,retry,series,tryEach,waterfall}", "changelogId": 0}
+2025-08-30 20:58:50,822 | INFO | repair.gulp-connect-ssi | Tapir run successful for /async/results/gpt-4.1/gulp-connect-ssi
+2025-08-30 20:58:50,823 | DEBUG | repair.gulp-connect-ssi | Parsed detection output: [{'pattern_id': 0, 'file': 'index.js', 'line': 91, 'column': 59}, {'pattern_id': 0, 'file': 'index.js', 'line': 128, 'column': 4}]
+2025-08-30 20:58:50,823 | DEBUG | repair.gulp-connect-ssi | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7420>, {'index.js': defaultdict(<class 'list'>, {0: [{'line': 91, 'column': 59}, {'line': 128, 'column': 4}]})})
+2025-08-30 20:58:50,823 | INFO | repair.gulp-connect-ssi | New context extracted from /async/results/gpt-4.1/gulp-connect-ssi/index.js
+2025-08-30 20:58:50,824 | INFO | repair.gulp-connect-ssi | New context extracted from /async/results/gpt-4.1/gulp-connect-ssi/index.js
+2025-08-30 20:58:51,635 | DEBUG | repair.gulp-connect-ssi | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:51,637 | DEBUG | repair.gulp-connect-ssi | Updated package.json saved at /async/results/gpt-4.1/gulp-connect-ssi/package.json
+2025-08-30 20:58:51,637 | INFO | repair.gulp-connect-ssi | END pattern 0 (pattern_0)
+2025-08-30 20:58:51,638 | INFO | repair.gulp-connect-ssi | ============================================================
+2025-08-30 20:58:51,638 | INFO | repair.gulp-connect-ssi | BEGIN pattern 2 (pattern_2)
+2025-08-30 20:58:51,638 | DEBUG | repair.gulp-connect-ssi | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{drain,saturated,unsaturated,empty,error}", "changelogId": 2}
+2025-08-30 20:58:51,793 | INFO | repair.gulp-connect-ssi | Tapir run successful for /async/results/gpt-4.1/gulp-connect-ssi
+2025-08-30 20:58:51,794 | DEBUG | repair.gulp-connect-ssi | Parsed detection output: []
+2025-08-30 20:58:51,794 | DEBUG | repair.gulp-connect-ssi | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b6de0>, {})
+2025-08-30 20:58:51,794 | DEBUG | repair.gulp-connect-ssi | Updated package.json saved at /async/results/gpt-4.1/gulp-connect-ssi/package.json
+2025-08-30 20:58:51,794 | INFO | repair.gulp-connect-ssi | END pattern 2 (pattern_2)
+2025-08-30 20:58:51,794 | INFO | repair.gulp-connect-ssi | ============================================================
+2025-08-30 20:58:51,794 | INFO | repair.gulp-connect-ssi | BEGIN pattern 3 (pattern_3)
+2025-08-30 20:58:51,794 | DEBUG | repair.gulp-connect-ssi | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{eachOfLimit*,each*,eachSeries*,compose*,seq*,waterfall*,auto*,autoInject*,whilst*,until*,forever*}", "changelogId": 3}
+2025-08-30 20:58:51,921 | INFO | repair.gulp-connect-ssi | Tapir run successful for /async/results/gpt-4.1/gulp-connect-ssi
+2025-08-30 20:58:51,921 | DEBUG | repair.gulp-connect-ssi | Parsed detection output: []
+2025-08-30 20:58:51,921 | DEBUG | repair.gulp-connect-ssi | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b6de0>, {})
+2025-08-30 20:58:51,922 | DEBUG | repair.gulp-connect-ssi | Updated package.json saved at /async/results/gpt-4.1/gulp-connect-ssi/package.json
+2025-08-30 20:58:51,922 | INFO | repair.gulp-connect-ssi | END pattern 3 (pattern_3)
+2025-08-30 20:58:51,922 | INFO | repair.gulp-connect-ssi | ============================================================
+2025-08-30 20:58:51,922 | INFO | repair.gulp-connect-ssi | BEGIN pattern 4 (pattern_4)
+2025-08-30 20:58:51,922 | DEBUG | repair.gulp-connect-ssi | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{during,doDuring,whilst,doWhilst,until,doUntil}", "changelogId": 4}
+2025-08-30 20:58:52,045 | INFO | repair.gulp-connect-ssi | Tapir run successful for /async/results/gpt-4.1/gulp-connect-ssi
+2025-08-30 20:58:52,045 | DEBUG | repair.gulp-connect-ssi | Parsed detection output: [{'pattern_id': 4, 'file': 'index.js', 'line': 128, 'column': 4}]
+2025-08-30 20:58:52,045 | DEBUG | repair.gulp-connect-ssi | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b6de0>, {'index.js': defaultdict(<class 'list'>, {4: [{'line': 128, 'column': 4}]})})
+2025-08-30 20:58:52,046 | INFO | repair.gulp-connect-ssi | New context extracted from /async/results/gpt-4.1/gulp-connect-ssi/index.js
+2025-08-30 20:58:56,936 | DEBUG | repair.gulp-connect-ssi | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "SSI.prototype.resolveIncludes = function (content, options, callback){\n    var matches, seg, isVirtual, basePath, tpath, subOptions, self = this;\n\n    /**\n     * @func insertInclude\n     * @param {Object} next next\n     * @returns {String} content content\n     */\n    function insertInclude(next){\n        seg = matches[0];\n        isVirtual = RegExp.$1 === 'virtual';\n        basePath = (isVirtual && options.dirname && RegExp.$3.charAt(0) !== '/') ? options.dirname : options.baseDir;\n        tpath = path.join(basePath, RegExp.$3);\n        var promise = self.methodResolve(tpath, url.resolve(options.domain, matches[3]), options);\n        promise.then(function(value){\n            if (value === 'readOnLine'){\n                (options.domain.indexOf('https') === -1 ? http : https).get(url.resolve(options.domain, matches[3]), function(res) {\n                    var chunks = [];\n                    res.on('data', function(chunk) {\n                        chunks.push(chunk);\n                    }).on('end', function() {\n                        var innerContentRaw = iconv.decode(Buffer.concat(chunks), options.onlineEncoding);\n                        subOptions = extend({}, options, {dirname: path.dirname(tpath)});\n                        self.resolveIncludes(innerContentRaw, subOptions, function(err, innerContent) {\n                            if (err) {\n                                return next(err);\n                            }\n                            content = content.slice(0, matches.index) + innerContent + content.slice(matches.index + seg.length);\n                            next(null, content);\n                        });\n                    });\n\n                }).on('error', function(err) {\n                    return next(err);\n                });\n            } else {\n                fs.readFile(tpath, {\n                    encoding: options.encoding\n                }, function(err, innerContentRaw) {\n                    if (err) {\n                        return next(err);\n                    }\n                    // ensure that included files can include other files with relative paths\n                    subOptions = extend({}, options, {dirname: path.dirname(tpath)});\n                    self.resolveIncludes(innerContentRaw, subOptions, function(err, innerContent) {\n                        if (err) {\n                            return next(err);\n                        }\n                        content = content.slice(0, matches.index) + innerContent + content.slice(matches.index + seg.length);\n                        next(null, content);\n                    });\n                });\n            }\n        });\n\n    }\n\n    async.whilst(\n        // The 'test' argument must now be asynchronous and accept a callback per async@3.x\n        function test(cb) {\n            cb(null, !!(matches = self.regExps.includeFileReg.exec(content)));\n        },\n        insertInclude,\n        function includesComplete(err) {\n            if (err) {\n                return callback(err);\n            }\n            return callback(null, content);\n        }\n    );\n};\n",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:56,938 | INFO | repair.gulp-connect-ssi | Replaced code in /async/results/gpt-4.1/gulp-connect-ssi/index.js at [2031, 5036]
+2025-08-30 20:58:56,940 | DEBUG | repair.gulp-connect-ssi | Updated package.json saved at /async/results/gpt-4.1/gulp-connect-ssi/package.json
+2025-08-30 20:58:56,940 | INFO | repair.gulp-connect-ssi | END pattern 4 (pattern_4)
+2025-08-30 20:58:56,941 | INFO | repair.gulp-connect-ssi | ============================================================
+2025-08-30 20:58:56,941 | INFO | repair.gulp-connect-ssi | BEGIN pattern 5 (pattern_5)
+2025-08-30 20:58:56,941 | DEBUG | repair.gulp-connect-ssi | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{queue,mapLimit,eachLimit,filterLimit,reduceLimit,concatLimit,eachOfLimit,forEachOfLimit,groupByLimit}", "changelogId": 5}
+2025-08-30 20:58:57,098 | INFO | repair.gulp-connect-ssi | Tapir run successful for /async/results/gpt-4.1/gulp-connect-ssi
+2025-08-30 20:58:57,099 | DEBUG | repair.gulp-connect-ssi | Parsed detection output: []
+2025-08-30 20:58:57,099 | DEBUG | repair.gulp-connect-ssi | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b6de0>, {})
+2025-08-30 20:58:57,099 | DEBUG | repair.gulp-connect-ssi | Updated package.json saved at /async/results/gpt-4.1/gulp-connect-ssi/package.json
+2025-08-30 20:58:57,099 | INFO | repair.gulp-connect-ssi | END pattern 5 (pattern_5)
+2025-08-30 20:58:57,099 | INFO | repair.gulp-connect-ssi | ============================================================
+2025-08-30 20:58:57,099 | INFO | repair.gulp-connect-ssi | BEGIN pattern 6 (pattern_6)
+2025-08-30 20:58:57,099 | DEBUG | repair.gulp-connect-ssi | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{memoize}", "changelogId": 6}
+2025-08-30 20:58:57,221 | INFO | repair.gulp-connect-ssi | Tapir run successful for /async/results/gpt-4.1/gulp-connect-ssi
+2025-08-30 20:58:57,221 | DEBUG | repair.gulp-connect-ssi | Parsed detection output: []
+2025-08-30 20:58:57,221 | DEBUG | repair.gulp-connect-ssi | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b6de0>, {})
+2025-08-30 20:58:57,221 | DEBUG | repair.gulp-connect-ssi | Updated package.json saved at /async/results/gpt-4.1/gulp-connect-ssi/package.json
+2025-08-30 20:58:57,221 | INFO | repair.gulp-connect-ssi | END pattern 6 (pattern_6)
+2025-08-30 20:58:57,221 | INFO | repair.gulp-connect-ssi | ============================================================
+2025-08-30 20:58:57,221 | INFO | repair.gulp-connect-ssi | BEGIN pattern 7 (pattern_7)
+2025-08-30 20:58:57,221 | DEBUG | repair.gulp-connect-ssi | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}", "changelogId": 7}
+2025-08-30 20:58:57,345 | INFO | repair.gulp-connect-ssi | Tapir run successful for /async/results/gpt-4.1/gulp-connect-ssi
+2025-08-30 20:58:57,345 | DEBUG | repair.gulp-connect-ssi | Parsed detection output: []
+2025-08-30 20:58:57,345 | DEBUG | repair.gulp-connect-ssi | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b6de0>, {})
+2025-08-30 20:58:57,345 | DEBUG | repair.gulp-connect-ssi | Updated package.json saved at /async/results/gpt-4.1/gulp-connect-ssi/package.json
+2025-08-30 20:58:57,345 | INFO | repair.gulp-connect-ssi | END pattern 7 (pattern_7)
+2025-08-30 20:58:57,345 | INFO | repair.gulp-connect-ssi | ============================================================
+2025-08-30 20:58:57,345 | INFO | repair.gulp-connect-ssi | BEGIN pattern 8 (pattern_8)
+2025-08-30 20:58:57,345 | DEBUG | repair.gulp-connect-ssi | Pattern payload: {"type": "import", "pattern": "import {async.mjs}", "changelogId": 8}
+2025-08-30 20:58:57,468 | INFO | repair.gulp-connect-ssi | Tapir run successful for /async/results/gpt-4.1/gulp-connect-ssi
+2025-08-30 20:58:57,468 | DEBUG | repair.gulp-connect-ssi | Parsed detection output: []
+2025-08-30 20:58:57,468 | DEBUG | repair.gulp-connect-ssi | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b6de0>, {})
+2025-08-30 20:58:57,468 | DEBUG | repair.gulp-connect-ssi | Updated package.json saved at /async/results/gpt-4.1/gulp-connect-ssi/package.json
+2025-08-30 20:58:57,468 | INFO | repair.gulp-connect-ssi | END pattern 8 (pattern_8)
+2025-08-30 20:58:57,468 | DEBUG | repair.gulp-connect-ssi | Updated package.json saved at /async/results/gpt-4.1/gulp-connect-ssi/package.json
+2025-08-30 20:58:57,469 | INFO | repair.gulp-connect-ssi | token consumed 6632
+2025-08-30 20:58:57,469 | INFO | repair.gulp-connect-ssi | parse consumption time: 5.700995542109013

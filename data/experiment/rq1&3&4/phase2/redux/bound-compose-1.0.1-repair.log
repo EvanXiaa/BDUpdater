@@ -1,0 +1,30 @@
+2025-08-30 01:10:56,428 | INFO | repair.bound-compose-1.0.1 | Starting analysis for bound-compose-1.0.1
+2025-08-30 01:10:56,428 | INFO | repair.bound-compose-1.0.1 | Starting breaking change analysis for /redux/results/gpt-4.1/bound-compose-1.0.1
+2025-08-30 01:10:56,428 | INFO | repair.bound-compose-1.0.1 | ============================================================
+2025-08-30 01:10:56,429 | INFO | repair.bound-compose-1.0.1 | BEGIN pattern 0 (pattern_0)
+2025-08-30 01:10:56,429 | DEBUG | repair.bound-compose-1.0.1 | Pattern payload: {"type": "call", "pattern": "call {<redux>,<redux/**/*>}?**.{getState,subscribe,unsubscribe}", "changelogId": 0}
+2025-08-30 01:10:56,560 | INFO | repair.bound-compose-1.0.1 | Tapir run successful for /redux/results/gpt-4.1/bound-compose-1.0.1
+2025-08-30 01:10:56,560 | DEBUG | repair.bound-compose-1.0.1 | Parsed detection output: []
+2025-08-30 01:10:56,560 | DEBUG | repair.bound-compose-1.0.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1042f5d00>, {})
+2025-08-30 01:10:56,560 | DEBUG | repair.bound-compose-1.0.1 | Updated package.json saved at /redux/results/gpt-4.1/bound-compose-1.0.1/package.json
+2025-08-30 01:10:56,560 | INFO | repair.bound-compose-1.0.1 | END pattern 0 (pattern_0)
+2025-08-30 01:10:56,560 | INFO | repair.bound-compose-1.0.1 | ============================================================
+2025-08-30 01:10:56,560 | INFO | repair.bound-compose-1.0.1 | BEGIN pattern 1 (pattern_1)
+2025-08-30 01:10:56,560 | DEBUG | repair.bound-compose-1.0.1 | Pattern payload: {"type": "import", "pattern": "import {redux/lib/*,redux/es/*,redux/lib/createStore,redux/es/createStore,redux/lib/combineReducers,redux/es/combineReducers,redux/lib/applyMiddleware,redux/es/applyMiddleware,redux/lib/bindActionCreators,redux/es/bindActionCreators,redux/lib/compose,redux/es/compose,redux/lib/actionTypes,redux/es/actionTypes,redux/lib/utils/*,redux/es/utils/*}", "changelogId": 1}
+2025-08-30 01:10:56,669 | INFO | repair.bound-compose-1.0.1 | Tapir run successful for /redux/results/gpt-4.1/bound-compose-1.0.1
+2025-08-30 01:10:56,669 | DEBUG | repair.bound-compose-1.0.1 | Parsed detection output: [{'pattern_id': 1, 'file': 'src/index.js', 'line': 1, 'column': 0}]
+2025-08-30 01:10:56,669 | DEBUG | repair.bound-compose-1.0.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1042f5d00>, {'src/index.js': defaultdict(<class 'list'>, {1: [{'line': 1, 'column': 0}]})})
+2025-08-30 01:10:56,669 | INFO | repair.bound-compose-1.0.1 | New context extracted from /redux/results/gpt-4.1/bound-compose-1.0.1/src/index.js
+2025-08-30 01:10:58,760 | DEBUG | repair.bound-compose-1.0.1 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import { compose } from 'redux'\n// Changed: Direct import from 'redux/lib/compose' is no longer supported in redux@v4.0.0+, import from 'redux' public API instead.",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 01:10:58,761 | INFO | repair.bound-compose-1.0.1 | Replaced code in /redux/results/gpt-4.1/bound-compose-1.0.1/src/index.js at [0, 39]
+2025-08-30 01:10:58,762 | DEBUG | repair.bound-compose-1.0.1 | Updated package.json saved at /redux/results/gpt-4.1/bound-compose-1.0.1/package.json
+2025-08-30 01:10:58,762 | INFO | repair.bound-compose-1.0.1 | END pattern 1 (pattern_1)
+2025-08-30 01:10:58,763 | INFO | repair.bound-compose-1.0.1 | Config BC: scanning 0 files
+2025-08-30 01:10:58,764 | DEBUG | repair.bound-compose-1.0.1 | Updated package.json saved at /redux/results/gpt-4.1/bound-compose-1.0.1/package.json
+2025-08-30 01:10:58,764 | INFO | repair.bound-compose-1.0.1 | token consumed 1425
+2025-08-30 01:10:58,764 | INFO | repair.bound-compose-1.0.1 | parse consumption time: 2.090151082724333

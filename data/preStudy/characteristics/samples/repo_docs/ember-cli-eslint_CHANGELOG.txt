@@ -1,0 +1,54 @@
+## v5.0.0 (2018-11-09)
+
+#### :boom: Breaking Change
+* [#284](https://github.com/ember-cli/ember-cli-eslint/pull/284) Upgrade `broccoli-lint-eslint` to v5.0.0 ([@Gaurav0](https://github.com/Gaurav0))
+* [#256](https://github.com/ember-cli/ember-cli-eslint/pull/256) Drop support for IE9 and IE10 ([@Gaurav0](https://github.com/Gaurav0))
+* [#254](https://github.com/ember-cli/ember-cli-eslint/pull/254) Drop support for Node.js 4 ([@Gaurav0](https://github.com/Gaurav0))
+
+#### :house: Internal
+* [#251](https://github.com/ember-cli/ember-cli-eslint/pull/251) Upgrade to ember cli 3.4 via ember-cli-update ([@Gaurav0](https://github.com/Gaurav0))
+* [#255](https://github.com/ember-cli/ember-cli-eslint/pull/255) Use Chrome instead of PhantomJS to run tests ([@Gaurav0](https://github.com/Gaurav0))
+* [#263](https://github.com/ember-cli/ember-cli-eslint/pull/263) Remove obsolete `es6-promise` dev dependency ([@Turbo87](https://github.com/Turbo87))
+* [#262](https://github.com/ember-cli/ember-cli-eslint/pull/262) yarn: Add `integrity` hashes ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 2
+- Gaurav Munjal ([@Gaurav0](https://github.com/Gaurav0))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
+
+## 4.2.3
+## 4.2.2
+## 4.2.1
+## 4.2.0
+## 4.1.0
+## 4.0.0
+## 3.1.0
+## 3.0.3
+## 3.0.2
+## 3.0.1
+## 3.0.0
+## 2.0.1
+## 2.0.0
+## 1.8.0
+## 1.7.0 / 02-07-2016
+## 1.6.0 / 15-06-2016
+## 1.5.0 / 09-06-2016
+## 1.4.1 / 30-05-2016
+## 1.4.0 / 14-05-2016
+## 1.3.0 / 13-04-2016
+## 1.2.1
+## 1.2.0
+## 1.1.0
+## 1.0.0
+## 1.0.0-beta.15
+## 1.0.0-beta.14
+## 1.0.0-beta.13
+## 1.0.0-beta.12
+## 1.0.0-beta.11
+## 1.0.0-beta.10
+## 1.0.0-beta.9
+## 1.0.0-beta.8
+## 1.0.0-beta.7
+## 1.0.0-beta.2
+## 0.1.4
+## 0.1.3

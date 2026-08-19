@@ -1,0 +1,721 @@
+2025-08-31 01:58:15,303 | INFO | repair.ketting | Starting analysis for ketting
+2025-08-31 01:58:15,303 | INFO | repair.ketting | Starting breaking change analysis for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 01:58:15,303 | INFO | repair.ketting | ============================================================
+2025-08-31 01:58:15,303 | INFO | repair.ketting | BEGIN pattern 2 (pattern_2)
+2025-08-31 01:58:15,303 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 01:58:15,512 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 01:58:15,513 | DEBUG | repair.ketting | Parsed detection output: [{'pattern_id': 2, 'file': 'lib/resource.js', 'line': 149, 'column': 15}]
+2025-08-31 01:58:15,513 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424fb00>, {'lib/resource.js': defaultdict(<class 'list'>, {2: [{'line': 149, 'column': 15}]})})
+2025-08-31 01:58:15,513 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 01:58:50,754 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "This snippet calls response.text() in refresh(). In node-fetch v2, text() always decodes as UTF-8 and no longer auto-detects other charsets. Please confirm whether all server responses for this resource are guaranteed to be UTF-8. If any responses can be in other encodings (e.g., ISO-8859-1, Shift_JIS) and you relied on v1 auto-detection, replace response.text() with response.textConverted() in refresh(), and add the optional dependency \"encoding\" (e.g., encoding@^0.1.13) so node-fetch can convert non-UTF-8 payloads. If everything is UTF-8, no changes are needed.",
+  "dependencies": []
+}
+2025-08-31 01:58:50,756 | DEBUG | repair.ketting | Added to whole mode list: file=/node-fetch/results/gpt-4.1/ketting/lib/resource.js, context=Node, bc_desc={'Id': 2, 'BC_description': "The 'response.text()' method now always returns text as UTF-8 without attempting to detect ...
+2025-08-31 01:58:50,756 | INFO | repair.ketting | Whole mode item: /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:00:15,841 | DEBUG | repair.ketting | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "'use strict';\n\nvar url = require('./utils/url');\nvar FollowablePromise = require('./followable-promise');\nvar fetch = require('./utils/fetch');\nvar problemFactory = require('./http-error');\nvar LinkHeader = require('http-link-header');\nvar Link = require('./link');\n\n/**\n * A 'resource' represents an endpoint on the server.\n *\n * The endpoint has a uri, you might for example be able to GET its\n * presentation.\n *\n * A resource may also have a list of links on them, pointing to other\n * resources.\n *\n * @param {Client} client\n * @param {string} uri\n * @constructor\n */\nvar Resource = function(client, uri) {\n\n  this.client = client;\n  this.uri = uri;\n  this.rep = null;\n\n};\n\nResource.prototype = {\n\n  /**\n   * Fetches the resource representation.\n   * Returns a promise that resolves to a parsed json object.\n   *\n   * @async\n   * @return {string|object}\n   */\n  get: function() {\n\n    return this.representation().then(function(r) {\n      return r.body;\n    });\n\n  },\n\n  /**\n   * Updates the resource representation with a new JSON object.\n   *\n   * @async\n   * @param {object} body\n   * @return {void}\n   */\n  put: function(body) {\n\n    return this.fetchAndThrow(\n      {\n        method: 'PUT',\n        body: JSON.stringify(body)\n      }\n    ).then(function() {\n\n      // Wipe out the local cache\n      this.repr = null;\n      return null;\n\n    }.bind(this));\n\n  },\n\n  /**\n   * Updates the resource representation with a new JSON object.\n   *\n   * @async\n   * @return {void}\n   */\n  delete: function() {\n\n    return this.fetchAndThrow(\n      {\n        method: 'DELETE',\n      }\n    ).then(function() {\n\n      // Wipe out the local cache\n      this.repr = null;\n      return null;\n\n    }.bind(this));\n\n  },\n\n  /**\n   * Sends a POST request to the resource.\n   *\n   * This function assumes that POST is used to create new resources, and\n   * that the response will be a 201 Created along with a Location header that\n   * identifies the new resource location.\n   *\n   * This function returns a Promise that resolves into the newly created\n   * Resource.\n   *\n   * If no Location header was given, it will resolve still, but with an empty\n   * value.\n   *\n   * @async\n   * @param {object} body\n   * @return {null|Resource}\n   */\n  post: function(body) {\n\n    return this.fetchAndThrow(\n      {\n        method: 'POST',\n        body: JSON.stringify(body)\n      }\n    ).then(function(response) {\n\n      if (response.headers.has('location')) {\n        return this.client.getResource(\n          url.resolve(\n            this.uri,\n            response.headers.get('location')\n          )\n        );\n      }\n      return null;\n\n    }.bind(this));\n\n  },\n\n  /**\n   * Refreshes the representation for this resource.\n   *\n   * This function will return the a parsed JSON object, like the get\n   * function does.\n   *\n   * @async\n   * @return {object}\n   */\n  refresh: function() {\n\n    var response;\n    return this.fetchAndThrow({method: 'GET'})\n      .then(function(r) {\n        response = r;\n        // node-fetch v2: text() no longer auto-detects encoding; use textConverted() to preserve v1 behavior if available.\n        return typeof response.textConverted === 'function' ? response.textConverted() : response.text();\n      }).then(function(body) {\n        var contentType = response.headers.get('Content-Type');\n        // eslint-disable-next-line no-console\n        console.log(typeof response.headers);console.log('!!!');console.log(response.headers);\n        this.repr = new (this.client.getRepresentor(contentType))(\n          this.uri,\n          contentType,\n          body\n        );\n\n        // Extracting HTTP Link header.\n        var httpLinkHeader = response.headers.get('Link');\n        if (httpLinkHeader) LinkHeader.parse(httpLinkHeader).refs\n          .forEach( function(httpLink) {\n            // Looping through individual links\n            httpLink.rel.split(' ').forEach(function(rel) {\n              // Looping through space separated rel values.\n              this.repr.links.push(\n                new Link({\n                  rel: rel,\n                  baseHref: this.uri,\n                  href: httpLink.uri\n                })\n              );\n            }.bind(this));\n          }.bind(this));\n\n        // Parsing and storing embedded uris\n        for (var uri in this.repr.embedded) {\n          var subResource = this.client.getResource(uri);\n          subResource.repr = new (this.client.getRepresentor(contentType))(\n            uri,\n            contentType,\n            this.repr.embedded[uri]\n          );\n        }\n        return this.repr.body;\n      // Removing embedded because it just takes up extra memory.\n      }.bind(this));\n\n  },\n\n  /**\n   * Returns the links for this resource, as a promise.\n   *\n   * The rel argument is optional. If it's given, we will only return links\n   * from that relationship type.\n   *\n   * @async\n   * @param {string} rel\n   * @returns {Link[]}\n   */\n  links: function(rel) {\n\n    return this.representation().then(function(r) {\n      if (!rel) return r.links;\n      return r.links.filter( function(item) { return item.rel === rel; } );\n    });\n\n  },\n\n  /**\n   * Follows a relationship, based on its reltype. For example, this might be\n   * 'alternate', 'item', 'edit' or a custom url-based one.\n   *\n   * This function can also follow templated uris. You can specify uri\n   * variables in the optional variables argument.\n   *\n   * @param {string} rel - Relationship type\n   * @param {Object} variables - Only needed for templated uris.\n   * @returns {FollowablePromise}\n   */\n  follow: function(rel, variables) {\n\n    return new FollowablePromise(function(res, rej) {\n\n      this.links(rel)\n        .then(function(links) {\n\n          var href;\n          if (links.length === 0) {\n            throw new Error('Relation with type ' + rel + ' not found on resource ' + this.uri);\n          }\n          if (links[0].templated) {\n            href = links[0].expand(variables);\n          } else {\n            href = links[0].resolve();\n          }\n\n          var resource = this.client.getResource(\n            href\n          );\n\n          res(resource);\n        }.bind(this))\n        .catch(function(reason) {\n          rej(reason);\n        });\n\n    }.bind(this));\n\n  },\n\n  /**\n   * Follows a relationship based on its reltype. This function returns a\n   * Promise that resolves to an array of Resource objects.\n   *\n   * If no resources were found, the array will be empty.\n   *\n   * @async\n   * @param {string} rel - Relationship type\n   * @returns {Resource[]}\n   */\n  followAll: function(rel) {\n\n    return this.links(rel).then(function(links) {\n\n      return links.map(function(link) {\n        return this.client.getResource(\n          link.resolve()\n        );\n      }.bind(this));\n    }.bind(this));\n  },\n\n  /**\n   * Returns the representation for the object.\n   * If it wasn't fetched yet, this function does the fetch as well.\n   *\n   * Usually you will want to use the `get()` method instead, unless you need\n   * the full object.\n   *\n   * @async\n   * @returns {Representation}\n   */\n  representation: function() {\n\n    if (this.repr) {\n      return Promise.resolve(this.repr);\n    } else {\n      return this.refresh().then(function() {\n        return this.repr;\n      }.bind(this));\n    }\n\n  },\n\n  /**\n   * Does an arbitrary HTTP request on the resource using the Fetch API.\n   *\n   * The method signature is the same as the MDN fetch object. However, it's\n   * possible in this case to not specify a URI or specify a relative URI.\n   *\n   * When doing the actual request, any relative uri will be resolved to the\n   * uri of the current resource.\n   *\n   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/Request\n   * @param {Request|uri|object} input\n   * @param {Object} init\n   * @returns {Response}\n   */\n  fetch: function(input, init) {\n\n    if (typeof input === 'undefined') {\n      // Nothing was provided, we're operating on the resource uri\n      input = this.uri;\n\n    } else if (typeof input === 'string') {\n      // A uri as sting is provided, we're resolving it.\n      input = url.resolve(this.uri, input);\n\n    } else if (typeof input.url === 'string') {\n      // A url is provided in the init object.\n      input.url = url.resolve(this.uri, input.url);\n    } else {\n      // The provided argument is untyped, so likely the init\n      // parameter was put first.\n\n      // Using the argument as the 'init' value\n      init = input;\n\n      // And using the current uri as the 'input' value.\n      input = this.uri;\n\n    }\n    var request = new fetch.Request(input, init);\n\n    return this.client.fetch(request, init);\n\n  },\n\n  /**\n   * Does a HTTP request and throws an exception if the server emitted\n   * a HTTP error.\n   *\n   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/Request\n   * @param {Request|uri|object} input\n   * @param {Object} init\n   * @returns {Response}\n   */\n  fetchAndThrow: function(input, init) {\n\n    return this.fetch(input, init).then(function(response) {\n\n      if (response.ok) {\n        return response;\n      } else {\n        return problemFactory(response).then(function(error) {\n          throw error;\n        });\n      }\n\n    });\n\n  }\n\n};\n\nmodule.exports = Resource;", 'additional_req': '', 'dependencies': ['encoding@^0.1.12']}
+2025-08-31 02:00:15,843 | INFO | repair.ketting | Replace whole file: /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:00:15,846 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:00:15,846 | INFO | repair.ketting | END pattern 2 (pattern_2)
+2025-08-31 02:00:15,853 | INFO | repair.ketting | ============================================================
+2025-08-31 02:00:15,853 | INFO | repair.ketting | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:00:15,854 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 02:00:16,251 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:00:16,252 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:00:16,252 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424ef20>, {})
+2025-08-31 02:00:16,252 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:00:16,252 | INFO | repair.ketting | END pattern 2 (pattern_2)
+2025-08-31 02:00:16,252 | INFO | repair.ketting | ============================================================
+2025-08-31 02:00:16,252 | INFO | repair.ketting | BEGIN pattern 3 (pattern_3)
+2025-08-31 02:00:16,252 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 02:00:16,441 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:00:16,442 | DEBUG | repair.ketting | Parsed detection output: [{'pattern_id': 3, 'file': 'lib/http-error.js', 'line': 62, 'column': 11}, {'pattern_id': 3, 'file': 'test/integration/fetch-api.js', 'line': 58, 'column': 23}]
+2025-08-31 02:00:16,442 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424ef20>, {'lib/http-error.js': defaultdict(<class 'list'>, {3: [{'line': 62, 'column': 11}]}), 'test/integration/fetch-api.js': defaultdict(<class 'list'>, {3: [{'line': 58, 'column': 23}]})})
+2025-08-31 02:00:16,442 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/http-error.js
+2025-08-31 02:00:29,841 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if (contentType && contentType.match(/^application\\/problem\\+json/i)) {\n    return response.json().then( function(problemBody) {\n\n      return new Problem(response, problemBody);\n\n    })\n    // node-fetch v2: response.json() throws on HTTP 204 No Content instead of resolving to {}\n    .catch(function(err) {\n      if (response && response.status === 204) {\n        // Preserve pre-v2 behavior by treating 204 as an empty object\n        return new Problem(response, {});\n      }\n      throw err;\n    });\n  } else {\n    var error = new HttpError(response);\n    return Promise.resolve(error);\n\n  }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:00:29,844 | INFO | repair.ketting | Replaced code in /node-fetch/results/gpt-4.1/ketting/lib/http-error.js at [1617, 1896]
+2025-08-31 02:00:29,845 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/fetch-api.js
+2025-08-31 02:00:44,209 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:00:44,213 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:00:44,213 | INFO | repair.ketting | END pattern 3 (pattern_3)
+2025-08-31 02:00:44,213 | INFO | repair.ketting | ============================================================
+2025-08-31 02:00:44,214 | INFO | repair.ketting | BEGIN pattern 3 (pattern_3)
+2025-08-31 02:00:44,214 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 02:00:44,603 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:00:44,604 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:00:44,604 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424ef20>, {})
+2025-08-31 02:00:44,604 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:00:44,604 | INFO | repair.ketting | END pattern 3 (pattern_3)
+2025-08-31 02:00:44,604 | INFO | repair.ketting | ============================================================
+2025-08-31 02:00:44,604 | INFO | repair.ketting | BEGIN pattern 4 (pattern_4)
+2025-08-31 02:00:44,604 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "call {<node-fetch>,<node-fetch/**/*>}?**.{*}", "changelogId": 4}
+2025-08-31 02:00:44,789 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:00:44,789 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:00:44,789 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424ef20>, {})
+2025-08-31 02:00:44,790 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:00:44,790 | INFO | repair.ketting | END pattern 4 (pattern_4)
+2025-08-31 02:00:44,790 | INFO | repair.ketting | ============================================================
+2025-08-31 02:00:44,790 | INFO | repair.ketting | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:00:44,790 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 02:00:44,978 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:00:44,979 | DEBUG | repair.ketting | Parsed detection output: [{'pattern_id': 5, 'file': 'lib/ketting.js', 'line': 149, 'column': 22}, {'pattern_id': 5, 'file': 'test/integration/basic-auth.js', 'line': 4, 'column': 16}, {'pattern_id': 5, 'file': 'lib/resource.js', 'line': 336, 'column': 22}, {'pattern_id': 5, 'file': 'test/integration/bearer-auth.js', 'line': 4, 'column': 16}, {'pattern_id': 5, 'file': 'test/integration/fetch-api.js', 'line': 4, 'column': 16}, {'pattern_id': 5, 'file': 'test/integration/oauth-auth.js', 'line': 4, 'column': 16}]
+2025-08-31 02:00:44,979 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424ef20>, {'lib/ketting.js': defaultdict(<class 'list'>, {5: [{'line': 149, 'column': 22}]}), 'test/integration/basic-auth.js': defaultdict(<class 'list'>, {5: [{'line': 4, 'column': 16}]}), 'lib/resource.js': defaultdict(<class 'list'>, {5: [{'line': 336, 'column': 22}]}), 'test/integration/bearer-auth.js': defaultdict(<class 'list'>, {5: [{'line': 4, 'column': 16}]}), 'test/integration/fetch-api.js': defaultdict(<class 'list'>, {5: [{'line': 4, 'column': 16}]}), 'test/integration/oauth-auth.js': defaultdict(<class 'list'>, {5: [{'line': 4, 'column': 16}]})})
+2025-08-31 02:00:44,979 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:01:30,984 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "Ketting.prototype = {\n\n  /**\n   * Here we store all the resources that were ever requested. This will\n   * ensure that if the same resource is requested twice, the same object is\n   * returned.\n   */\n  resourceCache : null,\n\n  /**\n   * Autentication settings.\n   *\n   * If set, must have at least a `type` property.\n   * If type=basic, userName and password must be set.\n   */\n  auth: null,\n\n  /**\n   * Content-Type settings and mappings.\n   *\n   * See the constructor for an example of the structure.\n   */\n  contentTypes: [],\n\n  /**\n   * A list of settings passed to the Fetch API.\n   *\n   * It's effectively a list of defaults that are passed as the 'init' argument.\n   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/Request\n   */\n  fetchInit : {},\n\n  /**\n   * This function is a shortcut for getResource().follow(x);\n   *\n   * @async\n   * @param {string} rel - Relationship\n   * @param {object} variables - Templated variables for templated links.\n   * @returns {Resource}\n   */\n  follow: function(rel, variables) {\n\n    return this.getResource().follow(rel, variables);\n\n  },\n\n  /**\n   * Returns a resource by its uri.\n   *\n   * This function doesn't do any HTTP requests. The uri is optional. If it's\n   * not specified, it will return the bookmark resource.\n   *\n   * @param {string} uri - Optional uri.\n   * @return {Resource}\n   */\n  getResource: function(uri) {\n\n    if (typeof uri === 'undefined') {\n      uri = '';\n    }\n    uri = url.resolve(this.bookMark, uri);\n\n    if (!this.resourceCache[uri]) {\n      this.resourceCache[uri] = new Resource(this, uri);\n    }\n\n    return this.resourceCache[uri];\n\n  },\n\n  /**\n   * This function does an arbitrary request using the fetch API.\n   *\n   * Every request in ketting is routed through here so it can be initialized\n   * with some useful defaults.\n   *\n   * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/GlobalFetch}\n   * @param {string|Request} input - Uri or Request object.\n   * @param {object} init - A list of settings.\n   * @return {Response}\n   */\n  fetch : function(input, init) {\n\n    var newInit = {};\n\n    if (init) {\n      Object.assign(newInit, this.fetchInit, init);\n    } else {\n      newInit = this.fetchInit;\n    }\n\n    // node-fetch v2: constructing Request with GET/HEAD and a non-null body throws.\n    // To preserve pre-v2 behavior and avoid runtime errors, drop body for GET/HEAD before constructing Request.\n    var _method = newInit && newInit.method ? String(newInit.method).toUpperCase() : 'GET';\n    if (newInit && newInit.body != null && (_method === 'GET' || _method === 'HEAD')) {\n      // Avoid mutating this.fetchInit when init is not provided by cloning before removing body\n      var _sanitizedInit = {};\n      Object.assign(_sanitizedInit, newInit);\n      delete _sanitizedInit.body;\n      newInit = _sanitizedInit;\n    }\n\n    var request = new fetch.Request(input, newInit);\n    if (!request.headers.has('User-Agent')) {\n      request.headers.set('User-Agent', 'Ketting/' + require('../package.json').version);\n    }\n    if (!request.headers.has('Accept')) {\n      var accept = this.contentTypes\n        .map( function(contentType) {\n          var item = contentType.mime;\n          if (contentType.q) item+=';q=' + contentType.q;\n          return item;\n        } )\n        .join(', ');\n      request.headers.set('Accept', accept);\n    }\n    if (!request.headers.has('Content-Type')) {\n      request.headers.set('Content-Type', this.contentTypes[0].mime);\n    }\n    if (!request.headers.has('Authorization') && this.auth) {\n      switch(this.auth.type) {\n\n      case 'basic' :\n        request.headers.set('Authorization', 'Basic ' + base64.encode(this.auth.userName + ':' + this.auth.password));\n        break;\n      case 'bearer' :\n        request.headers.set('Authorization', 'Bearer ' + this.auth.token);\n        break;\n      case 'oauth2' :\n        return oauth.fetch(this, request, init);\n      }\n\n    }\n\n    return fetch(request);\n\n  },\n\n  /**\n   * This function returns a representor constructor for a mime type.\n   *\n   * For example, given text/html, this function might return the constructor\n   * stored in representor/html.\n   *\n   * @param {String} contentType\n   * @return {Function}\n   */\n  getRepresentor : function(contentType) {\n\n    if (contentType.indexOf(';') !== -1) {\n      contentType = contentType.split(';')[0];\n    }\n    contentType = contentType.trim();\n    var result = this.contentTypes.find(function(item) {\n      return item.mime === contentType;\n    });\n\n    if (!result) {\n      throw new Error('Could not find a representor for contentType: ' + contentType);\n    }\n\n    switch(result.representor) {\n    case 'html' :\n      return representor.html;\n    case 'hal' :\n      return representor.hal;\n    default :\n      throw new Error('Unknown representor: ' + result.representor);\n\n    }\n\n  }\n\n};",
+  "additional_req": "",
+  "dependencies": [
+    "node-fetch@^2.0.0"
+  ]
+}
+2025-08-31 02:01:30,986 | INFO | repair.ketting | Replaced code in /node-fetch/results/gpt-4.1/ketting/lib/ketting.js at [1106, 5336]
+2025-08-31 02:01:30,987 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/basic-auth.js
+2025-08-31 02:01:35,489 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:01:35,491 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:02:18,902 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:02:18,907 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/bearer-auth.js
+2025-08-31 02:02:23,810 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:02:23,812 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/fetch-api.js
+2025-08-31 02:02:30,058 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:02:30,062 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/oauth-auth.js
+2025-08-31 02:02:36,610 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:02:36,613 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:02:36,614 | INFO | repair.ketting | END pattern 5 (pattern_5)
+2025-08-31 02:02:36,615 | INFO | repair.ketting | ============================================================
+2025-08-31 02:02:36,615 | INFO | repair.ketting | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:02:36,615 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 02:02:37,015 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:02:37,015 | DEBUG | repair.ketting | Parsed detection output: [{'pattern_id': 5, 'file': 'lib/utils/fetch.web.js', 'line': 19, 'column': 0}]
+2025-08-31 02:02:37,015 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424e160>, {'lib/utils/fetch.web.js': defaultdict(<class 'list'>, {5: [{'line': 19, 'column': 0}]})})
+2025-08-31 02:02:37,015 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/utils/fetch.web.js
+2025-08-31 02:02:41,923 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:02:41,926 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:02:41,926 | INFO | repair.ketting | END pattern 5 (pattern_5)
+2025-08-31 02:02:41,926 | INFO | repair.ketting | ============================================================
+2025-08-31 02:02:41,927 | INFO | repair.ketting | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:02:41,927 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 02:02:42,175 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:02:42,175 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:02:42,175 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424dd00>, {})
+2025-08-31 02:02:42,176 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:02:42,176 | INFO | repair.ketting | END pattern 6 (pattern_6)
+2025-08-31 02:02:42,176 | INFO | repair.ketting | ============================================================
+2025-08-31 02:02:42,176 | INFO | repair.ketting | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:02:42,176 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 02:02:42,363 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:02:42,363 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:02:42,363 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424dd00>, {})
+2025-08-31 02:02:42,363 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:02:42,363 | INFO | repair.ketting | END pattern 6 (pattern_6)
+2025-08-31 02:02:42,363 | INFO | repair.ketting | ============================================================
+2025-08-31 02:02:42,363 | INFO | repair.ketting | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:02:42,363 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 02:02:42,553 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:02:42,554 | DEBUG | repair.ketting | Parsed detection output: [{'pattern_id': 7, 'file': 'lib/http-error.js', 'line': 60, 'column': 20}, {'pattern_id': 7, 'file': 'lib/resource.js', 'line': 124, 'column': 12}, {'pattern_id': 7, 'file': 'lib/resource.js', 'line': 152, 'column': 26}, {'pattern_id': 7, 'file': 'lib/resource.js', 'line': 162, 'column': 29}, {'pattern_id': 7, 'file': 'test/integration/delete.js', 'line': 16, 'column': 10}, {'pattern_id': 7, 'file': 'test/integration/delete.js', 'line': 31, 'column': 28}, {'pattern_id': 7, 'file': 'test/integration/delete.js', 'line': 43, 'column': 28}, {'pattern_id': 7, 'file': 'test/integration/get.js', 'line': 20, 'column': 19}, {'pattern_id': 7, 'file': 'test/integration/get.js', 'line': 38, 'column': 14}, {'pattern_id': 7, 'file': 'test/integration/follow-hal.js', 'line': 20, 'column': 23}, {'pattern_id': 7, 'file': 'test/integration/follow-hal.js', 'line': 28, 'column': 23}, {'pattern_id': 7, 'file': 'test/integration/follow-hal.js', 'line': 36, 'column': 23}, {'pattern_id': 7, 'file': 'test/integration/put.js', 'line': 14, 'column': 10}, {'pattern_id': 7, 'file': 'test/integration/put.js', 'line': 25, 'column': 26}, {'pattern_id': 7, 'file': 'test/integration/put.js', 'line': 31, 'column': 26}, {'pattern_id': 7, 'file': 'test/integration/post.js', 'line': 33, 'column': 26}]
+2025-08-31 02:02:42,554 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424dd00>, {'lib/http-error.js': defaultdict(<class 'list'>, {7: [{'line': 60, 'column': 20}]}), 'lib/resource.js': defaultdict(<class 'list'>, {7: [{'line': 124, 'column': 12}, {'line': 152, 'column': 26}, {'line': 162, 'column': 29}]}), 'test/integration/delete.js': defaultdict(<class 'list'>, {7: [{'line': 16, 'column': 10}, {'line': 31, 'column': 28}, {'line': 43, 'column': 28}]}), 'test/integration/get.js': defaultdict(<class 'list'>, {7: [{'line': 20, 'column': 19}, {'line': 38, 'column': 14}]}), 'test/integration/follow-hal.js': defaultdict(<class 'list'>, {7: [{'line': 20, 'column': 23}, {'line': 28, 'column': 23}, {'line': 36, 'column': 23}]}), 'test/integration/put.js': defaultdict(<class 'list'>, {7: [{'line': 14, 'column': 10}, {'line': 25, 'column': 26}, {'line': 31, 'column': 26}]}), 'test/integration/post.js': defaultdict(<class 'list'>, {7: [{'line': 33, 'column': 26}]})})
+2025-08-31 02:02:42,554 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/http-error.js
+2025-08-31 02:03:03,236 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:03:03,240 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:03:03,243 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:03:23,716 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:03:23,720 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:03:23,722 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:03:23,723 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:03:31,702 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:03:36,719 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:03:40,818 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:03:40,821 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/get.js
+2025-08-31 02:03:40,822 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/get.js
+2025-08-31 02:03:45,541 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:03:50,136 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:03:50,139 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/follow-hal.js
+2025-08-31 02:03:50,140 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/follow-hal.js
+2025-08-31 02:03:50,141 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/follow-hal.js
+2025-08-31 02:03:56,383 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:04:01,851 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:04:06,314 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:04:06,317 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/put.js
+2025-08-31 02:04:06,318 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/put.js
+2025-08-31 02:04:06,318 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/put.js
+2025-08-31 02:04:13,325 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:04:19,470 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:04:24,764 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:04:24,768 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/post.js
+2025-08-31 02:04:29,003 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:04:29,005 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:04:29,006 | INFO | repair.ketting | END pattern 7 (pattern_7)
+2025-08-31 02:04:29,007 | INFO | repair.ketting | ============================================================
+2025-08-31 02:04:29,007 | INFO | repair.ketting | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:04:29,007 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 02:04:29,412 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:04:29,413 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:04:29,413 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424f1a0>, {})
+2025-08-31 02:04:29,413 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:04:29,413 | INFO | repair.ketting | END pattern 7 (pattern_7)
+2025-08-31 02:04:29,413 | INFO | repair.ketting | ============================================================
+2025-08-31 02:04:29,413 | INFO | repair.ketting | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:04:29,413 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 02:04:29,605 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:04:29,605 | DEBUG | repair.ketting | Parsed detection output: [{'pattern_id': 8, 'file': 'lib/utils/oauth.js', 'line': 36, 'column': 2}, {'pattern_id': 8, 'file': 'lib/utils/oauth.js', 'line': 44, 'column': 12}, {'pattern_id': 8, 'file': 'lib/utils/oauth.js', 'line': 71, 'column': 8}, {'pattern_id': 8, 'file': 'lib/ketting.js', 'line': 162, 'column': 6}, {'pattern_id': 8, 'file': 'lib/ketting.js', 'line': 172, 'column': 6}, {'pattern_id': 8, 'file': 'lib/ketting.js', 'line': 175, 'column': 6}, {'pattern_id': 8, 'file': 'lib/ketting.js', 'line': 181, 'column': 8}, {'pattern_id': 8, 'file': 'lib/ketting.js', 'line': 184, 'column': 8}, {'pattern_id': 8, 'file': 'lib/http-error.js', 'line': 60, 'column': 20}, {'pattern_id': 8, 'file': 'lib/resource.js', 'line': 124, 'column': 12}, {'pattern_id': 8, 'file': 'lib/resource.js', 'line': 152, 'column': 26}, {'pattern_id': 8, 'file': 'lib/resource.js', 'line': 162, 'column': 29}, {'pattern_id': 8, 'file': 'test/integration/delete.js', 'line': 16, 'column': 10}, {'pattern_id': 8, 'file': 'test/integration/delete.js', 'line': 23, 'column': 10}, {'pattern_id': 8, 'file': 'test/integration/delete.js', 'line': 31, 'column': 28}, {'pattern_id': 8, 'file': 'test/integration/delete.js', 'line': 43, 'column': 28}, {'pattern_id': 8, 'file': 'test/integration/delete.js', 'line': 60, 'column': 14}, {'pattern_id': 8, 'file': 'test/integration/delete.js', 'line': 76, 'column': 14}, {'pattern_id': 8, 'file': 'test/integration/follow-hal.js', 'line': 20, 'column': 23}, {'pattern_id': 8, 'file': 'test/integration/follow-hal.js', 'line': 28, 'column': 23}, {'pattern_id': 8, 'file': 'test/integration/follow-hal.js', 'line': 36, 'column': 23}, {'pattern_id': 8, 'file': 'test/integration/get.js', 'line': 20, 'column': 19}, {'pattern_id': 8, 'file': 'test/integration/get.js', 'line': 38, 'column': 14}, {'pattern_id': 8, 'file': 'test/integration/post.js', 'line': 33, 'column': 26}, {'pattern_id': 8, 'file': 'test/integration/put.js', 'line': 14, 'column': 10}, {'pattern_id': 8, 'file': 'test/integration/put.js', 'line': 25, 'column': 26}, {'pattern_id': 8, 'file': 'test/integration/put.js', 'line': 31, 'column': 26}, {'pattern_id': 8, 'file': 'test/testserver.js', 'line': 87, 'column': 5}, {'pattern_id': 8, 'file': 'test/testserver.js', 'line': 119, 'column': 6}, {'pattern_id': 8, 'file': 'test/testserver.js', 'line': 134, 'column': 6}, {'pattern_id': 8, 'file': 'test/testserver.js', 'line': 149, 'column': 6}, {'pattern_id': 8, 'file': 'test/testserver.js', 'line': 254, 'column': 8}]
+2025-08-31 02:04:29,605 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424f1a0>, {'lib/utils/oauth.js': defaultdict(<class 'list'>, {8: [{'line': 36, 'column': 2}, {'line': 44, 'column': 12}, {'line': 71, 'column': 8}]}), 'lib/ketting.js': defaultdict(<class 'list'>, {8: [{'line': 162, 'column': 6}, {'line': 172, 'column': 6}, {'line': 175, 'column': 6}, {'line': 181, 'column': 8}, {'line': 184, 'column': 8}]}), 'lib/http-error.js': defaultdict(<class 'list'>, {8: [{'line': 60, 'column': 20}]}), 'lib/resource.js': defaultdict(<class 'list'>, {8: [{'line': 124, 'column': 12}, {'line': 152, 'column': 26}, {'line': 162, 'column': 29}]}), 'test/integration/delete.js': defaultdict(<class 'list'>, {8: [{'line': 16, 'column': 10}, {'line': 23, 'column': 10}, {'line': 31, 'column': 28}, {'line': 43, 'column': 28}, {'line': 60, 'column': 14}, {'line': 76, 'column': 14}]}), 'test/integration/follow-hal.js': defaultdict(<class 'list'>, {8: [{'line': 20, 'column': 23}, {'line': 28, 'column': 23}, {'line': 36, 'column': 23}]}), 'test/integration/get.js': defaultdict(<class 'list'>, {8: [{'line': 20, 'column': 19}, {'line': 38, 'column': 14}]}), 'test/integration/post.js': defaultdict(<class 'list'>, {8: [{'line': 33, 'column': 26}]}), 'test/integration/put.js': defaultdict(<class 'list'>, {8: [{'line': 14, 'column': 10}, {'line': 25, 'column': 26}, {'line': 31, 'column': 26}]}), 'test/testserver.js': defaultdict(<class 'list'>, {8: [{'line': 87, 'column': 5}, {'line': 119, 'column': 6}, {'line': 134, 'column': 6}, {'line': 149, 'column': 6}, {'line': 254, 'column': 8}]})})
+2025-08-31 02:04:29,605 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/utils/oauth.js
+2025-08-31 02:04:29,606 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/utils/oauth.js
+2025-08-31 02:04:35,914 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:04:48,914 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:04:48,917 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:04:48,918 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:04:48,919 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:04:48,920 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:04:56,030 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:05:13,311 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:05:20,453 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:05:26,394 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:05:26,398 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/http-error.js
+2025-08-31 02:05:34,074 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:05:34,078 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:05:34,080 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:05:45,788 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:05:45,791 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:05:45,792 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:05:45,793 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:05:45,794 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:05:45,795 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:05:45,796 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:05:45,796 | INFO | repair.ketting | File /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js has too many contexts extracted
+2025-08-31 02:05:45,796 | INFO | repair.ketting | File size: 2137
+2025-08-31 02:05:51,995 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:05:51,997 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/follow-hal.js
+2025-08-31 02:05:51,998 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/follow-hal.js
+2025-08-31 02:05:51,999 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/follow-hal.js
+2025-08-31 02:05:57,113 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:06:08,583 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:06:13,194 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:06:13,197 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/get.js
+2025-08-31 02:06:13,198 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/get.js
+2025-08-31 02:06:18,263 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:06:25,376 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:06:25,379 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/post.js
+2025-08-31 02:06:29,665 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:06:29,667 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/put.js
+2025-08-31 02:06:29,668 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/put.js
+2025-08-31 02:06:29,669 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/put.js
+2025-08-31 02:06:35,037 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:06:39,918 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:06:46,639 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:06:46,644 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:06:46,646 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:06:46,648 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:06:46,649 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:06:46,651 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:06:52,821 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:07:00,681 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:07:07,056 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:07:13,713 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:07:31,939 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:07:31,943 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:07:31,943 | INFO | repair.ketting | END pattern 8 (pattern_8)
+2025-08-31 02:07:31,944 | INFO | repair.ketting | ============================================================
+2025-08-31 02:07:31,944 | INFO | repair.ketting | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:07:31,944 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 02:07:32,352 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:07:32,352 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:07:32,352 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424f560>, {})
+2025-08-31 02:07:32,352 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:07:32,352 | INFO | repair.ketting | END pattern 8 (pattern_8)
+2025-08-31 02:07:32,352 | INFO | repair.ketting | ============================================================
+2025-08-31 02:07:32,352 | INFO | repair.ketting | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:07:32,353 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 02:07:32,539 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:07:32,540 | DEBUG | repair.ketting | Parsed detection output: [{'pattern_id': 9, 'file': 'lib/utils/oauth.js', 'line': 36, 'column': 2}, {'pattern_id': 9, 'file': 'lib/utils/oauth.js', 'line': 44, 'column': 12}, {'pattern_id': 9, 'file': 'lib/utils/oauth.js', 'line': 71, 'column': 8}, {'pattern_id': 9, 'file': 'lib/http-error.js', 'line': 60, 'column': 20}, {'pattern_id': 9, 'file': 'lib/resource.js', 'line': 120, 'column': 10}, {'pattern_id': 9, 'file': 'lib/resource.js', 'line': 124, 'column': 12}, {'pattern_id': 9, 'file': 'lib/resource.js', 'line': 152, 'column': 26}, {'pattern_id': 9, 'file': 'lib/resource.js', 'line': 162, 'column': 29}, {'pattern_id': 9, 'file': 'lib/ketting.js', 'line': 161, 'column': 9}, {'pattern_id': 9, 'file': 'lib/ketting.js', 'line': 162, 'column': 6}, {'pattern_id': 9, 'file': 'lib/ketting.js', 'line': 164, 'column': 9}, {'pattern_id': 9, 'file': 'lib/ketting.js', 'line': 172, 'column': 6}, {'pattern_id': 9, 'file': 'lib/ketting.js', 'line': 174, 'column': 9}, {'pattern_id': 9, 'file': 'lib/ketting.js', 'line': 175, 'column': 6}, {'pattern_id': 9, 'file': 'lib/ketting.js', 'line': 177, 'column': 9}, {'pattern_id': 9, 'file': 'lib/ketting.js', 'line': 181, 'column': 8}, {'pattern_id': 9, 'file': 'lib/ketting.js', 'line': 184, 'column': 8}, {'pattern_id': 9, 'file': 'test/integration/delete.js', 'line': 16, 'column': 10}, {'pattern_id': 9, 'file': 'test/integration/delete.js', 'line': 23, 'column': 10}, {'pattern_id': 9, 'file': 'test/integration/delete.js', 'line': 31, 'column': 28}, {'pattern_id': 9, 'file': 'test/integration/delete.js', 'line': 43, 'column': 28}, {'pattern_id': 9, 'file': 'test/integration/delete.js', 'line': 60, 'column': 14}, {'pattern_id': 9, 'file': 'test/integration/delete.js', 'line': 76, 'column': 14}, {'pattern_id': 9, 'file': 'test/integration/follow-hal.js', 'line': 20, 'column': 23}, {'pattern_id': 9, 'file': 'test/integration/follow-hal.js', 'line': 28, 'column': 23}, {'pattern_id': 9, 'file': 'test/integration/follow-hal.js', 'line': 36, 'column': 23}, {'pattern_id': 9, 'file': 'test/integration/get.js', 'line': 20, 'column': 19}, {'pattern_id': 9, 'file': 'test/integration/get.js', 'line': 38, 'column': 14}, {'pattern_id': 9, 'file': 'test/integration/post.js', 'line': 33, 'column': 26}, {'pattern_id': 9, 'file': 'test/integration/put.js', 'line': 14, 'column': 10}, {'pattern_id': 9, 'file': 'test/integration/put.js', 'line': 25, 'column': 26}, {'pattern_id': 9, 'file': 'test/integration/put.js', 'line': 31, 'column': 26}, {'pattern_id': 9, 'file': 'test/testserver.js', 'line': 87, 'column': 5}, {'pattern_id': 9, 'file': 'test/testserver.js', 'line': 119, 'column': 6}, {'pattern_id': 9, 'file': 'test/testserver.js', 'line': 134, 'column': 6}, {'pattern_id': 9, 'file': 'test/testserver.js', 'line': 149, 'column': 6}, {'pattern_id': 9, 'file': 'test/testserver.js', 'line': 254, 'column': 8}]
+2025-08-31 02:07:32,540 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424f560>, {'lib/utils/oauth.js': defaultdict(<class 'list'>, {9: [{'line': 36, 'column': 2}, {'line': 44, 'column': 12}, {'line': 71, 'column': 8}]}), 'lib/http-error.js': defaultdict(<class 'list'>, {9: [{'line': 60, 'column': 20}]}), 'lib/resource.js': defaultdict(<class 'list'>, {9: [{'line': 120, 'column': 10}, {'line': 124, 'column': 12}, {'line': 152, 'column': 26}, {'line': 162, 'column': 29}]}), 'lib/ketting.js': defaultdict(<class 'list'>, {9: [{'line': 161, 'column': 9}, {'line': 162, 'column': 6}, {'line': 164, 'column': 9}, {'line': 172, 'column': 6}, {'line': 174, 'column': 9}, {'line': 175, 'column': 6}, {'line': 177, 'column': 9}, {'line': 181, 'column': 8}, {'line': 184, 'column': 8}]}), 'test/integration/delete.js': defaultdict(<class 'list'>, {9: [{'line': 16, 'column': 10}, {'line': 23, 'column': 10}, {'line': 31, 'column': 28}, {'line': 43, 'column': 28}, {'line': 60, 'column': 14}, {'line': 76, 'column': 14}]}), 'test/integration/follow-hal.js': defaultdict(<class 'list'>, {9: [{'line': 20, 'column': 23}, {'line': 28, 'column': 23}, {'line': 36, 'column': 23}]}), 'test/integration/get.js': defaultdict(<class 'list'>, {9: [{'line': 20, 'column': 19}, {'line': 38, 'column': 14}]}), 'test/integration/post.js': defaultdict(<class 'list'>, {9: [{'line': 33, 'column': 26}]}), 'test/integration/put.js': defaultdict(<class 'list'>, {9: [{'line': 14, 'column': 10}, {'line': 25, 'column': 26}, {'line': 31, 'column': 26}]}), 'test/testserver.js': defaultdict(<class 'list'>, {9: [{'line': 87, 'column': 5}, {'line': 119, 'column': 6}, {'line': 134, 'column': 6}, {'line': 149, 'column': 6}, {'line': 254, 'column': 8}]})})
+2025-08-31 02:07:32,540 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/utils/oauth.js
+2025-08-31 02:07:32,541 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/utils/oauth.js
+2025-08-31 02:07:52,829 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:08:15,663 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:08:15,667 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/http-error.js
+2025-08-31 02:08:26,397 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:08:26,428 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:08:26,452 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:08:44,432 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:08:44,435 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:08:44,437 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:08:44,439 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:08:44,441 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:09:10,866 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "This code may be affected only if: (1) request.headers is a node-fetch Headers instance (v2 now rejects invalid header names/values), and (2) the Authorization header values could contain invalid characters. Please confirm: \u2022 What type is request.headers? Is it node-fetch\u2019s Headers? \u2022 Does base64.encode(...) ever insert line breaks or non-ASCII characters in its output? Some base64 utilities wrap lines, which would introduce CR/LF and now cause Headers.set to throw. \u2022 Can this.auth.token ever contain non-ASCII or control characters (anything outside ASCII 0x20\u20130x7E)? If yes, Headers.set('Authorization', 'Bearer ' + token) will now throw in v2. If any of the above can occur, add validation to ensure ASCII-only, no control characters, and no line breaks before calling headers.set/has, or catch and handle the potential TypeError.",
+  "dependencies": []
+}
+2025-08-31 02:09:10,869 | DEBUG | repair.ketting | Added to whole mode list: file=/node-fetch/results/gpt-4.1/ketting/lib/ketting.js, context=Node, bc_desc={'Id': 9, 'BC_description': 'Invalid HTTP header names and values are now rejected outright by Headers methods and const...
+2025-08-31 02:09:17,518 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:09:41,785 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:09:50,693 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:09:50,694 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:09:50,694 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:09:50,694 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:09:50,694 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:09:50,695 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:09:50,695 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js
+2025-08-31 02:09:50,695 | INFO | repair.ketting | File /node-fetch/results/gpt-4.1/ketting/test/integration/delete.js has too many contexts extracted
+2025-08-31 02:09:50,695 | INFO | repair.ketting | File size: 2137
+2025-08-31 02:09:58,781 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:09:58,785 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/follow-hal.js
+2025-08-31 02:09:58,786 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/follow-hal.js
+2025-08-31 02:09:58,787 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/follow-hal.js
+2025-08-31 02:10:05,644 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:10:11,480 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:10:18,342 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:10:18,344 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/get.js
+2025-08-31 02:10:18,345 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/get.js
+2025-08-31 02:10:22,684 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:10:28,479 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:10:28,482 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/post.js
+2025-08-31 02:10:31,959 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:10:31,961 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/put.js
+2025-08-31 02:10:31,962 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/put.js
+2025-08-31 02:10:31,962 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/integration/put.js
+2025-08-31 02:10:36,069 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:10:42,400 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:10:47,219 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:10:47,224 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:10:47,226 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:10:47,228 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:10:47,230 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:10:47,232 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:10:55,308 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:11:07,533 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:11:12,087 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:11:18,860 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:11:27,067 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:11:27,068 | INFO | repair.ketting | Whole mode item: /node-fetch/results/gpt-4.1/ketting/lib/ketting.js
+2025-08-31 02:12:00,245 | DEBUG | repair.ketting | AI whole-file repair suggestion: {'repairFlag': False, 'modified_code': '', 'additional_req': "Potential impact is conditional. The code constructs a Request with user-provided init and default this.fetchInit, which may include headers. In node-fetch v2+, Headers now rejects invalid header names/values outright. To determine if changes are necessary, please confirm:\n- Whether any headers supplied via options.fetchInit or the per-call init can contain non-ASCII characters, illegal characters (e.g., spaces) in header names, or control characters in names/values.\n- Whether auth tokens (for bearer) can include non-ASCII characters. Basic auth here is base64-encoded and should be ASCII.\nIf invalid headers may appear, consider validating/sanitizing headers before constructing the Request (e.g., enforce header-name regex /^[!#$%&'*+.^_`|~0-9A-Za-z-]+$/ and ASCII-only values) or wrap new fetch.Request(input, newInit) in try/catch to surface a clearer error or strip problematic headers.", 'dependencies': []}
+2025-08-31 02:12:00,251 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:12:00,251 | INFO | repair.ketting | END pattern 9 (pattern_9)
+2025-08-31 02:12:00,253 | INFO | repair.ketting | ============================================================
+2025-08-31 02:12:00,253 | INFO | repair.ketting | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:12:00,253 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 02:12:00,662 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:12:00,662 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:12:00,662 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424e020>, {})
+2025-08-31 02:12:00,662 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:12:00,662 | INFO | repair.ketting | END pattern 9 (pattern_9)
+2025-08-31 02:12:00,662 | INFO | repair.ketting | ============================================================
+2025-08-31 02:12:00,662 | INFO | repair.ketting | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:12:00,662 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 02:12:00,854 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:12:00,854 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:12:00,854 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424e020>, {})
+2025-08-31 02:12:00,855 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:12:00,855 | INFO | repair.ketting | END pattern 10 (pattern_10)
+2025-08-31 02:12:00,855 | INFO | repair.ketting | ============================================================
+2025-08-31 02:12:00,855 | INFO | repair.ketting | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:12:00,855 | DEBUG | repair.ketting | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 02:12:01,075 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:12:01,075 | DEBUG | repair.ketting | Parsed detection output: []
+2025-08-31 02:12:01,075 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424e020>, {})
+2025-08-31 02:12:01,075 | DEBUG | repair.ketting | Updated package.json saved at /node-fetch/results/gpt-4.1/ketting/package.json
+2025-08-31 02:12:01,075 | INFO | repair.ketting | END pattern 10 (pattern_10)
+2025-08-31 02:12:01,076 | INFO | repair.ketting | ============================================================
+2025-08-31 02:12:01,076 | INFO | repair.ketting | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:12:01,076 | DEBUG | repair.ketting | Pattern payload: {"type": "write", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{body,bodyUsed,method,url,headers,redirect}", "changelogId": 11}
+2025-08-31 02:12:01,264 | INFO | repair.ketting | Tapir run successful for /node-fetch/results/gpt-4.1/ketting
+2025-08-31 02:12:01,264 | DEBUG | repair.ketting | Parsed detection output: [{'pattern_id': 11, 'file': 'lib/representor/base.js', 'line': 15, 'column': 2}, {'pattern_id': 11, 'file': 'lib/representor/hal.js', 'line': 24, 'column': 4}, {'pattern_id': 11, 'file': 'lib/representor/hal.js', 'line': 26, 'column': 4}, {'pattern_id': 11, 'file': 'lib/http-error.js', 'line': 35, 'column': 2}, {'pattern_id': 11, 'file': 'lib/resource.js', 'line': 324, 'column': 6}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 19, 'column': 4}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 26, 'column': 4}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 33, 'column': 4}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 41, 'column': 4}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 51, 'column': 4}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 59, 'column': 4}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 78, 'column': 4}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 92, 'column': 5}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 103, 'column': 5}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 118, 'column': 6}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 121, 'column': 6}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 133, 'column': 6}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 136, 'column': 6}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 148, 'column': 6}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 151, 'column': 6}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 176, 'column': 8}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 184, 'column': 8}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 200, 'column': 6}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 204, 'column': 4}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 221, 'column': 8}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 231, 'column': 4}, {'pattern_id': 11, 'file': 'test/testserver.js', 'line': 253, 'column': 8}]
+2025-08-31 02:12:01,264 | DEBUG | repair.ketting | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10424e020>, {'lib/representor/base.js': defaultdict(<class 'list'>, {11: [{'line': 15, 'column': 2}]}), 'lib/representor/hal.js': defaultdict(<class 'list'>, {11: [{'line': 24, 'column': 4}, {'line': 26, 'column': 4}]}), 'lib/http-error.js': defaultdict(<class 'list'>, {11: [{'line': 35, 'column': 2}]}), 'lib/resource.js': defaultdict(<class 'list'>, {11: [{'line': 324, 'column': 6}]}), 'test/testserver.js': defaultdict(<class 'list'>, {11: [{'line': 19, 'column': 4}, {'line': 26, 'column': 4}, {'line': 33, 'column': 4}, {'line': 41, 'column': 4}, {'line': 51, 'column': 4}, {'line': 59, 'column': 4}, {'line': 78, 'column': 4}, {'line': 92, 'column': 5}, {'line': 103, 'column': 5}, {'line': 118, 'column': 6}, {'line': 121, 'column': 6}, {'line': 133, 'column': 6}, {'line': 136, 'column': 6}, {'line': 148, 'column': 6}, {'line': 151, 'column': 6}, {'line': 176, 'column': 8}, {'line': 184, 'column': 8}, {'line': 200, 'column': 6}, {'line': 204, 'column': 4}, {'line': 221, 'column': 8}, {'line': 231, 'column': 4}, {'line': 253, 'column': 8}]})})
+2025-08-31 02:12:01,265 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/representor/base.js
+2025-08-31 02:12:05,477 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:12:05,481 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/representor/hal.js
+2025-08-31 02:12:22,599 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Unclear if `this` is an instance of node-fetch\u2019s Request. The breaking change applies only when writing to Request.body (or other now-read-only Request properties). Please confirm: (1) Is this code inside a class or function where `this` is a node-fetch Request instance? (2) Is `this` a custom class unrelated to node-fetch? If it is a node-fetch Request, direct assignment to `this.body` will throw in v2. In that case, refactor to avoid mutation: construct a new Request with the desired body (e.g., `const newReq = new Request(oldReq, { body: typeof body === 'string' ? body : JSON.stringify(body) });`) and use `newReq` instead, or store the parsed value under a different property name not conflicting with Request\u2019s read-only fields.",
+  "dependencies": []
+}
+2025-08-31 02:12:22,601 | DEBUG | repair.ketting | Added to whole mode list: file=/node-fetch/results/gpt-4.1/ketting/lib/representor/hal.js, context=Node, bc_desc={'Id': 11, 'BC_description': "Selected attributes ('body', 'bodyUsed', 'method', 'url', 'headers', 'redirect') of the Re...
+2025-08-31 02:12:22,602 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/http-error.js
+2025-08-31 02:12:33,124 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:12:33,128 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/lib/resource.js
+2025-08-31 02:13:10,111 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Clarify what types `input` can be at this call site. If `input` can ever be a node-fetch Request instance, then `input.url = ...` will throw in node-fetch v2 because Request.url is read-only. If `input` is always a plain init/options object (not a Request), no change is needed. If a Request may be passed, refactor this branch to avoid direct assignment: create a new Request with the resolved URL instead of mutating, e.g., `const { Request } = require('node-fetch'); input = new Request(url.resolve(this.uri, input.url), input);`.",
+  "dependencies": []
+}
+2025-08-31 02:13:10,113 | DEBUG | repair.ketting | Added to whole mode list: file=/node-fetch/results/gpt-4.1/ketting/lib/resource.js, context=Node, bc_desc={'Id': 11, 'BC_description': "Selected attributes ('body', 'bodyUsed', 'method', 'url', 'headers', 'redirect') of the Re...
+2025-08-31 02:13:10,115 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,117 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,119 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,121 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,122 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,123 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,124 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,125 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,127 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,129 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,131 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,133 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,135 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,137 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,138 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,139 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,140 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,141 | INFO | repair.ketting | New context extracted from /node-fetch/results/gpt-4.1/ketting/test/testserver.js
+2025-08-31 02:13:10,141 | INFO | repair.ketting | File /node-fetch/results/gpt-4.1/ketting/test/testserver.js has too many contexts extracted
+2025-08-31 02:13:10,141 | INFO | repair.ketting | File size: 5981
+2025-08-31 02:13:29,531 | DEBUG | repair.ketting | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:13:29,533 | INFO | repair.ketting | Whole mode item: /node-fetch/results/gpt-4.1/ketting/lib/representor/hal.js
+2025-08-31 02:13:38,270 | DEBUG | repair.ketting | AI whole-file repair suggestion: {'repairFlag': False, 'modified_code': '', 'additional_req': '', 'dependencies': []}
+2025-08-31 02:13:38,270 | INFO | repair.ketting | Whole mode item: /node-fetch/results/gpt-4.1/ketting/lib/resource.js

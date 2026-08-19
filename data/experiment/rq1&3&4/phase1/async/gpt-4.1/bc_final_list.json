@@ -1,0 +1,279 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "Most collection and control flow methods in the async library are now awaitable: if the final callback is omitted, these methods return a Promise instead of operating synchronously or expecting a callback. This changes the method signature and return value. Downstream code relying on synchronous return values, or that depends on passing callbacks to these methods, will need to adapt. Wrapping utility methods (like timeout, memoize, reflect, etc.) are not yet affected by this change and will not be awaitable at this time. Only collection and control flow methods listed in the commit messages are now awaitable when the callback is omitted.",
+      "Reference": [
+        "#1572",
+        "#1515",
+        "#439",
+        "#956",
+        "promise-async",
+        "koa-async",
+        "async-q",
+        "make each and family awaitable",
+        "awaitable concat",
+        "awaitable detect",
+        "awaitable every/filter",
+        "awaitable groupBy",
+        "awaitable map/mapValues",
+        "awaitable reduce",
+        "awaitable reject",
+        "awaitable some",
+        "awaitable transform",
+        "awaitable times",
+        "awaitable auto",
+        "awaitable compose/seq",
+        "awaitable whilst/until (lol)",
+        "awaitable forever",
+        "awaitable parallel/race",
+        "awaitable retry",
+        "awaitable series (lol)",
+        "awaitable tryEach",
+        "awaitable waterfall (lol)"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "async/each",
+          "async/concat",
+          "async/detect",
+          "async/every",
+          "async/filter",
+          "async/groupBy",
+          "async/map",
+          "async/mapValues",
+          "async/reduce",
+          "async/reject",
+          "async/some",
+          "async/transform",
+          "async/times",
+          "async/auto",
+          "async/compose",
+          "async/seq",
+          "async/whilst",
+          "async/until",
+          "async/forever",
+          "async/parallel",
+          "async/race",
+          "async/retry",
+          "async/series",
+          "async/tryEach",
+          "async/waterfall"
+        ],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Update invocations of affected async methods to use 'await' inside async functions or .then() with Promises if omitting the final callback. \n\nExample:\n// Before (callback required)\nasync.mapLimit(urls, 5, fn, callback);\n// After (callback omitted, now returns Promise):\nawait async.mapLimit(urls, 5, fn);\n\nIf you wish to continue using callbacks, pass them as before; the methods will continue to support callback style. For utility methods (e.g., async.timeout, async.memoize), awaitable support is not introduced by this change\u2014retain existing usage for those methods.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Dropped out-of-the-box support for Node 4 and earlier, as well as many old browser versions, due to heavy use of ES2015 features. This breaks compatibility with these environments.",
+      "Reference": [
+        "#1541",
+        "#1553"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Upgrade your runtime to Node 6+ or a browser that supports ES2015 features.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "List of minimum required runtime (Node versions & browser versions) is not fully specified. Explicit compatibility matrix is needed."
+    },
+    {
+      "Id": 2,
+      "BC_description": "The event-style properties 'drain', 'saturated', 'unsaturated', 'empty', and 'error' in the queue, priorityQueue, cargo, and cargoQueue classes have been changed from assignable callback properties to methods for registering callbacks. Instead of assigning a callback with 'q.drain = callback', you must now register it via method invocation, e.g., 'q.drain(callback)'. If these methods are called without a callback, they return a Promise that resolves on the next occurrence of the event, enabling use with 'await'.\n\nThis is a breaking change: existing code that used 'q.drain = callback', 'q.saturated = callback', etc., will no longer work. You must replace all event-like property assignments for: 'drain', 'saturated', 'unsaturated', 'empty', and 'error' in the affected classes with method invocation syntax.\n\nFor example,\nBefore:\n    q.drain = function() { ... }\n    q.saturated = function() { ... }\n    q.empty = fn;\n    q.error = fn;\n    q.unsaturated = fn;\nAfter:\n    q.drain(function() { ... })\n    q.saturated(function() { ... })\n    q.empty(fn)\n    q.error(fn)\n    q.unsaturated(fn)\nTo handle the event with async syntax:\n    await q.drain()\n    await q.empty()",
+      "Reference": [
+        "#1586",
+        "#1641"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "queue",
+          "priorityQueue",
+          "cargo",
+          "cargoQueue"
+        ],
+        "methodName": [
+          "drain",
+          "saturated",
+          "unsaturated",
+          "empty",
+          "error"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Change event-style property assignments to method invocations.\nBefore:\nq.drain = function() { ... }\nq.saturated = function() { ... }\nq.empty = fn;\nq.error = fn;\nq.unsaturated = fn;\nAfter:\nq.drain(function() { ... })\nq.saturated(function() { ... })\nq.empty(fn)\nq.error(fn)\nq.unsaturated(fn)\nTo await the event:\nawait q.drain()\nawait q.empty()",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "In asynchronous flow-control methods such as 'eachOfLimit' (and all similar collection-based methods), 'compose', 'seq', 'waterfall', 'auto', 'autoInject', 'whilst', 'until', and 'forever', calling a step callback with 'false' as the first argument (e.g., callback(false)) will now immediately cancel further iteration and prevent any pending or final callbacks from being called. This breaks prior behavior where such a call was either ignored or treated as a successful step, and the flow would continue or the final callback was always invoked. Code relying on the final callback being triggered\u2014even in cases of cancellation via 'callback(false)'\u2014will no longer work as before. Existing code patterns that expect the final callback to always run, or that rely on error propagation semantics consistent with prior Node.js convention (where 'false' was not interpreted specially), will be disrupted. See PR #1064 and associated references for discussion and rationale.",
+      "Reference": [
+        "#1064",
+        "#1542"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "async/eachOfLimit*",
+          "async/each*",
+          "async/eachSeries*",
+          "async/compose*",
+          "async/seq*",
+          "async/waterfall*",
+          "async/auto*",
+          "async/autoInject*",
+          "async/whilst*",
+          "async/until*",
+          "async/forever*"
+        ],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "If your logic uses 'callback(false)' (or passes 'false' as the first argument to a step callback) in any of the affected async control flow methods, thoroughly review how your application manages cancellation, completion, and error handling. Ensure you do not depend on the final callback being called after 'callback(false)' is used. If further cleanup or finalization is required, refactor your code to trigger it manually when canceling:\n\nExample (was):\nasync.waterfall([\n  function(cb) { ... cb(); },\n  function(cb) { ... cb(false); }, // breaks chain, used to call 'final callback', now it won't\n  function(cb) { ... cb(); }\n], function(err) { /* final callback, used for cleanup, now never called if canceled */ })\n\nAdaptation (now):\nfunction step1(cb) { ... cb(); }\nfunction step2(cb) { ... /* cancel */ cb(false); performCleanup(); }\nfunction step3(cb) { ... cb(); }\nfunction finalCallback(err) { /* finalization code */ }\n\nasync.waterfall([\n  step1,\n  step2,\n  step3\n], finalCallback);\n\nfunction performCleanup() {\n  // Call cleanup logic here because finalCallback will not be invoked after cancellation\n}\n\nAdditionally, review code for potential memory leaks or resource retention that depended on final callback execution. Audit all uses of the listed async methods for unintended breakage.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "The methods 'async.during' and 'async.doDuring' have been removed from the API. All direct calls to 'async.during' or 'async.doDuring' will now fail. Additionally, the methods 'async.whilst', 'async.doWhilst', 'async.until', and 'async.doUntil' now require their 'test' argument to be asynchronous, instead of synchronous. Synchronous 'test' functions will no longer work \u2014 the 'test' function must now accept a callback (or be async/await). For 'whilst' and 'until', refactor the 'test' function to the asynchronous style ((callback) => callback(null, condition)). For 'doWhilst' and 'doUntil', the 'test' function now receives the iteratee's results followed by a callback ((value, callback) => callback(null, condition)). Direct replacement is required for all uses of these APIs with synchronous 'test' arguments. Remove or migrate all usage, import, or export of 'async.during' and 'async.doDuring'.",
+      "Reference": [
+        "#850",
+        "#1557"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "async"
+        ],
+        "methodName": [
+          "during",
+          "doDuring",
+          "whilst",
+          "doWhilst",
+          "until",
+          "doUntil"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "1. Replace all 'async.during' calls with 'async.whilst', rewriting the 'test' argument as an asynchronous function ((callback) => callback(null, condition)).\n2. Replace all 'async.doDuring' calls with 'async.doWhilst', modifying the 'test' argument to be asynchronous ((...args, callback) => callback(null, condition)).\n3. For all usages of 'async.whilst' and 'async.until', refactor the 'test' argument from a synchronous function to an asynchronous function that accepts a callback: Before: async.whilst(() => condition, ...) After: async.whilst((cb) => cb(null, condition), ...)\n4. For usages of 'async.doWhilst' and 'async.doUntil', the 'test' function now must be asynchronous and accept results of the iteratee plus a callback as final argument: Before: async.doWhilst(iteratee, (value) => value < 5, done) After: async.doWhilst(iteratee, (value, cb) => cb(null, value < 5), done)\nNo synchronous 'test' functions are allowed. Update all test functions accordingly.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 5,
+      "BC_description": "All queue and collection methods in the library now throw an error if the 'limit' or 'concurrency' parameter is set to a value less than 1. Previously, passing a value less than 1 may have been allowed or resulted in undefined behavior. The following methods are affected: queue (constructor), priorityQueue (constructor), cargo (constructor), cargoQueue (constructor), mapLimit, eachLimit, filterLimit, reduceLimit, concatLimit, eachOfLimit, forEachOfLimit, groupByLimit. This change ensures that a RangeError is thrown immediately when an invalid limit or concurrency is provided to any of these APIs.",
+      "Reference": [
+        "#1249"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "queue",
+          "priorityQueue",
+          "cargo",
+          "cargoQueue",
+          "async"
+        ],
+        "methodName": [
+          "constructor",
+          "mapLimit",
+          "eachLimit",
+          "filterLimit",
+          "reduceLimit",
+          "concatLimit",
+          "eachOfLimit",
+          "forEachOfLimit",
+          "groupByLimit"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Update all uses of the 'limit' or 'concurrency' parameters in the affected methods to ensure they are set to values greater than or equal to 1. For example:\n// Before:\nasync.mapLimit(arr, 0, iterator, cb)\nasync.eachLimit(arr, 0, iterator, cb)\nasync.groupByLimit(arr, 0, iterator, cb)\n// After (must be >= 1):\nasync.mapLimit(arr, 1, iterator, cb)\nasync.eachLimit(arr, 1, iterator, cb)\nasync.groupByLimit(arr, 1, iterator, cb)\n\nPassing a value less than 1 (such as 0 or negative numbers) will now throw a RangeError and must be avoided.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 6,
+      "BC_description": "'async.memoize' no longer caches error results. Previously, if the callback passed to 'async.memoize' produced an error (i.e., called back with a non-null 'err'), the error result was cached, and subsequent calls with the same arguments would receive the cached error. As of this change, error results are not cached\u2014each call that results in an error will execute the underlying function again. This affects all uses of 'async.memoize' with asynchronous functions where errors may occur.",
+      "Reference": [
+        "#1465",
+        "#1466"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "async"
+        ],
+        "methodName": [
+          "memoize"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "async"
+        ]
+      },
+      "Adaptation_method": "If you need to cache error results for specific use cases, you must implement custom caching. For example:\n\nBefore:\n// Errors automatically cached\nconst memoizedFn = async.memoize(originalFn);\nmemoizedFn('arg', callback); // both error and result cached per arguments\n\nAfter:\n// Implement custom error caching if needed\nconst cache = new Map();\nconst memoizedFn = async.memoize((arg, cb) => {\n  if (cache.has(arg)) {\n    cb(...cache.get(arg));\n    return;\n  }\n  originalFn(arg, (err, result) => {\n    if (err) {\n      cache.set(arg, [err, result]);\n    }\n    cb(err, result);\n  });\n});",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 7,
+      "BC_description": "The methods async.applyEach and async.applyEachSeries have been changed. They now always return a function that accepts a single callback argument. If this callback is omitted, the returned function becomes awaitable via Promise. Crucially, the partial application feature previously available in applyEach\u2014where additional arguments could be bound to the function\u2014has been removed. Functions returned from applyEach and applyEachSeries no longer support partial argument application; only a callback or .then/await Promise is supported. The method signature and return value shape are changed: previous usage passing arguments for partial application will break. For example, before: async.applyEach(fns, arg1, arg2, cb); now: const fn = async.applyEach(fns); fn(cb) or await fn().",
+      "Reference": [
+        "#1228",
+        "#1640",
+        "commit: 667e71"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "async"
+        ],
+        "methodName": [
+          "applyEach",
+          "applyEachSeries"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Update all usage of async.applyEach and async.applyEachSeries to use the new returned function interface. Example:\nBefore:\nasync.applyEach(fns, arg1, arg2, cb); // Partial application with arguments\nAfter:\nconst fn = async.applyEach(fns);\n// To use with a callback:\nfn(cb)\n// To use with Promises/async:\nawait fn()\n// Note: Passing arguments for partial application is no longer supported. Refactor code to pass all needed arguments via the original function array or closures, not via applyEach itself.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 8,
+      "BC_description": "A ESM-flavored async.mjs module is included and described in the 'module' field of package.json, which changes how module loading occurs with modern bundlers. This could break setups where the CJS version was being forcibly used.",
+      "Reference": [],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "async.mjs"
+        ]
+      },
+      "Adaptation_method": "Update your import statements or bundler configuration to consume the correct ESM or CJS variant as appropriate for your environment.\nExample:\nimport async from 'async'; // Modern ESM import\n// or ensure require('async') for CJS environments\n",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

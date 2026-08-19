@@ -1,0 +1,7 @@
+{
+  "owner": "ember-cli",
+  "repo": "ember-cli-htmlbars",
+  "number": 493,
+  "pr_url": "https://github.com/ember-cli/ember-cli-htmlbars/pull/493",
+  "content": "# PR 493: Drop Node 8 support.\nBranches: drop-node-8 -> master\n\nNode 8 has been EOL'ed for quite some time, this drops support (in\npreparation for a major version bump).\n\n## Commit titles\n- Drop Node 8 support.\n\n## Changed files\n- .github/workflows/ci.yml\n- package.json"
+}

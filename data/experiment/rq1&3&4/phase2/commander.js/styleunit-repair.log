@@ -1,0 +1,84 @@
+2025-08-31 22:51:32,404 | INFO | repair.styleunit | Starting analysis for styleunit
+2025-08-31 22:51:32,404 | INFO | repair.styleunit | Starting breaking change analysis for -2024/commander.js/results/gpt-4.1/styleunit
+2025-08-31 22:51:32,405 | INFO | repair.styleunit | ============================================================
+2025-08-31 22:51:32,405 | INFO | repair.styleunit | BEGIN pattern 0 (pattern_0)
+2025-08-31 22:51:32,405 | DEBUG | repair.styleunit | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{parse,allowExcessArguments}", "changelogId": 0}
+2025-08-31 22:51:32,688 | INFO | repair.styleunit | Tapir run successful for -2024/commander.js/results/gpt-4.1/styleunit
+2025-08-31 22:51:32,688 | DEBUG | repair.styleunit | Parsed detection output: [{'pattern_id': 0, 'file': 'config.js', 'line': 20, 'column': 12}]
+2025-08-31 22:51:32,688 | DEBUG | repair.styleunit | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b1840e0>, {'config.js': defaultdict(<class 'list'>, {0: [{'line': 20, 'column': 12}]})})
+2025-08-31 22:51:32,689 | INFO | repair.styleunit | New context extracted from -2024/commander.js/results/gpt-4.1/styleunit/config.js
+2025-08-31 22:51:39,190 | DEBUG | repair.styleunit | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "const cli = new Command()\n  .option('--host <ip>', 'set ip.')\n  .option('--port <number>', 'set port.')\n  .option('--protocol <scheme>', 'set protocol.')\n  .option('--open [type]', 'open browser automatically or not.')\n  .option('--ui', 'enable debug ui or not.')\n  .option('--compress', 'enable file compress or not.')\n  // Added to restore previous behavior of ignoring extra arguments\n  .allowExcessArguments()\n  .parse(process.argv);",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:51:39,191 | INFO | repair.styleunit | Replaced code in -2024/commander.js/results/gpt-4.1/styleunit/config.js at [478, 821]
+2025-08-31 22:51:39,193 | DEBUG | repair.styleunit | Updated package.json saved at -2024/commander.js/results/gpt-4.1/styleunit/package.json
+2025-08-31 22:51:39,193 | INFO | repair.styleunit | END pattern 0 (pattern_0)
+2025-08-31 22:51:39,193 | INFO | repair.styleunit | ============================================================
+2025-08-31 22:51:39,194 | INFO | repair.styleunit | BEGIN pattern 0 (pattern_0)
+2025-08-31 22:51:39,194 | DEBUG | repair.styleunit | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{parse,allowExcessArguments}", "changelogId": 0}
+2025-08-31 22:51:39,505 | INFO | repair.styleunit | Tapir run successful for -2024/commander.js/results/gpt-4.1/styleunit
+2025-08-31 22:51:39,505 | DEBUG | repair.styleunit | Parsed detection output: []
+2025-08-31 22:51:39,505 | DEBUG | repair.styleunit | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba35c60>, {})
+2025-08-31 22:51:39,505 | DEBUG | repair.styleunit | Updated package.json saved at -2024/commander.js/results/gpt-4.1/styleunit/package.json
+2025-08-31 22:51:39,505 | INFO | repair.styleunit | END pattern 0 (pattern_0)
+2025-08-31 22:51:39,505 | INFO | repair.styleunit | ============================================================
+2025-08-31 22:51:39,505 | INFO | repair.styleunit | BEGIN pattern 1 (pattern_1)
+2025-08-31 22:51:39,505 | DEBUG | repair.styleunit | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{Option}", "changelogId": 1}
+2025-08-31 22:51:39,795 | INFO | repair.styleunit | Tapir run successful for -2024/commander.js/results/gpt-4.1/styleunit
+2025-08-31 22:51:39,795 | DEBUG | repair.styleunit | Parsed detection output: []
+2025-08-31 22:51:39,795 | DEBUG | repair.styleunit | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba35c60>, {})
+2025-08-31 22:51:39,795 | DEBUG | repair.styleunit | Updated package.json saved at -2024/commander.js/results/gpt-4.1/styleunit/package.json
+2025-08-31 22:51:39,795 | INFO | repair.styleunit | END pattern 1 (pattern_1)
+2025-08-31 22:51:39,797 | INFO | repair.styleunit | ============================================================
+2025-08-31 22:51:39,797 | INFO | repair.styleunit | BEGIN pattern 1 (pattern_1)
+2025-08-31 22:51:39,797 | DEBUG | repair.styleunit | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{Option}", "changelogId": 1}
+2025-08-31 22:51:40,070 | INFO | repair.styleunit | Tapir run successful for -2024/commander.js/results/gpt-4.1/styleunit
+2025-08-31 22:51:40,071 | DEBUG | repair.styleunit | Parsed detection output: []
+2025-08-31 22:51:40,071 | DEBUG | repair.styleunit | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba35c60>, {})
+2025-08-31 22:51:40,071 | DEBUG | repair.styleunit | Updated package.json saved at -2024/commander.js/results/gpt-4.1/styleunit/package.json
+2025-08-31 22:51:40,071 | INFO | repair.styleunit | END pattern 1 (pattern_1)
+2025-08-31 22:51:40,071 | INFO | repair.styleunit | ============================================================
+2025-08-31 22:51:40,071 | INFO | repair.styleunit | BEGIN pattern 2 (pattern_2)
+2025-08-31 22:51:40,071 | DEBUG | repair.styleunit | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{parse}", "changelogId": 2}
+2025-08-31 22:51:40,369 | INFO | repair.styleunit | Tapir run successful for -2024/commander.js/results/gpt-4.1/styleunit
+2025-08-31 22:51:40,369 | DEBUG | repair.styleunit | Parsed detection output: [{'pattern_id': 2, 'file': 'config.js', 'line': 20, 'column': 12}]
+2025-08-31 22:51:40,369 | DEBUG | repair.styleunit | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba35c60>, {'config.js': defaultdict(<class 'list'>, {2: [{'line': 20, 'column': 12}]})})
+2025-08-31 22:51:40,369 | INFO | repair.styleunit | New context extracted from -2024/commander.js/results/gpt-4.1/styleunit/config.js
+2025-08-31 22:51:45,436 | DEBUG | repair.styleunit | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:51:45,438 | DEBUG | repair.styleunit | Updated package.json saved at -2024/commander.js/results/gpt-4.1/styleunit/package.json
+2025-08-31 22:51:45,438 | INFO | repair.styleunit | END pattern 2 (pattern_2)
+2025-08-31 22:51:45,439 | INFO | repair.styleunit | ============================================================
+2025-08-31 22:51:45,439 | INFO | repair.styleunit | BEGIN pattern 2 (pattern_2)
+2025-08-31 22:51:45,439 | DEBUG | repair.styleunit | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{parse}", "changelogId": 2}
+2025-08-31 22:51:45,738 | INFO | repair.styleunit | Tapir run successful for -2024/commander.js/results/gpt-4.1/styleunit
+2025-08-31 22:51:45,739 | DEBUG | repair.styleunit | Parsed detection output: []
+2025-08-31 22:51:45,739 | DEBUG | repair.styleunit | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba36b60>, {})
+2025-08-31 22:51:45,739 | DEBUG | repair.styleunit | Updated package.json saved at -2024/commander.js/results/gpt-4.1/styleunit/package.json
+2025-08-31 22:51:45,739 | INFO | repair.styleunit | END pattern 2 (pattern_2)
+2025-08-31 22:51:45,739 | INFO | repair.styleunit | ============================================================
+2025-08-31 22:51:45,739 | INFO | repair.styleunit | BEGIN pattern 3 (pattern_3)
+2025-08-31 22:51:45,739 | DEBUG | repair.styleunit | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{wrap}", "changelogId": 3}
+2025-08-31 22:51:46,022 | INFO | repair.styleunit | Tapir run successful for -2024/commander.js/results/gpt-4.1/styleunit
+2025-08-31 22:51:46,022 | DEBUG | repair.styleunit | Parsed detection output: []
+2025-08-31 22:51:46,022 | DEBUG | repair.styleunit | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba36b60>, {})
+2025-08-31 22:51:46,023 | DEBUG | repair.styleunit | Updated package.json saved at -2024/commander.js/results/gpt-4.1/styleunit/package.json
+2025-08-31 22:51:46,023 | INFO | repair.styleunit | END pattern 3 (pattern_3)
+2025-08-31 22:51:46,023 | INFO | repair.styleunit | ============================================================
+2025-08-31 22:51:46,023 | INFO | repair.styleunit | BEGIN pattern 3 (pattern_3)
+2025-08-31 22:51:46,023 | DEBUG | repair.styleunit | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{wrap}", "changelogId": 3}
+2025-08-31 22:51:46,296 | INFO | repair.styleunit | Tapir run successful for -2024/commander.js/results/gpt-4.1/styleunit
+2025-08-31 22:51:46,296 | DEBUG | repair.styleunit | Parsed detection output: []
+2025-08-31 22:51:46,296 | DEBUG | repair.styleunit | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba36b60>, {})
+2025-08-31 22:51:46,296 | DEBUG | repair.styleunit | Updated package.json saved at -2024/commander.js/results/gpt-4.1/styleunit/package.json
+2025-08-31 22:51:46,296 | INFO | repair.styleunit | END pattern 3 (pattern_3)
+2025-08-31 22:51:46,297 | DEBUG | repair.styleunit | Updated package.json saved at -2024/commander.js/results/gpt-4.1/styleunit/package.json
+2025-08-31 22:51:46,297 | INFO | repair.styleunit | token consumed 6098
+2025-08-31 22:51:46,297 | INFO | repair.styleunit | parse consumption time: 11.56760533247143

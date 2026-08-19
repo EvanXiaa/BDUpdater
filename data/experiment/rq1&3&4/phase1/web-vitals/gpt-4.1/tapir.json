@@ -1,0 +1,22 @@
+[
+  {
+    "type": "call",
+    "pattern": "call <web-vitals>?**.{onFID}",
+    "changelogId": 0
+  },
+  {
+    "type": "read",
+    "pattern": "read <web-vitals>?**.{FIDThresholds}",
+    "changelogId": 0
+  },
+  {
+    "pattern": "write <web-vitals>?**.{selector}",
+    "type": "write",
+    "changelogId": 2
+  },
+  {
+    "type": "import",
+    "pattern": "import {web-vitals,}",
+    "changelogId": 0
+  }
+]

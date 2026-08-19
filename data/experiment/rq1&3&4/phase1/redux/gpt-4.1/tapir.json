@@ -1,0 +1,12 @@
+[
+  {
+    "type": "call",
+    "pattern": "call {<redux>,<redux/**/*>}?**.{getState,subscribe,unsubscribe}",
+    "changelogId": 0
+  },
+  {
+    "type": "import",
+    "pattern": "import {redux/lib/*,redux/es/*,redux/lib/createStore,redux/es/createStore,redux/lib/combineReducers,redux/es/combineReducers,redux/lib/applyMiddleware,redux/es/applyMiddleware,redux/lib/bindActionCreators,redux/es/bindActionCreators,redux/lib/compose,redux/es/compose,redux/lib/actionTypes,redux/es/actionTypes,redux/lib/utils/*,redux/es/utils/*}",
+    "changelogId": 1
+  }
+]

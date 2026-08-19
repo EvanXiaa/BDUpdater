@@ -1,0 +1,5 @@
+## v6.0.0
+
+**November 27, 2024**
+
+<https://github.com/dlmanning/gulp-sass/releases/tag/v6.0.0>

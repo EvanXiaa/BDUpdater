@@ -1,0 +1,564 @@
+2025-08-30 23:46:23,932 | INFO | repair.sw-test-env | Starting analysis for sw-test-env
+2025-08-30 23:46:23,932 | INFO | repair.sw-test-env | Starting breaking change analysis for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:46:23,933 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:46:23,933 | INFO | repair.sw-test-env | BEGIN pattern 2 (pattern_2)
+2025-08-30 23:46:23,933 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-30 23:46:24,134 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:46:24,134 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:46:24,134 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653240>, {})
+2025-08-30 23:46:24,135 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:46:24,135 | INFO | repair.sw-test-env | END pattern 2 (pattern_2)
+2025-08-30 23:46:24,135 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:46:24,135 | INFO | repair.sw-test-env | BEGIN pattern 2 (pattern_2)
+2025-08-30 23:46:24,135 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-30 23:46:24,354 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:46:24,354 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:46:24,354 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653240>, {})
+2025-08-30 23:46:24,355 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:46:24,355 | INFO | repair.sw-test-env | END pattern 2 (pattern_2)
+2025-08-30 23:46:24,355 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:46:24,355 | INFO | repair.sw-test-env | BEGIN pattern 3 (pattern_3)
+2025-08-30 23:46:24,355 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-30 23:46:24,571 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:46:24,571 | DEBUG | repair.sw-test-env | Parsed detection output: [{'pattern_id': 3, 'file': 'test/1-caching-test.js', 'line': 67, 'column': 41}, {'pattern_id': 3, 'file': 'test/1-caching-test.js', 'line': 89, 'column': 35}, {'pattern_id': 3, 'file': 'test/1-caching-test.js', 'line': 89, 'column': 66}]
+2025-08-30 23:46:24,571 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653240>, {'test/1-caching-test.js': defaultdict(<class 'list'>, {3: [{'line': 67, 'column': 41}, {'line': 89, 'column': 35}, {'line': 89, 'column': 66}]})})
+2025-08-30 23:46:24,572 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:46:24,573 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:46:31,063 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "() => Promise.all([\n  // In node-fetch v2, response.json() throws on 204 No Content instead of returning {}\n  cache._items.get(req1).json().catch(err => {\n    const response = cache._items.get(req1);\n    if (response && typeof response.status === 'number' && response.status === 204) {\n      // Preserve pre-v2 behavior: return empty object if 204\n      return {};\n    }\n    throw err;\n  }),\n  cache._items.get(req2).json().catch(err => {\n    const response = cache._items.get(req2);\n    if (response && typeof response.status === 'number' && response.status === 204) {\n      return {};\n    }\n    throw err;\n  })\n])\n// The code now handles 204 status specifically, restoring previous behavior. If req1/req2 are not node-fetch Responses, you may double-check their type.",
+  "additional_req": "If cache._items.get returns something other than a node-fetch Response (for example, another custom object or from a different fetch implementation), this change may be unsafe and further context is required to confirm correctness.",
+  "dependencies": [
+    "node-fetch@^2.0.0"
+  ]
+}
+2025-08-30 23:46:31,063 | DEBUG | repair.sw-test-env | Added to whole mode list: file=/node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js, context=dict, bc_desc={'Id': 3, 'BC_description': 'response.json() now throws an error on HTTP 204 No Content response instead of returning an...
+2025-08-30 23:46:33,826 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "() => {\n  // node-fetch v2: response.json() now throws on 204 No Content\n  const response = cache._items.get(req);\n  try {\n    return response.json();\n  } catch (err) {\n    if (response.status === 204) {\n      // Preserve v1 behavior: return empty object on 204\n      return {};\n    }\n    throw err;\n  }\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:46:33,828 | INFO | repair.sw-test-env | Replaced code in /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js at [2091, 2125]
+2025-08-30 23:46:33,828 | INFO | repair.sw-test-env | Whole mode item: /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:10,671 | DEBUG | repair.sw-test-env | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': '\'use strict\';\n\nconst { expect } = require(\'chai\');\nconst Cache = require(\'../lib/Cache\');\nconst CacheStorage = require(\'../lib/CacheStorage\');\nconst nock = require(\'nock\');\nconst Request = require(\'../lib/Request\');\nconst Response = require(\'../lib/Response\');\n\nlet cache, caches, fake;\n\ndescribe(\'caching\', () => {\n  describe(\'Cache\', () => {\n    before(() => {\n      nock.disableNetConnect();\n      nock.enableNetConnect(\'localhost\');\n    });\n    beforeEach(() => {\n      fake = nock(\'http://localhost:3333\', { encodedQueryParams: true });\n      cache = new Cache(\'test\');\n    });\n    afterEach(() => {\n      nock.cleanAll();\n      cache._destroy();\n    });\n    after(() => {\n      nock.enableNetConnect();\n    });\n\n    describe(\'put()\', () => {\n      it(\'should store a request/response\', () => {\n        const req = new Request(\'foo.js\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        expect(cache._items.has(req)).to.equal(true);\n        expect(cache._items.get(req)).to.equal(res);\n      });\n      it(\'should overwrite an existing request/response\', () => {\n        const req1 = new Request(\'foo.js\');\n        const res1 = new Response(\'foo1\');\n        const req2 = new Request(\'foo.js\');\n        const res2 = new Response(\'foo2\');\n\n        cache.put(req1, res1);\n        cache.put(req2, res2);\n        expect(cache._items.has(req2)).to.equal(false);\n        expect(cache._items.has(req1)).to.equal(true);\n        expect(cache._items.get(req1)).to.equal(res2);\n      });\n      it(\'should not overwrite an existing request/response if different VARY header\');\n    });\n\n    describe(\'add()\', () => {\n      it(\'should fetch and store a request url\', () => {\n        fake.get(\'/foo\').reply(200, { foo: \'foo\' });\n\n        return cache.add(\'http://localhost:3333/foo\').then(() => {\n          expect(cache._items.size).to.equal(1);\n        });\n      });\n      it(\'should fetch and store a request\', () => {\n        fake.get(\'/foo\').reply(200, { foo: \'foo\' });\n\n        const req = new Request(\'http://localhost:3333/foo\');\n\n        // The following block synchronously catches errors from an async method.\n        // This likely won\'t work as intended if response.json() returns a Promise.\n        // To account for node-fetch v2\'s breaking change, patch to async .catch for response.json().\n        return cache.add(req).then(() => {\n          const response = cache._items.get(req);\n          // Patch: Handle 204/No Content for node-fetch v2 semantics\n          return response.json().catch(err => {\n            if (response.status === 204) {\n              // node-fetch v1: returns {}; v2: throws. Restore old behavior.\n              return {};\n            }\n            throw err;\n          });\n        }).then(body => {\n          expect(body).to.deep.equal({ foo: \'foo\' });\n        });\n      });\n    });\n\n    describe(\'addAll()\', () => {\n      it(\'should fetch and store multiple request urls\', () => {\n        fake.get(\'/foo\').reply(200, { foo: \'foo\' }).get(\'/bar\').reply(200, { bar: \'bar\' });\n\n        return cache.addAll([\'http://localhost:3333/foo\', \'http://localhost:3333/bar\']).then(() => {\n          expect(cache._items.size).to.equal(2);\n        });\n      });\n      it(\'should fetch and store multiple requests\', () => {\n        fake.get(\'/foo\').reply(200, { foo: \'foo\' }).get(\'/bar\').reply(200, { bar: \'bar\' });\n\n        const req1 = new Request(\'http://localhost:3333/foo\');\n        const req2 = new Request(\'http://localhost:3333/bar\');\n\n        // Patch: response.json() throws on 204 in node-fetch v2\n        return cache\n          .addAll([req1, req2])\n          .then(() => Promise.all([\n            cache._items.get(req1).json().catch(err => {\n              const response = cache._items.get(req1);\n              if (response && typeof response.status === \'number\' && response.status === 204) {\n                // Preserve previous behavior: return {} if 204\n                return {};\n              }\n              throw err;\n            }),\n            cache._items.get(req2).json().catch(err => {\n              const response = cache._items.get(req2);\n              if (response && typeof response.status === \'number\' && response.status === 204) {\n                return {};\n              }\n              throw err;\n            })\n          ]))\n          .then(bodies => {\n            expect(bodies[0]).to.deep.equal({ foo: \'foo\' });\n            expect(bodies[1]).to.deep.equal({ bar: \'bar\' });\n          });\n      });\n    });\n\n    describe(\'match()\', () => {\n      it(\'should resolve with "undefined" if no match\', () => {\n        return cache.match(new Request(\'foo.js\')).then(response => {\n          expect(response).to.equal(undefined);\n        });\n      });\n      it(\'should retrieve matching response\', () => {\n        const req = new Request(\'foo.js\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        return cache.match(req).then(response => {\n          expect(response).to.equal(res);\n        });\n      });\n      it(\'should retrieve matching response when passed string request\', () => {\n        const req = new Request(\'foo.js\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        return cache.match(\'foo.js\').then(response => {\n          expect(response).to.equal(res);\n        });\n      });\n      it(\'should retrieve matching response for fully qualified string request\', () => {\n        const req = new Request(\'http://localhost:3333/foo.js\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        return cache.match(\'foo.js\').then(response => {\n          expect(response).to.equal(res);\n        });\n      });\n      it(\'should retrieve matching response, ignoring search query\', () => {\n        const req = new Request(\'foo.js?q=foo\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        return cache.match(new Request(\'foo.js\'), { ignoreSearch: true }).then(response => {\n          expect(response).to.equal(res);\n        });\n      });\n      it(\'should retrieve matching response for fully qualified string request, ignoring search query\', () => {\n        const req = new Request(\'http://localhost:3333/foo.js?q=foo\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        return cache.match(\'foo.js\', { ignoreSearch: true }).then(response => {\n          expect(response).to.equal(res);\n        });\n      });\n      it(\'should retrieve matching response, ignoring method\');\n      it(\'should retrieve matching response, ignoring VARY header\');\n    });\n\n    describe(\'matchAll()\', () => {\n      it(\'should resolve with empty array if no match\', () => {\n        return cache.matchAll(\'foo.js\').then(responses => {\n          expect(responses).to.deep.equal([]);\n        });\n      });\n      it(\'should retrieve matching responses\', () => {\n        const req = new Request(\'foo.js\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        return cache.matchAll(req).then(responses => {\n          expect(responses[0]).to.equal(res);\n        });\n      });\n      it(\'should retrieve matching responses, ignoring search query\', () => {\n        const req1 = new Request(\'foo.js?q=foo\');\n        const res1 = new Response(\'foo\');\n        const req2 = new Request(\'foo.js?q=bar\');\n        const res2 = new Response(\'bar\');\n\n        cache.put(req1, res1);\n        cache.put(req2, res2);\n        return cache.matchAll(req1, { ignoreSearch: true }).then(responses => {\n          expect(responses).to.have.length(2);\n          expect(responses[0]).to.equal(res1);\n          expect(responses[1]).to.equal(res2);\n        });\n      });\n      it(\'should retrieve matching responses, ignoring method\');\n      it(\'should retrieve matching responses, ignoring VARY header\');\n    });\n\n    describe(\'delete()\', () => {\n      it(\'should resolve with "false" if no match\', () => {\n        return cache.delete(new Request(\'foo.js\')).then(success => {\n          expect(success).to.equal(false);\n        });\n      });\n      it(\'should remove matching request\', () => {\n        const req = new Request(\'foo.js\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        return cache.delete(req).then(success => {\n          expect(success).to.equal(true);\n          expect(cache._items.size).to.equal(0);\n        });\n      });\n      it(\'should remove matching requests, ignoring search query\', () => {\n        const req1 = new Request(\'foo.js?q=foo\');\n        const res1 = new Response(\'foo\');\n        const req2 = new Request(\'foo.js?q=bar\');\n        const res2 = new Response(\'bar\');\n\n        cache.put(req1, res1);\n        cache.put(req2, res2);\n        return cache.delete(req1, { ignoreSearch: true }).then(success => {\n          expect(success).to.equal(true);\n          expect(cache._items.size).to.equal(0);\n        });\n      });\n      it(\'should remove matching requests, ignoring method\');\n      it(\'should remove matching requests, ignoring VARY header\');\n    });\n\n    describe(\'keys()\', () => {\n      it(\'should resolve with empty array if no cached items\', () => {\n        return cache.keys().then(results => {\n          expect(results).to.deep.equal([]);\n        });\n      });\n      it(\'should resolve with all keys\', () => {\n        const req = new Request(\'foo.js\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        return cache.keys().then(results => {\n          expect(results).to.deep.equal([req]);\n        });\n      });\n      it(\'should resolve with keys matching passed request\', () => {\n        const req = new Request(\'foo.js\');\n        const res = new Response(\'foo\');\n\n        cache.put(req, res);\n        return cache.keys(req).then(results => {\n          expect(results).to.deep.equal([req]);\n        });\n      });\n      it(\'should resolve with keys matching passed request, ignoring search query\', () => {\n        const req1 = new Request(\'foo.js?q=foo\');\n        const res1 = new Response(\'foo\');\n        const req2 = new Request(\'foo.js?q=bar\');\n        const res2 = new Response(\'bar\');\n\n        cache.put(req1, res1);\n        cache.put(req2, res2);\n        return cache.keys(req1, { ignoreSearch: true }).then(results => {\n          expect(results).to.deep.equal([req1, req2]);\n        });\n      });\n      it(\'should resolve with keys matching passed request, ignoring method\');\n      it(\'should resolve with keys matching passed request, ignoring VARY header\');\n    });\n  });\n\n  describe(\'CacheStorage\', () => {\n    beforeEach(() => {\n      caches = new CacheStorage();\n    });\n    afterEach(() => {\n      caches._destroy();\n    });\n\n    describe(\'open()\', () => {\n      it("should create new cache instance if it doesn\'t exist", () => {\n        return caches.open(\'foo\').then(cache => {\n          expect(cache).to.have.property(\'name\', \'foo\');\n          expect(caches._caches.size).to.equal(1);\n        });\n      });\n      it(\'should return existing cache instance\', () => {\n        return caches.open(\'foo\').then(cache => caches.open(\'foo\')).then(cache => {\n          expect(cache).to.have.property(\'name\', \'foo\');\n          expect(caches._caches.size).to.equal(1);\n        });\n      });\n    });\n\n    describe(\'match()\', () => {\n      it(\'should resolve with "undefined" if no match\', () => {\n        return caches.match(new Request(\'foo.js\')).then(response => {\n          expect(response).to.equal(undefined);\n        });\n      });\n      it(\'should resolve with response if match\', () => {\n        const req = new Request(\'foo.js\');\n        const res = new Response(\'foo\');\n\n        return caches\n          .open(\'foo\')\n          .then(cache => cache.put(req, res))\n          .then(() => caches.match(req))\n          .then(response => {\n            expect(response).to.equal(res);\n          });\n      });\n      it(\'should resolve with response if match and "options.cacheName"\', () => {\n        const req = new Request(\'foo.js\');\n        const res = new Response(\'foo\');\n\n        return caches\n          .open(\'foo\')\n          .then(cache => cache.put(req, res))\n          .then(() => caches.match(req, { cacheName: \'foo\' }))\n          .then(response => {\n            expect(response).to.equal(res);\n          });\n      });\n      it(\'should reject if passed "options.cacheName" doesn\\\'t exist\', done => {\n        caches.match(new Request(\'foo.js\'), { cacheName: \'foo\' }).catch(err => {\n          expect(err.message).to.equal("cache with name \'foo\' not found");\n          done();\n        });\n      });\n    });\n\n    describe(\'has()\', () => {\n      it(\'should resolve with "false" if cache doesn\\\'t exist\', () => {\n        return caches.has(\'foo\').then(success => {\n          expect(success).to.equal(false);\n        });\n      });\n      it(\'should resolve with "true" if cache exists\', () => {\n        return caches.open(\'foo\').then(cache => caches.has(\'foo\')).then(success => {\n          expect(success).to.equal(true);\n        });\n      });\n    });\n\n    describe(\'keys()\', () => {\n      it(\'should resolve with an empty array if no caches\', () => {\n        return caches.keys().then(keys => {\n          expect(keys).to.deep.equal([]);\n        });\n      });\n      it(\'should resolve with an array of cache keys\', () => {\n        return caches.open(\'foo\').then(cache => caches.keys()).then(keys => {\n          expect(keys).to.deep.equal([\'foo\']);\n        });\n      });\n    });\n\n    describe(\'delete()\', () => {\n      it(\'should resolve with "false" if no caches\', () => {\n        return caches.delete(\'foo\').then(success => {\n          expect(success).to.equal(false);\n        });\n      });\n      it(\'should resolve with "true" if successfully removed\', () => {\n        return caches.open(\'foo\').then(cache => caches.delete(\'foo\')).then(success => {\n          expect(success).to.equal(true);\n        });\n      });\n    });\n  });\n});\n', 'additional_req': 'If cache._items.get returns something other than a node-fetch or standard spec-compliant Response (for example, a mock object, or a Response from a different fetch implementation), this change may not be fully safe/correct. In that case, confirm that the .json() method is compatible with node-fetch v2 error behavior on status 204.', 'dependencies': ['node-fetch@^2.0.0']}
+2025-08-30 23:48:10,672 | INFO | repair.sw-test-env | Replace whole file: /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:10,674 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:10,674 | INFO | repair.sw-test-env | END pattern 3 (pattern_3)
+2025-08-30 23:48:10,675 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:10,675 | INFO | repair.sw-test-env | BEGIN pattern 3 (pattern_3)
+2025-08-30 23:48:10,675 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-30 23:48:11,056 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:11,056 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:48:11,056 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653240>, {})
+2025-08-30 23:48:11,057 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:11,057 | INFO | repair.sw-test-env | END pattern 3 (pattern_3)
+2025-08-30 23:48:11,057 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:11,057 | INFO | repair.sw-test-env | BEGIN pattern 4 (pattern_4)
+2025-08-30 23:48:11,057 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "call {<node-fetch>,<node-fetch/**/*>}?**.{*}", "changelogId": 4}
+2025-08-30 23:48:11,260 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:11,260 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:48:11,260 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653240>, {})
+2025-08-30 23:48:11,261 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:11,261 | INFO | repair.sw-test-env | END pattern 4 (pattern_4)
+2025-08-30 23:48:11,261 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:11,261 | INFO | repair.sw-test-env | BEGIN pattern 5 (pattern_5)
+2025-08-30 23:48:11,261 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-30 23:48:11,469 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:11,469 | DEBUG | repair.sw-test-env | Parsed detection output: [{'pattern_id': 5, 'file': 'lib/Request.js', 'line': 5, 'column': 17}]
+2025-08-30 23:48:11,469 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653240>, {'lib/Request.js': defaultdict(<class 'list'>, {5: [{'line': 5, 'column': 17}]})})
+2025-08-30 23:48:11,469 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/Request.js
+2025-08-30 23:48:12,847 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:12,848 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:12,848 | INFO | repair.sw-test-env | END pattern 5 (pattern_5)
+2025-08-30 23:48:12,848 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:12,848 | INFO | repair.sw-test-env | BEGIN pattern 5 (pattern_5)
+2025-08-30 23:48:12,848 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-30 23:48:13,102 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:13,103 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:48:13,103 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653c40>, {})
+2025-08-30 23:48:13,103 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:13,103 | INFO | repair.sw-test-env | END pattern 5 (pattern_5)
+2025-08-30 23:48:13,103 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:13,103 | INFO | repair.sw-test-env | BEGIN pattern 6 (pattern_6)
+2025-08-30 23:48:13,103 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-30 23:48:13,309 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:13,310 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:48:13,310 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653c40>, {})
+2025-08-30 23:48:13,310 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:13,310 | INFO | repair.sw-test-env | END pattern 6 (pattern_6)
+2025-08-30 23:48:13,310 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:13,310 | INFO | repair.sw-test-env | BEGIN pattern 6 (pattern_6)
+2025-08-30 23:48:13,310 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-30 23:48:13,519 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:13,520 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:48:13,520 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653c40>, {})
+2025-08-30 23:48:13,520 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:13,520 | INFO | repair.sw-test-env | END pattern 6 (pattern_6)
+2025-08-30 23:48:13,520 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:13,520 | INFO | repair.sw-test-env | BEGIN pattern 7 (pattern_7)
+2025-08-30 23:48:13,520 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-30 23:48:13,736 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:13,736 | DEBUG | repair.sw-test-env | Parsed detection output: [{'pattern_id': 7, 'file': 'lib/CacheStorage.js', 'line': 29, 'column': 20}, {'pattern_id': 7, 'file': 'lib/CacheStorage.js', 'line': 64, 'column': 16}, {'pattern_id': 7, 'file': 'test/1-caching-test.js', 'line': 37, 'column': 15}, {'pattern_id': 7, 'file': 'test/1-caching-test.js', 'line': 49, 'column': 15}, {'pattern_id': 7, 'file': 'test/1-caching-test.js', 'line': 71, 'column': 27}, {'pattern_id': 7, 'file': 'test/1-caching-test.js', 'line': 104, 'column': 12}, {'pattern_id': 7, 'file': 'test/1-caching-test.js', 'line': 105, 'column': 31}, {'pattern_id': 7, 'file': 'test/1-caching-test.js', 'line': 112, 'column': 12}, {'pattern_id': 7, 'file': 'test/1-caching-test.js', 'line': 113, 'column': 31}, {'pattern_id': 7, 'file': 'test/2-clients-test.js', 'line': 56, 'column': 17}, {'pattern_id': 7, 'file': 'test/2-clients-test.js', 'line': 64, 'column': 15}, {'pattern_id': 7, 'file': 'test/3-index-test.js', 'line': 235, 'column': 34}]
+2025-08-30 23:48:13,736 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653c40>, {'lib/CacheStorage.js': defaultdict(<class 'list'>, {7: [{'line': 29, 'column': 20}, {'line': 64, 'column': 16}]}), 'test/1-caching-test.js': defaultdict(<class 'list'>, {7: [{'line': 37, 'column': 15}, {'line': 49, 'column': 15}, {'line': 71, 'column': 27}, {'line': 104, 'column': 12}, {'line': 105, 'column': 31}, {'line': 112, 'column': 12}, {'line': 113, 'column': 31}]}), 'test/2-clients-test.js': defaultdict(<class 'list'>, {7: [{'line': 56, 'column': 17}, {'line': 64, 'column': 15}]}), 'test/3-index-test.js': defaultdict(<class 'list'>, {7: [{'line': 235, 'column': 34}]})})
+2025-08-30 23:48:13,736 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/CacheStorage.js
+2025-08-30 23:48:13,737 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/CacheStorage.js
+2025-08-30 23:48:14,948 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:15,985 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:15,990 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:15,993 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:15,997 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:16,000 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:17,007 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:18,235 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:19,565 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:20,692 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:20,695 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/2-clients-test.js
+2025-08-30 23:48:20,696 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/2-clients-test.js
+2025-08-30 23:48:22,027 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:23,664 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "The code calls 'unit.get()'. There is no evidence this is Headers.get from node-fetch. If unit is not an instance of Headers from node-fetch, this breaking change does not apply.",
+  "dependencies": []
+}
+2025-08-30 23:48:23,665 | DEBUG | repair.sw-test-env | Added to whole mode list: file=/node-fetch/results/gpt-4.1/sw-test-env/test/2-clients-test.js, context=Node, bc_desc={'Id': 7, 'BC_description': "The Headers 'get()' method now returns all matching header values joined by a comma string ...
+2025-08-30 23:48:23,667 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/3-index-test.js
+2025-08-30 23:48:24,787 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:24,788 | INFO | repair.sw-test-env | Whole mode item: /node-fetch/results/gpt-4.1/sw-test-env/test/2-clients-test.js
+2025-08-30 23:48:25,711 | DEBUG | repair.sw-test-env | AI whole-file repair suggestion: {'repairFlag': False, 'modified_code': '', 'additional_req': '', 'dependencies': []}
+2025-08-30 23:48:25,714 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:25,714 | INFO | repair.sw-test-env | END pattern 7 (pattern_7)
+2025-08-30 23:48:25,715 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:25,715 | INFO | repair.sw-test-env | BEGIN pattern 7 (pattern_7)
+2025-08-30 23:48:25,715 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-30 23:48:26,039 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:26,039 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:48:26,039 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653c40>, {})
+2025-08-30 23:48:26,040 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:26,040 | INFO | repair.sw-test-env | END pattern 7 (pattern_7)
+2025-08-30 23:48:26,040 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:26,040 | INFO | repair.sw-test-env | BEGIN pattern 8 (pattern_8)
+2025-08-30 23:48:26,040 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-30 23:48:26,320 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:26,321 | DEBUG | repair.sw-test-env | Parsed detection output: [{'pattern_id': 8, 'file': 'lib/Cache.js', 'line': 91, 'column': 4}, {'pattern_id': 8, 'file': 'lib/Cache.js', 'line': 109, 'column': 16}, {'pattern_id': 8, 'file': 'lib/CacheStorage.js', 'line': 29, 'column': 20}, {'pattern_id': 8, 'file': 'lib/CacheStorage.js', 'line': 64, 'column': 16}, {'pattern_id': 8, 'file': 'lib/CacheStorage.js', 'line': 68, 'column': 6}, {'pattern_id': 8, 'file': 'lib/CacheStorage.js', 'line': 80, 'column': 27}, {'pattern_id': 8, 'file': 'lib/ServiceWorkerRegistration.js', 'line': 49, 'column': 6}, {'pattern_id': 8, 'file': 'test/2-clients-test.js', 'line': 56, 'column': 17}, {'pattern_id': 8, 'file': 'test/2-clients-test.js', 'line': 64, 'column': 15}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 37, 'column': 15}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 49, 'column': 15}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 71, 'column': 27}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 104, 'column': 12}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 105, 'column': 31}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 112, 'column': 12}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 113, 'column': 31}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 217, 'column': 15}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 226, 'column': 15}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 239, 'column': 15}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 378, 'column': 15}, {'pattern_id': 8, 'file': 'test/1-caching-test.js', 'line': 383, 'column': 48}, {'pattern_id': 8, 'file': 'test/3-index-test.js', 'line': 235, 'column': 34}]
+2025-08-30 23:48:26,321 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107653c40>, {'lib/Cache.js': defaultdict(<class 'list'>, {8: [{'line': 91, 'column': 4}, {'line': 109, 'column': 16}]}), 'lib/CacheStorage.js': defaultdict(<class 'list'>, {8: [{'line': 29, 'column': 20}, {'line': 64, 'column': 16}, {'line': 68, 'column': 6}, {'line': 80, 'column': 27}]}), 'lib/ServiceWorkerRegistration.js': defaultdict(<class 'list'>, {8: [{'line': 49, 'column': 6}]}), 'test/2-clients-test.js': defaultdict(<class 'list'>, {8: [{'line': 56, 'column': 17}, {'line': 64, 'column': 15}]}), 'test/1-caching-test.js': defaultdict(<class 'list'>, {8: [{'line': 37, 'column': 15}, {'line': 49, 'column': 15}, {'line': 71, 'column': 27}, {'line': 104, 'column': 12}, {'line': 105, 'column': 31}, {'line': 112, 'column': 12}, {'line': 113, 'column': 31}, {'line': 217, 'column': 15}, {'line': 226, 'column': 15}, {'line': 239, 'column': 15}, {'line': 378, 'column': 15}, {'line': 383, 'column': 48}]}), 'test/3-index-test.js': defaultdict(<class 'list'>, {8: [{'line': 235, 'column': 34}]})})
+2025-08-30 23:48:26,322 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/Cache.js
+2025-08-30 23:48:26,323 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/Cache.js
+2025-08-30 23:48:27,757 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:28,948 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:28,950 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/CacheStorage.js
+2025-08-30 23:48:28,951 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/CacheStorage.js
+2025-08-30 23:48:28,952 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/CacheStorage.js
+2025-08-30 23:48:30,109 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:31,244 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:32,298 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:32,300 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/ServiceWorkerRegistration.js
+2025-08-30 23:48:34,007 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:34,010 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/2-clients-test.js
+2025-08-30 23:48:34,012 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/2-clients-test.js
+2025-08-30 23:48:35,026 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:35,947 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:35,952 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:35,956 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:35,959 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:35,962 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:35,967 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:35,968 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:35,969 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:35,970 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:35,971 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:48:37,278 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:38,301 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:39,432 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:40,556 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:41,703 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:42,774 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:43,832 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:45,268 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:46,390 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:46,395 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/3-index-test.js
+2025-08-30 23:48:47,314 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:47,316 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:47,316 | INFO | repair.sw-test-env | END pattern 8 (pattern_8)
+2025-08-30 23:48:47,317 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:47,317 | INFO | repair.sw-test-env | BEGIN pattern 8 (pattern_8)
+2025-08-30 23:48:47,318 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-30 23:48:47,717 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:47,717 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:48:47,717 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107652980>, {})
+2025-08-30 23:48:47,717 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:48:47,717 | INFO | repair.sw-test-env | END pattern 8 (pattern_8)
+2025-08-30 23:48:47,717 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:48:47,717 | INFO | repair.sw-test-env | BEGIN pattern 9 (pattern_9)
+2025-08-30 23:48:47,718 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-30 23:48:47,924 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:48:47,924 | DEBUG | repair.sw-test-env | Parsed detection output: [{'pattern_id': 9, 'file': 'lib/Cache.js', 'line': 91, 'column': 4}, {'pattern_id': 9, 'file': 'lib/Cache.js', 'line': 109, 'column': 16}, {'pattern_id': 9, 'file': 'lib/CacheStorage.js', 'line': 29, 'column': 20}, {'pattern_id': 9, 'file': 'lib/CacheStorage.js', 'line': 54, 'column': 27}, {'pattern_id': 9, 'file': 'lib/CacheStorage.js', 'line': 64, 'column': 16}, {'pattern_id': 9, 'file': 'lib/CacheStorage.js', 'line': 68, 'column': 6}, {'pattern_id': 9, 'file': 'lib/CacheStorage.js', 'line': 80, 'column': 27}, {'pattern_id': 9, 'file': 'lib/Headers.js', 'line': 5, 'column': 17}, {'pattern_id': 9, 'file': 'lib/ServiceWorkerRegistration.js', 'line': 49, 'column': 6}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 36, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 37, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 47, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 48, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 49, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 71, 'column': 27}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 104, 'column': 12}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 105, 'column': 31}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 112, 'column': 12}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 113, 'column': 31}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 217, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 226, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 239, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 352, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 357, 'column': 48}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 378, 'column': 15}, {'pattern_id': 9, 'file': 'test/1-caching-test.js', 'line': 383, 'column': 48}, {'pattern_id': 9, 'file': 'test/3-index-test.js', 'line': 235, 'column': 34}, {'pattern_id': 9, 'file': 'test/2-clients-test.js', 'line': 56, 'column': 17}, {'pattern_id': 9, 'file': 'test/2-clients-test.js', 'line': 64, 'column': 15}]
+2025-08-30 23:48:47,924 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107652980>, {'lib/Cache.js': defaultdict(<class 'list'>, {9: [{'line': 91, 'column': 4}, {'line': 109, 'column': 16}]}), 'lib/CacheStorage.js': defaultdict(<class 'list'>, {9: [{'line': 29, 'column': 20}, {'line': 54, 'column': 27}, {'line': 64, 'column': 16}, {'line': 68, 'column': 6}, {'line': 80, 'column': 27}]}), 'lib/Headers.js': defaultdict(<class 'list'>, {9: [{'line': 5, 'column': 17}]}), 'lib/ServiceWorkerRegistration.js': defaultdict(<class 'list'>, {9: [{'line': 49, 'column': 6}]}), 'test/1-caching-test.js': defaultdict(<class 'list'>, {9: [{'line': 36, 'column': 15}, {'line': 37, 'column': 15}, {'line': 47, 'column': 15}, {'line': 48, 'column': 15}, {'line': 49, 'column': 15}, {'line': 71, 'column': 27}, {'line': 104, 'column': 12}, {'line': 105, 'column': 31}, {'line': 112, 'column': 12}, {'line': 113, 'column': 31}, {'line': 217, 'column': 15}, {'line': 226, 'column': 15}, {'line': 239, 'column': 15}, {'line': 352, 'column': 15}, {'line': 357, 'column': 48}, {'line': 378, 'column': 15}, {'line': 383, 'column': 48}]}), 'test/3-index-test.js': defaultdict(<class 'list'>, {9: [{'line': 235, 'column': 34}]}), 'test/2-clients-test.js': defaultdict(<class 'list'>, {9: [{'line': 56, 'column': 17}, {'line': 64, 'column': 15}]})})
+2025-08-30 23:48:47,925 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/Cache.js
+2025-08-30 23:48:47,925 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/Cache.js
+2025-08-30 23:48:49,055 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:50,282 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:50,283 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/CacheStorage.js
+2025-08-30 23:48:50,284 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/CacheStorage.js
+2025-08-30 23:48:50,285 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/CacheStorage.js
+2025-08-30 23:48:50,286 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/CacheStorage.js
+2025-08-30 23:48:51,247 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:54,008 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:55,201 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:56,530 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:56,530 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/Headers.js
+2025-08-30 23:48:58,269 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:48:58,271 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/ServiceWorkerRegistration.js
+2025-08-30 23:49:00,830 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:00,835 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,840 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,848 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,851 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,859 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,860 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,862 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,864 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,866 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,867 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:00,869 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/1-caching-test.js
+2025-08-30 23:49:01,751 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:03,492 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:04,692 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:05,974 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:08,130 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:09,227 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:10,251 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:11,149 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:12,297 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:14,247 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:15,271 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:15,280 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/3-index-test.js
+2025-08-30 23:49:17,319 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:17,322 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/2-clients-test.js
+2025-08-30 23:49:17,324 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/test/2-clients-test.js
+2025-08-30 23:49:18,396 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:19,368 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:19,371 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:49:19,371 | INFO | repair.sw-test-env | END pattern 9 (pattern_9)
+2025-08-30 23:49:19,372 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:49:19,372 | INFO | repair.sw-test-env | BEGIN pattern 9 (pattern_9)
+2025-08-30 23:49:19,372 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-30 23:49:19,762 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:49:19,762 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:49:19,762 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107652020>, {})
+2025-08-30 23:49:19,762 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:49:19,762 | INFO | repair.sw-test-env | END pattern 9 (pattern_9)
+2025-08-30 23:49:19,762 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:49:19,762 | INFO | repair.sw-test-env | BEGIN pattern 10 (pattern_10)
+2025-08-30 23:49:19,762 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-30 23:49:19,967 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:49:19,967 | DEBUG | repair.sw-test-env | Parsed detection output: [{'pattern_id': 10, 'file': 'lib/Headers.js', 'line': 5, 'column': 17}]
+2025-08-30 23:49:19,968 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107652020>, {'lib/Headers.js': defaultdict(<class 'list'>, {10: [{'line': 5, 'column': 17}]})})
+2025-08-30 23:49:19,968 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/Headers.js
+2025-08-30 23:49:21,105 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:21,107 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:49:21,107 | INFO | repair.sw-test-env | END pattern 10 (pattern_10)
+2025-08-30 23:49:21,108 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:49:21,108 | INFO | repair.sw-test-env | BEGIN pattern 10 (pattern_10)
+2025-08-30 23:49:21,108 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-30 23:49:21,335 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:49:21,335 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:49:21,335 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107652ca0>, {})
+2025-08-30 23:49:21,336 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:49:21,336 | INFO | repair.sw-test-env | END pattern 10 (pattern_10)
+2025-08-30 23:49:21,336 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:49:21,336 | INFO | repair.sw-test-env | BEGIN pattern 11 (pattern_11)
+2025-08-30 23:49:21,336 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "write", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{body,bodyUsed,method,url,headers,redirect}", "changelogId": 11}
+2025-08-30 23:49:21,535 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:49:21,536 | DEBUG | repair.sw-test-env | Parsed detection output: [{'pattern_id': 11, 'file': 'lib/Client.js', 'line': 12, 'column': 4}, {'pattern_id': 11, 'file': 'lib/fetchFactory.js', 'line': 25, 'column': 6}]
+2025-08-30 23:49:21,536 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107652ca0>, {'lib/Client.js': defaultdict(<class 'list'>, {11: [{'line': 12, 'column': 4}]}), 'lib/fetchFactory.js': defaultdict(<class 'list'>, {11: [{'line': 25, 'column': 6}]})})
+2025-08-30 23:49:21,536 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/Client.js
+2025-08-30 23:49:22,540 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:49:22,541 | INFO | repair.sw-test-env | New context extracted from /node-fetch/results/gpt-4.1/sw-test-env/lib/fetchFactory.js
+2025-08-30 23:49:26,863 | DEBUG | repair.sw-test-env | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if (request) {\n      // node-fetch@v2 makes Request.url read-only, so we need to create a new Request instance if we want a different URL\n      // Original code attempted to do: request.url = url; url = request;\n      // Instead, create new Request with desired URL, reusing the old request's options/props if needed\n      // NOTE: This repair assumes 'Request' is imported from 'node-fetch'\n      const newRequest = new Request(url, request); // passing the old request as options will copy over init options\n      url = newRequest;\n    }",
+  "additional_req": "If 'Request' is not imported in this file, please ensure: 'const { Request } = require(\"node-fetch\");' or equivalent import exists before this code.",
+  "dependencies": []
+}
+2025-08-30 23:49:26,863 | DEBUG | repair.sw-test-env | Added to whole mode list: file=/node-fetch/results/gpt-4.1/sw-test-env/lib/fetchFactory.js, context=dict, bc_desc={'Id': 11, 'BC_description': "Selected attributes ('body', 'bodyUsed', 'method', 'url', 'headers', 'redirect') of the Re...
+2025-08-30 23:49:26,863 | INFO | repair.sw-test-env | Whole mode item: /node-fetch/results/gpt-4.1/sw-test-env/lib/fetchFactory.js
+2025-08-30 23:49:31,037 | DEBUG | repair.sw-test-env | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "'use strict';\n\nconst nodeFetch = require('node-fetch');\nconst urlUtil = require('url');\n\nconst RE_ABSOLUTE = /^https?/;\n\n/**\n * Fetch function factory\n * @param {String} origin\n * @returns {Function}\n */\nmodule.exports = function fetchFactory(origin = '') {\n  return function fetch(url, options) {\n    const isRequest = typeof url !== 'string';\n    const request = isRequest ? url : null;\n\n    if (request) {\n      url = request.url;\n    }\n    if (!RE_ABSOLUTE.test(url)) {\n      url = urlUtil.resolve(origin, url);\n    }\n    if (request) {\n      // node-fetch@v2 and above: Request.url is read-only. Rather than assigning to request.url,\n      // create a new Request with the updated URL and existing properties.\n      // This assumes Request is available as nodeFetch.Request\n      const newRequest = new nodeFetch.Request(url, request); // pass current request as init for copying headers/method/etc.\n      url = newRequest;\n    }\n    return nodeFetch(url, options);\n  };\n};\n", 'additional_req': 'If nodeFetch.Request is not available in your node-fetch version or if you rely on a different import or instantiation pattern for Request, ensure that the Request constructor is compatible and accessible as shown. No further dependency update is needed if using node-fetch@^2.0.0 or later.', 'dependencies': []}
+2025-08-30 23:49:31,038 | INFO | repair.sw-test-env | Replace whole file: /node-fetch/results/gpt-4.1/sw-test-env/lib/fetchFactory.js
+2025-08-30 23:49:31,041 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:49:31,042 | INFO | repair.sw-test-env | END pattern 11 (pattern_11)
+2025-08-30 23:49:31,042 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:49:31,043 | INFO | repair.sw-test-env | BEGIN pattern 1 (pattern_1)
+2025-08-30 23:49:31,043 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/response,node-fetch/lib/request,node-fetch/lib/headers,node-fetch/lib/*}", "changelogId": 1}
+2025-08-30 23:49:31,277 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:49:31,277 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:49:31,277 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107652f20>, {})
+2025-08-30 23:49:31,278 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:49:31,278 | INFO | repair.sw-test-env | END pattern 1 (pattern_1)
+2025-08-30 23:49:31,278 | INFO | repair.sw-test-env | ============================================================
+2025-08-30 23:49:31,278 | INFO | repair.sw-test-env | BEGIN pattern 4 (pattern_4)
+2025-08-30 23:49:31,278 | DEBUG | repair.sw-test-env | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/*}", "changelogId": 4}
+2025-08-30 23:49:31,477 | INFO | repair.sw-test-env | Tapir run successful for /node-fetch/results/gpt-4.1/sw-test-env
+2025-08-30 23:49:31,477 | DEBUG | repair.sw-test-env | Parsed detection output: []
+2025-08-30 23:49:31,477 | DEBUG | repair.sw-test-env | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107652f20>, {})
+2025-08-30 23:49:31,478 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:49:31,478 | INFO | repair.sw-test-env | END pattern 4 (pattern_4)
+2025-08-30 23:49:31,478 | DEBUG | repair.sw-test-env | Updated package.json saved at /node-fetch/results/gpt-4.1/sw-test-env/package.json
+2025-08-30 23:49:31,478 | INFO | repair.sw-test-env | token consumed 83467
+2025-08-30 23:49:31,478 | INFO | repair.sw-test-env | parse consumption time: 182.39581045042723

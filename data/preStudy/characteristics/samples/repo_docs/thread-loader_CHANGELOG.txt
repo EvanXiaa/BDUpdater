@@ -1,0 +1,7 @@
+## [4.0.0](https://github.com/webpack-contrib/thread-loader/compare/v3.0.4...v4.0.0) (2023-04-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* minimum supported `Node.js` version is `16.10.0`
+* minimum supported `webpack` version is `5`

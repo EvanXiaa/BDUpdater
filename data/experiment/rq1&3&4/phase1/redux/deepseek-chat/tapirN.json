@@ -1,0 +1,27 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<redux>,<redux/**/*>}?**.{getState,subscribe,unsubscribe}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "write {<redux>,<redux/**/*>}?**.{getState,subscribe,unsubscribe}",
+    "changelogId": 1
+  },
+  {
+    "type": "import",
+    "pattern": "import {redux/lib/*}",
+    "changelogId": 0
+  },
+  {
+    "type": "import",
+    "pattern": "import {ActionTypes}",
+    "changelogId": 2
+  },
+  {
+    "type": "import",
+    "pattern": "import {packageon,jsnext}",
+    "changelogId": 3
+  }
+]

@@ -1,0 +1,47 @@
+2025-09-01 02:05:49,154 | INFO | repair.vite-react-ts-template-main | Starting analysis for vite-react-ts-template-main
+2025-09-01 02:05:49,154 | INFO | repair.vite-react-ts-template-main | Starting breaking change analysis for -2024/svgo/results/gpt-4.1/vite-react-ts-template-main
+2025-09-01 02:05:49,155 | INFO | repair.vite-react-ts-template-main | ============================================================
+2025-09-01 02:05:49,155 | INFO | repair.vite-react-ts-template-main | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:05:49,155 | DEBUG | repair.vite-react-ts-template-main | Pattern payload: {"type": "call", "pattern": "read {<svgo>,<svgo/**/*>}?**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 02:05:49,333 | INFO | repair.vite-react-ts-template-main | Tapir run successful for -2024/svgo/results/gpt-4.1/vite-react-ts-template-main
+2025-09-01 02:05:49,333 | DEBUG | repair.vite-react-ts-template-main | Parsed detection output: []
+2025-09-01 02:05:49,333 | DEBUG | repair.vite-react-ts-template-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10472c7c0>, {})
+2025-09-01 02:05:49,334 | DEBUG | repair.vite-react-ts-template-main | Updated package.json saved at -2024/svgo/results/gpt-4.1/vite-react-ts-template-main/package.json
+2025-09-01 02:05:49,334 | INFO | repair.vite-react-ts-template-main | END pattern 4 (pattern_4)
+2025-09-01 02:05:49,334 | INFO | repair.vite-react-ts-template-main | ============================================================
+2025-09-01 02:05:49,334 | INFO | repair.vite-react-ts-template-main | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:05:49,334 | DEBUG | repair.vite-react-ts-template-main | Pattern payload: {"type": "call", "pattern": "write {<svgo>,<svgo/**/*>}?**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 02:05:49,467 | INFO | repair.vite-react-ts-template-main | Tapir run successful for -2024/svgo/results/gpt-4.1/vite-react-ts-template-main
+2025-09-01 02:05:49,467 | DEBUG | repair.vite-react-ts-template-main | Parsed detection output: []
+2025-09-01 02:05:49,467 | DEBUG | repair.vite-react-ts-template-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10472c7c0>, {})
+2025-09-01 02:05:49,467 | DEBUG | repair.vite-react-ts-template-main | Updated package.json saved at -2024/svgo/results/gpt-4.1/vite-react-ts-template-main/package.json
+2025-09-01 02:05:49,468 | INFO | repair.vite-react-ts-template-main | END pattern 4 (pattern_4)
+2025-09-01 02:05:49,468 | INFO | repair.vite-react-ts-template-main | ============================================================
+2025-09-01 02:05:49,468 | INFO | repair.vite-react-ts-template-main | BEGIN pattern 3 (pattern_3)
+2025-09-01 02:05:49,468 | DEBUG | repair.vite-react-ts-template-main | Pattern payload: {"type": "import", "pattern": "import {svgo/lib/xast,svgo/lib/builtin,svgo/plugins/*,svgo/dist/svgo.browser}", "changelogId": 3}
+2025-09-01 02:05:49,599 | INFO | repair.vite-react-ts-template-main | Tapir run successful for -2024/svgo/results/gpt-4.1/vite-react-ts-template-main
+2025-09-01 02:05:49,600 | DEBUG | repair.vite-react-ts-template-main | Parsed detection output: []
+2025-09-01 02:05:49,600 | DEBUG | repair.vite-react-ts-template-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10472c7c0>, {})
+2025-09-01 02:05:49,600 | DEBUG | repair.vite-react-ts-template-main | Updated package.json saved at -2024/svgo/results/gpt-4.1/vite-react-ts-template-main/package.json
+2025-09-01 02:05:49,600 | INFO | repair.vite-react-ts-template-main | END pattern 3 (pattern_3)
+2025-09-01 02:05:49,600 | INFO | repair.vite-react-ts-template-main | ============================================================
+2025-09-01 02:05:49,601 | INFO | repair.vite-react-ts-template-main | BEGIN pattern 5 (pattern_5)
+2025-09-01 02:05:49,601 | DEBUG | repair.vite-react-ts-template-main | Pattern payload: {"type": "import", "pattern": "import svgo", "changelogId": 5}
+2025-09-01 02:05:49,732 | INFO | repair.vite-react-ts-template-main | Tapir run successful for -2024/svgo/results/gpt-4.1/vite-react-ts-template-main
+2025-09-01 02:05:49,732 | DEBUG | repair.vite-react-ts-template-main | Parsed detection output: [{'pattern_id': 5, 'file': 'scripts/svgo.js', 'line': 3, 'column': 0, 'confidence': 'high'}]
+2025-09-01 02:05:49,732 | DEBUG | repair.vite-react-ts-template-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10472c7c0>, {'scripts/svgo.js': defaultdict(<class 'list'>, {5: [{'line': 3, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 02:05:49,732 | INFO | repair.vite-react-ts-template-main | New context extracted from -2024/svgo/results/gpt-4.1/vite-react-ts-template-main/scripts/svgo.js
+2025-09-01 02:05:53,728 | DEBUG | repair.vite-react-ts-template-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import * as SVGO from \"svgo\";",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:05:53,729 | INFO | repair.vite-react-ts-template-main | Replaced code in -2024/svgo/results/gpt-4.1/vite-react-ts-template-main/scripts/svgo.js at [46, 70]
+2025-09-01 02:05:53,731 | DEBUG | repair.vite-react-ts-template-main | Updated package.json saved at -2024/svgo/results/gpt-4.1/vite-react-ts-template-main/package.json
+2025-09-01 02:05:53,731 | INFO | repair.vite-react-ts-template-main | END pattern 5 (pattern_5)
+2025-09-01 02:05:53,734 | INFO | repair.vite-react-ts-template-main | Config BC: scanning 0 files
+2025-09-01 02:05:53,736 | INFO | repair.vite-react-ts-template-main | Config BC: scanning 0 files
+2025-09-01 02:05:53,737 | DEBUG | repair.vite-react-ts-template-main | Updated package.json saved at -2024/svgo/results/gpt-4.1/vite-react-ts-template-main/package.json
+2025-09-01 02:05:53,737 | INFO | repair.vite-react-ts-template-main | token consumed 2354
+2025-09-01 02:05:53,737 | INFO | repair.vite-react-ts-template-main | parse consumption time: 3.9976063342764974

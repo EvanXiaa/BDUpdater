@@ -1,0 +1,32 @@
+2025-08-31 18:09:03,392 | INFO | repair.seogi-master | Starting analysis for seogi-master
+2025-08-31 18:09:03,393 | INFO | repair.seogi-master | Starting breaking change analysis for -2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master
+2025-08-31 18:09:03,394 | INFO | repair.seogi-master | ============================================================
+2025-08-31 18:09:03,394 | INFO | repair.seogi-master | BEGIN pattern 0 (pattern_0)
+2025-08-31 18:09:03,394 | DEBUG | repair.seogi-master | Pattern payload: {"type": "call", "pattern": "read {<jsdoc-to-markdown>,<jsdoc-to-markdown/**/*>}?**.{renderSync,getTemplateDataSync,getJsdocDataSync}", "changelogId": 0}
+2025-08-31 18:09:04,008 | INFO | repair.seogi-master | Tapir run successful for -2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master
+2025-08-31 18:09:04,008 | DEBUG | repair.seogi-master | Parsed detection output: [{'pattern_id': 0, 'file': 'scripts/doc.js', 'line': 7, 'column': 11}]
+2025-08-31 18:09:04,009 | DEBUG | repair.seogi-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x105eb6d40>, {'scripts/doc.js': defaultdict(<class 'list'>, {0: [{'line': 7, 'column': 11}]})})
+2025-08-31 18:09:04,011 | INFO | repair.seogi-master | New context extracted from -2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master/scripts/doc.js
+2025-08-31 18:09:06,102 | DEBUG | repair.seogi-master | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "// The synchronous renderSync API has been removed in jsdoc-to-markdown v8.0.0.\n// Use the async render API with await instead. Ensure your code runs in an async function or top-level await context.\nconst md = await jsdoc2md.render({ files: 'src/index.js', 'heading-depth': 3 });",
+  "additional_req": "If this code is not already inside an async function or a module supporting top-level await, you need to wrap it accordingly. Also make sure your Node.js and project setup support top-level await, or rewrite to use .then() chain.",
+  "dependencies": []
+}
+2025-08-31 18:09:06,102 | DEBUG | repair.seogi-master | Added to whole mode list: file=-2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master/scripts/doc.js, context=dict, bc_desc={'Id': 0, 'BC_description': 'The synchronous APIs `.renderSync()`, `.getTemplateDataSync()`, and `.getJsdocDataSync()` h...
+2025-08-31 18:09:06,102 | INFO | repair.seogi-master | Whole mode item: -2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master/scripts/doc.js
+2025-08-31 18:09:10,093 | DEBUG | repair.seogi-master | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': 'import { spawnSync } from \'child_process\';\nimport path from \'path\';\nimport jsdoc2md from \'jsdoc-to-markdown\';\nimport fs from \'fs-extra\';\nimport markdownInclude from \'markdown-include\';\n\n// The renderSync API has been removed in jsdoc-to-markdown v8+. Switch to async render.\n// This code must now run inside an async function or with top-level await.\n(async () => {\n  const md = await jsdoc2md.render({ files: \'src/index.js\', \'heading-depth\': 3 });\n\n  fs.outputFileSync(path.resolve(__dirname, \'../docTemplates/examples.md\'), md);\n\n  markdownInclude.compileFiles(path.resolve(__dirname, \'../markdown.json\')).then(() => {\n    const lastCommandArgs = [[\'pull\'], [\'commit\', \'-am\', \'"Update new doc"\'], [\'push\', \'--force\']];\n\n    setTimeout(() => {\n      lastCommandArgs.forEach(v => {\n        spawnSync(\'git\', v, { stdio: \'inherit\', shell: true });\n      });\n    }, 500);\n  });\n})();\n// NOTE: Top-level await or an async wrapper is now required. This IIFE preserves structure and keeps the change scoped.', 'additional_req': 'If your environment does NOT support top-level await, the IIFE is necessary. Ensure this pattern fits your build/runtime pipeline. No other file changes are necessary unless other synchronous jsdoc2md APIs are used elsewhere.', 'dependencies': []}
+2025-08-31 18:09:10,093 | INFO | repair.seogi-master | Replace whole file: -2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master/scripts/doc.js
+2025-08-31 18:09:10,094 | DEBUG | repair.seogi-master | Updated package.json saved at -2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master/package.json
+2025-08-31 18:09:10,094 | INFO | repair.seogi-master | END pattern 0 (pattern_0)
+2025-08-31 18:09:10,094 | INFO | repair.seogi-master | ============================================================
+2025-08-31 18:09:10,094 | INFO | repair.seogi-master | BEGIN pattern 0 (pattern_0)
+2025-08-31 18:09:10,094 | DEBUG | repair.seogi-master | Pattern payload: {"type": "call", "pattern": "write {<jsdoc-to-markdown>,<jsdoc-to-markdown/**/*>}?**.{renderSync,getTemplateDataSync,getJsdocDataSync}", "changelogId": 0}
+2025-08-31 18:09:10,678 | INFO | repair.seogi-master | Tapir run successful for -2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master
+2025-08-31 18:09:10,678 | DEBUG | repair.seogi-master | Parsed detection output: []
+2025-08-31 18:09:10,678 | DEBUG | repair.seogi-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x105eb6de0>, {})
+2025-08-31 18:09:10,678 | DEBUG | repair.seogi-master | Updated package.json saved at -2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master/package.json
+2025-08-31 18:09:10,678 | INFO | repair.seogi-master | END pattern 0 (pattern_0)
+2025-08-31 18:09:10,678 | DEBUG | repair.seogi-master | Updated package.json saved at -2024/jsdoc-to-markdown/results/gpt-4.1/seogi-master/package.json
+2025-08-31 18:09:10,679 | INFO | repair.seogi-master | token consumed 4117
+2025-08-31 18:09:10,679 | INFO | repair.seogi-master | parse consumption time: 6.081253458745778

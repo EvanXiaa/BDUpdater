@@ -1,0 +1,284 @@
+2025-09-08 04:43:25,046 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Starting analysis for derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:25,047 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Starting breaking change analysis for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:25,049 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:25,049 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 1 (pattern_1)
+2025-09-08 04:43:25,049 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{stdout,stderr,all}", "changelogId": 1}
+2025-09-08 04:43:25,348 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:25,348 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:43:25,348 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106ebaca0>, {})
+2025-09-08 04:43:25,349 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:25,349 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 1 (pattern_1)
+2025-09-08 04:43:25,349 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:25,349 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 1 (pattern_1)
+2025-09-08 04:43:25,349 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{stdout,stderr,all}", "changelogId": 1}
+2025-09-08 04:43:25,535 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:25,535 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:43:25,535 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106ebaca0>, {})
+2025-09-08 04:43:25,535 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:25,535 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 1 (pattern_1)
+2025-09-08 04:43:25,535 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:25,536 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 2 (pattern_2)
+2025-09-08 04:43:25,536 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "call {<execa>,<execa/**/*>}**.{execa,execaSync}", "changelogId": 2}
+2025-09-08 04:43:25,768 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:25,769 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: [{'pattern_id': 2, 'file': 'test/index.js', 'line': 111, 'column': 17, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 160, 'column': 26, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 186, 'column': 26, 'confidence': 'high'}]
+2025-09-08 04:43:25,769 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106ebaca0>, {'test/index.js': defaultdict(<class 'list'>, {2: [{'line': 111, 'column': 17, 'confidence': 'high'}, {'line': 160, 'column': 26, 'confidence': 'high'}, {'line': 186, 'column': 26, 'confidence': 'high'}]})})
+2025-09-08 04:43:25,773 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:43:30,934 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:43:30,935 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:30,935 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 2 (pattern_2)
+2025-09-08 04:43:30,935 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:30,935 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 3 (pattern_3)
+2025-09-08 04:43:30,935 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}", "changelogId": 3}
+2025-09-08 04:43:31,179 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:31,179 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:43:31,179 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:43:31,179 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:31,179 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 3 (pattern_3)
+2025-09-08 04:43:31,179 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:31,179 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 3 (pattern_3)
+2025-09-08 04:43:31,180 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}", "changelogId": 3}
+2025-09-08 04:43:31,408 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:31,409 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:43:31,409 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:43:31,409 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:31,409 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 3 (pattern_3)
+2025-09-08 04:43:31,410 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:31,410 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 4 (pattern_4)
+2025-09-08 04:43:31,410 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}", "changelogId": 4}
+2025-09-08 04:43:31,651 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:31,651 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:43:31,651 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:43:31,652 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:31,652 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 4 (pattern_4)
+2025-09-08 04:43:31,652 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:31,652 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 4 (pattern_4)
+2025-09-08 04:43:31,652 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}", "changelogId": 4}
+2025-09-08 04:43:31,860 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:31,860 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:43:31,860 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:43:31,860 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:31,860 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 4 (pattern_4)
+2025-09-08 04:43:31,861 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:31,861 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 5 (pattern_5)
+2025-09-08 04:43:31,861 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa}", "changelogId": 5}
+2025-09-08 04:43:32,090 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:32,091 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: [{'pattern_id': 5, 'file': 'test/index.js', 'line': 9, 'column': 0, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'test/index.js', 'line': 111, 'column': 17, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'test/index.js', 'line': 160, 'column': 26, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'test/index.js', 'line': 186, 'column': 26, 'confidence': 'high'}]
+2025-09-08 04:43:32,091 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {'test/index.js': defaultdict(<class 'list'>, {5: [{'line': 9, 'column': 0, 'confidence': 'high'}, {'line': 111, 'column': 17, 'confidence': 'high'}, {'line': 160, 'column': 26, 'confidence': 'high'}, {'line': 186, 'column': 26, 'confidence': 'high'}]})})
+2025-09-08 04:43:32,092 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:43:32,092 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:43:36,145 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:43:39,951 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:43:39,953 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:39,953 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 5 (pattern_5)
+2025-09-08 04:43:39,953 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:39,954 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 5 (pattern_5)
+2025-09-08 04:43:39,954 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa}", "changelogId": 5}
+2025-09-08 04:43:40,163 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:40,163 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:43:40,163 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:43:40,164 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:40,164 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 5 (pattern_5)
+2025-09-08 04:43:40,164 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:40,164 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 6 (pattern_6)
+2025-09-08 04:43:40,164 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "read", "pattern": "read {<execa>,<execa/**/*>}**.{killed,isTerminated}", "changelogId": 6}
+2025-09-08 04:43:40,329 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:40,329 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: [{'pattern_id': 6, 'file': 'test/index.js', 'line': 228, 'column': 13, 'confidence': 'high'}]
+2025-09-08 04:43:40,329 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {'test/index.js': defaultdict(<class 'list'>, {6: [{'line': 228, 'column': 13, 'confidence': 'high'}]})})
+2025-09-08 04:43:40,330 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:43:50,489 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:43:50,493 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:50,493 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 6 (pattern_6)
+2025-09-08 04:43:50,493 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:50,493 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 7 (pattern_7)
+2025-09-08 04:43:50,493 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{cancel}", "changelogId": 7}
+2025-09-08 04:43:50,719 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:50,719 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:43:50,719 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:43:50,720 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:50,720 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 7 (pattern_7)
+2025-09-08 04:43:50,720 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:50,720 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 7 (pattern_7)
+2025-09-08 04:43:50,720 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{cancel}", "changelogId": 7}
+2025-09-08 04:43:50,873 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:50,873 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:43:50,873 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:43:50,874 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:43:50,874 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 7 (pattern_7)
+2025-09-08 04:43:50,874 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:43:50,874 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 8 (pattern_8)
+2025-09-08 04:43:50,874 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa,kill}", "changelogId": 8}
+2025-09-08 04:43:51,031 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:43:51,031 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: [{'pattern_id': 8, 'file': 'test/index.js', 'line': 9, 'column': 0, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'test/index.js', 'line': 111, 'column': 17, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'test/index.js', 'line': 160, 'column': 26, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'test/index.js', 'line': 186, 'column': 26, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'test/index.js', 'line': 221, 'column': 20, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'test/index.js', 'line': 229, 'column': 12, 'confidence': 'high'}]
+2025-09-08 04:43:51,031 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {'test/index.js': defaultdict(<class 'list'>, {8: [{'line': 9, 'column': 0, 'confidence': 'high'}, {'line': 111, 'column': 17, 'confidence': 'high'}, {'line': 160, 'column': 26, 'confidence': 'high'}, {'line': 186, 'column': 26, 'confidence': 'high'}, {'line': 221, 'column': 20, 'confidence': 'high'}, {'line': 229, 'column': 12, 'confidence': 'high'}]})})
+2025-09-08 04:43:51,032 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:43:51,032 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:44:28,068 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async (t) => {\n\tconst NS = `pgb-${Math.random().toString(16).slice(2, 7)}.`\n\n\tawait mkdir(TMP, {recursive: true})\n\n\tconst pathToAdapter = fileURLToPath(new URL('../cli.js', import.meta.url).href)\n\n\tconst pgbouncerIniPath = TMP + '/pgbouncer.ini'\n\tconst userlistTxtPath = TMP + '/userlist.txt'\n\tdebug({pgbouncerIniPath, userlistTxtPath})\n\n\tconst etcd = execa('etcd', [], {\n\t\tshell: true,\n\t\tcwd: TMP,\n\t\tenv: {\n\t\t\t// > List of URLs to listen on for client traffic.\n\t\t\t'ETCD_LISTEN_CLIENT_URLS': 'http://localhost:12379',\n\t\t\t// > --advertise-client-urls is required when --listen-client-urls is set explicitly\n\t\t\t'ETCD_ADVERTISE_CLIENT_URLS': 'http://localhost:12379',\n\t\t\t// > List of URLs to listen on for peer traffic.\n\t\t\t'ETCD_LISTEN_PEER_URLS': 'http://localhost:12380',\n\t\t},\n\t\t// preserve previous kill timeout behavior\n\t\tforceKillAfterDelay: 2000,\n\t\t// todo: stdio?\n\t})\n\n\tconst etcdClient = new Etcd3({\n\t\thosts: ['localhost:12379'],\n\t})\n\n\ttry {\n\t\tawait Promise.all([\n\t\t\t(async () => {\n\t\t\t\ttry {\n\t\t\t\t\tawait etcd\n\t\t\t\t} catch (err) {\n\t\t\t\t\tif (err.command == 'etcd' && err.signal === 'SIGTERM') {\n\t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\t\t\t\t\tthrow err\n\t\t\t\t}\n\t\t\t})(),\n\t\t\t(async () => {\n\t\t\t\ttry {\n\t\t\t\t\t// wait for etcd to start up\n\t\t\t\t\tawait new Promise(r => setTimeout(r, 500))\n\n\t\t\t\t\tawait etcdClient.stm().transact(async (tx) => {\n\t\t\t\t\t\tawait Promise.all([\n\t\t\t\t\t\t\ttx.put(NS + 'logfile').value('/tmp/pgbouncer.log'),\n\t\t\t\t\t\t\ttx.put('foo').value('bar'),\n\t\t\t\t\t\t\ttx.put(NS + 'users.alice').value('pool_mode=statement'),\n\t\t\t\t\t\t\ttx.put(NS + 'users.bob').value('pool_mode=transaction'),\n\t\t\t\t\t\t\ttx.put(NS + 'databases.db1.host').value('db1'),\n\t\t\t\t\t\t\ttx.put(NS + 'databases.db1.user').value('hello'),\n\t\t\t\t\t\t\ttx.put(NS + 'databases.db1.password').value('world'),\n\t\t\t\t\t\t\ttx.put(NS + 'userlist.alice').value('password'),\n\t\t\t\t\t\t\ttx.put(NS + 'userlist.bob').value('some\"password'),\n\t\t\t\t\t\t])\n\t\t\t\t\t})\n\n\t\t\t\t\tawait execa(pathToAdapter, [\n\t\t\t\t\t\t'-p', NS,\n\t\t\t\t\t\t'-c', pgbouncerIniPath,\n\t\t\t\t\t\t'-u', userlistTxtPath,\n\t\t\t\t\t\t'--no-pgbouncer-reload',\n\t\t\t\t\t\t'--quiet',\n\t\t\t\t\t], {\n\t\t\t\t\t\tstdio: 'inherit',\n\t\t\t\t\t\tenv: {\n\t\t\t\t\t\t\t'ETCD_ADDR': 'http://localhost:12379',\n\t\t\t\t\t\t},\n\t\t\t\t\t})\n\n\t\t\t\t\t// todo: this is needed, why? \u2013 it shouldn't\n\t\t\t\t\tawait new Promise(r => setTimeout(r, 500))\n\n\t\t\t\t\tconst [\n\t\t\t\t\t\tpgbouncerIni,\n\t\t\t\t\t\tuserlistTxt,\n\t\t\t\t\t] = await Promise.all([\n\t\t\t\t\t\treadFile(pgbouncerIniPath, {encoding: 'utf8'}),\n\t\t\t\t\t\treadFile(userlistTxtPath, {encoding: 'utf8'}),\n\t\t\t\t\t])\n\t\t\t\t\tdebug({pgbouncerIni, userlistTxt})\n\n\t\t\t\t\tawait execa(pathToAdapter, [\n\t\t\t\t\t\t'-p', NS,\n\t\t\t\t\t\t'-c', pgbouncerIniPath,\n\t\t\t\t\t\t'-u', userlistTxtPath,\n\t\t\t\t\t\t'--no-pgbouncer-reload',\n\t\t\t\t\t\t'--quiet',\n\t\t\t\t\t], {\n\t\t\t\t\t\tstdio: 'inherit',\n\t\t\t\t\t\tenv: {\n\t\t\t\t\t\t\t'ETCD_ADDR': 'http://localhost:12379',\n\t\t\t\t\t\t},\n\t\t\t\t\t})\n\n\t\t\t\t\t// Note that we expect the sections to be sorted, unlike the etcd fields put above.\n\t\t\t\t\tstrictEqual(pgbouncerIni, `\\\n[pgbouncer]\\n\nlogfile=/tmp/pgbouncer.log\\n\n[users]\\n\nalice=pool_mode=statement\\nbob=pool_mode=transaction\\n\n[databases]\\n\ndb1=host=db1 user=hello password=world\\n\n`)\n\t\t\t\t\tstrictEqual(userlistTxt, `\\\n\"alice\" \"password\"\\n\"bob\" \"some\"password\"\\n`)\n\n\t\t\t\t} finally {\n\t\t\t\t\t// kill without timeout option (now configured at execa invocation)\n\t\t\t\t\tetcd.kill('SIGTERM')\n\t\t\t\t}\n\t\t\t})(),\n\t\t])\n\t} finally {\n\t\tdebug('tearing down')\n\t\tetcdClient.close()\n\t\tif (!etcd.killed) {\n\t\t\t// kill without timeout option (now configured at execa invocation)\n\t\t\tetcd.kill('SIGTERM')\n\t\t}\n\t}\n}",
+  "additional_req": "",
+  "dependencies": [
+    "execa@^9.0.0"
+  ]
+}
+2025-09-08 04:44:28,071 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Replaced code in -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js at [2032, 5293]
+2025-09-08 04:44:30,446 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:44:30,448 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:30,449 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 8 (pattern_8)
+2025-09-08 04:44:30,450 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:30,450 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 8 (pattern_8)
+2025-09-08 04:44:30,450 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa,kill}", "changelogId": 8}
+2025-09-08 04:44:30,671 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:30,671 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:44:30,671 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:44:30,671 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:30,671 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 8 (pattern_8)
+2025-09-08 04:44:30,672 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:30,672 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 9 (pattern_9)
+2025-09-08 04:44:30,672 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa}", "changelogId": 9}
+2025-09-08 04:44:30,824 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:30,825 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: [{'pattern_id': 9, 'file': 'test/index.js', 'line': 9, 'column': 0, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'test/index.js', 'line': 111, 'column': 17, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'test/index.js', 'line': 162, 'column': 26, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'test/index.js', 'line': 187, 'column': 26, 'confidence': 'high'}]
+2025-09-08 04:44:30,825 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {'test/index.js': defaultdict(<class 'list'>, {9: [{'line': 9, 'column': 0, 'confidence': 'high'}, {'line': 111, 'column': 17, 'confidence': 'high'}, {'line': 162, 'column': 26, 'confidence': 'high'}, {'line': 187, 'column': 26, 'confidence': 'high'}]})})
+2025-09-08 04:44:30,825 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:44:30,826 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:44:34,206 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:44:37,889 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:44:37,891 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:37,891 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 9 (pattern_9)
+2025-09-08 04:44:37,892 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:37,892 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 9 (pattern_9)
+2025-09-08 04:44:37,892 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa}", "changelogId": 9}
+2025-09-08 04:44:38,098 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:38,098 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:44:38,098 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:44:38,098 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:38,098 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 9 (pattern_9)
+2025-09-08 04:44:38,099 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:38,099 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 10 (pattern_10)
+2025-09-08 04:44:38,099 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa}", "changelogId": 10}
+2025-09-08 04:44:38,255 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:38,255 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: [{'pattern_id': 10, 'file': 'test/index.js', 'line': 9, 'column': 0, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'test/index.js', 'line': 111, 'column': 17, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'test/index.js', 'line': 162, 'column': 26, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'test/index.js', 'line': 187, 'column': 26, 'confidence': 'high'}]
+2025-09-08 04:44:38,255 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {'test/index.js': defaultdict(<class 'list'>, {10: [{'line': 9, 'column': 0, 'confidence': 'high'}, {'line': 111, 'column': 17, 'confidence': 'high'}, {'line': 162, 'column': 26, 'confidence': 'high'}, {'line': 187, 'column': 26, 'confidence': 'high'}]})})
+2025-09-08 04:44:38,256 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:44:38,256 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:44:41,369 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:44:43,652 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:44:43,654 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:43,654 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 10 (pattern_10)
+2025-09-08 04:44:43,654 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:43,654 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 10 (pattern_10)
+2025-09-08 04:44:43,654 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa}", "changelogId": 10}
+2025-09-08 04:44:43,845 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:43,845 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:44:43,845 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:44:43,846 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:43,846 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 10 (pattern_10)
+2025-09-08 04:44:43,846 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:43,846 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 11 (pattern_11)
+2025-09-08 04:44:43,846 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{send}", "changelogId": 11}
+2025-09-08 04:44:44,003 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:44,003 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:44:44,003 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:44:44,003 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:44,003 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 11 (pattern_11)
+2025-09-08 04:44:44,003 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:44,003 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 11 (pattern_11)
+2025-09-08 04:44:44,003 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{send}", "changelogId": 11}
+2025-09-08 04:44:44,164 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:44,165 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:44:44,165 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:44:44,165 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:44,165 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 11 (pattern_11)
+2025-09-08 04:44:44,165 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:44,165 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 12 (pattern_12)
+2025-09-08 04:44:44,165 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{pipe,pipe,pipe}", "changelogId": 12}
+2025-09-08 04:44:44,327 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:44,328 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:44:44,328 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:44:44,328 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:44,328 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 12 (pattern_12)
+2025-09-08 04:44:44,328 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:44,328 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 12 (pattern_12)
+2025-09-08 04:44:44,328 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{pipe,pipe,pipe}", "changelogId": 12}
+2025-09-08 04:44:44,480 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:44,480 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:44:44,480 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:44:44,481 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:44,481 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 12 (pattern_12)
+2025-09-08 04:44:44,481 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:44,481 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 13 (pattern_13)
+2025-09-08 04:44:44,481 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{kill}", "changelogId": 13}
+2025-09-08 04:44:44,633 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:44,633 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: [{'pattern_id': 13, 'file': 'test/index.js', 'line': 214, 'column': 20, 'confidence': 'high'}, {'pattern_id': 13, 'file': 'test/index.js', 'line': 223, 'column': 12, 'confidence': 'high'}]
+2025-09-08 04:44:44,633 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {'test/index.js': defaultdict(<class 'list'>, {13: [{'line': 214, 'column': 20, 'confidence': 'high'}, {'line': 223, 'column': 12, 'confidence': 'high'}]})})
+2025-09-08 04:44:44,634 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:44:44,634 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | New context extracted from -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/test/index.js
+2025-09-08 04:44:47,319 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:44:51,917 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:44:51,920 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:51,920 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 13 (pattern_13)
+2025-09-08 04:44:51,921 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | ============================================================
+2025-09-08 04:44:51,921 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | BEGIN pattern 13 (pattern_13)
+2025-09-08 04:44:51,921 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{kill}", "changelogId": 13}
+2025-09-08 04:44:52,124 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Tapir run successful for -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8
+2025-09-08 04:44:52,124 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Parsed detection output: []
+2025-09-08 04:44:52,124 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106eba700>, {})
+2025-09-08 04:44:52,125 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:52,125 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | END pattern 13 (pattern_13)
+2025-09-08 04:44:52,125 | DEBUG | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | Updated package.json saved at -2024/execa/results/gpt-4.1/derhuerst-pgbouncer-etcd-adapter-b7410c8/package.json
+2025-09-08 04:44:52,125 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | token consumed 45217
+2025-09-08 04:44:52,125 | INFO | repair.derhuerst-pgbouncer-etcd-adapter-b7410c8 | parse consumption time: 82.31969158537686

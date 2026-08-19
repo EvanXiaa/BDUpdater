@@ -1,0 +1,225 @@
+2025-08-31 19:02:14,526 | INFO | repair.openui5-fhir-master | Starting analysis for openui5-fhir-master
+2025-08-31 19:02:14,526 | INFO | repair.openui5-fhir-master | Starting breaking change analysis for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:14,526 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:14,526 | INFO | repair.openui5-fhir-master | BEGIN pattern 2 (pattern_2)
+2025-08-31 19:02:14,526 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "call", "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}?**.{sync}", "changelogId": 2}
+2025-08-31 19:02:15,191 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:15,191 | DEBUG | repair.openui5-fhir-master | Parsed detection output: []
+2025-08-31 19:02:15,191 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110057740>, {})
+2025-08-31 19:02:15,191 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:15,191 | INFO | repair.openui5-fhir-master | END pattern 2 (pattern_2)
+2025-08-31 19:02:15,191 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:15,191 | INFO | repair.openui5-fhir-master | BEGIN pattern 2 (pattern_2)
+2025-08-31 19:02:15,191 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "call", "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}?**.{sync}", "changelogId": 2}
+2025-08-31 19:02:15,820 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:15,821 | DEBUG | repair.openui5-fhir-master | Parsed detection output: []
+2025-08-31 19:02:15,821 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110057740>, {})
+2025-08-31 19:02:15,821 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:15,821 | INFO | repair.openui5-fhir-master | END pattern 2 (pattern_2)
+2025-08-31 19:02:15,821 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:15,821 | INFO | repair.openui5-fhir-master | BEGIN pattern 3 (pattern_3)
+2025-08-31 19:02:15,821 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "call", "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}?**.{replace}", "changelogId": 3}
+2025-08-31 19:02:16,497 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:16,497 | DEBUG | repair.openui5-fhir-master | Parsed detection output: [{'pattern_id': 3, 'file': 'lib/jsdoc/plugin/static/scripts/prettify/prettify.js', 'line': 5, 'column': 201}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/static/scripts/prettify/prettify.js', 'line': 5, 'column': 420}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/static/scripts/prettify/prettify.js', 'line': 6, 'column': 419}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/static/scripts/prettify/prettify.js', 'line': 6, 'column': 444}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/static/scripts/prettify/prettify.js', 'line': 11, 'column': 495}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/static/scripts/prettify/prettify.js', 'line': 12, 'column': 42}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/static/scripts/prettify/prettify.js', 'line': 16, 'column': 470}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/publish.js', 'line': 221, 'column': 28}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/publish.js', 'line': 221, 'column': 28}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/publish.js', 'line': 323, 'column': 26}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/publish.js', 'line': 414, 'column': 22}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/publish.js', 'line': 445, 'column': 26}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/publish.js', 'line': 603, 'column': 25}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/publish.js', 'line': 631, 'column': 29}, {'pattern_id': 3, 'file': 'lib/jsdoc/plugin/patternReplacer.js', 'line': 20, 'column': 20}, {'pattern_id': 3, 'file': 'scripts/build/replaceCopyright.js', 'line': 13, 'column': 11}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/lib/FHIRUrl.js', 'line': 27, 'column': 26}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/lib/FHIRRequestor.js', 'line': 517, 'column': 23}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/lib/FHIRRequestor.js', 'line': 517, 'column': 23}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/lib/FHIRRequestor.js', 'line': 517, 'column': 23}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/lib/FHIRRequestor.js', 'line': 519, 'column': 23}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/FHIRModel.js', 'line': 1204, 'column': 42}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/FHIRModel.js', 'line': 1205, 'column': 31}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/FHIRTreeBinding.js', 'line': 1071, 'column': 40}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/FHIRUtils.js', 'line': 300, 'column': 15}, {'pattern_id': 3, 'file': 'src/sap/fhir/model/r4/FHIRUtils.js', 'line': 437, 'column': 33}]
+2025-08-31 19:02:16,497 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110057740>, {'lib/jsdoc/plugin/static/scripts/prettify/prettify.js': defaultdict(<class 'list'>, {3: [{'line': 5, 'column': 201}, {'line': 5, 'column': 420}, {'line': 6, 'column': 419}, {'line': 6, 'column': 444}, {'line': 11, 'column': 495}, {'line': 12, 'column': 42}, {'line': 16, 'column': 470}]}), 'lib/jsdoc/plugin/publish.js': defaultdict(<class 'list'>, {3: [{'line': 221, 'column': 28}, {'line': 221, 'column': 28}, {'line': 323, 'column': 26}, {'line': 414, 'column': 22}, {'line': 445, 'column': 26}, {'line': 603, 'column': 25}, {'line': 631, 'column': 29}]}), 'lib/jsdoc/plugin/patternReplacer.js': defaultdict(<class 'list'>, {3: [{'line': 20, 'column': 20}]}), 'scripts/build/replaceCopyright.js': defaultdict(<class 'list'>, {3: [{'line': 13, 'column': 11}]}), 'src/sap/fhir/model/r4/lib/FHIRUrl.js': defaultdict(<class 'list'>, {3: [{'line': 27, 'column': 26}]}), 'src/sap/fhir/model/r4/lib/FHIRRequestor.js': defaultdict(<class 'list'>, {3: [{'line': 517, 'column': 23}, {'line': 517, 'column': 23}, {'line': 517, 'column': 23}, {'line': 519, 'column': 23}]}), 'src/sap/fhir/model/r4/FHIRModel.js': defaultdict(<class 'list'>, {3: [{'line': 1204, 'column': 42}, {'line': 1205, 'column': 31}]}), 'src/sap/fhir/model/r4/FHIRTreeBinding.js': defaultdict(<class 'list'>, {3: [{'line': 1071, 'column': 40}]}), 'src/sap/fhir/model/r4/FHIRUtils.js': defaultdict(<class 'list'>, {3: [{'line': 300, 'column': 15}, {'line': 437, 'column': 33}]})})
+2025-08-31 19:02:16,499 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/static/scripts/prettify/prettify.js
+2025-08-31 19:02:16,501 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/static/scripts/prettify/prettify.js
+2025-08-31 19:02:16,502 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/static/scripts/prettify/prettify.js
+2025-08-31 19:02:16,505 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/static/scripts/prettify/prettify.js
+2025-08-31 19:02:16,509 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/static/scripts/prettify/prettify.js
+2025-08-31 19:02:17,383 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:18,303 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:19,328 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:20,252 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:21,171 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:21,182 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/publish.js
+2025-08-31 19:02:21,192 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/publish.js
+2025-08-31 19:02:21,196 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/publish.js
+2025-08-31 19:02:21,199 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/publish.js
+2025-08-31 19:02:21,203 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/publish.js
+2025-08-31 19:02:22,300 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:23,219 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:24,140 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:24,956 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:25,896 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:25,897 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/lib/jsdoc/plugin/patternReplacer.js
+2025-08-31 19:02:27,009 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:27,010 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/scripts/build/replaceCopyright.js
+2025-08-31 19:02:27,827 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:27,830 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/src/sap/fhir/model/r4/lib/FHIRUrl.js
+2025-08-31 19:02:28,644 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:28,652 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/src/sap/fhir/model/r4/lib/FHIRRequestor.js
+2025-08-31 19:02:30,044 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:30,062 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/src/sap/fhir/model/r4/FHIRModel.js
+2025-08-31 19:02:30,860 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:30,877 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/src/sap/fhir/model/r4/FHIRTreeBinding.js
+2025-08-31 19:02:31,718 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:31,728 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/src/sap/fhir/model/r4/FHIRUtils.js
+2025-08-31 19:02:32,946 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:32,949 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:32,949 | INFO | repair.openui5-fhir-master | END pattern 3 (pattern_3)
+2025-08-31 19:02:32,950 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:32,950 | INFO | repair.openui5-fhir-master | BEGIN pattern 3 (pattern_3)
+2025-08-31 19:02:32,951 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "call", "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}?**.{replace}", "changelogId": 3}
+2025-08-31 19:02:33,661 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:33,661 | DEBUG | repair.openui5-fhir-master | Parsed detection output: []
+2025-08-31 19:02:33,661 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1100576a0>, {})
+2025-08-31 19:02:33,662 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:33,662 | INFO | repair.openui5-fhir-master | END pattern 3 (pattern_3)
+2025-08-31 19:02:33,662 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:33,662 | INFO | repair.openui5-fhir-master | BEGIN pattern 5 (pattern_5)
+2025-08-31 19:02:33,662 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "call", "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile,replaceInFileSync}", "changelogId": 5}
+2025-08-31 19:02:34,319 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:34,319 | DEBUG | repair.openui5-fhir-master | Parsed detection output: []
+2025-08-31 19:02:34,319 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1100576a0>, {})
+2025-08-31 19:02:34,320 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:34,320 | INFO | repair.openui5-fhir-master | END pattern 5 (pattern_5)
+2025-08-31 19:02:34,320 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:34,320 | INFO | repair.openui5-fhir-master | BEGIN pattern 5 (pattern_5)
+2025-08-31 19:02:34,320 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "call", "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile,replaceInFileSync}", "changelogId": 5}
+2025-08-31 19:02:34,936 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:34,936 | DEBUG | repair.openui5-fhir-master | Parsed detection output: []
+2025-08-31 19:02:34,936 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1100576a0>, {})
+2025-08-31 19:02:34,937 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:34,937 | INFO | repair.openui5-fhir-master | END pattern 5 (pattern_5)
+2025-08-31 19:02:34,937 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:34,937 | INFO | repair.openui5-fhir-master | BEGIN pattern 6 (pattern_6)
+2025-08-31 19:02:34,937 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "call", "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile,replaceInFileSync}", "changelogId": 6}
+2025-08-31 19:02:35,587 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:35,587 | DEBUG | repair.openui5-fhir-master | Parsed detection output: []
+2025-08-31 19:02:35,587 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1100576a0>, {})
+2025-08-31 19:02:35,588 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:35,588 | INFO | repair.openui5-fhir-master | END pattern 6 (pattern_6)
+2025-08-31 19:02:35,588 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:35,588 | INFO | repair.openui5-fhir-master | BEGIN pattern 6 (pattern_6)
+2025-08-31 19:02:35,588 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "call", "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile,replaceInFileSync}", "changelogId": 6}
+2025-08-31 19:02:36,265 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:36,265 | DEBUG | repair.openui5-fhir-master | Parsed detection output: []
+2025-08-31 19:02:36,265 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1100576a0>, {})
+2025-08-31 19:02:36,266 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:36,266 | INFO | repair.openui5-fhir-master | END pattern 6 (pattern_6)
+2025-08-31 19:02:36,266 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:36,266 | INFO | repair.openui5-fhir-master | BEGIN pattern 0 (pattern_0)
+2025-08-31 19:02:36,266 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "import", "pattern": "import {replace-in-file/**/*,replace-in-file}", "changelogId": 0}
+2025-08-31 19:02:36,907 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:36,907 | DEBUG | repair.openui5-fhir-master | Parsed detection output: [{'pattern_id': 0, 'file': 'scripts/build/patternReplacer.js', 'line': 1, 'column': 16}]
+2025-08-31 19:02:36,907 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1100576a0>, {'scripts/build/patternReplacer.js': defaultdict(<class 'list'>, {0: [{'line': 1, 'column': 16}]})})
+2025-08-31 19:02:36,907 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/scripts/build/patternReplacer.js
+2025-08-31 19:02:40,612 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "// The 'replace-in-file' package is now an ESModule and can no longer be imported using 'require'.\n// Adaptation: use ESM import syntax. If this file must be run in CommonJS, further migration of the project to ESM may be required.\n//\n// import { replaceInFile, replaceInFileSync } from \"replace-in-file\";\n// If the previous usage relies on the default export, you may need to adapt usage to the named exports.\n\nimport { replaceInFile, replaceInFileSync } from \"replace-in-file\"; // Modify usage below as needed, e.g., replaceInFile(...)\n\n// Note: If there are usages of 'replace' below, change them to use 'replaceInFile' or 'replaceInFileSync'.",
+  "additional_req": "If this file is still using CommonJS (require/module.exports) elsewhere or in the project, further migration to ES modules (including updating package.json with \"type\": \"module\") is required. Also, if code below expects 'replace' as the default export, update usage to named exports.",
+  "dependencies": [
+    "replace-in-file@^8.0.0"
+  ]
+}
+2025-08-31 19:02:40,612 | DEBUG | repair.openui5-fhir-master | Added to whole mode list: file=-2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/scripts/build/patternReplacer.js, context=dict, bc_desc={'Id': 0, 'BC_description': "The package has been converted to an ES module. As a result, it can no longer be required o...
+2025-08-31 19:02:40,612 | INFO | repair.openui5-fhir-master | Whole mode item: -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/scripts/build/patternReplacer.js
+2025-08-31 19:02:44,930 | DEBUG | repair.openui5-fhir-master | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': '// The \'replace-in-file\' package is now an ESModule and can no longer be imported using \'require\'.\n// To use it, switch to ESM import syntax, and adapt usage from default export (\'replace\') to the named export \'replaceInFile\'.\n// Note: For this migration, this file must itself be an ES module (e.g., use .mjs extension or set "type": "module" in package.json)\n//\n// Adapted code:\nimport { replaceInFile } from "replace-in-file";\n\nexport default function (taskName, options) {\n    return replaceInFile(options)\n        .then(results => {\n            console.log("OpenUI5-FHIR builder task " + taskName + " completed successfully.");\n        })\n        .catch(error => {\n            console.error("OpenUI5-FHIR builder task " + taskName + " failed with following error: " + error);\n        });\n}\n\n// Note: If other parts of your project or build expect CommonJS (module.exports/require), you\'ll need to further adapt your module system (see additional_req).\n', 'additional_req': "If your project or other files are still using CommonJS (require/module.exports), you must migrate them to ESM as well, and change package.json to include 'type': 'module'. The exported function is now using 'export default' instead of 'module.exports'. If that is not feasible, consider using dynamic import('replace-in-file').then(...) as a fallback, but ESM migration is recommended.", 'dependencies': ['replace-in-file@^8.0.0']}
+2025-08-31 19:02:44,931 | INFO | repair.openui5-fhir-master | Replace whole file: -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/scripts/build/patternReplacer.js
+2025-08-31 19:02:44,933 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:44,933 | INFO | repair.openui5-fhir-master | END pattern 0 (pattern_0)
+2025-08-31 19:02:44,934 | INFO | repair.openui5-fhir-master | ============================================================
+2025-08-31 19:02:44,935 | INFO | repair.openui5-fhir-master | BEGIN pattern 1 (pattern_1)
+2025-08-31 19:02:44,935 | DEBUG | repair.openui5-fhir-master | Pattern payload: {"type": "import", "pattern": "import {replace-in-file/**/*,replace-in-file}", "changelogId": 1}
+2025-08-31 19:02:45,614 | INFO | repair.openui5-fhir-master | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master
+2025-08-31 19:02:45,614 | DEBUG | repair.openui5-fhir-master | Parsed detection output: [{'pattern_id': 1, 'file': 'scripts/build/patternReplacer.js', 'line': 6, 'column': 0}]
+2025-08-31 19:02:45,614 | DEBUG | repair.openui5-fhir-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110055580>, {'scripts/build/patternReplacer.js': defaultdict(<class 'list'>, {1: [{'line': 6, 'column': 0}]})})
+2025-08-31 19:02:45,614 | INFO | repair.openui5-fhir-master | New context extracted from -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/scripts/build/patternReplacer.js
+2025-08-31 19:02:46,465 | DEBUG | repair.openui5-fhir-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:46,468 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:46,468 | INFO | repair.openui5-fhir-master | END pattern 1 (pattern_1)
+2025-08-31 19:02:46,477 | INFO | repair.openui5-fhir-master | Config BC: scanning 0 files
+2025-08-31 19:02:46,478 | DEBUG | repair.openui5-fhir-master | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/openui5-fhir-master/package.json
+2025-08-31 19:02:46,479 | INFO | repair.openui5-fhir-master | token consumed 42253
+2025-08-31 19:02:46,479 | INFO | repair.openui5-fhir-master | parse consumption time: 25.181167874485254

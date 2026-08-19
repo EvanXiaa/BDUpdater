@@ -1,0 +1,9 @@
+### v3.0.1 (2018-02-15)
+- [#3163](https://github.com/less/less.js/pull/3163) Merge 3.x into master (@matthew-dean, @barnabycolby, @kirillrogovoy, @maxbrunsfeld, @seven-phases-max, @ryysud, @bdsomer, @wiinci, @nikeee, @anthony-redFox)
+
+### v3.0.0-RC.2 (2018-02-11)
+- [#3161](https://github.com/less/less.js/pull/3161) Remove legacy upgrade (@matthew-dean)
+- [#3159](https://github.com/less/less.js/pull/3159) Bump to 3.0.0-RC.1 (@matthew-dean)
+
+### v3.0.0-RC.1 (2018-02-04)
+- [#3150](https://github.com/less/less.js/pull/3150) Drop node 0.10 and 0.12 and added node 9 matrix testing (@anthony-redFox)

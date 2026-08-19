@@ -1,0 +1,7 @@
+{
+  "owner": "nodejs",
+  "repo": "node-gyp",
+  "number": 3102,
+  "pr_url": "https://github.com/nodejs/node-gyp/pull/3102",
+  "content": "# PR 3102: Update engines and dependencies\nBranches: lk/11 -> main\n\nThis PR updates the engines from `^16.14.0 || >=18.0.0` to `^18.17.0 || >=20.5.0` and updates all dependencies that were behind on major versions due them not supporting Node 16.\r\n\r\nThe new engines range was chosen to align with the `npm` dependencies that were updated such as [`make-fetch-happen`](https://github.com/npm/make-fetch-happen/blob/ecd8f33c411096e8f79ae6f7043edab11ab29289/package.json#L57).\r\n\r\nThis PR also closes #2663 as it updates `make-fetch-happen` to a version with the necessary fix.\r\n\n\n## Commit titles\n- deps: make-fetch-happen@14.0.3\n- deps: nopt@8.0.0\n- deps: proc-log@5.0.0\n- deps: which@5.0.0\n- deps: tar@7.4.3\n- feat!: drop node 16 support\n- chore(deps): mocha@11.0.1\n\n## Changed files\n- package.json\n## Reviews\n- @legendecas [APPROVED]"
+}

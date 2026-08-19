@@ -1,0 +1,27 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<chalk>,<chalk/**/*>}?**.{hasColor}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "write {<chalk>,<chalk/**/*>}?**.{hasColor}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "read {<chalk>,<chalk/**/*>}?**.{stripColor}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "write {<chalk>,<chalk/**/*>}?**.{stripColor}",
+    "changelogId": 2
+  },
+  {
+    "type": "read",
+    "pattern": "read {<chalk>,<chalk/**/*>}?**.{styles}",
+    "changelogId": 3
+  }
+]

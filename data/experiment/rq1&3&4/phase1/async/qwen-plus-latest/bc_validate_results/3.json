@@ -1,0 +1,29 @@
+{
+  "Id": 3,
+  "BC_description": "The `queue`, `priorityQueue`, `cargo`, and `cargoQueue` objects no longer allow direct assignment to event properties such as `saturated`, `drain`, `empty`, `pause`, and `resume`. These properties were previously used to assign callback functions directly (e.g., `q.drain = () => { ... }`). Now, these event handlers are implemented as methods that register callbacks via invocation, such as `q.drain(callback)`, or can be awaited directly using `await q.drain()` to wait for the next occurrence of the event. This change enables awaitable queue events and improves integration with async/await patterns, but breaks existing code relying on property assignment for event handling.",
+  "Reference": [
+    "#1586",
+    "#1641"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "queue",
+      "priorityQueue",
+      "cargo",
+      "cargoQueue"
+    ],
+    "methodName": [
+      "drain",
+      "saturated",
+      "empty",
+      "pause",
+      "resume"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Before: q.drain = () => { console.log('done'); };\nAfter: q.drain(() => { console.log('done'); });\n\nOr to await the next occurrence:\nAfter: await q.drain();",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}

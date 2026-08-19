@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dependency BC Repair"
+  short_description: "Agent-led two-stage dependency breaking-change repair"
+  default_prompt: "Use $dep-bc-repair to mine breaking changes for node-fetch v1 to v2 and repair an affected client."

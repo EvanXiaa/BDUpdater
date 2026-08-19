@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "dep_bc_repair_report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "handoff",
+    "handoff_sha256",
+    "bc_list_sha256",
+    "pattern_file_sha256",
+    "preflight",
+    "preflight_sha256",
+    "tapir_run",
+    "tapir_run_sha256",
+    "supplemental_run",
+    "supplemental_run_sha256",
+    "locations_sha256",
+    "target_client_dir",
+    "package_name",
+    "new_version",
+    "entries",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "handoff": { "type": "string", "minLength": 1 },
+    "handoff_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "bc_list_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "pattern_file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "preflight": { "type": "string", "minLength": 1 },
+    "preflight_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "tapir_run": { "type": "string", "minLength": 1 },
+    "tapir_run_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "supplemental_run": { "type": ["string", "null"] },
+    "supplemental_run_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "locations_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "target_client_dir": { "type": "string", "minLength": 1 },
+    "package_name": { "type": "string", "minLength": 1 },
+    "new_version": { "type": "string", "minLength": 1 },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["bc_id", "status", "hit_count", "changed_files", "evidence", "notes"],
+        "properties": {
+          "bc_id": { "type": "integer", "minimum": 0 },
+          "status": {
+            "enum": [
+              "pending",
+              "repaired",
+              "unaffected",
+              "not_found",
+              "manual",
+              "blocked",
+              "environment_checked"
+            ]
+          },
+          "hit_count": { "type": "integer", "minimum": 0 },
+          "changed_files": { "type": "array", "items": { "type": "string" } },
+          "evidence": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overall", "commands"],
+      "properties": {
+        "overall": { "enum": ["pending", "passed", "unverified", "failed"] },
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["command", "status"],
+            "properties": {
+              "command": { "type": "string" },
+              "status": { "enum": ["passed", "failed", "skipped"] },
+              "output": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

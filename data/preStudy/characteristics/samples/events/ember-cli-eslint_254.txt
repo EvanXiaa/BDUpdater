@@ -1,0 +1,7 @@
+{
+  "owner": "ember-cli",
+  "repo": "ember-cli-eslint",
+  "number": 254,
+  "pr_url": "https://github.com/ember-cli/ember-cli-eslint/pull/254",
+  "content": "# PR 254: Drop support for node 4\nBranches: drop_node_4 -> master\n\nBreaking.\n\n## Commit titles\n- Drop support for node 4\n\n## Changed files\n- .travis.yml\n- package.json\n- yarn.lock\n## Review comments\n- @Turbo87: @rwjblue was there a reason why we ran this on all supported Node versions? 🤔\n- @rwjblue: Don’t think so. In general we mostly use “oldest” supported node for addons these days, so I figured this was probably fine.\n## Reviews\n- @Turbo87 [COMMENTED]\n- @rwjblue [COMMENTED]"
+}

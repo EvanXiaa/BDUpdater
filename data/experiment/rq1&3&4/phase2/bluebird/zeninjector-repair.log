@@ -1,0 +1,261 @@
+2025-08-31 02:23:36,295 | INFO | repair.zeninjector | Starting analysis for zeninjector
+2025-08-31 02:23:36,295 | INFO | repair.zeninjector | Starting breaking change analysis for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:23:36,296 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:23:36,296 | INFO | repair.zeninjector | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:23:36,296 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:23:36,468 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:23:36,468 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:23:36,468 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204722a0>, {})
+2025-08-31 02:23:36,468 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:23:36,468 | INFO | repair.zeninjector | END pattern 0 (pattern_0)
+2025-08-31 02:23:36,469 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:23:36,469 | INFO | repair.zeninjector | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:23:36,469 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:23:36,646 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:23:36,646 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:23:36,646 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204722a0>, {})
+2025-08-31 02:23:36,647 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:23:36,647 | INFO | repair.zeninjector | END pattern 0 (pattern_0)
+2025-08-31 02:23:36,647 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:23:36,647 | INFO | repair.zeninjector | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:23:36,647 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:23:36,841 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:23:36,841 | DEBUG | repair.zeninjector | Parsed detection output: [{'pattern_id': 1, 'file': 'lib/parser.js', 'line': 64, 'column': 17}]
+2025-08-31 02:23:36,841 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204722a0>, {'lib/parser.js': defaultdict(<class 'list'>, {1: [{'line': 64, 'column': 17}]})})
+2025-08-31 02:23:36,841 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/lib/parser.js
+2025-08-31 02:24:04,958 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "function extractInjectedFunctions(file) {\n\n  var nameParam = 'name\\\\s*=\\\\s*([^,)]+)';\n  var injectPattern = /^\\s*\\/\\/\\s*@autoinject/;\n  var exportPattern = /^\\s*\\/\\/\\s*@autoexport/;\n  var parseErrorMsg = 'Parse error. Cannot have two annotations with no functions between';\n  var resolver = {};\n  resolver.promise = new Promise(function(resolve, reject) {\n    resolver.resolve = resolve;\n    resolver.reject = reject;\n  });\n  var matches = [];\n\n  var gotAutoinject, gotAutoexport, lineCount=0;\n  var exportName, dependencies;\n\n  fs.createReadStream(file)\n  .pipe(split())\n  .on('data', function(line) {\n    lineCount++;\n    if(!line.length) return; // ignore empty lines\n\n    if(injectPattern.test(line)) {\n      if(gotAutoinject) {\n        this.removeAllListeners();\n        resolver.reject(new Error(parseErrorMsg));\n        return;\n      }\n\n      var params = getParams(line);\n      exportName = params.exportName;\n      dependencies = params.dependencies;\n\n      gotAutoinject = true;\n      return;\n    }\n\n    if(exportPattern.test(line)) {\n      if(gotAutoexport) {\n        this.removeAllListeners();\n        resolver.reject(new Error(parseErrorMsg));\n        return;\n      }\n\n      var params = getParams(line);\n      exportName = params.exportName;\n      gotAutoexport = true;\n      return;\n    }\n\n    if(!gotAutoinject && !gotAutoexport) return;\n\n    var name = extractExportName(line);\n    if(!name && !exportName) {\n      this.removeAllListeners();\n      resolver.reject(new Error('Parse error. An annotation must be directly followed by the function declaration'));\n      return;\n    }\n\n    if(gotAutoinject) {\n      matches.push({\n        name: name,\n        exportedName: exportName || name,\n        dependencies: dependencies,\n        autoinject: true\n      });\n    } else {\n      matches.push({\n        name: name,\n        exportedName: exportName || name,\n        autoexport: true\n      });\n    }\n\n    exportName = void(0);\n    dependencies = void(0);\n    gotAutoinject = false;\n    gotAutoexport = false;\n  })\n  .on('end', function() {\n    resolver.resolve(matches);\n  });\n\n  return resolver.promise;\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:24:04,961 | INFO | repair.zeninjector | Replaced code in /bluebird/results/gpt-4.1/zeninjector/lib/parser.js at [1621, 3624]
+2025-08-31 02:24:04,962 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:04,962 | INFO | repair.zeninjector | END pattern 1 (pattern_1)
+2025-08-31 02:24:04,963 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:04,963 | INFO | repair.zeninjector | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:24:04,963 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:24:05,334 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:05,335 | DEBUG | repair.zeninjector | Parsed detection output: [{'pattern_id': 1, 'file': 'lib/promise.js', 'line': 3, 'column': 0}]
+2025-08-31 02:24:05,335 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204722a0>, {'lib/promise.js': defaultdict(<class 'list'>, {1: [{'line': 3, 'column': 0}]})})
+2025-08-31 02:24:05,335 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/lib/promise.js
+2025-08-31 02:24:08,966 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:24:08,967 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:08,967 | INFO | repair.zeninjector | END pattern 1 (pattern_1)
+2025-08-31 02:24:08,968 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:08,968 | INFO | repair.zeninjector | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:24:08,968 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:24:09,205 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:09,205 | DEBUG | repair.zeninjector | Parsed detection output: [{'pattern_id': 2, 'file': 'lib/container.js', 'line': 239, 'column': 13}, {'pattern_id': 2, 'file': 'test/container.js', 'line': 84, 'column': 6}, {'pattern_id': 2, 'file': 'test/container.js', 'line': 98, 'column': 6}, {'pattern_id': 2, 'file': 'test/container.js', 'line': 144, 'column': 6}, {'pattern_id': 2, 'file': 'test/container.js', 'line': 202, 'column': 6}, {'pattern_id': 2, 'file': 'test/container.js', 'line': 210, 'column': 6}, {'pattern_id': 2, 'file': 'test/container.js', 'line': 250, 'column': 6}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 11, 'column': 4}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 22, 'column': 4}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 33, 'column': 4}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 47, 'column': 4}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 56, 'column': 4}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 67, 'column': 4}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 78, 'column': 6}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 87, 'column': 6}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 96, 'column': 6}, {'pattern_id': 2, 'file': 'test/parser.js', 'line': 108, 'column': 6}]
+2025-08-31 02:24:09,205 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204722a0>, {'lib/container.js': defaultdict(<class 'list'>, {2: [{'line': 239, 'column': 13}]}), 'test/container.js': defaultdict(<class 'list'>, {2: [{'line': 84, 'column': 6}, {'line': 98, 'column': 6}, {'line': 144, 'column': 6}, {'line': 202, 'column': 6}, {'line': 210, 'column': 6}, {'line': 250, 'column': 6}]}), 'test/parser.js': defaultdict(<class 'list'>, {2: [{'line': 11, 'column': 4}, {'line': 22, 'column': 4}, {'line': 33, 'column': 4}, {'line': 47, 'column': 4}, {'line': 56, 'column': 4}, {'line': 67, 'column': 4}, {'line': 78, 'column': 6}, {'line': 87, 'column': 6}, {'line': 96, 'column': 6}, {'line': 108, 'column': 6}]})})
+2025-08-31 02:24:09,206 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/lib/container.js
+2025-08-31 02:24:13,146 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:24:13,149 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/test/container.js
+2025-08-31 02:24:20,826 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:24:20,828 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/test/parser.js
+2025-08-31 02:24:26,142 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:24:26,145 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:26,146 | INFO | repair.zeninjector | END pattern 2 (pattern_2)
+2025-08-31 02:24:26,147 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:26,147 | INFO | repair.zeninjector | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:24:26,147 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:24:26,516 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:26,516 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:26,516 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ba0>, {})
+2025-08-31 02:24:26,516 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:26,516 | INFO | repair.zeninjector | END pattern 2 (pattern_2)
+2025-08-31 02:24:26,517 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:26,517 | INFO | repair.zeninjector | BEGIN pattern 4 (pattern_4)
+2025-08-31 02:24:26,517 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{Promise}", "changelogId": 4}
+2025-08-31 02:24:26,691 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:26,692 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:26,692 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ba0>, {})
+2025-08-31 02:24:26,692 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:26,692 | INFO | repair.zeninjector | END pattern 4 (pattern_4)
+2025-08-31 02:24:26,692 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:26,692 | INFO | repair.zeninjector | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:24:26,692 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:24:26,869 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:26,870 | DEBUG | repair.zeninjector | Parsed detection output: [{'pattern_id': 5, 'file': 'lib/container.js', 'line': 233, 'column': 14}]
+2025-08-31 02:24:26,870 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ba0>, {'lib/container.js': defaultdict(<class 'list'>, {5: [{'line': 233, 'column': 14}]})})
+2025-08-31 02:24:26,870 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/lib/container.js
+2025-08-31 02:24:41,535 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:24:41,537 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:41,537 | INFO | repair.zeninjector | END pattern 5 (pattern_5)
+2025-08-31 02:24:41,537 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:41,539 | INFO | repair.zeninjector | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:24:41,539 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:24:41,886 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:41,886 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:41,886 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {})
+2025-08-31 02:24:41,886 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:41,886 | INFO | repair.zeninjector | END pattern 5 (pattern_5)
+2025-08-31 02:24:41,886 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:41,886 | INFO | repair.zeninjector | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:24:41,886 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:24:42,052 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:42,052 | DEBUG | repair.zeninjector | Parsed detection output: [{'pattern_id': 6, 'file': 'lib/container.js', 'line': 233, 'column': 14}]
+2025-08-31 02:24:42,052 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {'lib/container.js': defaultdict(<class 'list'>, {6: [{'line': 233, 'column': 14}]})})
+2025-08-31 02:24:42,053 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/lib/container.js
+2025-08-31 02:24:47,043 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:24:47,044 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:47,044 | INFO | repair.zeninjector | END pattern 6 (pattern_6)
+2025-08-31 02:24:47,045 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:47,045 | INFO | repair.zeninjector | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:24:47,045 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:24:47,239 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:47,239 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:47,239 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {})
+2025-08-31 02:24:47,240 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:47,240 | INFO | repair.zeninjector | END pattern 6 (pattern_6)
+2025-08-31 02:24:47,240 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:47,240 | INFO | repair.zeninjector | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:24:47,240 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:24:47,420 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:47,420 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:47,420 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {})
+2025-08-31 02:24:47,420 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:47,420 | INFO | repair.zeninjector | END pattern 7 (pattern_7)
+2025-08-31 02:24:47,420 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:47,420 | INFO | repair.zeninjector | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:24:47,420 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:24:47,592 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:47,592 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:47,592 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {})
+2025-08-31 02:24:47,592 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:47,592 | INFO | repair.zeninjector | END pattern 7 (pattern_7)
+2025-08-31 02:24:47,592 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:47,592 | INFO | repair.zeninjector | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:24:47,592 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:24:47,772 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:47,773 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:47,773 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {})
+2025-08-31 02:24:47,773 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:47,773 | INFO | repair.zeninjector | END pattern 8 (pattern_8)
+2025-08-31 02:24:47,773 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:47,773 | INFO | repair.zeninjector | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:24:47,773 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:24:47,938 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:47,938 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:47,938 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {})
+2025-08-31 02:24:47,939 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:47,939 | INFO | repair.zeninjector | END pattern 8 (pattern_8)
+2025-08-31 02:24:47,939 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:47,939 | INFO | repair.zeninjector | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:24:47,939 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:24:48,117 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:48,117 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:48,117 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {})
+2025-08-31 02:24:48,118 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:48,118 | INFO | repair.zeninjector | END pattern 9 (pattern_9)
+2025-08-31 02:24:48,118 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:48,118 | INFO | repair.zeninjector | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:24:48,118 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:24:48,295 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:48,296 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:24:48,296 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {})
+2025-08-31 02:24:48,296 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:24:48,296 | INFO | repair.zeninjector | END pattern 9 (pattern_9)
+2025-08-31 02:24:48,296 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:24:48,296 | INFO | repair.zeninjector | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:24:48,296 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:24:48,472 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:24:48,472 | DEBUG | repair.zeninjector | Parsed detection output: [{'pattern_id': 10, 'file': 'test/container.js', 'line': 113, 'column': 6}, {'pattern_id': 10, 'file': 'test/container.js', 'line': 124, 'column': 6}, {'pattern_id': 10, 'file': 'test/container.js', 'line': 136, 'column': 6}, {'pattern_id': 10, 'file': 'test/container.js', 'line': 177, 'column': 6}, {'pattern_id': 10, 'file': 'test/container.js', 'line': 187, 'column': 6}]
+2025-08-31 02:24:48,472 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6660>, {'test/container.js': defaultdict(<class 'list'>, {10: [{'line': 113, 'column': 6}, {'line': 124, 'column': 6}, {'line': 136, 'column': 6}, {'line': 177, 'column': 6}, {'line': 187, 'column': 6}]})})
+2025-08-31 02:24:48,473 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/test/container.js
+2025-08-31 02:25:50,539 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "suite('container', function() {\n  setup(function() {\n    this.container = new Container({logger: logger});\n  });\n\n  teardown(function() {\n    this.container = null;\n  });\n\n  describe('logging', function() {\n\n    test('verbose option', function() {\n      sinon.spy(logger, 'debug');\n      var container = new Container({\n        logger: logger,\n        verbose: false\n      });\n      container.register('a', function() { return 'a'; });\n\n      sinon.assert.notCalled(logger.debug);\n      logger.debug.restore();\n    });\n\n    test('custom logging', function() {\n      var newLogger = _.clone(logger);\n      sinon.spy(newLogger, 'debug');\n      sinon.spy(logger, 'debug');\n      this.container.setLogger(newLogger);\n      this.container.options.verbose = true;\n\n      this.container.register('a', function() { return 'a'; });\n      sinon.assert.notCalled(logger.debug);\n      sinon.assert.called(newLogger.debug);\n    });\n\n  });\n\n  suite('register throws error', function() {\n\n    test('with no arguments', function() {\n      var container = this.container;\n      assert.throw(function() {\n        container.register({});\n      }, /must have a name/i);\n    });\n\n    test('with no function', function() {\n      var container = this.container;\n      assert.throw(function() {\n        container.register('foo');\n      }, /must give a function/i);\n    });\n\n    test('already registered', function() {\n      var container = this.container;\n      container.register('first', function() {});\n      assert.throw(function() {\n        container.register('first', function() {});\n      }, /already registered/i);\n    });\n\n  });\n\n  suite('register/resolve', function() {\n\n    test('`resolve` throws error if module is not registered', function(done) {\n      this.container.resolve('doesntExist').then(function() {\n        done(new Error('Resolve should throw an error'));\n      }).catch(function(err) {\n        if(/missing dependency/i.test(err.toString())) {\n          done();\n        } else {\n          done(err);\n        }\n      });\n    });\n\n    test('`resolve` throws error when deep dependency is missing', function(done) {\n      this.container.register('a', function(b) { return 'a'+b; });\n      this.container.register('b', function(c) { return c+'b' });\n      this.container.resolve('a').then(function() {\n        done(new Error('should throw error'));\n      }).catch(function(err) {\n        if(/missing dependency/i.test(err.toString())) {\n          done();\n        } else {\n          done(err);\n        }\n      });\n    });\n\n    test('module with no dependencies', function(done) {\n      assert.isFalse(this.container.isRegistered('noDep'));\n      this.container.register('noDep', function() { return 'nodep'; });\n      assert.isTrue(this.container.isRegistered('noDep'));\n      // Replaced .done() with .then().catch() to handle errors\n      this.container.resolve('noDep')\n        .then(function(result) {\n          assert.equal(result, 'nodep');\n          done();\n        })\n        .catch(done);\n    });\n\n    test('module with a dependency', function(done) {\n      var o1 = function() { return 'o1'; }\n      var o2 = function(o1) { return o1+' augmented'; }\n      this.container.register('o1', o1);\n      this.container.register('o2', o2);\n      // Replaced .done() with .then().catch()\n      this.container.resolve('o2')\n        .then(function(o2Module) {\n          assert.equal(o2Module, 'o1 augmented');\n          done();\n        })\n        .catch(done);\n    });\n\n    test('module with an explicit dependency', function(done) {\n      var o1 = function() { return 'o1'; }\n      var o2 = function(foo) { return foo+' augmented'; }\n      this.container.register('o1', o1);\n      this.container.register('o2', ['o1', o2]);\n      // Replaced .done() with .then().catch()\n      this.container.resolve('o2')\n        .then(function(o2Module) {\n          assert.equal(o2Module, 'o1 augmented');\n          done();\n        })\n        .catch(done);\n    });\n\n    test('throw error when dependency is not found', function(done) {\n      this.container.register('willFail', function(notHere) {return 'ok'; });\n      this.container.resolve('willFail').then(function() {;\n        done(new Error('resolve should throw an error'));\n      }).catch(function(err) {\n        done();\n      });\n    });\n\n    test('do not throw error when `resolve` is called multiple times', function(done) {\n      this.container.register('foo', function() { return 'foo'; });\n      this.container.register('bar', function(foo) { return foo+'bar'; });\n      var first = this.container.resolve('bar');\n      var second = this.container.resolve('bar');\n      Promise.all([first, second]).nodeify(done);\n    });\n\n  });\n\n  test('can register existing objects', function() {\n    var fs = require('fs');\n    assert.equal(this.container.registerAndExport('fs', fs), fs);\n  });\n\n  suite('circular dependencies', function() {\n\n    test('false positive', function(done) {\n      this.container.registerAndExport('a', 'a');\n      this.container.register('b', function(a) {\n        return a+'b';\n      });\n      this.container.register('c', function(a, b) {\n        return a+b+'c';\n      });\n      // Replaced .done() with .then().catch()\n      this.container.resolve('c')\n        .then(function() {\n          done();\n        })\n        .catch(done);\n    });\n\n    test('a -> b -> c -> a throws error', function(done) {\n      // a -> b -> c -> a\n      this.container.register('a', function(c) { return c+'a'; });\n      this.container.register('b', function(a) { return a+'b'; });\n      this.container.register('c', function(b) { return b+'c'; });\n      // Replaced .done() with .then(success, error).catch() to handle fatal errors\n      this.container.resolve('a')\n        .then(function() {\n          done(new Error('Should throw an error'));\n        }, function(err) {\n          if(/circular dependency/i.test(String(err))) {\n            done();\n          } else {\n            done(err);\n          }\n        })\n        .catch(done);\n    });\n\n    test('a -> (b, c), b -> c does not throw', function(done) {\n      this.container.register('a', function(b, c) { return 'a'+b+c; });\n      this.container.register('b', function(c) { return 'b'+c; });\n      this.container.register('c', function() { return 'c'; });\n      this.container.resolve('a').then(function() {\n        done();\n      })\n      .catch(done);\n    });\n\n    test('a -> a throw error', function(done) {\n      this.container.register('a', function(a) { return a; });\n      this.container.resolve('a').then(function() {\n        done(new Error('should throw an error'));\n      })\n      .catch(function(err) {\n        if(/circular dependency/i.test(String(err))) {\n          done();\n        } else {\n          done(err);\n        }\n      });\n    });\n\n  });\n\n  suite('Inject: manage dependencies', function() {\n\n    test('for anonymous function', function(done) {\n      this.container.register('foo', function() { return 'foo'; });\n      this.container.inject(function(foo) {\n        return foo+foo;\n      }).then(function(res) {\n        assert.equal(res, 'foofoo');\n      }).nodeify(done);\n    });\n\n    test('with explicit dependencies', function(done) {\n      this.container.register('foo', function() { return 'foo'; });\n      this.container.inject(['foo', function(f) {\n        return f+f;\n      }]).then(function(res) {\n        assert.equal(res, 'foofoo');\n      }).nodeify(done);\n    });\n\n  });\n\n  suite('Scan', function() {\n\n    test('automatically register dependencies', function(done) {\n      var that = this;\n      this.container.scan(['test/files/module.js'])\n      .bind(this)\n      .then(function() {\n        return this.container.resolve('a');\n      })\n      .then(function(a) {\n        assert.ok(a);\n        done();\n      })\n      .catch(function(err) {\n        done(err);\n      });\n    });\n\n  });\n\n});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:25:50,543 | INFO | repair.zeninjector | Replaced code in /bluebird/results/gpt-4.1/zeninjector/test/container.js at [462, 7805]
+2025-08-31 02:25:50,545 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:25:50,545 | INFO | repair.zeninjector | END pattern 10 (pattern_10)
+2025-08-31 02:25:50,546 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:25:50,546 | INFO | repair.zeninjector | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:25:50,546 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:25:50,910 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:25:50,911 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:25:50,911 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473600>, {})
+2025-08-31 02:25:50,911 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:25:50,911 | INFO | repair.zeninjector | END pattern 10 (pattern_10)
+2025-08-31 02:25:50,911 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:25:50,911 | INFO | repair.zeninjector | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:25:50,911 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:25:51,074 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:25:51,074 | DEBUG | repair.zeninjector | Parsed detection output: [{'pattern_id': 11, 'file': 'lib/container.js', 'line': 137, 'column': 11}, {'pattern_id': 11, 'file': 'lib/container.js', 'line': 153, 'column': 11}, {'pattern_id': 11, 'file': 'lib/container.js', 'line': 160, 'column': 26}, {'pattern_id': 11, 'file': 'lib/container.js', 'line': 172, 'column': 11}]
+2025-08-31 02:25:51,074 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473600>, {'lib/container.js': defaultdict(<class 'list'>, {11: [{'line': 137, 'column': 11}, {'line': 153, 'column': 11}, {'line': 160, 'column': 26}, {'line': 172, 'column': 11}]})})
+2025-08-31 02:25:51,074 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/lib/container.js
+2025-08-31 02:25:51,075 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/lib/container.js
+2025-08-31 02:25:51,076 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/lib/container.js
+2025-08-31 02:25:51,076 | INFO | repair.zeninjector | New context extracted from /bluebird/results/gpt-4.1/zeninjector/lib/container.js
+2025-08-31 02:26:02,098 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if(cycles.length) {\n    var prettyCycles = cycles.map(function(cycle) {\n      var start = cycle[0];\n      var prettyCycle = cycle.map(function(m) { return m.name; });\n      prettyCycle.push(start.name);\n      prettyCycle = prettyCycle.join(' -> ');\n      return prettyCycle;\n    }).join('\\n');\n    // Use Bluebird's OperationalError so downstream instanceof checks still work\n    return Promise.reject(new Promise.OperationalError(\n      'Circular dependency detected with '+name+':\\n'+prettyCycles\n    ));\n  }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:26:02,100 | INFO | repair.zeninjector | Replaced code in /bluebird/results/gpt-4.1/zeninjector/lib/container.js at [4451, 4860]
+2025-08-31 02:26:07,627 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:26:10,681 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:26:14,796 | DEBUG | repair.zeninjector | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:26:14,799 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:26:14,799 | INFO | repair.zeninjector | END pattern 11 (pattern_11)
+2025-08-31 02:26:14,800 | INFO | repair.zeninjector | ============================================================
+2025-08-31 02:26:14,800 | INFO | repair.zeninjector | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:26:14,800 | DEBUG | repair.zeninjector | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:26:15,136 | INFO | repair.zeninjector | Tapir run successful for /bluebird/results/gpt-4.1/zeninjector
+2025-08-31 02:26:15,137 | DEBUG | repair.zeninjector | Parsed detection output: []
+2025-08-31 02:26:15,137 | DEBUG | repair.zeninjector | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120472fc0>, {})
+2025-08-31 02:26:15,137 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:26:15,137 | INFO | repair.zeninjector | END pattern 11 (pattern_11)
+2025-08-31 02:26:15,137 | INFO | repair.zeninjector | Config BC: scanning 0 files
+2025-08-31 02:26:15,137 | DEBUG | repair.zeninjector | Updated package.json saved at /bluebird/results/gpt-4.1/zeninjector/package.json
+2025-08-31 02:26:15,137 | INFO | repair.zeninjector | token consumed 70085
+2025-08-31 02:26:15,137 | INFO | repair.zeninjector | parse consumption time: 154.09133483283222

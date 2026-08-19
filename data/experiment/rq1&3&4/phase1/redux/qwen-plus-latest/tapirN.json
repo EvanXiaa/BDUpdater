@@ -1,0 +1,22 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<redux>,<redux/**/*>}?**.{getState,subscribe,unsubscribe}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "write {<redux>,<redux/**/*>}?**.{getState,subscribe,unsubscribe}",
+    "changelogId": 1
+  },
+  {
+    "type": "read",
+    "pattern": "read {<redux>,<redux/**/*>}?**.{ActionTypes}",
+    "changelogId": 2
+  },
+  {
+    "type": "import",
+    "pattern": "import {redux/lib/createStore,redux/lib/combineReducers,redux/lib/applyMiddleware,redux/lib/bindActionCreators,redux/lib/compose,redux/lib/*}",
+    "changelogId": 0
+  }
+]

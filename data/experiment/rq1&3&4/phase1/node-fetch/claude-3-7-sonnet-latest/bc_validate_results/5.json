@@ -1,0 +1,30 @@
+{
+  "Id": 5,
+  "BC_description": "Internal methods of the Response and Request classes are no longer exposed, which breaks code that depends on these internal methods such as _clone, _decode, and _convert. Additionally, Response and Request attributes are now properly defined as read-only properties.",
+  "Reference": [
+    "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200",
+    "UPGRADE-GUIDE.md",
+    "https://github.com/bitinn/node-fetch/pull/354"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Response",
+      "Request"
+    ],
+    "methodName": [
+      "_clone",
+      "_decode",
+      "_convert"
+    ],
+    "propertyName": [
+      "*"
+    ],
+    "moduleName": [
+      "node-fetch"
+    ]
+  },
+  "Adaptation_method": "Refactor your code to use only the documented public API methods instead of internal methods. For object manipulation, do not use Object.assign() directly on Response or Request objects as their properties are now properly defined as non-enumerable read-only attributes. Instead, extract the required data into a new object structure.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}

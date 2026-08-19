@@ -1,0 +1,1 @@
+- Fixed: `no-descending-specificity` false positives for `#{&}` ([#3420](https://github.com/stylelint/stylelint/pull/3420)).

@@ -1,0 +1,7 @@
+## [v7.0.0](https://github.com/bcomnes/npm-run-all2/compare/v6.2.6...v7.0.0)
+
+## [v6.2.6](https://github.com/bcomnes/npm-run-all2/compare/v6.2.4...v6.2.6) - 2024-10-21
+
+### Commits
+
+- Prevent a throw when looking up undefined results [`d928f9a`](https://github.com/bcomnes/npm-run-all2/commit/d928f9ad59c00a20797c90d35b62ef0aecf0c364)

@@ -1,0 +1,39 @@
+2025-09-01 02:01:07,600 | INFO | repair.ember-table | Starting analysis for ember-table
+2025-09-01 02:01:07,600 | INFO | repair.ember-table | Starting breaking change analysis for -2024/ember-qunit/results/gpt-4.1/ember-table
+2025-09-01 02:01:07,601 | INFO | repair.ember-table | ============================================================
+2025-09-01 02:01:07,601 | INFO | repair.ember-table | BEGIN pattern 0 (pattern_0)
+2025-09-01 02:01:07,601 | DEBUG | repair.ember-table | Pattern payload: {"type": "call", "pattern": "read {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 02:01:08,118 | INFO | repair.ember-table | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ember-table
+2025-09-01 02:01:08,118 | DEBUG | repair.ember-table | Parsed detection output: [{'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 5, 'column': 0, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 29, 'column': 0, 'confidence': 'high'}]
+2025-09-01 02:01:08,118 | DEBUG | repair.ember-table | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1097182c0>, {'tests/test-helper.js': defaultdict(<class 'list'>, {0: [{'line': 5, 'column': 0, 'confidence': 'high'}, {'line': 29, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 02:01:08,118 | INFO | repair.ember-table | New context extracted from -2024/ember-qunit/results/gpt-4.1/ember-table/tests/test-helper.js
+2025-09-01 02:01:08,118 | INFO | repair.ember-table | New context extracted from -2024/ember-qunit/results/gpt-4.1/ember-table/tests/test-helper.js
+2025-09-01 02:01:13,981 | DEBUG | repair.ember-table | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the import statement or surrounding context for `start()` (e.g., full test-helper.js) to determine if it comes from `ember-qunit` or `ember-exam` and whether calls to `loadTests()` and `setupEmberOnerrorValidation()` need to be added.",
+  "dependencies": []
+}
+2025-09-01 02:01:13,981 | DEBUG | repair.ember-table | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/ember-table/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 02:01:24,833 | DEBUG | repair.ember-table | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import { start, setupEmberOnerrorValidation } from 'ember-qunit';\nimport { loadTests } from 'ember-qunit/test-loader';\n\n// enable global Ember onerror validation during tests\nsetupEmberOnerrorValidation();\n// explicitly load all test modules\nloadTests();\n// start the test run\nstart();",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:01:24,835 | INFO | repair.ember-table | Replaced code in -2024/ember-qunit/results/gpt-4.1/ember-table/tests/test-helper.js at [214, 250]
+2025-09-01 02:01:24,835 | INFO | repair.ember-table | Whole mode item: -2024/ember-qunit/results/gpt-4.1/ember-table/tests/test-helper.js
+2025-09-01 02:01:37,524 | DEBUG | repair.ember-table | AI whole-file repair suggestion: {'repairFlag': False, 'modified_code': '', 'additional_req': '', 'dependencies': []}
+2025-09-01 02:01:37,528 | DEBUG | repair.ember-table | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ember-table/package.json
+2025-09-01 02:01:37,528 | INFO | repair.ember-table | END pattern 0 (pattern_0)
+2025-09-01 02:01:37,529 | INFO | repair.ember-table | ============================================================
+2025-09-01 02:01:37,530 | INFO | repair.ember-table | BEGIN pattern 0 (pattern_0)
+2025-09-01 02:01:37,530 | DEBUG | repair.ember-table | Pattern payload: {"type": "call", "pattern": "write {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 02:01:38,156 | INFO | repair.ember-table | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ember-table
+2025-09-01 02:01:38,156 | DEBUG | repair.ember-table | Parsed detection output: []
+2025-09-01 02:01:38,156 | DEBUG | repair.ember-table | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1096bf380>, {})
+2025-09-01 02:01:38,157 | DEBUG | repair.ember-table | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ember-table/package.json
+2025-09-01 02:01:38,157 | INFO | repair.ember-table | END pattern 0 (pattern_0)
+2025-09-01 02:01:38,157 | DEBUG | repair.ember-table | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ember-table/package.json
+2025-09-01 02:01:38,157 | INFO | repair.ember-table | token consumed 13121
+2025-09-01 02:01:38,157 | INFO | repair.ember-table | parse consumption time: 29.401976043358445

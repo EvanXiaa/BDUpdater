@@ -1,0 +1,336 @@
+Extracting breaking changes for async
+[{'role': 'system', 'content': 'You are a software engineer who recently discovered that a library used\n          in your project has released a new major version. \n          Your top priority is to identify breaking changes \n          in the new version before updating and assessing its impact on your project.\n              - you only care about the breaking changes in version v3.0.0'}, {'role': 'user', 'content': 'The first step is to identify relevant files that may reference breaking changes.\nBelow is a JSON list of file entries from the repository:\n[\n  "README.es.md",\n  "CHANGELOG.md",\n  "intro.md",\n  "README.md",\n  "bcCommitMessages.txt",\n  "docs/index.html",\n  "docs/v2/every.js.html",\n  "docs/v2/filter.js.html",\n  "docs/v2/whilst.js.html",\n  "docs/v2/reduce.js.html",\n  "docs/v2/detectLimit.js.html",\n  "docs/v2/doUntil.js.html",\n  "docs/v2/filterLimit.js.html",\n  "docs/v2/everySeries.js.html",\n  "docs/v2/parallel.js.html",\n  "docs/v2/race.js.html",\n  "docs/v2/retry.js.html",\n  "docs/v2/retryable.js.html",\n  "docs/v2/doWhilst.js.html",\n  "docs/v2/concat.js.html",\n  "docs/v2/index.js.html",\n  "docs/v2/reflectAll.js.html",\n  "docs/v2/concatSeries.js.html",\n  "docs/v2/index.html",\n  "docs/v2/priorityQueue.js.html",\n  "docs/v2/mapSeries.js.html",\n  "docs/v2/transform.js.html",\n  "docs/v2/eachSeries.js.html",\n  "docs/v2/tryEach.js.html",\n  "docs/v2/sortBy.js.html",\n  "docs/v2/setImmediate.js.html",\n  "docs/v2/cargo.js.html",\n  "docs/v2/queue.js.html",\n  "docs/v2/nextTick.js.html",\n  "docs/v2/each.js.html",\n  "docs/v2/global.html",\n  "docs/v2/waterfall.js.html",\n  "docs/v2/mapValuesSeries.js.html",\n  "docs/v2/mapValuesLimit.js.html",\n  "docs/v2/seq.js.html",\n  "docs/v2/reflect.js.html",\n  "docs/v2/rejectLimit.js.html",\n  "docs/v2/ensureAsync.js.html",\n  "docs/v2/everyLimit.js.html",\n  "docs/v2/parallelLimit.js.html",\n  "docs/v2/doDuring.js.html",\n  "docs/v2/forever.js.html",\n  "docs/v2/detectSeries.js.html",\n  "docs/v2/apply.js.html",\n  "docs/v2/log.js.html",\n  "docs/v2/times.js.html",\n  "docs/v2/timeout.js.html",\n  "docs/v2/detect.js.html",\n  "docs/v2/during.js.html",\n  "docs/v2/mapLimit.js.html",\n  "docs/v2/eachOfLimit.js.html",\n  "docs/v2/timesSeries.js.html",\n  "docs/v2/eachLimit.js.html",\n  "docs/v2/groupBy.js.html",\n  "docs/v2/timesLimit.js.html",\n  "docs/v2/map.js.html",\n  "docs/v2/series.js.html",\n  "docs/v2/module-Utils.html",\n  "docs/v2/module-Collections.html",\n  "docs/v2/auto.js.html",\n  "docs/v2/asyncify.js.html",\n  "docs/v2/eachOf.js.html",\n  "docs/v2/autoInject.js.html",\n  "docs/v2/groupByLimit.js.html",\n  "docs/v2/some.js.html",\n  "docs/v2/someSeries.js.html",\n  "docs/v2/until.js.html",\n  "docs/v2/memoize.js.html",\n  "docs/v2/constant.js.html",\n  "docs/v2/eachOfSeries.js.html",\n  "docs/v2/filterSeries.js.html",\n  "docs/v2/module-ControlFlow.html",\n  "docs/v2/unmemoize.js.html",\n  "docs/v2/rejectSeries.js.html",\n  "docs/v2/docs.html",\n  "docs/v2/reject.js.html",\n  "docs/v2/reduceRight.js.html",\n  "docs/v2/compose.js.html",\n  "docs/v2/groupBySeries.js.html",\n  "docs/v2/concatLimit.js.html",\n  "docs/v2/module-async.html",\n  "docs/v2/applyEachSeries.js.html",\n  "docs/v2/mapValues.js.html",\n  "docs/v2/someLimit.js.html",\n  "docs/v2/dir.js.html",\n  "docs/v2/applyEach.js.html",\n  "docs/v2/scripts/prettify/Apache-License-2.0.txt",\n  "docs/v3/cargoQueue.js.html",\n  "docs/v3/every.js.html",\n  "docs/v3/filter.js.html",\n  "docs/v3/whilst.js.html",\n  "docs/v3/reduce.js.html",\n  "docs/v3/detectLimit.js.html",\n  "docs/v3/doUntil.js.html",\n  "docs/v3/filterLimit.js.html",\n  "docs/v3/everySeries.js.html",\n  "docs/v3/parallel.js.html",\n  "docs/v3/race.js.html",\n  "docs/v3/retry.js.html",\n  "docs/v3/retryable.js.html",\n  "docs/v3/doWhilst.js.html",\n  "docs/v3/concat.js.html",\n  "docs/v3/index.js.html",\n  "docs/v3/reflectAll.js.html",\n  "docs/v3/concatSeries.js.html",\n  "docs/v3/index.html",\n  "docs/v3/priorityQueue.js.html",\n  "docs/v3/mapSeries.js.html",\n  "docs/v3/transform.js.html",\n  "docs/v3/eachSeries.js.html",\n  "docs/v3/tryEach.js.html",\n  "docs/v3/sortBy.js.html",\n  "docs/v3/setImmediate.js.html",\n  "docs/v3/cargo.js.html",\n  "docs/v3/queue.js.html",\n  "docs/v3/nextTick.js.html",\n  "docs/v3/each.js.html",\n  "docs/v3/global.html",\n  "docs/v3/waterfall.js.html",\n  "docs/v3/mapValuesSeries.js.html",\n  "docs/v3/mapValuesLimit.js.html",\n  "docs/v3/seq.js.html",\n  "docs/v3/reflect.js.html",\n  "docs/v3/rejectLimit.js.html",\n  "docs/v3/ensureAsync.js.html",\n  "docs/v3/everyLimit.js.html",\n  "docs/v3/parallelLimit.js.html",\n  "docs/v3/forever.js.html",\n  "docs/v3/detectSeries.js.html",\n  "docs/v3/apply.js.html",\n  "docs/v3/log.js.html",\n  "docs/v3/times.js.html",\n  "docs/v3/timeout.js.html",\n  "docs/v3/detect.js.html",\n  "docs/v3/mapLimit.js.html",\n  "docs/v3/eachOfLimit.js.html",\n  "docs/v3/timesSeries.js.html",\n  "docs/v3/eachLimit.js.html",\n  "docs/v3/groupBy.js.html",\n  "docs/v3/timesLimit.js.html",\n  "docs/v3/map.js.html",\n  "docs/v3/series.js.html",\n  "docs/v3/module-Utils.html",\n  "docs/v3/module-Collections.html",\n  "docs/v3/auto.js.html",\n  "docs/v3/asyncify.js.html",\n  "docs/v3/eachOf.js.html",\n  "docs/v3/autoInject.js.html",\n  "docs/v3/groupByLimit.js.html",\n  "docs/v3/some.js.html",\n  "docs/v3/someSeries.js.html",\n  "docs/v3/until.js.html",\n  "docs/v3/memoize.js.html",\n  "docs/v3/constant.js.html",\n  "docs/v3/eachOfSeries.js.html",\n  "docs/v3/filterSeries.js.html",\n  "docs/v3/module-ControlFlow.html",\n  "docs/v3/unmemoize.js.html",\n  "docs/v3/rejectSeries.js.html",\n  "docs/v3/docs.html",\n  "docs/v3/reject.js.html",\n  "docs/v3/reduceRight.js.html",\n  "docs/v3/compose.js.html",\n  "docs/v3/groupBySeries.js.html",\n  "docs/v3/concatLimit.js.html",\n  "docs/v3/module-async.html",\n  "docs/v3/applyEachSeries.js.html",\n  "docs/v3/mapValues.js.html",\n  "docs/v3/someLimit.js.html",\n  "docs/v3/dir.js.html",\n  "docs/v3/applyEach.js.html",\n  "docs/v3/scripts/prettify/Apache-License-2.0.txt",\n  "support/module_template.md",\n  "support/aliases.txt",\n  "support/jsdoc/theme/README.md",\n  "support/jsdoc/theme/static/scripts/prettify/Apache-License-2.0.txt",\n  ".github/ISSUE_TEMPLATE.md"\n]\n### Task:\nReturn a **Python list** of file paths that are likely to contain any of the following:\n1. **API Change information** (e.g., `changelog.md`, `history.md`, "deprecation.md", "readme.md`))  \n2. **Release notes** (e.g., `releasenotes.md`, `release-notes.txt`)  \n3. **Version migration or upgrade guidance** (e.g., `migration-guide.md`, `upgrading.md`, `changes-in-version-3.md`)  \n4. **External links or references** related to (1)–(3) (e.g., `migrate-to-v2.html`)\n\n### Output:\nReturn only a raw Python list of matching file paths (e.g., `["docs/changelog.md", "RELEASE_NOTES.md"]`). Rank them by relevance.\n**Do not** include any explanations, formatting, or wrapper structures.\n**Only select files related to the target version.\n'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Candidate documentation files:
+['bcCommitMessages.txt', 'CHANGELOG.md']
+Tokens till now: 2204
+[{'role': 'system', 'content': 'You\'re a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v3.0.0\nyou must reply in json format following this schema: {\'type\': \'json_schema\', \'json_schema\': {\'name\': \'breaking_changes_response\', \'strict\': True, \'schema\': {\'type\': \'object\', \'properties\': {\'breaking_changes\': {\'type\': \'array\', \'items\': {\'type\': \'object\', \'properties\': {\'Id\': {\'type\': \'integer\', \'description\': \'A unique identifier, assigned sequentially starting from 0.\'}, \'BC_description\': {\'type\': \'string\', \'description\': \'A clear, detailed, and comprehensive description of the breaking change.\'}, \'Reference\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'All references related to this change, including parsing sources, issue numbers, commit SHAs.\'}, \'Changed_object\': {\'type\': \'object\', \'properties\': {\'type\': {\'type\': \'string\', \'enum\': [\'environment\', \'config\', \'import\', \'call\', \'read\', \'write\'], \'description\': "The type of changed object: \'call\' for method call change (e.g.,method signature, arguments and option change), \'read\' and \'write\' for API properties changes, \'environment\' for environment changes, \'config\' for configuration changes in an external file (e.g., *.config.js) , and \'import\' for import/require related changes."}, \'className\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'Explicit class names impacted by the change. Wildcard is allowed for a set of objects. \'}, \'methodName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Exact method names affected (required when type is \'call\').  Wildcard is allowed for a set of objects."}, \'propertyName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit property names affected (required when type is \'read\' or \'write\'). Wildcard is allowed for a set of objects."}, \'moduleName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit module names affected (required when type is \'import\' or \'config\'). If type is \'config\', specify the configration file name (e.g., webpack.config.js). Wildcard pattern is encouraged for a set of modules. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}}, \'required\': [\'type\', \'className\', \'methodName\', \'propertyName\', \'moduleName\'], \'additionalProperties\': False, \'description\': \'All information about the changed API (in the old version) which could help locate the affected code in downstream clients*.\'}, \'Adaptation_method\': {\'type\': \'string\', \'description\': "A structured recommendation for adapting to the change. Prioritize direct code examples. (e.g., \'base.text() -> base.textConverted())\'"}, \'RequireInfoFlag\': {\'type\': \'boolean\', \'description\': "Set to true if any aspect of the breaking change, including affected entities, adaptation methods, or specific terminology, is not fully clear, explicitly defined, or completely specified in the provided documentation. If set to true, you must precisely specify the missing or unclear details in the \'RequireInfo\' field."}, \'RequireInfo\': {\'type\': \'string\', \'description\': "Explicitly describe the missing information, clarification, definitions, or additional details required to fully understand or accurately resolve the breaking change. This field must remain empty only if \'RequireInfoFlag\' is false."}}, \'required\': [\'Id\', \'Reference\', \'BC_description\', \'Changed_object\', \'Adaptation_method\', \'RequireInfo\', \'RequireInfoFlag\'], \'additionalProperties\': False}}}, \'required\': [\'breaking_changes\'], \'additionalProperties\': False}}}'}, {'role': 'user', 'content': "\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: []\n.\nNow you are provided with the file content of:\n\nbcCommitMessages.txt\ncommit: 667e71\nBREAKING CHANGE: remove partial application feature of applyEach (#1640)\ncommit: e04466\nBREAKING CHANGE: awaitable queues (#1641)"}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': 'You\'re a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v3.0.0\nyou must reply in json format following this schema: {\'type\': \'json_schema\', \'json_schema\': {\'name\': \'breaking_changes_response\', \'strict\': True, \'schema\': {\'type\': \'object\', \'properties\': {\'breaking_changes\': {\'type\': \'array\', \'items\': {\'type\': \'object\', \'properties\': {\'Id\': {\'type\': \'integer\', \'description\': \'A unique identifier, assigned sequentially starting from 0.\'}, \'BC_description\': {\'type\': \'string\', \'description\': \'A clear, detailed, and comprehensive description of the breaking change.\'}, \'Reference\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'All references related to this change, including parsing sources, issue numbers, commit SHAs.\'}, \'Changed_object\': {\'type\': \'object\', \'properties\': {\'type\': {\'type\': \'string\', \'enum\': [\'environment\', \'config\', \'import\', \'call\', \'read\', \'write\'], \'description\': "The type of changed object: \'call\' for method call change (e.g.,method signature, arguments and option change), \'read\' and \'write\' for API properties changes, \'environment\' for environment changes, \'config\' for configuration changes in an external file (e.g., *.config.js) , and \'import\' for import/require related changes."}, \'className\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'Explicit class names impacted by the change. Wildcard is allowed for a set of objects. \'}, \'methodName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Exact method names affected (required when type is \'call\').  Wildcard is allowed for a set of objects."}, \'propertyName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit property names affected (required when type is \'read\' or \'write\'). Wildcard is allowed for a set of objects."}, \'moduleName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit module names affected (required when type is \'import\' or \'config\'). If type is \'config\', specify the configration file name (e.g., webpack.config.js). Wildcard pattern is encouraged for a set of modules. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}}, \'required\': [\'type\', \'className\', \'methodName\', \'propertyName\', \'moduleName\'], \'additionalProperties\': False, \'description\': \'All information about the changed API (in the old version) which could help locate the affected code in downstream clients*.\'}, \'Adaptation_method\': {\'type\': \'string\', \'description\': "A structured recommendation for adapting to the change. Prioritize direct code examples. (e.g., \'base.text() -> base.textConverted())\'"}, \'RequireInfoFlag\': {\'type\': \'boolean\', \'description\': "Set to true if any aspect of the breaking change, including affected entities, adaptation methods, or specific terminology, is not fully clear, explicitly defined, or completely specified in the provided documentation. If set to true, you must precisely specify the missing or unclear details in the \'RequireInfo\' field."}, \'RequireInfo\': {\'type\': \'string\', \'description\': "Explicitly describe the missing information, clarification, definitions, or additional details required to fully understand or accurately resolve the breaking change. This field must remain empty only if \'RequireInfoFlag\' is false."}}, \'required\': [\'Id\', \'Reference\', \'BC_description\', \'Changed_object\', \'Adaptation_method\', \'RequireInfo\', \'RequireInfoFlag\'], \'additionalProperties\': False}}}, \'required\': [\'breaking_changes\'], \'additionalProperties\': False}}}'}, {'role': 'user', 'content': '\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as\').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: {"breaking_changes": [{"Id": 0, "BC_description": "The partial application feature of the `applyEach` function has been removed. This means that functions previously using `applyEach` with partial application will no longer work as before and must be updated to pass all arguments at the time of invocation.", "Reference": ["667e71", "#1640"], "Changed_object": {"type": "call", "className": ["*"], "methodName": ["applyEach"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Before: const partiallyApplied = applyEach(fnList, arg1); partiallyApplied(arg2);\\nAfter: applyEach(fnList, arg1, arg2); // All arguments must be passed at once", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 1, "BC_description": "Queues are now awaitable. This change alters the behavior of queue objects when used in an async context, potentially breaking code that relies on the previous non-awaitable behavior or that does not handle the new Promise-like behavior correctly.", "Reference": ["e04466", "#1641"], "Changed_object": {"type": "call", "className": ["Queue"], "methodName": ["then"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Code that passes queue instances directly into async/await contexts must now explicitly reject or handle their Promise-like nature if not intended to be awaited. To prevent accidental awaiting, wrap or proxy the queue object if needed.\\nExample:\\nBefore: const result = await queue; // This was previously invalid or noop\\nAfter: // If awaiting was not intended, avoid await or use { then: undefined } to strip thenable behavior", "RequireInfoFlag": true, "RequireInfo": "The exact class or classes representing queues (e.g., Queue, AsyncQueue) and whether \'then\' method was added or inherited need to be confirmed. Also, official guidance or example from the library on how to disable or safely use awaitable queues is missing."}]}\n.\nNow you are provided with the file content of:\n\nCHANGELOG.md\n# v3.0.0\nThe `async`/`await` release!\nThere are a lot of new features and subtle breaking changes in this major version, but the biggest feature is that most Async methods return a Promise if you omit the callback, meaning you can `await` them from within an `async` function.\n```js\nconst results = await async.mapLimit(urls, 5, async url => {\nconst resp = await fetch(url)\nreturn resp.body\n})\n```\n## Breaking Changes\n- Most Async methods return a Promise when the final callback is omitted, making them `await`-able! (#1572)\n- We are now making heavy use of ES2015 features, this means we have dropped out-of-the-box support for Node 4 and earlier, and many old versions of browsers. (#1541, #1553)\n- In `queue`, `priorityQueue`, `cargo` and `cargoQueue`, the "event"-style methods, like `q.drain` and `q.saturated` are now methods that register a callback, rather than properties you assign a callback to.  They are now of the form `q.drain(callback)`.  If you do not pass a callback a Promise will be returned for the next occurrence of the event, making them `await`-able, e.g. `await q.drain()`.  (#1586, #1641)\n- Calling `callback(false)` will cancel an async method, preventing further iteration and callback calls.  This is useful for preventing memory leaks when you break out of an async flow by calling an outer callback. (#1064, #1542)\n- `during` and `doDuring` have been removed, and instead `whilst`, `doWhilst`, `until` and `doUntil` now have asynchronous `test` functions. (#850, #1557)\n- `limits` of less than 1 now cause an error to be thrown in queues and collection methods. (#1249, #1552)\n- `memoize` no longer memoizes errors (#1465, #1466)\n- `applyEach`/`applyEachSeries` have a simpler interface, to make them more easily type-able.  It always returns a function that takes in a single callback argument.  If that callback is omitted, a promise is returned, making it awaitable. (#1228, #1640)\n- Async generators are now supported in all the Collection methods. (#1560)\n- Added `cargoQueue`, a queue with both `concurrency` and `payload` size parameters. (#1567)\n- Queue objects returned from `queue` now have a `Symbol.iterator` method, meaning they can be iterated over to inspect the current list of items in the queue. (#1459, #1556)\n- A ESM-flavored `async.mjs` is included in the `async` package.  This is described in the `package.json` `"module"` field, meaning it should be automatically used by Webpack and other compatible bundlers.\n## Bug fixes\n- Better handle arbitrary error objects in `asyncify` (#1568, #1569)\n- Removed Lodash as a dependency (#1283, #1528)\n- Miscellaneous docs fixes (#1393, #1501, #1540, #1543, #1558, #1563, #1564, #1579, #1581)\n- Miscellaneous test fixes (#1538)'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Extracted BC candidate list:
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "The partial application feature of the `applyEach` function has been removed. This means that functions previously using `applyEach` with partial application will no longer work as before and must be updated to pass all arguments at the time of invocation.",
+      "Reference": [
+        "667e71",
+        "#1640"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "*"
+        ],
+        "methodName": [
+          "applyEach"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Before: const partiallyApplied = applyEach(fnList, arg1); partiallyApplied(arg2);\nAfter: applyEach(fnList, arg1, arg2); // All arguments must be passed at once",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Queues are now awaitable. This change alters the behavior of queue objects when used in an async context, potentially breaking code that relies on the previous non-awaitable behavior or that does not handle the new Promise-like behavior correctly.",
+      "Reference": [
+        "e04466",
+        "#1641"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Queue"
+        ],
+        "methodName": [
+          "then"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Code that passes queue instances directly into async/await contexts must now explicitly reject or handle their Promise-like nature if not intended to be awaited. To prevent accidental awaiting, wrap or proxy the queue object if needed.\nExample:\nBefore: const result = await queue; // This was previously invalid or noop\nAfter: // If awaiting was not intended, avoid await or use { then: undefined } to strip thenable behavior",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The exact class or classes representing queues (e.g., Queue, AsyncQueue) and whether 'then' method was added or inherited need to be confirmed. Also, official guidance or example from the library on how to disable or safely use awaitable queues is missing."
+    },
+    {
+      "Id": 2,
+      "BC_description": "Most Async methods now return a Promise when the final callback is omitted, enabling direct use with `await`. This breaks code that expects these methods to return a non-Promise value or that does not handle Promise return types properly.",
+      "Reference": [
+        "#1572"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "*"
+        ],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Before: async.mapLimit(urls, 5, fetchUrl, callback);\nAfter: try { const results = await async.mapLimit(urls, 5, fetchUrl); } catch (err) { handle(err); }",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "The `queue`, `priorityQueue`, `cargo`, and `cargoQueue` objects no longer allow direct assignment to event properties like `saturated`, `drain`, etc. Instead, these are now methods that register callbacks via `q.drain(callback)` or return Promises via `await q.drain()`. This breaks existing code that assigns functions directly to these properties.",
+      "Reference": [
+        "#1586",
+        "#1641"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "queue",
+          "priorityQueue",
+          "cargo",
+          "cargoQueue"
+        ],
+        "methodName": [
+          "drain",
+          "saturated",
+          "empty",
+          "pause",
+          "resume"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Before: q.drain = () => { console.log('done'); };\nAfter: q.drain(() => { console.log('done'); });\n\nOr to await the next occurrence:\nAfter: await q.drain();",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "Calling `callback(false)` in an async method now cancels further iteration and subsequent callback invocations. This introduces new control flow behavior that may break existing logic if `callback(false)` was used without expecting cancellation side effects.",
+      "Reference": [
+        "#1064",
+        "#1542"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "*"
+        ],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Before: callback(false); // continued iteration\nAfter: callback(false); // stops iteration and prevents further callbacks \u2014 ensure this is intentional",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The exact list of methods where `callback(false)` triggers cancellation is not specified. It must be clarified which async methods are affected by this behavior and whether it applies universally or only in specific contexts (e.g., loops, queues)."
+    },
+    {
+      "Id": 5,
+      "BC_description": "`during` and `doDuring` functions have been removed. Their functionality is replaced by `whilst`, `doWhilst`, `until`, and `doUntil`, which now support asynchronous test functions. Code using `during` or `doDuring` will break and must be migrated.",
+      "Reference": [
+        "#850",
+        "#1557"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "during",
+          "doDuring"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "async"
+        ]
+      },
+      "Adaptation_method": "Before: async.during(whileTest, worker, callback);\nAfter: async.whilst(whileTest, worker, callback);\n\nOr with async test:\nAfter: await async.whilst(async () => condition(), async () => work());",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 6,
+      "BC_description": "Passing a limit less than 1 to queue or collection methods now throws an error. Previously, such values might have been silently accepted or treated as zero. This breaks code that relies on setting limits < 1 without validation.",
+      "Reference": [
+        "#1249",
+        "#1552"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "queue",
+          "priorityQueue",
+          "cargo",
+          "cargoQueue"
+        ],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Before: const q = async.queue(worker, 0); // now throws\nAfter: const q = async.queue(worker, 1); // use 1 as minimum",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 7,
+      "BC_description": "The `memoize` function no longer caches error results. Previously, if a memoized function threw or returned an error, it might have been cached and rethrown on subsequent calls. Now, errors are not cached, so retries may occur, breaking assumptions about caching behavior.",
+      "Reference": [
+        "#1465",
+        "#1466"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "memoize"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "async"
+        ]
+      },
+      "Adaptation_method": "Before: memoizedFn(arg); // error is cached and repeated\nAfter: memoizedFn(arg); // error not cached, function re-executes on next call",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 8,
+      "BC_description": "`applyEach` and `applyEachSeries` now have a simplified interface: they always return a function that accepts a single callback argument. If the callback is omitted, a Promise is returned. The previous multi-argument and partial application behaviors are removed.",
+      "Reference": [
+        "#1228",
+        "#1640"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "applyEach",
+          "applyEachSeries"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "async"
+        ]
+      },
+      "Adaptation_method": "Before: applyEach(fns, arg1, arg2, callback);\nAfter: applyEach(fns)([arg1, arg2], callback);\n\nOr with promise: const result = await applyEach(fns)([arg1, arg2]);",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 9,
+      "BC_description": "Queue objects returned by `queue()` now have a `Symbol.iterator` method, allowing iteration over the current items in the queue. This may break code that assumes queues are not iterable or uses `for...in` loops without filtering, as the iterable nature may cause unexpected enumeration behavior.",
+      "Reference": [
+        "#1459",
+        "#1556"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "queue"
+        ],
+        "methodName": [
+          "Symbol.iterator"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Before: for (const key in q) { ... } // safe over plain object\nAfter: for (const key in q) { if (q.hasOwnProperty(key)) { ... } } // filter to avoid iterating queue items",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 10,
+      "BC_description": "The library now uses ES2015 features and no longer supports Node.js 4 and earlier versions out of the box. This breaks runtime compatibility for projects running on older Node.js versions or browsers lacking ES2015 support.",
+      "Reference": [
+        "#1541",
+        "#1553"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "async"
+        ]
+      },
+      "Adaptation_method": "Upgrade Node.js to version 6 or higher, or use a transpiler like Babel to compile the library code for older environments.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 11,
+      "BC_description": "An ESM version of the library (`async.mjs`) is now provided and referenced in the `package.json` `module` field. This may affect bundling behavior in tools like Webpack, potentially causing unexpected imports or tree-shaking changes in projects that rely on specific module resolution logic.",
+      "Reference": [
+        "CHANGELOG.md"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "async.mjs"
+        ]
+      },
+      "Adaptation_method": "If CommonJS behavior is required, explicitly import via `require('async')` or configure bundler to prefer CJS. Otherwise, ensure ESM semantics (e.g., static analysis, named imports) are respected.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}
+parse consumption token: 18831
+parse consumption time: 144.05559683404863
+Validating BC list for async
+We still do validate once for raw bc {
+  "Id": 0,
+  "BC_description": "The partial application feature of the `applyEach` function has been removed. This means that functions previously using `applyEach` with partial application will no longer work as before and must be updated to pass all arguments at the time of invocation.",
+  "Reference": [
+    "667e71",
+    "#1640"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "*"
+    ],
+    "methodName": [
+      "applyEach"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Before: const partiallyApplied = applyEach(fnList, arg1); partiallyApplied(arg2);\nAfter: applyEach(fnList, arg1, arg2); // All arguments must be passed at once",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}.
+Validating by searchForCommit
+
+New description: {
+  "Id": 0,
+  "BC_description": "The partial application feature of the `applyEach` function has been removed. This means that functions previously using `applyEach` with partial application will no longer work as before and must be updated to pass all arguments at the time of invocation.",
+  "Reference": [
+    "667e71",
+    "#1640"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "*"
+    ],
+    "methodName": [
+      "applyEach"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Before: const partiallyApplied = applyEach(fnList, arg1); partiallyApplied(arg2);\nAfter: applyEach(fnList, arg1, arg2); // All arguments must be passed at once",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+[{'role': 'system', 'content': "\nYou are a software engineer who has discovered that a critical library in your project has released a new major version.\nYour current task is to complement the Changed_object field in a JSON.\n    Carefully read the 'BC_description' and 'Adaptation_method' field. \n    Accordingly, Make the Changed_object description more sufficient and aligned with the information from the other fields. \n    Ensure all changed APIs in 'BC_description' are covered.\nReturn the refined JSON as the output. \n    "}, {'role': 'user', 'content': "{'Id': 0, 'BC_description': 'The partial application feature of the `applyEach` function has been removed. This means that functions previously using `applyEach` with partial application will no longer work as before and must be updated to pass all arguments at the time of invocation.', 'Reference': ['667e71', '#1640'], 'Changed_object': {'type': 'call', 'className': ['*'], 'methodName': ['applyEach'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': 'Before: const partiallyApplied = applyEach(fnList, arg1); partiallyApplied(arg2);\\nAfter: applyEach(fnList, arg1, arg2); // All arguments must be passed at once', 'RequireInfoFlag': False, 'RequireInfo': ''}"}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"

@@ -1,0 +1,7 @@
+{
+  "owner": "ember-cli",
+  "repo": "eslint-plugin-ember",
+  "number": 1967,
+  "pr_url": "https://github.com/ember-cli/eslint-plugin-ember/pull/1967",
+  "content": "# PR 1967: Drop support for ESLint 7\nBranches: drop-eslint-7 -> master\n\nESLint v8 has been [out](https://eslint.org/blog/2021/10/eslint-v8.0.0-released/) for two years (since Oct 2021).\r\n\r\nThe ember-cli blueprint has also been using ESLint v8 since earlier this year:\r\n* https://github.com/ember-cli/ember-cli/pull/10142\r\n* https://github.com/ember-cli/ember-cli/releases/tag/v4.12.0\n\n## Commit titles\n- breaking: drop support for ESLint 7\n\n## Changed files\n- .github/workflows/ci.yml\n- README.md\n- package.json\n## Markdown changes\n### README.md\n```diff\n@@ -8,7 +8,7 @@\n \n ## ❗️Requirements\n \n-- [ESLint](https://eslint.org/) `>= 7`\n+- [ESLint](https://eslint.org/) `>= 8`\n - [Node.js](https://nodejs.org/) `18.* || 20.* || >= 21`\n \n ## 🚀 Usage\n```\n## Reviews\n- @NullVoxPopuli [APPROVED]"
+}

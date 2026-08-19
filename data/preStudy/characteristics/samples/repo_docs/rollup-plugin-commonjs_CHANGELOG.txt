@@ -1,0 +1,3 @@
+## 10.0.0
+*2019-05-15*
+* Use new Rollup@1.12 context functions, fix issue when resolveId returns an object ([#387](https://github.com/rollup/rollup-plugin-commonjs/issues/387))

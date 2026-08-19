@@ -1,0 +1,7 @@
+{
+  "owner": "avajs",
+  "repo": "ava",
+  "number": 3063,
+  "pr_url": "https://github.com/avajs/ava/pull/3063",
+  "content": "# PR 3063: Parse for line numbers with latest supported ECMA version\nBranches: acorn-latest -> main\n\nThis means the supported syntax changes depending on the installed Acorn version, which may change independently of the AVA version since we do not pin the dependency.\n\n\n## Commit titles\n- Parse for line numbers with latest supported ECMA version\n\n## Changed files\n- lib/worker/line-numbers.js"
+}

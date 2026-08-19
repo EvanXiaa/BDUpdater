@@ -1,0 +1,210 @@
+2025-08-31 02:39:38,931 | INFO | repair.nfield-api | Starting analysis for nfield-api
+2025-08-31 02:39:38,931 | INFO | repair.nfield-api | Starting breaking change analysis for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:38,932 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:38,932 | INFO | repair.nfield-api | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:39:38,932 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:39:39,280 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:39,280 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:39,280 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10818ed40>, {})
+2025-08-31 02:39:39,281 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:39,281 | INFO | repair.nfield-api | END pattern 0 (pattern_0)
+2025-08-31 02:39:39,281 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:39,281 | INFO | repair.nfield-api | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:39:39,281 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:39:39,441 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:39,442 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:39,442 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10818ed40>, {})
+2025-08-31 02:39:39,442 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:39,442 | INFO | repair.nfield-api | END pattern 0 (pattern_0)
+2025-08-31 02:39:39,443 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:39,443 | INFO | repair.nfield-api | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:39:39,443 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:39:39,599 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:39,599 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:39,599 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10818ed40>, {})
+2025-08-31 02:39:39,600 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:39,600 | INFO | repair.nfield-api | END pattern 1 (pattern_1)
+2025-08-31 02:39:39,600 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:39,600 | INFO | repair.nfield-api | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:39:39,600 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:39:39,759 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:39,759 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:39,759 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10818ed40>, {})
+2025-08-31 02:39:39,760 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:39,760 | INFO | repair.nfield-api | END pattern 1 (pattern_1)
+2025-08-31 02:39:39,760 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:39,760 | INFO | repair.nfield-api | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:39:39,760 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:39:39,926 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:39,926 | DEBUG | repair.nfield-api | Parsed detection output: [{'pattern_id': 2, 'file': 'test/test.js', 'line': 33, 'column': 6}, {'pattern_id': 2, 'file': 'test/test.js', 'line': 58, 'column': 6}, {'pattern_id': 2, 'file': 'test/test.js', 'line': 68, 'column': 6}]
+2025-08-31 02:39:39,926 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10818ed40>, {'test/test.js': defaultdict(<class 'list'>, {2: [{'line': 33, 'column': 6}, {'line': 58, 'column': 6}, {'line': 68, 'column': 6}]})})
+2025-08-31 02:39:39,928 | INFO | repair.nfield-api | New context extracted from /bluebird/results/gpt-4.1/nfield-api/test/test.js
+2025-08-31 02:39:43,987 | DEBUG | repair.nfield-api | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:39:43,989 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:43,989 | INFO | repair.nfield-api | END pattern 2 (pattern_2)
+2025-08-31 02:39:43,990 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:43,990 | INFO | repair.nfield-api | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:39:43,990 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:39:44,161 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:44,161 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:44,161 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:44,161 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:44,161 | INFO | repair.nfield-api | END pattern 2 (pattern_2)
+2025-08-31 02:39:44,162 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:44,162 | INFO | repair.nfield-api | BEGIN pattern 4 (pattern_4)
+2025-08-31 02:39:44,162 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{Promise}", "changelogId": 4}
+2025-08-31 02:39:44,317 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:44,318 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:44,318 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:44,318 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:44,318 | INFO | repair.nfield-api | END pattern 4 (pattern_4)
+2025-08-31 02:39:44,318 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:44,318 | INFO | repair.nfield-api | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:39:44,318 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:39:44,468 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:44,468 | DEBUG | repair.nfield-api | Parsed detection output: [{'pattern_id': 5, 'file': 'api.js', 'line': 7, 'column': 14}]
+2025-08-31 02:39:44,468 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {'api.js': defaultdict(<class 'list'>, {5: [{'line': 7, 'column': 14}]})})
+2025-08-31 02:39:44,470 | INFO | repair.nfield-api | New context extracted from /bluebird/results/gpt-4.1/nfield-api/api.js
+2025-08-31 02:39:50,203 | DEBUG | repair.nfield-api | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "var request = Promise.promisify(require('request'), {multiArgs: true});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:39:50,206 | INFO | repair.nfield-api | Replaced code in /bluebird/results/gpt-4.1/nfield-api/api.js at [155, 207]
+2025-08-31 02:39:50,207 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:50,207 | INFO | repair.nfield-api | END pattern 5 (pattern_5)
+2025-08-31 02:39:50,207 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:50,207 | INFO | repair.nfield-api | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:39:50,208 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:39:50,382 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:50,382 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:50,382 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:50,383 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:50,383 | INFO | repair.nfield-api | END pattern 5 (pattern_5)
+2025-08-31 02:39:50,383 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:50,383 | INFO | repair.nfield-api | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:39:50,383 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:39:50,561 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:50,562 | DEBUG | repair.nfield-api | Parsed detection output: [{'pattern_id': 6, 'file': 'api.js', 'line': 7, 'column': 14}]
+2025-08-31 02:39:50,562 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {'api.js': defaultdict(<class 'list'>, {6: [{'line': 7, 'column': 14}]})})
+2025-08-31 02:39:50,563 | INFO | repair.nfield-api | New context extracted from /bluebird/results/gpt-4.1/nfield-api/api.js
+2025-08-31 02:39:55,015 | DEBUG | repair.nfield-api | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:39:55,017 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:55,017 | INFO | repair.nfield-api | END pattern 6 (pattern_6)
+2025-08-31 02:39:55,018 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:55,018 | INFO | repair.nfield-api | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:39:55,018 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:39:55,207 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:55,207 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:55,207 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:55,208 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:55,208 | INFO | repair.nfield-api | END pattern 6 (pattern_6)
+2025-08-31 02:39:55,208 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:55,208 | INFO | repair.nfield-api | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:39:55,208 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:39:55,358 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:55,358 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:55,358 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:55,359 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:55,359 | INFO | repair.nfield-api | END pattern 7 (pattern_7)
+2025-08-31 02:39:55,359 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:55,359 | INFO | repair.nfield-api | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:39:55,359 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:39:55,505 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:55,505 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:55,505 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:55,506 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:55,506 | INFO | repair.nfield-api | END pattern 7 (pattern_7)
+2025-08-31 02:39:55,506 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:55,506 | INFO | repair.nfield-api | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:39:55,506 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:39:55,657 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:55,657 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:55,657 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:55,658 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:55,658 | INFO | repair.nfield-api | END pattern 8 (pattern_8)
+2025-08-31 02:39:55,658 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:55,658 | INFO | repair.nfield-api | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:39:55,658 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:39:55,808 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:55,808 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:55,808 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:55,808 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:55,808 | INFO | repair.nfield-api | END pattern 8 (pattern_8)
+2025-08-31 02:39:55,808 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:55,808 | INFO | repair.nfield-api | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:39:55,808 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:39:55,961 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:55,961 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:55,961 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:55,961 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:55,961 | INFO | repair.nfield-api | END pattern 9 (pattern_9)
+2025-08-31 02:39:55,962 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:55,962 | INFO | repair.nfield-api | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:39:55,962 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:39:56,109 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:56,109 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:56,109 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:56,109 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:56,109 | INFO | repair.nfield-api | END pattern 9 (pattern_9)
+2025-08-31 02:39:56,109 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:56,109 | INFO | repair.nfield-api | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:39:56,109 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:39:56,256 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:56,257 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:56,257 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:56,257 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:56,257 | INFO | repair.nfield-api | END pattern 10 (pattern_10)
+2025-08-31 02:39:56,257 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:56,257 | INFO | repair.nfield-api | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:39:56,257 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:39:56,405 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:56,405 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:39:56,405 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:39:56,405 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:39:56,405 | INFO | repair.nfield-api | END pattern 10 (pattern_10)
+2025-08-31 02:39:56,405 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:39:56,406 | INFO | repair.nfield-api | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:39:56,406 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:39:56,556 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:39:56,556 | DEBUG | repair.nfield-api | Parsed detection output: [{'pattern_id': 11, 'file': 'api.js', 'line': 158, 'column': 47}, {'pattern_id': 11, 'file': 'api.js', 'line': 176, 'column': 47}, {'pattern_id': 11, 'file': 'api.js', 'line': 417, 'column': 47}, {'pattern_id': 11, 'file': 'api.js', 'line': 457, 'column': 47}, {'pattern_id': 11, 'file': 'api.js', 'line': 589, 'column': 47}, {'pattern_id': 11, 'file': 'api.js', 'line': 607, 'column': 47}]
+2025-08-31 02:39:56,556 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {'api.js': defaultdict(<class 'list'>, {11: [{'line': 158, 'column': 47}, {'line': 176, 'column': 47}, {'line': 417, 'column': 47}, {'line': 457, 'column': 47}, {'line': 589, 'column': 47}, {'line': 607, 'column': 47}]})})
+2025-08-31 02:39:56,558 | INFO | repair.nfield-api | New context extracted from /bluebird/results/gpt-4.1/nfield-api/api.js
+2025-08-31 02:39:56,559 | INFO | repair.nfield-api | New context extracted from /bluebird/results/gpt-4.1/nfield-api/api.js
+2025-08-31 02:39:56,560 | INFO | repair.nfield-api | New context extracted from /bluebird/results/gpt-4.1/nfield-api/api.js
+2025-08-31 02:39:56,561 | INFO | repair.nfield-api | New context extracted from /bluebird/results/gpt-4.1/nfield-api/api.js
+2025-08-31 02:39:56,562 | INFO | repair.nfield-api | New context extracted from /bluebird/results/gpt-4.1/nfield-api/api.js
+2025-08-31 02:39:56,563 | INFO | repair.nfield-api | New context extracted from /bluebird/results/gpt-4.1/nfield-api/api.js
+2025-08-31 02:39:56,563 | INFO | repair.nfield-api | File /bluebird/results/gpt-4.1/nfield-api/api.js has too many contexts extracted
+2025-08-31 02:39:56,563 | INFO | repair.nfield-api | File size: 22321
+2025-08-31 02:40:00,372 | DEBUG | repair.nfield-api | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:40:00,373 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:40:00,373 | INFO | repair.nfield-api | END pattern 11 (pattern_11)
+2025-08-31 02:40:00,373 | INFO | repair.nfield-api | ============================================================
+2025-08-31 02:40:00,373 | INFO | repair.nfield-api | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:40:00,373 | DEBUG | repair.nfield-api | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:40:00,547 | INFO | repair.nfield-api | Tapir run successful for /bluebird/results/gpt-4.1/nfield-api
+2025-08-31 02:40:00,547 | DEBUG | repair.nfield-api | Parsed detection output: []
+2025-08-31 02:40:00,547 | DEBUG | repair.nfield-api | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1081b0540>, {})
+2025-08-31 02:40:00,548 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:40:00,548 | INFO | repair.nfield-api | END pattern 11 (pattern_11)
+2025-08-31 02:40:00,548 | INFO | repair.nfield-api | Config BC: scanning 0 files
+2025-08-31 02:40:00,548 | DEBUG | repair.nfield-api | Updated package.json saved at /bluebird/results/gpt-4.1/nfield-api/package.json
+2025-08-31 02:40:00,549 | INFO | repair.nfield-api | token consumed 15085
+2025-08-31 02:40:00,549 | INFO | repair.nfield-api | parse consumption time: 18.05256849899888

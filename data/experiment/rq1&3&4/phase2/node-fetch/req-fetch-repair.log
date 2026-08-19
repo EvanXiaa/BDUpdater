@@ -1,0 +1,259 @@
+2025-08-31 01:55:18,630 | INFO | repair.req-fetch | Starting analysis for req-fetch
+2025-08-31 01:55:18,630 | INFO | repair.req-fetch | Starting breaking change analysis for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:55:18,630 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:55:18,630 | INFO | repair.req-fetch | BEGIN pattern 2 (pattern_2)
+2025-08-31 01:55:18,630 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 01:55:18,953 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:55:18,953 | DEBUG | repair.req-fetch | Parsed detection output: [{'pattern_id': 2, 'file': 'test/index.js', 'line': 92, 'column': 12}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 118, 'column': 12}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 143, 'column': 12}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 168, 'column': 12}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 187, 'column': 12}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 207, 'column': 12}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 226, 'column': 12}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 246, 'column': 12}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 314, 'column': 12}]
+2025-08-31 01:55:18,953 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037ead40>, {'test/index.js': defaultdict(<class 'list'>, {2: [{'line': 92, 'column': 12}, {'line': 118, 'column': 12}, {'line': 143, 'column': 12}, {'line': 168, 'column': 12}, {'line': 187, 'column': 12}, {'line': 207, 'column': 12}, {'line': 226, 'column': 12}, {'line': 246, 'column': 12}, {'line': 314, 'column': 12}]})})
+2025-08-31 01:55:18,955 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:18,956 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:18,957 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:18,958 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:18,958 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:18,959 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:18,960 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:18,961 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:18,962 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:18,962 | INFO | repair.req-fetch | File /node-fetch/results/gpt-4.1/req-fetch/test/index.js has too many contexts extracted
+2025-08-31 01:55:18,962 | INFO | repair.req-fetch | File size: 10193
+2025-08-31 01:55:44,975 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 01:55:44,979 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:55:44,980 | INFO | repair.req-fetch | END pattern 2 (pattern_2)
+2025-08-31 01:55:44,984 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:55:44,984 | INFO | repair.req-fetch | BEGIN pattern 2 (pattern_2)
+2025-08-31 01:55:44,984 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 01:55:45,621 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:55:45,621 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:55:45,621 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:55:45,621 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:55:45,621 | INFO | repair.req-fetch | END pattern 2 (pattern_2)
+2025-08-31 01:55:45,622 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:55:45,622 | INFO | repair.req-fetch | BEGIN pattern 3 (pattern_3)
+2025-08-31 01:55:45,622 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 01:55:45,951 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:55:45,951 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:55:45,951 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:55:45,952 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:55:45,952 | INFO | repair.req-fetch | END pattern 3 (pattern_3)
+2025-08-31 01:55:45,952 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:55:45,952 | INFO | repair.req-fetch | BEGIN pattern 3 (pattern_3)
+2025-08-31 01:55:45,952 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 01:55:46,206 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:55:46,206 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:55:46,206 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:55:46,206 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:55:46,207 | INFO | repair.req-fetch | END pattern 3 (pattern_3)
+2025-08-31 01:55:46,207 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:55:46,207 | INFO | repair.req-fetch | BEGIN pattern 4 (pattern_4)
+2025-08-31 01:55:46,207 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "call {<node-fetch>,<node-fetch/**/*>}?**.{*}", "changelogId": 4}
+2025-08-31 01:55:46,378 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:55:46,378 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:55:46,378 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:55:46,379 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:55:46,379 | INFO | repair.req-fetch | END pattern 4 (pattern_4)
+2025-08-31 01:55:46,379 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:55:46,379 | INFO | repair.req-fetch | BEGIN pattern 5 (pattern_5)
+2025-08-31 01:55:46,379 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 01:55:46,609 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:55:46,610 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:55:46,610 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:55:46,610 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:55:46,610 | INFO | repair.req-fetch | END pattern 5 (pattern_5)
+2025-08-31 01:55:46,610 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:55:46,610 | INFO | repair.req-fetch | BEGIN pattern 5 (pattern_5)
+2025-08-31 01:55:46,610 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 01:55:46,762 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:55:46,762 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:55:46,762 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:55:46,762 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:55:46,763 | INFO | repair.req-fetch | END pattern 5 (pattern_5)
+2025-08-31 01:55:46,763 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:55:46,763 | INFO | repair.req-fetch | BEGIN pattern 6 (pattern_6)
+2025-08-31 01:55:46,763 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 01:55:46,922 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:55:46,923 | DEBUG | repair.req-fetch | Parsed detection output: [{'pattern_id': 6, 'file': 'test/index.js', 'line': 266, 'column': 23}, {'pattern_id': 6, 'file': 'test/index.js', 'line': 288, 'column': 23}, {'pattern_id': 6, 'file': 'index.js', 'line': 13, 'column': 18}]
+2025-08-31 01:55:46,923 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {'test/index.js': defaultdict(<class 'list'>, {6: [{'line': 266, 'column': 23}, {'line': 288, 'column': 23}]}), 'index.js': defaultdict(<class 'list'>, {6: [{'line': 13, 'column': 18}]})})
+2025-08-31 01:55:46,925 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:55:46,926 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:56:09,953 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "tape('forward cookie (turn off path alter)', function (test) {\n    test.plan(4);\n    var app = getApp();\n    app.use('/test', function (req, res) {\n        req.fetch(app.prefix + '/set-cookie').then(function (response) {\n            // node-fetch v2: headers.getAll() removed. For Set-Cookie, use headers.raw()['set-cookie'] to get all values.\n            test.equal((response.headers.raw()['set-cookie'] || []).length, 2);\n            req.fetch.forwardCookie(response, function (url) {\n                if (url == '/abc123') return '/abc456';\n                else return url;\n            });\n            res.statusCode = 204;\n            res.end();\n        });\n    });\n    supertest(app)\n        .get('/test')\n        .expect(204)\n        .end(function (err, r) {\n            var cookies = r.headers['set-cookie'];\n            test.ok(cookies[0].indexOf('Path=/helloworld') > -1);\n            test.ok(cookies[1].indexOf('Path=/abc456') > -1);\n            done(test, app)();\n        });\n});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 01:56:09,956 | INFO | repair.req-fetch | Replaced code in /node-fetch/results/gpt-4.1/req-fetch/test/index.js at [8810, 9669]
+2025-08-31 01:56:37,596 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "tape('forward cookie (turn off path alter)', function (test) {\n    test.plan(4);\n    var app = getApp();\n    app.use('/test', function (req, res) {\n        req.fetch(app.prefix + '/set-cookie').then(function (response) {\n            // node-fetch v2 removed headers.getAll(); use headers.raw()['set-cookie'] to access multiple Set-Cookie values\n            test.equal((response.headers.raw()['set-cookie'] || []).length, 2);\n            req.fetch.forwardCookie(response, false);\n            res.statusCode = 204;\n            res.end();\n        });\n    });\n    supertest(app)\n        .get('/test')\n        .expect(204)\n        .end(function (err, r) {\n            var cookies = r.headers['set-cookie'];\n            test.ok(cookies[0].indexOf('Path=/helloworld') > -1);\n            test.ok(cookies[1].indexOf('Path=/abc123') > -1);\n            done(test, app)();\n        });\n});",
+  "additional_req": "",
+  "dependencies": [
+    "node-fetch@^2.0.0"
+  ]
+}
+2025-08-31 01:56:37,597 | INFO | repair.req-fetch | Replaced code in /node-fetch/results/gpt-4.1/req-fetch/test/index.js at [8063, 8808]
+2025-08-31 01:56:37,599 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/index.js
+2025-08-31 01:57:11,800 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "function forwardCookie(res, response, alterPath) {\n    // node-fetch v2: headers.getAll() removed. Use headers.raw()['set-cookie'] to obtain an array of Set-Cookie values safely.\n    var cookies = (response.headers.raw && response.headers.raw()['set-cookie']) || [];\n    if (cookies.length) {\n        cookies = cookies.map(function (cstr) {\n            cstr = cstr.replace(/; *Domain=[^;]*(; *)?/i, '; ');\n            if (alterPath === false) {\n                return cstr;\n            } else if ('function' == typeof alterPath) {\n                return cstr.replace(/; *Path=(\\/[^;]*)(; *)?/i, function (all, $1, $2) {\n                    return '; Path=' + alterPath($1) + ($2 || '');\n                });\n            } else {\n                return cstr.replace(/; *Path=\\/[^;]*(; *)?/i, '; Path=/$1');\n            }\n        });\n        var prev = res.get('Set-Cookie');\n        if (prev) {\n            if (Array.isArray(prev)) {\n                cookies = prev.concat(cookies);\n            } else {\n                cookies = [prev].concat(cookies);\n            }\n        }\n        res.set('Set-Cookie', cookies);\n    }\n}",
+  "additional_req": "",
+  "dependencies": [
+    "node-fetch@^2.0.0"
+  ]
+}
+2025-08-31 01:57:11,802 | INFO | repair.req-fetch | Replaced code in /node-fetch/results/gpt-4.1/req-fetch/index.js at [302, 1265]
+2025-08-31 01:57:11,803 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:11,803 | INFO | repair.req-fetch | END pattern 6 (pattern_6)
+2025-08-31 01:57:11,803 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:11,803 | INFO | repair.req-fetch | BEGIN pattern 6 (pattern_6)
+2025-08-31 01:57:11,803 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 01:57:12,147 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:12,147 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:57:12,147 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:57:12,147 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:12,147 | INFO | repair.req-fetch | END pattern 6 (pattern_6)
+2025-08-31 01:57:12,148 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:12,148 | INFO | repair.req-fetch | BEGIN pattern 7 (pattern_7)
+2025-08-31 01:57:12,148 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 01:57:12,292 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:12,292 | DEBUG | repair.req-fetch | Parsed detection output: [{'pattern_id': 7, 'file': 'index.js', 'line': 28, 'column': 19}]
+2025-08-31 01:57:12,292 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {'index.js': defaultdict(<class 'list'>, {7: [{'line': 28, 'column': 19}]})})
+2025-08-31 01:57:12,293 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/index.js
+2025-08-31 01:57:18,654 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 01:57:18,657 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:18,657 | INFO | repair.req-fetch | END pattern 7 (pattern_7)
+2025-08-31 01:57:18,658 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:18,658 | INFO | repair.req-fetch | BEGIN pattern 7 (pattern_7)
+2025-08-31 01:57:18,658 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 01:57:18,835 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:18,836 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:57:18,836 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:57:18,836 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:18,836 | INFO | repair.req-fetch | END pattern 7 (pattern_7)
+2025-08-31 01:57:18,836 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:18,836 | INFO | repair.req-fetch | BEGIN pattern 8 (pattern_8)
+2025-08-31 01:57:18,836 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 01:57:18,990 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:18,991 | DEBUG | repair.req-fetch | Parsed detection output: [{'pattern_id': 8, 'file': 'index.js', 'line': 28, 'column': 19}, {'pattern_id': 8, 'file': 'index.js', 'line': 36, 'column': 8}]
+2025-08-31 01:57:18,991 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {'index.js': defaultdict(<class 'list'>, {8: [{'line': 28, 'column': 19}, {'line': 36, 'column': 8}]})})
+2025-08-31 01:57:18,991 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/index.js
+2025-08-31 01:57:25,312 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 01:57:25,314 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:25,314 | INFO | repair.req-fetch | END pattern 8 (pattern_8)
+2025-08-31 01:57:25,315 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:25,315 | INFO | repair.req-fetch | BEGIN pattern 8 (pattern_8)
+2025-08-31 01:57:25,315 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 01:57:25,486 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:25,486 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:57:25,486 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:57:25,487 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:25,487 | INFO | repair.req-fetch | END pattern 8 (pattern_8)
+2025-08-31 01:57:25,487 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:25,487 | INFO | repair.req-fetch | BEGIN pattern 9 (pattern_9)
+2025-08-31 01:57:25,487 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 01:57:25,635 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:25,635 | DEBUG | repair.req-fetch | Parsed detection output: [{'pattern_id': 9, 'file': 'index.js', 'line': 28, 'column': 19}, {'pattern_id': 9, 'file': 'index.js', 'line': 36, 'column': 8}, {'pattern_id': 9, 'file': 'index.js', 'line': 117, 'column': 44}]
+2025-08-31 01:57:25,635 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {'index.js': defaultdict(<class 'list'>, {9: [{'line': 28, 'column': 19}, {'line': 36, 'column': 8}, {'line': 117, 'column': 44}]})})
+2025-08-31 01:57:25,636 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/index.js
+2025-08-31 01:57:25,637 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/index.js
+2025-08-31 01:57:32,683 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 01:57:40,470 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 01:57:40,472 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:40,472 | INFO | repair.req-fetch | END pattern 9 (pattern_9)
+2025-08-31 01:57:40,473 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:40,473 | INFO | repair.req-fetch | BEGIN pattern 9 (pattern_9)
+2025-08-31 01:57:40,473 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 01:57:40,791 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:40,792 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:57:40,792 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:57:40,792 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:40,792 | INFO | repair.req-fetch | END pattern 9 (pattern_9)
+2025-08-31 01:57:40,792 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:40,792 | INFO | repair.req-fetch | BEGIN pattern 10 (pattern_10)
+2025-08-31 01:57:40,792 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 01:57:40,936 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:40,936 | DEBUG | repair.req-fetch | Parsed detection output: [{'pattern_id': 10, 'file': 'index.js', 'line': 117, 'column': 44}]
+2025-08-31 01:57:40,936 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {'index.js': defaultdict(<class 'list'>, {10: [{'line': 117, 'column': 44}]})})
+2025-08-31 01:57:40,937 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/index.js
+2025-08-31 01:57:48,746 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 01:57:48,749 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:48,749 | INFO | repair.req-fetch | END pattern 10 (pattern_10)
+2025-08-31 01:57:48,750 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:48,750 | INFO | repair.req-fetch | BEGIN pattern 10 (pattern_10)
+2025-08-31 01:57:48,750 | DEBUG | repair.req-fetch | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 01:57:48,922 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:48,922 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:57:48,922 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:57:48,923 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:57:48,923 | INFO | repair.req-fetch | END pattern 10 (pattern_10)
+2025-08-31 01:57:48,923 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:57:48,923 | INFO | repair.req-fetch | BEGIN pattern 11 (pattern_11)
+2025-08-31 01:57:48,923 | DEBUG | repair.req-fetch | Pattern payload: {"type": "write", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{body,bodyUsed,method,url,headers,redirect}", "changelogId": 11}
+2025-08-31 01:57:49,081 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:57:49,081 | DEBUG | repair.req-fetch | Parsed detection output: [{'pattern_id': 11, 'file': 'test/index.js', 'line': 159, 'column': 8}, {'pattern_id': 11, 'file': 'index.js', 'line': 116, 'column': 16}, {'pattern_id': 11, 'file': 'index.js', 'line': 118, 'column': 20}]
+2025-08-31 01:57:49,081 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {'test/index.js': defaultdict(<class 'list'>, {11: [{'line': 159, 'column': 8}]}), 'index.js': defaultdict(<class 'list'>, {11: [{'line': 116, 'column': 16}, {'line': 118, 'column': 20}]})})
+2025-08-31 01:57:49,082 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/test/index.js
+2025-08-31 01:57:57,261 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 01:57:57,264 | INFO | repair.req-fetch | New context extracted from /node-fetch/results/gpt-4.1/req-fetch/index.js
+2025-08-31 01:58:14,777 | DEBUG | repair.req-fetch | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 01:58:14,780 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:58:14,780 | INFO | repair.req-fetch | END pattern 11 (pattern_11)
+2025-08-31 01:58:14,781 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:58:14,781 | INFO | repair.req-fetch | BEGIN pattern 1 (pattern_1)
+2025-08-31 01:58:14,781 | DEBUG | repair.req-fetch | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/response,node-fetch/lib/request,node-fetch/lib/headers,node-fetch/lib/*}", "changelogId": 1}
+2025-08-31 01:58:15,140 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:58:15,141 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:58:15,141 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:58:15,141 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:58:15,141 | INFO | repair.req-fetch | END pattern 1 (pattern_1)
+2025-08-31 01:58:15,141 | INFO | repair.req-fetch | ============================================================
+2025-08-31 01:58:15,141 | INFO | repair.req-fetch | BEGIN pattern 4 (pattern_4)
+2025-08-31 01:58:15,141 | DEBUG | repair.req-fetch | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/*}", "changelogId": 4}
+2025-08-31 01:58:15,282 | INFO | repair.req-fetch | Tapir run successful for /node-fetch/results/gpt-4.1/req-fetch
+2025-08-31 01:58:15,282 | DEBUG | repair.req-fetch | Parsed detection output: []
+2025-08-31 01:58:15,282 | DEBUG | repair.req-fetch | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1037eade0>, {})
+2025-08-31 01:58:15,282 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:58:15,282 | INFO | repair.req-fetch | END pattern 4 (pattern_4)
+2025-08-31 01:58:15,283 | DEBUG | repair.req-fetch | Updated package.json saved at /node-fetch/results/gpt-4.1/req-fetch/package.json
+2025-08-31 01:58:15,283 | INFO | repair.req-fetch | token consumed 62854
+2025-08-31 01:58:15,283 | INFO | repair.req-fetch | parse consumption time: 171.8897890392691

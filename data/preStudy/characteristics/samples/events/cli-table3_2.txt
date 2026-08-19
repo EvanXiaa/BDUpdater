@@ -1,0 +1,7 @@
+{
+  "owner": "cli-table",
+  "repo": "cli-table3",
+  "number": 2,
+  "pr_url": "https://github.com/cli-table/cli-table3/pull/2",
+  "content": "# PR 2: Update Node version requirements\nBranches: node-requirement -> master\n\nThis PR updates the Node versions that we test against on CI and officially declares the supported versions in the `package.json` file. Supported after this PR are Node 6, 8 and 10, which are the currently officially supported Node versions.\r\n\r\nSince we previously tested against Node 0.10 and 0.11 this should be considered a breaking change, and the next release should bump the minor version since we're still pre-1.0.\n\n## Commit titles\n- CI: Change `node_js` targets to Node 6, 8 and 10\n- package.json: Declare Node version requirements\n\n## Changed files\n- .travis.yml\n- package.json"
+}

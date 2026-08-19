@@ -1,0 +1,44 @@
+Extracting breaking changes for jsdoc-to-markdown
+[{'role': 'system', 'content': 'You are a software engineer who recently discovered that a library used\n          in your project has released a new major version. \n          Your top priority is to identify breaking changes \n          in the new version before updating and assessing its impact on your project.\n              - you only care about the breaking changes in version v9.0.0'}, {'role': 'user', 'content': 'The first step is to identify relevant files that may reference breaking changes.\nBelow is a JSON list of file entries from the repository:\n[\n  "release_note.md",\n  "README.md",\n  "docs/API.md"\n]\n### Task:\nReturn a **Python list** of file paths that are likely to contain any of the following:\n1. **API Change information** (e.g., `changelog.md`, `history.md`, "deprecation.md", "readme.md`))  \n2. **Release notes** (e.g., `releasenotes.md`, `release-notes.txt`)  \n3. **Version migration or upgrade guidance** (e.g., `migration-guide.md`, `upgrading.md`, `changes-in-version-3.md`)  \n4. **External links or references** related to (1)–(3) (e.g., `migrate-to-v2.html`)\n\n### Output:\nReturn only a raw Python list of matching file paths (e.g., `["docs/changelog.md", "RELEASE_NOTES.md"]`). Rank them by relevance.\n**Do not** include any explanations, formatting, or wrapper structures.\n**Only select files related to the target version.\n'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Candidate documentation files:
+['release_note.md']
+Tokens till now: 344
+[{'role': 'system', 'content': "You're a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v9.0.0\n"}, {'role': 'user', 'content': "\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: []\n.\nNow you are provided with the file content of:\n\nrelease_note.md\n## v9.0.0\n\nThe default output has not changed. The minimum required Node version is still v12.17. The goals for this release were bug fixing and simplification. Feel free to comment in the [release discussion](https://github.com/jsdoc2md/jsdoc-to-markdown/discussions/305) or post an issue.\n\n## Breaking changes since v8.0.3\n\n* Removed `.renderSync()`, `.getTemplateDataSync()` and `.getJsdocDataSync()`. The jsdoc2md API is now async-only.\n* Previously, passing either `option.files` or `option.source` was mandatory. Now, it is either `option.files`, `option.source` or `option.configure`. https://github.com/jsdoc2md/jsdoc-api/issues/27 \n\n## Non-breaking changes\n\n* Fixed a bug where it was possible for a handlebars template to be passed into the jsdoc-api `template` option. #303\n* Support clever-links, monospace-links, `{@linkcode}` and `{@linkplain}`. #301 \n* Fixed a 'maximum call stack size exceeded' error. The user now gets a warning if the malformed input which formerly caused the error is detected.  https://github.com/jsdoc2md/dmd/issues/89\n* Fixed an issue where the dmd internal partials failed to load if a user's directory name contained special glob characters. https://github.com/jsdoc2md/dmd/issues/82 \n* Added the `--EOL` option to control line-endings. Fixes https://github.com/jsdoc2md/dmd/issues/92.\n* Fixed an issue where setting `{ pedantic: false }` confused the underlying jsdoc. https://github.com/jsdoc2md/jsdoc-api/issues/22 \n* Can now pass an array of strings to `.source`. https://github.com/jsdoc2md/jsdoc-api/issues/11 \n* Added support for `@hideconstructor`. https://github.com/jsdoc2md/dmd/issues/94\n* Print a warning when the most common mistake is detected (`@module` tag required) https://github.com/jsdoc2md/dmd/issues/96\n* Fixed an issue where a `@example` was excluded in the output if the doclet did not contain a description. https://github.com/jsdoc2md/jsdoc-parse/issues/33\n\n## Other improvements\n\n* Greatly optimised the dependency tree - upgraded all deps to their latest versions (removing deprecation warnings) and factored many old modules out of the project.\n\n## Upgrade notes\n\n* Update your code replacing any use of `.renderSync()`, `.getTemplateDataSync()` and `.getJsdocDataSync()` with their async equivalents.\n  * To see an example of API usage, see [here](https://github.com/jsdoc2md/jsdoc-to-markdown/wiki/How-to-create-one-output-file-per-class).\n"}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Extracted BC candidate list:
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "The synchronous APIs `.renderSync()`, `.getTemplateDataSync()`, and `.getJsdocDataSync()` have been removed. The jsdoc2md API is now async-only.",
+      "Reference": [
+        "release_note.md",
+        "https://github.com/jsdoc2md/jsdoc-to-markdown/wiki/How-to-create-one-output-file-per-class"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "*"
+        ],
+        "methodName": [
+          "renderSync",
+          "getTemplateDataSync",
+          "getJsdocDataSync"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Replace synchronous calls with their asynchronous equivalents:\n\n// Before:\nconst result = jsdoc2md.renderSync(options);\n\n// After:\nconst result = await jsdoc2md.render(options);",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}
+parse consumption token: 2934
+parse consumption time: 4.578265833668411
+Validating BC list for jsdoc-to-markdown
+validation consumption token: 0
+validation consumption time: 0
+Done: jsdoc-to-markdown
+Wrote 2 patterns to  /exp/after-2024/jsdoc-to-markdown/gpt-4.1/tapir.json

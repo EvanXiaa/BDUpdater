@@ -1,0 +1,26 @@
+{
+  "Id": 1,
+  "BC_description": "Queues are now awaitable, meaning that methods which previously returned values synchronously or used callbacks now return promises and require asynchronous handling. Specifically, the push and unshift methods of the queue function now return promises when no callback is provided, and event handling methods like saturated, unsaturated, empty, drain, and error now return promises or require asynchronous handling via callbacks or promises.",
+  "Reference": [
+    "e04466",
+    "#1641"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "push",
+      "unshift",
+      "saturated",
+      "unsaturated",
+      "empty",
+      "drain",
+      "error"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Update code to handle queues asynchronously. For push and unshift methods, if no callback is provided, use await or .then() for the returned promise. For event handling methods, use await for the promise-based version or provide a callback. Examples: Before: queue.push(item); After: await queue.push(item); or queue.push(item, callback); Before: queue.drain = function() { /* code */ }; After: await queue.drain(); or queue.drain(function() { /* code */ });",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}

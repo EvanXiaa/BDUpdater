@@ -1,0 +1,209 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "The partial application feature of the applyEach function has been removed, which may break code that relied on this functionality for applying functions with partial arguments.",
+      "Reference": [
+        "667e71",
+        "#1640"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "applyEach"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Replace partial application with explicit function binding or currying. For example, instead of using applyEach with partial arguments, use a wrapper function: applyEach(fn.bind(null, arg)) or a similar approach.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The exact signature and usage of the removed partial application feature in applyEach are unclear. Please provide detailed examples of how it was used in the old version and specific adaptation code snippets for the new version."
+    },
+    {
+      "Id": 1,
+      "BC_description": "Queues are now awaitable, meaning that operations which previously returned values synchronously or used callbacks may now require the use of await or promises, potentially breaking synchronous code.",
+      "Reference": [
+        "e04466",
+        "#1641"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Update code to handle queues asynchronously by using await or .then() for promise-based operations. For example, if a method like queue.add() now returns a promise, use await queue.add(item) instead of assuming synchronous behavior.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The specific queue methods and classes affected are not detailed. Please provide a comprehensive list of all queue-related methods and classes that are now awaitable, along with before and after code examples for each."
+    },
+    {
+      "Id": 2,
+      "BC_description": "Most Async methods return a Promise when the final callback is omitted, making them awaitable, which may break code that relies on synchronous return values or callback-based flows.",
+      "Reference": [
+        "#1572"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Use await or promises for methods that now return promises when callbacks are omitted. For example, replace async.mapLimit(array, limit, iterator, callback) with await async.mapLimit(array, limit, iterator) or use the callback version.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The specific Async methods affected are not enumerated. Please provide a complete list of all methods that now return promises when callbacks are omitted, along with detailed before and after code examples."
+    },
+    {
+      "Id": 3,
+      "BC_description": "Support for Node 4 and earlier, and many old browser versions, has been dropped due to heavy use of ES2015 features, potentially breaking environments that do not support these features.",
+      "Reference": [
+        "#1541",
+        "#1553"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Upgrade the runtime environment to a version that supports ES2015 features, such as Node.js 6 or later, or use a transpiler like Babel for older environments.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "In queue, priorityQueue, cargo, and cargoQueue, the event-style methods like drain and saturated are now methods that register a callback or return a promise, rather than properties to assign a callback to, potentially breaking code that assigns callbacks directly to these properties.",
+      "Reference": [
+        "#1586",
+        "#1641"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "queue",
+          "priorityQueue",
+          "cargo",
+          "cargoQueue"
+        ],
+        "methodName": [
+          "drain",
+          "saturated"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Use the method form to register callbacks or await promises. For example, replace q.drain = callback with q.drain(callback), or use await q.drain() for promise-based waiting.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The full list of event-style methods affected (e.g., drain, saturated, and others) is not specified. Please provide all method names and detailed adaptation examples."
+    },
+    {
+      "Id": 5,
+      "BC_description": "Calling callback(false) will now cancel an async method, preventing further iteration and callback calls, which may break code that relies on the previous behavior of not canceling.",
+      "Reference": [
+        "#1064",
+        "#1542"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Avoid calling callback(false) if cancellation is not intended, or handle the cancellation appropriately in the async flow.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The specific async methods where callback(false) triggers cancellation are not detailed. Please provide a list of affected methods and examples of the new behavior."
+    },
+    {
+      "Id": 6,
+      "BC_description": "The during and doDuring functions have been removed, and their functionality is replaced by enhanced whilst, doWhilst, until, and doUntil functions with asynchronous test functions, potentially breaking code that uses the removed functions.",
+      "Reference": [
+        "#850",
+        "#1557"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "during",
+          "doDuring"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Replace during and doDuring with whilst, doWhilst, until, or doUntil, ensuring the test function is asynchronous if needed. For example, use async.whilst(testFn, iteratee, callback) instead of async.during(testFn, iteratee, callback).",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The exact differences in usage and adaptation for the replaced functions are unclear. Please provide specific before and after code examples for migrating from during/doDuring to the new functions."
+    },
+    {
+      "Id": 7,
+      "BC_description": "Limits of less than 1 now cause an error to be thrown in queues and collection methods, potentially breaking code that uses such limits without error handling.",
+      "Reference": [
+        "#1249",
+        "#1552"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Ensure limits are at least 1 in queue and collection method calls, or add error handling for cases where limits might be less than 1.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The specific queue and collection methods affected are not enumerated. Please provide a complete list of methods where this limit validation applies."
+    },
+    {
+      "Id": 8,
+      "BC_description": "Memoize no longer memoizes errors, meaning that subsequent calls with the same arguments may not return the same error if it was previously memoized, potentially breaking error handling logic.",
+      "Reference": [
+        "#1465",
+        "#1466"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "memoize"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Implement custom error handling or caching if memoization of errors is required, as the built-in memoize function no longer supports it.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 9,
+      "BC_description": "ApplyEach and applyEachSeries have a simpler interface, always returning a function that takes a single callback argument or a promise if the callback is omitted, potentially breaking code that relied on the previous interface.",
+      "Reference": [
+        "#1228",
+        "#1640"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "applyEach",
+          "applyEachSeries"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Use the new interface by passing a callback or awaiting the promise. For example, replace old usage with applyEach(functions)(callback) or await applyEach(functions)().",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The exact changes in the interface and adaptation examples are not fully detailed. Please provide specific before and after code snippets for applyEach and applyEachSeries."
+    }
+  ]
+}

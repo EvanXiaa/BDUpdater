@@ -1,0 +1,41 @@
+2025-09-01 02:01:40,918 | INFO | repair.ember-feature-flags | Starting analysis for ember-feature-flags
+2025-09-01 02:01:40,918 | INFO | repair.ember-feature-flags | Starting breaking change analysis for -2024/ember-qunit/results/gpt-4.1/ember-feature-flags
+2025-09-01 02:01:40,919 | INFO | repair.ember-feature-flags | ============================================================
+2025-09-01 02:01:40,919 | INFO | repair.ember-feature-flags | BEGIN pattern 0 (pattern_0)
+2025-09-01 02:01:40,919 | DEBUG | repair.ember-feature-flags | Pattern payload: {"type": "call", "pattern": "read {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 02:01:41,066 | INFO | repair.ember-feature-flags | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ember-feature-flags
+2025-09-01 02:01:41,066 | DEBUG | repair.ember-feature-flags | Parsed detection output: [{'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 6, 'column': 0, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 11, 'column': 0, 'confidence': 'high'}]
+2025-09-01 02:01:41,066 | DEBUG | repair.ember-feature-flags | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1096d4180>, {'tests/test-helper.js': defaultdict(<class 'list'>, {0: [{'line': 6, 'column': 0, 'confidence': 'high'}, {'line': 11, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 02:01:41,066 | INFO | repair.ember-feature-flags | New context extracted from -2024/ember-qunit/results/gpt-4.1/ember-feature-flags/tests/test-helper.js
+2025-09-01 02:01:41,067 | INFO | repair.ember-feature-flags | New context extracted from -2024/ember-qunit/results/gpt-4.1/ember-feature-flags/tests/test-helper.js
+2025-09-01 02:01:49,868 | DEBUG | repair.ember-feature-flags | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the surrounding context of this call (e.g., the full test-helper.js file) including the import statement for `start` and whether you are using `ember-exam` so we can determine the correct migration steps.",
+  "dependencies": []
+}
+2025-09-01 02:01:49,869 | DEBUG | repair.ember-feature-flags | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/ember-feature-flags/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 02:02:00,521 | DEBUG | repair.ember-feature-flags | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the full contents of the test helper file (including where start() is invoked) so we can determine where to insert setupEmberOnerrorValidation() and loadTests() calls.",
+  "dependencies": []
+}
+2025-09-01 02:02:00,522 | DEBUG | repair.ember-feature-flags | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/ember-feature-flags/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 02:02:00,523 | INFO | repair.ember-feature-flags | Whole mode item: -2024/ember-qunit/results/gpt-4.1/ember-feature-flags/tests/test-helper.js
+2025-09-01 02:02:11,424 | DEBUG | repair.ember-feature-flags | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "import Application from 'dummy/app';\nimport config from 'dummy/config/environment';\nimport * as QUnit from 'qunit';\nimport { setApplication } from '@ember/test-helpers';\nimport { setup } from 'qunit-dom';\n// Updated imports to satisfy ember-qunit v9+ explicit API requirements\nimport { start, setupEmberOnerrorValidation } from 'ember-qunit';\nimport { loadTests } from 'ember-qunit/test-loader';\n\nsetApplication(Application.create(config.APP));\n\nsetup(QUnit.assert);\n// Ensure global error validation is enabled before loading tests\nsetupEmberOnerrorValidation();\n// Explicitly load test modules (required in v9+)\nloadTests();\n// Finally, start the test run\nstart();\n", 'additional_req': '', 'dependencies': ['ember-qunit@^9.0.0']}
+2025-09-01 02:02:11,424 | INFO | repair.ember-feature-flags | Replace whole file: -2024/ember-qunit/results/gpt-4.1/ember-feature-flags/tests/test-helper.js
+2025-09-01 02:02:11,426 | INFO | repair.ember-feature-flags | Whole mode item: -2024/ember-qunit/results/gpt-4.1/ember-feature-flags/tests/test-helper.js
+2025-09-01 02:02:11,428 | DEBUG | repair.ember-feature-flags | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ember-feature-flags/package.json
+2025-09-01 02:02:11,428 | INFO | repair.ember-feature-flags | END pattern 0 (pattern_0)
+2025-09-01 02:02:11,429 | INFO | repair.ember-feature-flags | ============================================================
+2025-09-01 02:02:11,430 | INFO | repair.ember-feature-flags | BEGIN pattern 0 (pattern_0)
+2025-09-01 02:02:11,430 | DEBUG | repair.ember-feature-flags | Pattern payload: {"type": "call", "pattern": "write {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 02:02:11,658 | INFO | repair.ember-feature-flags | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ember-feature-flags
+2025-09-01 02:02:11,658 | DEBUG | repair.ember-feature-flags | Parsed detection output: []
+2025-09-01 02:02:11,658 | DEBUG | repair.ember-feature-flags | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1096bdf80>, {})
+2025-09-01 02:02:11,658 | DEBUG | repair.ember-feature-flags | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ember-feature-flags/package.json
+2025-09-01 02:02:11,658 | INFO | repair.ember-feature-flags | END pattern 0 (pattern_0)
+2025-09-01 02:02:11,659 | DEBUG | repair.ember-feature-flags | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ember-feature-flags/package.json
+2025-09-01 02:02:11,659 | INFO | repair.ember-feature-flags | token consumed 12238
+2025-09-01 02:02:11,659 | INFO | repair.ember-feature-flags | parse consumption time: 30.352202167734504

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "dep_bc_repair_handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "package_name",
+    "upstream_repo",
+    "old_version",
+    "new_version",
+    "tapir_client_name",
+    "bc_list",
+    "pattern_file",
+    "precision_reviewed",
+    "bc_list_sha256",
+    "pattern_file_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "package_name": { "type": "string", "minLength": 1 },
+    "upstream_repo": {
+      "type": "string",
+      "pattern": "^[^/\\s]+/[^/\\s]+$"
+    },
+    "old_version": { "type": "string", "minLength": 1 },
+    "new_version": { "type": "string", "minLength": 1 },
+    "old_commit": { "type": ["string", "null"] },
+    "new_commit": { "type": ["string", "null"] },
+    "tapir_client_name": { "type": "string", "minLength": 1 },
+    "bc_list": { "type": "string", "minLength": 1 },
+    "pattern_file": { "type": "string", "minLength": 1 },
+    "precision_reviewed": { "type": "boolean" },
+    "bc_list_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "pattern_file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}

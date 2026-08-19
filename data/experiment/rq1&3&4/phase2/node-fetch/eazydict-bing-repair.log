@@ -1,0 +1,214 @@
+2025-08-31 00:30:30,478 | INFO | repair.eazydict-bing | Starting analysis for eazydict-bing
+2025-08-31 00:30:30,478 | INFO | repair.eazydict-bing | Starting breaking change analysis for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:30,479 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:30,479 | INFO | repair.eazydict-bing | BEGIN pattern 2 (pattern_2)
+2025-08-31 00:30:30,479 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 00:30:30,831 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:30,831 | DEBUG | repair.eazydict-bing | Parsed detection output: [{'pattern_id': 2, 'file': 'lib/fetch.js', 'line': 39, 'column': 19}, {'pattern_id': 2, 'file': 'lib/parser.js', 'line': 90, 'column': 17}]
+2025-08-31 00:30:30,831 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6de0>, {'lib/fetch.js': defaultdict(<class 'list'>, {2: [{'line': 39, 'column': 19}]}), 'lib/parser.js': defaultdict(<class 'list'>, {2: [{'line': 90, 'column': 17}]})})
+2025-08-31 00:30:30,832 | INFO | repair.eazydict-bing | New context extracted from /node-fetch/results/gpt-4.1/eazydict-bing/lib/fetch.js
+2025-08-31 00:30:38,893 | DEBUG | repair.eazydict-bing | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please confirm whether the code relies on automatic character encoding detection from response.text(). If it does, res.text() should be replaced with res.textConverted().",
+  "dependencies": []
+}
+2025-08-31 00:30:38,894 | DEBUG | repair.eazydict-bing | Added to whole mode list: file=/node-fetch/results/gpt-4.1/eazydict-bing/lib/fetch.js, context=Node, bc_desc={'Id': 2, 'BC_description': "The 'response.text()' method now always returns text as UTF-8 without attempting to detect ...
+2025-08-31 00:30:38,896 | INFO | repair.eazydict-bing | New context extracted from /node-fetch/results/gpt-4.1/eazydict-bing/lib/parser.js
+2025-08-31 00:30:41,280 | DEBUG | repair.eazydict-bing | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:30:41,280 | INFO | repair.eazydict-bing | Whole mode item: /node-fetch/results/gpt-4.1/eazydict-bing/lib/fetch.js
+2025-08-31 00:30:58,239 | DEBUG | repair.eazydict-bing | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "/*Start*/'use strict';\n\nconst debug = require('./debug');\nconst fetch = require('node-fetch');\nconst pRetry = require('p-retry');\nconst proxy = require('./proxy');\n\n/**\n * 模拟浏览器的头信息\n */\n/* eslint-disable max-len */\nconst headers = new fetch.Headers({\n  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',\n  'Accept-Encoding': 'gzip, deflate',\n  'Accept-Language': 'zh-CN,zh;q=0.8',\n  'Cache-Control': 'no-cache',\n  'Connection': 'keep-alive',\n  'Host': 'cn.bing.com',\n  'Pragma': 'no-cache',\n  'Referer': 'http://cn.bing.com/dict/?FORM=Z9LH3',\n  'Upgrade-Insecure-Requests': '1',\n  'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'\n});\n/* eslint-enable max-len */\n\nfunction main(url, configs) {\n  let retryOptions = {\n    retries: configs.retries\n  };\n\n  let fetchOptions = {\n    headers,\n    timeout: configs.timeout,\n    agent: proxy(configs.proxy)\n  };\n\n  return pRetry(() => {\n    return fetch(url, fetchOptions)\n      .then(res => res.textConverted()) // use textConverted() to preserve automatic encoding detection as in v1\n  }, retryOptions);\n}\n\n\nmodule.exports = main;\n/*End*/", 'additional_req': 'Ensure the optional "encoding" dependency is installed to support response.textConverted().', 'dependencies': []}
+2025-08-31 00:30:58,240 | INFO | repair.eazydict-bing | Replace whole file: /node-fetch/results/gpt-4.1/eazydict-bing/lib/fetch.js
+2025-08-31 00:30:58,243 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:58,243 | INFO | repair.eazydict-bing | END pattern 2 (pattern_2)
+2025-08-31 00:30:58,244 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:58,244 | INFO | repair.eazydict-bing | BEGIN pattern 2 (pattern_2)
+2025-08-31 00:30:58,244 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 00:30:58,595 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:58,595 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:58,595 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:58,596 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:58,596 | INFO | repair.eazydict-bing | END pattern 2 (pattern_2)
+2025-08-31 00:30:58,596 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:58,596 | INFO | repair.eazydict-bing | BEGIN pattern 3 (pattern_3)
+2025-08-31 00:30:58,596 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 00:30:58,743 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:58,744 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:58,744 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:58,744 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:58,744 | INFO | repair.eazydict-bing | END pattern 3 (pattern_3)
+2025-08-31 00:30:58,744 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:58,744 | INFO | repair.eazydict-bing | BEGIN pattern 3 (pattern_3)
+2025-08-31 00:30:58,744 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 00:30:58,893 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:58,893 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:58,893 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:58,894 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:58,894 | INFO | repair.eazydict-bing | END pattern 3 (pattern_3)
+2025-08-31 00:30:58,894 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:58,894 | INFO | repair.eazydict-bing | BEGIN pattern 4 (pattern_4)
+2025-08-31 00:30:58,894 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "call {<node-fetch>,<node-fetch/**/*>}?**.{*}", "changelogId": 4}
+2025-08-31 00:30:59,041 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:59,041 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:59,041 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:59,042 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:59,042 | INFO | repair.eazydict-bing | END pattern 4 (pattern_4)
+2025-08-31 00:30:59,042 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:59,042 | INFO | repair.eazydict-bing | BEGIN pattern 5 (pattern_5)
+2025-08-31 00:30:59,042 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 00:30:59,196 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:59,196 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:59,196 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:59,196 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:59,196 | INFO | repair.eazydict-bing | END pattern 5 (pattern_5)
+2025-08-31 00:30:59,196 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:59,196 | INFO | repair.eazydict-bing | BEGIN pattern 5 (pattern_5)
+2025-08-31 00:30:59,197 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 00:30:59,347 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:59,347 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:59,347 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:59,348 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:59,348 | INFO | repair.eazydict-bing | END pattern 5 (pattern_5)
+2025-08-31 00:30:59,348 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:59,348 | INFO | repair.eazydict-bing | BEGIN pattern 6 (pattern_6)
+2025-08-31 00:30:59,348 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 00:30:59,501 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:59,501 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:59,501 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:59,501 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:59,501 | INFO | repair.eazydict-bing | END pattern 6 (pattern_6)
+2025-08-31 00:30:59,501 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:59,501 | INFO | repair.eazydict-bing | BEGIN pattern 6 (pattern_6)
+2025-08-31 00:30:59,502 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 00:30:59,653 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:59,653 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:59,653 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:59,654 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:59,654 | INFO | repair.eazydict-bing | END pattern 6 (pattern_6)
+2025-08-31 00:30:59,654 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:59,654 | INFO | repair.eazydict-bing | BEGIN pattern 7 (pattern_7)
+2025-08-31 00:30:59,654 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 00:30:59,803 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:59,803 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:59,803 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:59,804 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:59,804 | INFO | repair.eazydict-bing | END pattern 7 (pattern_7)
+2025-08-31 00:30:59,804 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:59,804 | INFO | repair.eazydict-bing | BEGIN pattern 7 (pattern_7)
+2025-08-31 00:30:59,804 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 00:30:59,955 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:30:59,955 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:30:59,955 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:30:59,956 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:30:59,956 | INFO | repair.eazydict-bing | END pattern 7 (pattern_7)
+2025-08-31 00:30:59,956 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:30:59,956 | INFO | repair.eazydict-bing | BEGIN pattern 8 (pattern_8)
+2025-08-31 00:30:59,956 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 00:31:00,108 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:31:00,108 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:31:00,108 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:31:00,108 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:00,108 | INFO | repair.eazydict-bing | END pattern 8 (pattern_8)
+2025-08-31 00:31:00,109 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:31:00,109 | INFO | repair.eazydict-bing | BEGIN pattern 8 (pattern_8)
+2025-08-31 00:31:00,109 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 00:31:00,259 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:31:00,259 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:31:00,259 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {})
+2025-08-31 00:31:00,260 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:00,260 | INFO | repair.eazydict-bing | END pattern 8 (pattern_8)
+2025-08-31 00:31:00,260 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:31:00,260 | INFO | repair.eazydict-bing | BEGIN pattern 9 (pattern_9)
+2025-08-31 00:31:00,260 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 00:31:00,412 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:31:00,412 | DEBUG | repair.eazydict-bing | Parsed detection output: [{'pattern_id': 9, 'file': 'lib/fetch.js', 'line': 12, 'column': 20}]
+2025-08-31 00:31:00,412 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1107b6f20>, {'lib/fetch.js': defaultdict(<class 'list'>, {9: [{'line': 12, 'column': 20}]})})
+2025-08-31 00:31:00,413 | INFO | repair.eazydict-bing | New context extracted from /node-fetch/results/gpt-4.1/eazydict-bing/lib/fetch.js
+2025-08-31 00:31:04,995 | DEBUG | repair.eazydict-bing | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:31:04,996 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:04,996 | INFO | repair.eazydict-bing | END pattern 9 (pattern_9)
+2025-08-31 00:31:04,997 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:31:04,997 | INFO | repair.eazydict-bing | BEGIN pattern 9 (pattern_9)
+2025-08-31 00:31:04,997 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 00:31:05,184 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:31:05,185 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:31:05,185 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110fa1b20>, {})
+2025-08-31 00:31:05,185 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:05,185 | INFO | repair.eazydict-bing | END pattern 9 (pattern_9)
+2025-08-31 00:31:05,185 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:31:05,185 | INFO | repair.eazydict-bing | BEGIN pattern 10 (pattern_10)
+2025-08-31 00:31:05,185 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 00:31:05,340 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:31:05,341 | DEBUG | repair.eazydict-bing | Parsed detection output: [{'pattern_id': 10, 'file': 'lib/fetch.js', 'line': 12, 'column': 20}]
+2025-08-31 00:31:05,341 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110fa1b20>, {'lib/fetch.js': defaultdict(<class 'list'>, {10: [{'line': 12, 'column': 20}]})})
+2025-08-31 00:31:05,341 | INFO | repair.eazydict-bing | New context extracted from /node-fetch/results/gpt-4.1/eazydict-bing/lib/fetch.js
+2025-08-31 00:31:12,983 | DEBUG | repair.eazydict-bing | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:31:12,986 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:12,987 | INFO | repair.eazydict-bing | END pattern 10 (pattern_10)
+2025-08-31 00:31:12,987 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:31:12,988 | INFO | repair.eazydict-bing | BEGIN pattern 10 (pattern_10)
+2025-08-31 00:31:12,988 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 00:31:13,172 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:31:13,172 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:31:13,172 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110fa1b20>, {})
+2025-08-31 00:31:13,172 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:13,172 | INFO | repair.eazydict-bing | END pattern 10 (pattern_10)
+2025-08-31 00:31:13,172 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:31:13,172 | INFO | repair.eazydict-bing | BEGIN pattern 11 (pattern_11)
+2025-08-31 00:31:13,172 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "write", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{body,bodyUsed,method,url,headers,redirect}", "changelogId": 11}
+2025-08-31 00:31:13,328 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:31:13,328 | DEBUG | repair.eazydict-bing | Parsed detection output: [{'pattern_id': 11, 'file': 'index.js', 'line': 51, 'column': 6}]
+2025-08-31 00:31:13,329 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110fa1b20>, {'index.js': defaultdict(<class 'list'>, {11: [{'line': 51, 'column': 6}]})})
+2025-08-31 00:31:13,329 | INFO | repair.eazydict-bing | New context extracted from /node-fetch/results/gpt-4.1/eazydict-bing/index.js
+2025-08-31 00:31:18,513 | DEBUG | repair.eazydict-bing | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:31:18,515 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:18,515 | INFO | repair.eazydict-bing | END pattern 11 (pattern_11)
+2025-08-31 00:31:18,516 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:31:18,516 | INFO | repair.eazydict-bing | BEGIN pattern 1 (pattern_1)
+2025-08-31 00:31:18,516 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/response,node-fetch/lib/request,node-fetch/lib/headers,node-fetch/lib/*}", "changelogId": 1}
+2025-08-31 00:31:18,696 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:31:18,697 | DEBUG | repair.eazydict-bing | Parsed detection output: [{'pattern_id': 1, 'file': 'test/lib/fetch.js', 'line': 10, 'column': 19}]
+2025-08-31 00:31:18,697 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110fa2020>, {'test/lib/fetch.js': defaultdict(<class 'list'>, {1: [{'line': 10, 'column': 19}]})})
+2025-08-31 00:31:18,697 | INFO | repair.eazydict-bing | New context extracted from /node-fetch/results/gpt-4.1/eazydict-bing/test/lib/fetch.js
+2025-08-31 00:31:31,422 | DEBUG | repair.eazydict-bing | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "const { FetchError } = require('node-fetch');",
+  "additional_req": "",
+  "dependencies": [
+    "node-fetch@^2.0.0"
+  ]
+}
+2025-08-31 00:31:31,425 | INFO | repair.eazydict-bing | Replaced code in /node-fetch/results/gpt-4.1/eazydict-bing/test/lib/fetch.js at [127, 184]
+2025-08-31 00:31:31,426 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:31,426 | INFO | repair.eazydict-bing | END pattern 1 (pattern_1)
+2025-08-31 00:31:31,427 | INFO | repair.eazydict-bing | ============================================================
+2025-08-31 00:31:31,427 | INFO | repair.eazydict-bing | BEGIN pattern 4 (pattern_4)
+2025-08-31 00:31:31,427 | DEBUG | repair.eazydict-bing | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/*}", "changelogId": 4}
+2025-08-31 00:31:31,679 | INFO | repair.eazydict-bing | Tapir run successful for /node-fetch/results/gpt-4.1/eazydict-bing
+2025-08-31 00:31:31,679 | DEBUG | repair.eazydict-bing | Parsed detection output: []
+2025-08-31 00:31:31,679 | DEBUG | repair.eazydict-bing | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110fa1b20>, {})
+2025-08-31 00:31:31,679 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:31,679 | INFO | repair.eazydict-bing | END pattern 4 (pattern_4)
+2025-08-31 00:31:31,680 | DEBUG | repair.eazydict-bing | Updated package.json saved at /node-fetch/results/gpt-4.1/eazydict-bing/package.json
+2025-08-31 00:31:31,680 | INFO | repair.eazydict-bing | token consumed 25397
+2025-08-31 00:31:31,680 | INFO | repair.eazydict-bing | parse consumption time: 57.53471720777452

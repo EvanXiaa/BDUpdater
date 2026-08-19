@@ -1,0 +1,258 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "Node.js 0.10.x and 0.12.x are no longer supported in node-fetch v2.0.0. This means that any project running on these legacy Node.js versions will not be able to use this version of the library.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Upgrade the Node.js runtime to version 4.x or higher to use node-fetch v2.0.0.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Direct require of internal modules such as 'node-fetch/lib/response' is no longer supported. Users must now access Response, Request, and other classes via the main export or ES6 imports.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [
+          "Response",
+          "Request"
+        ],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch/lib/response",
+          "node-fetch/lib/request"
+        ]
+      },
+      "Adaptation_method": "Before: const Response = require('node-fetch/lib/response'); After: const { Response } = require('node-fetch'); or import { Response } from 'node-fetch';",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "The `response.text()` method no longer attempts to detect the response encoding and now always defaults to UTF-8 as per the Fetch specification. The previous behavior of encoding detection is moved to a new method `textConverted()`.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200",
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "text"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "If encoding detection is required, replace `response.text()` with `response.textConverted()`. For UTF-8 only, keep using `response.text()`.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "`response.json()` now throws a syntax error when the response status is 204 (No Content), instead of returning an empty object. This reverts a change introduced in v1.6.2 and aligns with the Fetch specification.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "json"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: const data = await response.json(); // returns {} for 204. After: wrap in try-catch or check status before calling: const data = response.status === 204 ? null : await response.json();",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "Internal methods of the library are no longer exposed, which may break code that directly accessed or relied on internal implementation details. Specifically, methods such as `_clone()`, `_decode()`, and `_convert()` on the `response` object are now inaccessible.",
+      "Reference": [
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "read",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "_clone",
+          "_decode",
+          "_convert"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Refactor code to avoid direct access to internal methods like `_clone()`, `_decode()`, and `_convert()`. Use only the public API as documented in the official API docs.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 5,
+      "BC_description": "Constructing a Request with method GET or HEAD and a non-null body now throws an error, in compliance with the Fetch specification. Previously, such requests were allowed.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Request"
+        ],
+        "methodName": [
+          "constructor"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: new Request('https://example.com', { method: 'GET', body: 'data' }); After: Ensure GET and HEAD requests have null or undefined body: new Request('https://example.com', { method: 'GET', body: null });",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 6,
+      "BC_description": "The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200",
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "getAll"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Replace `headers.getAll('set-cookie')` with `headers.get('set-cookie').split(',')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers."
+    },
+    {
+      "Id": 7,
+      "BC_description": "The user-provided `Content-Length` header is now overwritten by node-fetch if the library can determine the correct length, in accordance with the Fetch specification.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "write",
+        "className": [
+          "Request"
+        ],
+        "methodName": [],
+        "propertyName": [
+          "headers"
+        ],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Do not rely on manually set `Content-Length` headers. Ensure server logic does not validate or reject requests based on expectations of a specific `Content-Length` value set by the client.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 8,
+      "BC_description": "The `headers.get()` method now returns all values of a header as a comma-separated string, rather than only the first value. This aligns with the Fetch specification but breaks code expecting only the first value.",
+      "Reference": [
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "get"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: headers.get('Multi') returned 'header1'. After: headers.get('Multi') returns 'header1,header2'. To retrieve the first value, use: headers.get('Multi').split(',')[0].",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 9,
+      "BC_description": "All inputs to `Headers` methods (e.g., name and value in `set()`) are now stringified. Previously, `null` or `undefined` values were preserved or caused errors; now they are converted to the strings 'null' and 'undefined'.",
+      "Reference": [
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "set"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: headers.set('null-header', null); headers.get('null-header') returned null. After: it returns 'null'. To avoid unintended stringification, ensure that header names and values are already strings or explicitly handle null/undefined before passing to `set()`.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 10,
+      "BC_description": "Invalid HTTP header names and values (e.g., containing non-ASCII characters like 'H\u00e9y') are now rejected with an error during construction or setting, in compliance with the Fetch specification.",
+      "Reference": [
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "set",
+          "constructor"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: headers.set('H\u00e9y', 'ok') was allowed. After: it throws. Normalize header names and values to ASCII before setting them. For example, use 'Hey' instead of 'H\u00e9y'.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

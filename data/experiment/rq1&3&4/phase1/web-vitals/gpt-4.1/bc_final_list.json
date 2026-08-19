@@ -1,0 +1,67 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "The deprecated `onFID()` function has been removed from the library. All client code that uses or imports `onFID()` will break and needs to be updated. No direct replacement for measuring First Input Delay (FID) is provided, as both the FID metric and its reporting functionality have been fully removed from the library. Client code must remove all usage and import statements associated with `onFID()`.",
+      "Reference": [
+        "https://github.com/GoogleChrome/web-vitals/pull/519"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "*"
+        ],
+        "methodName": [
+          "onFID"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "web-vitals"
+        ]
+      },
+      "Adaptation_method": "Remove all uses of `onFID()` and corresponding imports from your code. There is no direct API replacement for this metric in the current release. For example:\n\n// Before:\nimport { onFID } from 'web-vitals';\nonFID(callback);\n\n// After:\n// No direct replacement. Remove these lines entirely.\n",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Change browser support policy to Baseline Widely available",
+      "Reference": [
+        "https://github.com/GoogleChrome/web-vitals/pull/525"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Ensure that target environments meet the new baseline browser support policy by adding necessary polyfills or dropping unsupported browsers.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "Please specify the exact browsers (and minimum versions) covered by the new baseline widely available policy, and list any APIs that now require polyfills."
+    },
+    {
+      "Id": 2,
+      "BC_description": "The order of class names included in the 'attribution selectors' property of the INPAttribution, LCPAttribution, and CLSAttribution classes is now always sorted lexicographically. Previously, class order in attribution selectors was not guaranteed and could vary, resulting in potentially higher cardinality for downstream grouping logic. Downstream code that relied on or assumed a specific (non-sorted) class order in attribution selector strings must update to accommodate this change.",
+      "Reference": [
+        "https://github.com/GoogleChrome/web-vitals/pull/518"
+      ],
+      "Changed_object": {
+        "type": "read",
+        "className": [
+          "INPAttribution",
+          "LCPAttribution",
+          "CLSAttribution"
+        ],
+        "methodName": [],
+        "propertyName": [
+          "attribution selectors"
+        ],
+        "moduleName": []
+      },
+      "Adaptation_method": "If your code compares or groups attribution selectors as strings, ensure you allow for (or explicitly sort) class names in selectors. For example, if previous output was 'div.a.b.c' and it could now be 'div.a.b.c' regardless of input order, you do not need to change code. But if your downstream code stored and expected 'div.c.b.a', update logic as follows:\n// Before (order not guaranteed)\nconst sel = attrib['attribution selectors']; // could be 'div.c.b.a'\n// After (order always guaranteed lexicographically)\nconst sel = attrib['attribution selectors']; // always 'div.a.b.c'\n// If comparing old data, sort or migrate old attribution selectors to canonical order for consistent grouping.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

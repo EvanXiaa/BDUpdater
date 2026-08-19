@@ -1,0 +1,103 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "In Commander v13.0.0, the default behavior of handling excess command-arguments has changed. Previously, when calling the `.parse()` method on a `Command` instance, extra positional arguments provided by users (those not explicitly declared using `.argument(...)` or consumed by the command's configuration) were ignored by default and did not produce an error. Now, the 'allowExcessArguments' setting defaults to `false`, and providing more command-arguments than expected causes a runtime error. This breaking change impacts the `parse` method, as well as the setup pattern for all commands that may rely on allowing excess arguments. If your code previously worked by receiving and ignoring extra arguments, you must either explicitly allow them with `.allowExcessArguments()` before parsing, or fully declare expected arguments using `.argument(...)`.",
+      "Reference": [
+        "https://github.com/tj/commander.js/pull/2223"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Command"
+        ],
+        "methodName": [
+          "parse",
+          "allowExcessArguments"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "To maintain the previous behavior and prevent errors due to excess arguments, add '.allowExcessArguments()' to your command definition before calling 'parse', as in:\n\nprogram.option('-p, --port <number>', 'port number');\nprogram.allowExcessArguments();\nprogram.action((options) => {\n  console.log(program.args);\n});\n\nAlternatively, explicitly specify accepted positional arguments using '.argument(...)' for each expected argument. Any excess arguments will then generate an error unless 'allowExcessArguments()' is enabled.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Starting with Commander.js v13.0.0, constructing an Option with unsupported option flag formats will throw an error during construction. Previously, passing certain invalid flag specifications (such as a short flag with more than one character after a single '-' like '-ab', or providing more than one long flag such as '--foo, --bar', or using multi-letter short flags like '-es') resulted in undefined or inconsistent behavior, but did not immediately throw; now such usages will cause an immediate exception. Only supported flag patterns are allowed: a single-character short flag after a single '-' (e.g., '-a') and a single long flag after '--' (e.g., '--foo'). Attempting to use concatenated short flags, multi-letter short options, or multiple long option names in a single Option declaration will throw an error during Option construction in v13.0.0. (Support for dual long options, as an exception, is added back in v13.1.0.)",
+      "Reference": [
+        "https://github.com/tj/commander.js/pull/2270",
+        "#2235",
+        "#430",
+        "#479",
+        "#908",
+        "#1718",
+        "#1862",
+        "#2211",
+        "#2222",
+        "#2227",
+        "#2307"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Option"
+        ],
+        "methodName": [
+          "constructor"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "commander"
+        ]
+      },
+      "Adaptation_method": "Update Option construction to use only supported flag formats. For short options, use a single character after a single dash (e.g., new Option('-a, --alpha')). For long options, use a single long option per Option (e.g., new Option('--example')). Do not provide multi-letter short flags (e.g., '-es') or multiple long flags (e.g., '--foo, --bar') in one Option construction if using v13.0.0. If you need multiple flags for the same option, declare separate Option instances for each, or, if using Commander 13.1.0 or later, check dual-long flag support. \n\nExamples:\n\n// Before (invalid in v13.0.0, throws error):\nnew Option('-es, --ecmascript');\nnew Option('--foo, --bar');\n\n// After (v13.0.0):\nnew Option('-e, --ecmascript');\n// To support both --foo and --bar, create separate options or use Commander >=13.1.0 for dual long option support.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "In Commander v13.0.0, calling the 'parse()' method multiple times on a Command instance where 'storeOptionsAsProperties' is set to true will now throw an error. Previously, this may have been silently allowed or produced undefined behavior. The new behavior is: (a) If 'storeOptionsAsProperties' is true, a second and subsequent call to 'parse()' will throw an error. (b) If 'storeOptionsAsProperties' is false (the default), multiple calls to 'parse()' are supported. This affects the 'Command.parse' method only and does not apply to 'parseOptions()', which does not have this state tracking. This change prevents unintended side effects when properties are set directly on the Command instance due to 'storeOptionsAsProperties'.",
+      "Reference": [
+        "https://github.com/tj/commander.js/pull/2299"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Command"
+        ],
+        "methodName": [
+          "parse"
+        ],
+        "propertyName": [
+          "storeOptionsAsProperties"
+        ],
+        "moduleName": []
+      },
+      "Adaptation_method": "Refactor code to ensure that when using a Command instance with 'storeOptionsAsProperties: true', 'parse()' is only called once per Command instance lifecycle. When multiple parses are required, either set 'storeOptionsAsProperties: false' or recreate the Command instance between parses. Example adaptations:\n\n// Avoid multiple parses with storeOptionsAsProperties: true\nconst cmd = new Command();\ncmp.storeOptionsAsProperties = true;\ncmp.parse(process.argv); // OK\n// cmd.parse(['node', 'script.js', '--foo']); // Throws if called again\n\n// Allow multiple parses with storeOptionsAsProperties: false or default\nconst cmd2 = new Command();\ncmp2.parse(['node', 'script.js', '--foo']); // OK\ncmp2.parse(['node', 'script.js', '--bar']); // OK",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "The method 'Help.wrap()' has been removed from the Help class. Its previous line-wrapping and indentation logic is now separated: 'Help.boxWrap()' provides basic string wrapping (without indentation), and 'Help.formatItem()' is used for formatting and aligning term/description pairs, handling description wrapping internally. Indentation must now be added manually where needed. 'boxWrap()' takes only (str, width), and no longer supports the 'indent' parameter or partial word wrapping with zero-width spaces. Handling of colored strings (with ANSI codes) is improved: wrapping now works on visible width only. Calls to 'Help.wrap()' must be replaced with the new methods, and code relying on its automatic indentation must be adapted.",
+      "Reference": [
+        "https://github.com/tj/commander.js/pull/2251"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Help"
+        ],
+        "methodName": [
+          "wrap"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "1. Replace all usages of 'Help.wrap(str, width, indent)' with 'Help.boxWrap(str, width)' and manually add indentation if needed.\n2. For formatting term/description pairs (such as command or option lists), replace manual wrapping and alignment logic by calling 'Help.formatItem(term, termWidth, description, helper)'.\n3. Ensure proper handling of colored strings and edge cases in line wrapping, and update any custom indentation logic no longer handled by core methods.\n\nExample: \nOld:\n  this.wrap(desc, width, indent)\nNew:\n  this.boxWrap(desc, width) // add indentation as needed\n\nOld:\n  this.wrap(optionText, width, indent)\nNew:\n  this.formatItem(term, termWidth, description, helper)",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

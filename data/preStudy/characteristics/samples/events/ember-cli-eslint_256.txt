@@ -1,0 +1,7 @@
+{
+  "owner": "ember-cli",
+  "repo": "ember-cli-eslint",
+  "number": 256,
+  "pr_url": "https://github.com/ember-cli/ember-cli-eslint/pull/256",
+  "content": "# PR 256: Drop support for IE9 and IE10 in dummy app\nBranches: drop_ie_support -> master\n\nBreaking\n\n## Commit titles\n- Drop support for IE9 and IE10 in dummy app\n\n## Changed files\n- tests/dummy/config/targets.js"
+}

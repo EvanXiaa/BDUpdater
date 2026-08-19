@@ -1,0 +1,92 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "read {<async>,<async/**/*>}**.{saturated,unsaturated,empty,drain,error}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}**.{saturated,unsaturated,empty,drain,error}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "read {<async>,<async/**/*>}**.{each,map,mapValues,filter,reject,reduce,detect,some,every,concat,groupBy,transform,times,series,parallel,race,waterfall,auto,compose,seq,whilst,until,forever,retry,tryEach}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}**.{each,map,mapValues,filter,reject,reduce,detect,some,every,concat,groupBy,transform,times,series,parallel,race,waterfall,auto,compose,seq,whilst,until,forever,retry,tryEach}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "read {<async>,<async/**/*>}**.{drain,saturated,empty,error}",
+    "changelogId": 4
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}**.{drain,saturated,empty,error}",
+    "changelogId": 4
+  },
+  {
+    "type": "call",
+    "pattern": "read {<async>,<async/**/*>}**.{eachOfLimit,compose,seq,waterfall,auto,autoInject,whilst,until,forever,retry,eachOf,each,eachLimit,eachSeries,forEachOf,forEach,forEachLimit,forEachSeries,doWhilst,doUntil,during,doDuring,whileLoop,untilLoop,retryable}",
+    "changelogId": 5
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}**.{eachOfLimit,compose,seq,waterfall,auto,autoInject,whilst,until,forever,retry,eachOf,each,eachLimit,eachSeries,forEachOf,forEach,forEachLimit,forEachSeries,doWhilst,doUntil,during,doDuring,whileLoop,untilLoop,retryable}",
+    "changelogId": 5
+  },
+  {
+    "type": "call",
+    "pattern": "read {<async>,<async/**/*>}**.{during,doDuring,whilst,doWhilst,until,doUntil}",
+    "changelogId": 6
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}**.{during,doDuring,whilst,doWhilst,until,doUntil}",
+    "changelogId": 6
+  },
+  {
+    "type": "call",
+    "pattern": "read {<async>,<async/**/*>}**.{concatLimit,eachLimit,eachOfLimit,forEachLimit,forEachOfLimit,groupByLimit,mapLimit,queue,priorityQueue,cargo}",
+    "changelogId": 7
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}**.{concatLimit,eachLimit,eachOfLimit,forEachLimit,forEachOfLimit,groupByLimit,mapLimit,queue,priorityQueue,cargo}",
+    "changelogId": 7
+  },
+  {
+    "type": "call",
+    "pattern": "read {<async>,<async/**/*>}**.{memoize}",
+    "changelogId": 8
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}**.{memoize}",
+    "changelogId": 8
+  },
+  {
+    "type": "call",
+    "pattern": "read {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}",
+    "changelogId": 9
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}",
+    "changelogId": 9
+  }
+]

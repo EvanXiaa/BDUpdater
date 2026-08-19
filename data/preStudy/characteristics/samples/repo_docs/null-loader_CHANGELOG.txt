@@ -1,0 +1,10 @@
+## [4.0.0](https://github.com/webpack-contrib/null-loader/compare/v3.0.0...v4.0.0) (2020-04-15)
+
+
+### Bug Fixes
+
+* support `webpack@5`
+
+### ⚠ BREAKING CHANGES
+
+* minimum required Nodejs version is `10.13`

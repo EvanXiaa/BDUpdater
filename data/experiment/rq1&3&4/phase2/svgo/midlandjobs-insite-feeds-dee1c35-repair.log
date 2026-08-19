@@ -1,0 +1,49 @@
+2025-09-01 04:12:15,517 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | Starting analysis for midlandjobs-insite-feeds-dee1c35
+2025-09-01 04:12:15,517 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | Starting breaking change analysis for -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35
+2025-09-01 04:12:15,517 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | ============================================================
+2025-09-01 04:12:15,517 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | BEGIN pattern 4 (pattern_4)
+2025-09-01 04:12:15,517 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Pattern payload: {"type": "call", "pattern": "read {<svgo>,<svgo/**/*>}**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 04:12:19,794 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | Tapir run successful for -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35
+2025-09-01 04:12:19,794 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Parsed detection output: []
+2025-09-01 04:12:19,795 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1071ae980>, {})
+2025-09-01 04:12:19,795 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Updated package.json saved at -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35/package.json
+2025-09-01 04:12:19,795 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | END pattern 4 (pattern_4)
+2025-09-01 04:12:19,795 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | ============================================================
+2025-09-01 04:12:19,795 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | BEGIN pattern 4 (pattern_4)
+2025-09-01 04:12:19,795 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Pattern payload: {"type": "call", "pattern": "write {<svgo>,<svgo/**/*>}**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 04:12:23,785 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | Tapir run successful for -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35
+2025-09-01 04:12:23,785 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Parsed detection output: []
+2025-09-01 04:12:23,785 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1071ae980>, {})
+2025-09-01 04:12:23,785 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Updated package.json saved at -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35/package.json
+2025-09-01 04:12:23,785 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | END pattern 4 (pattern_4)
+2025-09-01 04:12:23,785 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | ============================================================
+2025-09-01 04:12:23,785 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | BEGIN pattern 3 (pattern_3)
+2025-09-01 04:12:23,785 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Pattern payload: {"type": "import", "pattern": "import {svgo/lib/xast,svgo/lib/builtin,svgo/plugins/*,svgo/dist/svgo.browser}", "changelogId": 3}
+2025-09-01 04:12:27,796 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | Tapir run successful for -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35
+2025-09-01 04:12:27,796 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Parsed detection output: []
+2025-09-01 04:12:27,796 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1071ae980>, {})
+2025-09-01 04:12:27,797 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Updated package.json saved at -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35/package.json
+2025-09-01 04:12:27,797 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | END pattern 3 (pattern_3)
+2025-09-01 04:12:27,797 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | ============================================================
+2025-09-01 04:12:27,797 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | BEGIN pattern 5 (pattern_5)
+2025-09-01 04:12:27,797 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Pattern payload: {"type": "import", "pattern": "import svgo", "changelogId": 5}
+2025-09-01 04:12:31,857 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | Tapir run successful for -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35
+2025-09-01 04:12:31,857 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Parsed detection output: [{'pattern_id': 5, 'file': 'build/util.js', 'line': 13, 'column': 0, 'confidence': 'high'}]
+2025-09-01 04:12:31,857 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1071ae980>, {'build/util.js': defaultdict(<class 'list'>, {5: [{'line': 13, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 04:12:31,860 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | New context extracted from -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35/build/util.js
+2025-09-01 04:12:38,626 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import * as svgo from 'svgo';",
+  "additional_req": "",
+  "dependencies": [
+    "svgo@^4.0.0"
+  ]
+}
+2025-09-01 04:12:38,628 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | Replaced code in -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35/build/util.js at [474, 498]
+2025-09-01 04:12:38,629 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Updated package.json saved at -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35/package.json
+2025-09-01 04:12:38,629 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | END pattern 5 (pattern_5)
+2025-09-01 04:12:38,632 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | Config BC: scanning 0 files
+2025-09-01 04:12:38,633 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | Config BC: scanning 0 files
+2025-09-01 04:12:38,634 | DEBUG | repair.midlandjobs-insite-feeds-dee1c35 | Updated package.json saved at -2024/svgo/results/gpt-4.1/midlandjobs-insite-feeds-dee1c35/package.json
+2025-09-01 04:12:38,634 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | token consumed 3158
+2025-09-01 04:12:38,634 | INFO | repair.midlandjobs-insite-feeds-dee1c35 | parse consumption time: 6.766197166405618

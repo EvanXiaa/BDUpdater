@@ -1,0 +1,112 @@
+2025-08-31 22:51:46,338 | INFO | repair.lint-staged-15.4.1 | Starting analysis for lint-staged-15.4.1
+2025-08-31 22:51:46,338 | INFO | repair.lint-staged-15.4.1 | Starting breaking change analysis for -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1
+2025-08-31 22:51:46,339 | INFO | repair.lint-staged-15.4.1 | ============================================================
+2025-08-31 22:51:46,339 | INFO | repair.lint-staged-15.4.1 | BEGIN pattern 0 (pattern_0)
+2025-08-31 22:51:46,339 | DEBUG | repair.lint-staged-15.4.1 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{parse,allowExcessArguments}", "changelogId": 0}
+2025-08-31 22:51:46,715 | INFO | repair.lint-staged-15.4.1 | Tapir run successful for -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1
+2025-08-31 22:51:46,715 | DEBUG | repair.lint-staged-15.4.1 | Parsed detection output: [{'pattern_id': 0, 'file': 'bin/lint-staged.js', 'line': 106, 'column': 19}]
+2025-08-31 22:51:46,715 | DEBUG | repair.lint-staged-15.4.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b185260>, {'bin/lint-staged.js': defaultdict(<class 'list'>, {0: [{'line': 106, 'column': 19}]})})
+2025-08-31 22:51:46,716 | INFO | repair.lint-staged-15.4.1 | New context extracted from -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/bin/lint-staged.js
+2025-08-31 22:51:53,021 | DEBUG | repair.lint-staged-15.4.1 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "program.allowExcessArguments();\nconst cliOptions = program.parse(process.argv).opts();",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:51:53,023 | INFO | repair.lint-staged-15.4.1 | Replaced code in -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/bin/lint-staged.js at [3334, 3387]
+2025-08-31 22:51:53,025 | DEBUG | repair.lint-staged-15.4.1 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/package.json
+2025-08-31 22:51:53,025 | INFO | repair.lint-staged-15.4.1 | END pattern 0 (pattern_0)
+2025-08-31 22:51:53,026 | INFO | repair.lint-staged-15.4.1 | ============================================================
+2025-08-31 22:51:53,026 | INFO | repair.lint-staged-15.4.1 | BEGIN pattern 0 (pattern_0)
+2025-08-31 22:51:53,026 | DEBUG | repair.lint-staged-15.4.1 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{parse,allowExcessArguments}", "changelogId": 0}
+2025-08-31 22:51:53,427 | INFO | repair.lint-staged-15.4.1 | Tapir run successful for -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1
+2025-08-31 22:51:53,427 | DEBUG | repair.lint-staged-15.4.1 | Parsed detection output: []
+2025-08-31 22:51:53,427 | DEBUG | repair.lint-staged-15.4.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba359e0>, {})
+2025-08-31 22:51:53,428 | DEBUG | repair.lint-staged-15.4.1 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/package.json
+2025-08-31 22:51:53,428 | INFO | repair.lint-staged-15.4.1 | END pattern 0 (pattern_0)
+2025-08-31 22:51:53,428 | INFO | repair.lint-staged-15.4.1 | ============================================================
+2025-08-31 22:51:53,428 | INFO | repair.lint-staged-15.4.1 | BEGIN pattern 1 (pattern_1)
+2025-08-31 22:51:53,428 | DEBUG | repair.lint-staged-15.4.1 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{Option}", "changelogId": 1}
+2025-08-31 22:51:53,802 | INFO | repair.lint-staged-15.4.1 | Tapir run successful for -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1
+2025-08-31 22:51:53,802 | DEBUG | repair.lint-staged-15.4.1 | Parsed detection output: [{'pattern_id': 1, 'file': 'bin/lint-staged.js', 'line': 6, 'column': 0}, {'pattern_id': 1, 'file': 'bin/lint-staged.js', 'line': 41, 'column': 6}, {'pattern_id': 1, 'file': 'bin/lint-staged.js', 'line': 61, 'column': 8}, {'pattern_id': 1, 'file': 'bin/lint-staged.js', 'line': 66, 'column': 8}, {'pattern_id': 1, 'file': 'bin/lint-staged.js', 'line': 81, 'column': 8}, {'pattern_id': 1, 'file': 'bin/lint-staged.js', 'line': 86, 'column': 8}]
+2025-08-31 22:51:53,802 | DEBUG | repair.lint-staged-15.4.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba359e0>, {'bin/lint-staged.js': defaultdict(<class 'list'>, {1: [{'line': 6, 'column': 0}, {'line': 41, 'column': 6}, {'line': 61, 'column': 8}, {'line': 66, 'column': 8}, {'line': 81, 'column': 8}, {'line': 86, 'column': 8}]})})
+2025-08-31 22:51:53,802 | INFO | repair.lint-staged-15.4.1 | New context extracted from -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/bin/lint-staged.js
+2025-08-31 22:51:53,803 | INFO | repair.lint-staged-15.4.1 | New context extracted from -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/bin/lint-staged.js
+2025-08-31 22:51:53,803 | INFO | repair.lint-staged-15.4.1 | New context extracted from -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/bin/lint-staged.js
+2025-08-31 22:51:53,803 | INFO | repair.lint-staged-15.4.1 | New context extracted from -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/bin/lint-staged.js
+2025-08-31 22:51:58,133 | DEBUG | repair.lint-staged-15.4.1 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:52:02,229 | DEBUG | repair.lint-staged-15.4.1 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:52:06,630 | DEBUG | repair.lint-staged-15.4.1 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:52:09,396 | DEBUG | repair.lint-staged-15.4.1 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:52:09,399 | DEBUG | repair.lint-staged-15.4.1 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/package.json
+2025-08-31 22:52:09,400 | INFO | repair.lint-staged-15.4.1 | END pattern 1 (pattern_1)
+2025-08-31 22:52:09,401 | INFO | repair.lint-staged-15.4.1 | ============================================================
+2025-08-31 22:52:09,401 | INFO | repair.lint-staged-15.4.1 | BEGIN pattern 1 (pattern_1)
+2025-08-31 22:52:09,401 | DEBUG | repair.lint-staged-15.4.1 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{Option}", "changelogId": 1}
+2025-08-31 22:52:09,869 | INFO | repair.lint-staged-15.4.1 | Tapir run successful for -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1
+2025-08-31 22:52:09,869 | DEBUG | repair.lint-staged-15.4.1 | Parsed detection output: []
+2025-08-31 22:52:09,869 | DEBUG | repair.lint-staged-15.4.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37060>, {})
+2025-08-31 22:52:09,870 | DEBUG | repair.lint-staged-15.4.1 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/package.json
+2025-08-31 22:52:09,870 | INFO | repair.lint-staged-15.4.1 | END pattern 1 (pattern_1)
+2025-08-31 22:52:09,870 | INFO | repair.lint-staged-15.4.1 | ============================================================
+2025-08-31 22:52:09,870 | INFO | repair.lint-staged-15.4.1 | BEGIN pattern 2 (pattern_2)
+2025-08-31 22:52:09,870 | DEBUG | repair.lint-staged-15.4.1 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{parse}", "changelogId": 2}
+2025-08-31 22:52:10,239 | INFO | repair.lint-staged-15.4.1 | Tapir run successful for -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1
+2025-08-31 22:52:10,240 | DEBUG | repair.lint-staged-15.4.1 | Parsed detection output: [{'pattern_id': 2, 'file': 'bin/lint-staged.js', 'line': 107, 'column': 19}]
+2025-08-31 22:52:10,240 | DEBUG | repair.lint-staged-15.4.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37060>, {'bin/lint-staged.js': defaultdict(<class 'list'>, {2: [{'line': 107, 'column': 19}]})})
+2025-08-31 22:52:10,240 | INFO | repair.lint-staged-15.4.1 | New context extracted from -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/bin/lint-staged.js
+2025-08-31 22:52:14,722 | DEBUG | repair.lint-staged-15.4.1 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:52:14,724 | DEBUG | repair.lint-staged-15.4.1 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/package.json
+2025-08-31 22:52:14,724 | INFO | repair.lint-staged-15.4.1 | END pattern 2 (pattern_2)
+2025-08-31 22:52:14,725 | INFO | repair.lint-staged-15.4.1 | ============================================================
+2025-08-31 22:52:14,725 | INFO | repair.lint-staged-15.4.1 | BEGIN pattern 2 (pattern_2)
+2025-08-31 22:52:14,726 | DEBUG | repair.lint-staged-15.4.1 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{parse}", "changelogId": 2}
+2025-08-31 22:52:15,129 | INFO | repair.lint-staged-15.4.1 | Tapir run successful for -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1
+2025-08-31 22:52:15,130 | DEBUG | repair.lint-staged-15.4.1 | Parsed detection output: []
+2025-08-31 22:52:15,130 | DEBUG | repair.lint-staged-15.4.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37060>, {})
+2025-08-31 22:52:15,131 | DEBUG | repair.lint-staged-15.4.1 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/package.json
+2025-08-31 22:52:15,131 | INFO | repair.lint-staged-15.4.1 | END pattern 2 (pattern_2)
+2025-08-31 22:52:15,131 | INFO | repair.lint-staged-15.4.1 | ============================================================
+2025-08-31 22:52:15,131 | INFO | repair.lint-staged-15.4.1 | BEGIN pattern 3 (pattern_3)
+2025-08-31 22:52:15,131 | DEBUG | repair.lint-staged-15.4.1 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{wrap}", "changelogId": 3}
+2025-08-31 22:52:15,514 | INFO | repair.lint-staged-15.4.1 | Tapir run successful for -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1
+2025-08-31 22:52:15,515 | DEBUG | repair.lint-staged-15.4.1 | Parsed detection output: []
+2025-08-31 22:52:15,515 | DEBUG | repair.lint-staged-15.4.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37060>, {})
+2025-08-31 22:52:15,516 | DEBUG | repair.lint-staged-15.4.1 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/package.json
+2025-08-31 22:52:15,516 | INFO | repair.lint-staged-15.4.1 | END pattern 3 (pattern_3)
+2025-08-31 22:52:15,516 | INFO | repair.lint-staged-15.4.1 | ============================================================
+2025-08-31 22:52:15,516 | INFO | repair.lint-staged-15.4.1 | BEGIN pattern 3 (pattern_3)
+2025-08-31 22:52:15,516 | DEBUG | repair.lint-staged-15.4.1 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{wrap}", "changelogId": 3}
+2025-08-31 22:52:15,887 | INFO | repair.lint-staged-15.4.1 | Tapir run successful for -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1
+2025-08-31 22:52:15,887 | DEBUG | repair.lint-staged-15.4.1 | Parsed detection output: []
+2025-08-31 22:52:15,887 | DEBUG | repair.lint-staged-15.4.1 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37060>, {})
+2025-08-31 22:52:15,887 | DEBUG | repair.lint-staged-15.4.1 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/package.json
+2025-08-31 22:52:15,887 | INFO | repair.lint-staged-15.4.1 | END pattern 3 (pattern_3)
+2025-08-31 22:52:15,888 | DEBUG | repair.lint-staged-15.4.1 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/lint-staged-15.4.1/package.json
+2025-08-31 22:52:15,888 | INFO | repair.lint-staged-15.4.1 | token consumed 15413
+2025-08-31 22:52:15,888 | INFO | repair.lint-staged-15.4.1 | parse consumption time: 26.375875583849847

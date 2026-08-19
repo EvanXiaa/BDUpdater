@@ -1,0 +1,1 @@
+The other big change is we are now bundling our CommonJS and ES builds like React has done recently. This means direct, private imports (`import createStore from 'redux/lib/createStore'`) will no longer work. This ensures our modules are maintaining a consistent contract with your apps and that any reorganization we choose to do internally has no effect on your usage of Redux.

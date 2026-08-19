@@ -1,0 +1,70 @@
+2025-09-01 02:05:17,716 | INFO | repair.kids-learning-app-main-strokesvg | Starting analysis for kids-learning-app-main-strokesvg
+2025-09-01 02:05:17,717 | INFO | repair.kids-learning-app-main-strokesvg | Starting breaking change analysis for -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg
+2025-09-01 02:05:17,718 | INFO | repair.kids-learning-app-main-strokesvg | ============================================================
+2025-09-01 02:05:17,718 | INFO | repair.kids-learning-app-main-strokesvg | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:05:17,719 | DEBUG | repair.kids-learning-app-main-strokesvg | Pattern payload: {"type": "call", "pattern": "read {<svgo>,<svgo/**/*>}?**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 02:05:17,919 | INFO | repair.kids-learning-app-main-strokesvg | Tapir run successful for -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg
+2025-09-01 02:05:17,919 | DEBUG | repair.kids-learning-app-main-strokesvg | Parsed detection output: [{'pattern_id': 4, 'file': 'index.js', 'line': 7, 'column': 2, 'confidence': 'low'}, {'pattern_id': 4, 'file': 'index.js', 'line': 240, 'column': 19, 'confidence': 'low'}]
+2025-09-01 02:05:17,919 | DEBUG | repair.kids-learning-app-main-strokesvg | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x104601bc0>, {'index.js': defaultdict(<class 'list'>, {4: [{'line': 7, 'column': 2, 'confidence': 'low'}, {'line': 240, 'column': 19, 'confidence': 'low'}]})})
+2025-09-01 02:05:17,920 | INFO | repair.kids-learning-app-main-strokesvg | New context extracted from -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/index.js
+2025-09-01 02:05:17,921 | INFO | repair.kids-learning-app-main-strokesvg | New context extracted from -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/index.js
+2025-09-01 02:05:20,967 | DEBUG | repair.kids-learning-app-main-strokesvg | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:05:25,267 | DEBUG | repair.kids-learning-app-main-strokesvg | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:05:25,270 | DEBUG | repair.kids-learning-app-main-strokesvg | Updated package.json saved at -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/package.json
+2025-09-01 02:05:25,271 | INFO | repair.kids-learning-app-main-strokesvg | END pattern 4 (pattern_4)
+2025-09-01 02:05:25,272 | INFO | repair.kids-learning-app-main-strokesvg | ============================================================
+2025-09-01 02:05:25,272 | INFO | repair.kids-learning-app-main-strokesvg | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:05:25,273 | DEBUG | repair.kids-learning-app-main-strokesvg | Pattern payload: {"type": "call", "pattern": "write {<svgo>,<svgo/**/*>}?**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 02:05:25,475 | INFO | repair.kids-learning-app-main-strokesvg | Tapir run successful for -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg
+2025-09-01 02:05:25,476 | DEBUG | repair.kids-learning-app-main-strokesvg | Parsed detection output: []
+2025-09-01 02:05:25,476 | DEBUG | repair.kids-learning-app-main-strokesvg | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x104601d00>, {})
+2025-09-01 02:05:25,476 | DEBUG | repair.kids-learning-app-main-strokesvg | Updated package.json saved at -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/package.json
+2025-09-01 02:05:25,476 | INFO | repair.kids-learning-app-main-strokesvg | END pattern 4 (pattern_4)
+2025-09-01 02:05:25,477 | INFO | repair.kids-learning-app-main-strokesvg | ============================================================
+2025-09-01 02:05:25,477 | INFO | repair.kids-learning-app-main-strokesvg | BEGIN pattern 3 (pattern_3)
+2025-09-01 02:05:25,477 | DEBUG | repair.kids-learning-app-main-strokesvg | Pattern payload: {"type": "import", "pattern": "import {svgo/lib/xast,svgo/lib/builtin,svgo/plugins/*,svgo/dist/svgo.browser}", "changelogId": 3}
+2025-09-01 02:05:25,616 | INFO | repair.kids-learning-app-main-strokesvg | Tapir run successful for -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg
+2025-09-01 02:05:25,616 | DEBUG | repair.kids-learning-app-main-strokesvg | Parsed detection output: [{'pattern_id': 3, 'file': 'svgo.config.js', 'line': 2, 'column': 44, 'confidence': 'high'}]
+2025-09-01 02:05:25,616 | DEBUG | repair.kids-learning-app-main-strokesvg | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x104601d00>, {'svgo.config.js': defaultdict(<class 'list'>, {3: [{'line': 2, 'column': 44, 'confidence': 'high'}]})})
+2025-09-01 02:05:25,616 | INFO | repair.kids-learning-app-main-strokesvg | New context extracted from -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/svgo.config.js
+2025-09-01 02:05:32,640 | DEBUG | repair.kids-learning-app-main-strokesvg | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "const { querySelectorAll, querySelector } = require(\"svgo\"); // updated to use public API 'svgo'",
+  "additional_req": "",
+  "dependencies": [
+    "svgo@^4.0.0"
+  ]
+}
+2025-09-01 02:05:32,642 | INFO | repair.kids-learning-app-main-strokesvg | Replaced code in -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/svgo.config.js at [35, 107]
+2025-09-01 02:05:32,643 | DEBUG | repair.kids-learning-app-main-strokesvg | Updated package.json saved at -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/package.json
+2025-09-01 02:05:32,643 | INFO | repair.kids-learning-app-main-strokesvg | END pattern 3 (pattern_3)
+2025-09-01 02:05:32,644 | INFO | repair.kids-learning-app-main-strokesvg | ============================================================
+2025-09-01 02:05:32,644 | INFO | repair.kids-learning-app-main-strokesvg | BEGIN pattern 5 (pattern_5)
+2025-09-01 02:05:32,644 | DEBUG | repair.kids-learning-app-main-strokesvg | Pattern payload: {"type": "import", "pattern": "import svgo", "changelogId": 5}
+2025-09-01 02:05:32,807 | INFO | repair.kids-learning-app-main-strokesvg | Tapir run successful for -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg
+2025-09-01 02:05:32,808 | DEBUG | repair.kids-learning-app-main-strokesvg | Parsed detection output: [{'pattern_id': 5, 'file': 'svgo.config.js', 'line': 2, 'column': 44, 'confidence': 'high'}]
+2025-09-01 02:05:32,808 | DEBUG | repair.kids-learning-app-main-strokesvg | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1046022a0>, {'svgo.config.js': defaultdict(<class 'list'>, {5: [{'line': 2, 'column': 44, 'confidence': 'high'}]})})
+2025-09-01 02:05:32,808 | INFO | repair.kids-learning-app-main-strokesvg | New context extracted from -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/svgo.config.js
+2025-09-01 02:05:37,145 | DEBUG | repair.kids-learning-app-main-strokesvg | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:05:37,147 | DEBUG | repair.kids-learning-app-main-strokesvg | Updated package.json saved at -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/package.json
+2025-09-01 02:05:37,147 | INFO | repair.kids-learning-app-main-strokesvg | END pattern 5 (pattern_5)
+2025-09-01 02:05:37,150 | INFO | repair.kids-learning-app-main-strokesvg | Config BC: scanning 1 files
+2025-09-01 02:05:46,044 | INFO | repair.kids-learning-app-main-strokesvg | Config BC: scanning 1 files
+2025-09-01 02:05:49,127 | DEBUG | repair.kids-learning-app-main-strokesvg | Updated package.json saved at -2024/svgo/results/gpt-4.1/kids-learning-app-main-strokesvg/package.json
+2025-09-01 02:05:49,128 | INFO | repair.kids-learning-app-main-strokesvg | token consumed 18790
+2025-09-01 02:05:49,128 | INFO | repair.kids-learning-app-main-strokesvg | parse consumption time: 30.681239374913275

@@ -1,0 +1,50 @@
+2025-09-01 04:12:38,736 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Starting analysis for aslStudio-hot-wallet-f14bc51
+2025-09-01 04:12:38,737 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Starting breaking change analysis for -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51
+2025-09-01 04:12:38,737 | INFO | repair.aslStudio-hot-wallet-f14bc51 | ============================================================
+2025-09-01 04:12:38,737 | INFO | repair.aslStudio-hot-wallet-f14bc51 | BEGIN pattern 4 (pattern_4)
+2025-09-01 04:12:38,737 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Pattern payload: {"type": "call", "pattern": "read {<svgo>,<svgo/**/*>}**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 04:12:38,932 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Tapir run successful for -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51
+2025-09-01 04:12:38,933 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Parsed detection output: []
+2025-09-01 04:12:38,933 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1079d51c0>, {})
+2025-09-01 04:12:38,933 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Updated package.json saved at -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51/package.json
+2025-09-01 04:12:38,933 | INFO | repair.aslStudio-hot-wallet-f14bc51 | END pattern 4 (pattern_4)
+2025-09-01 04:12:38,933 | INFO | repair.aslStudio-hot-wallet-f14bc51 | ============================================================
+2025-09-01 04:12:38,933 | INFO | repair.aslStudio-hot-wallet-f14bc51 | BEGIN pattern 4 (pattern_4)
+2025-09-01 04:12:38,933 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Pattern payload: {"type": "call", "pattern": "write {<svgo>,<svgo/**/*>}**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 04:12:39,116 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Tapir run successful for -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51
+2025-09-01 04:12:39,116 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Parsed detection output: []
+2025-09-01 04:12:39,116 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1079d51c0>, {})
+2025-09-01 04:12:39,116 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Updated package.json saved at -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51/package.json
+2025-09-01 04:12:39,116 | INFO | repair.aslStudio-hot-wallet-f14bc51 | END pattern 4 (pattern_4)
+2025-09-01 04:12:39,116 | INFO | repair.aslStudio-hot-wallet-f14bc51 | ============================================================
+2025-09-01 04:12:39,116 | INFO | repair.aslStudio-hot-wallet-f14bc51 | BEGIN pattern 3 (pattern_3)
+2025-09-01 04:12:39,116 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Pattern payload: {"type": "import", "pattern": "import {svgo/lib/xast,svgo/lib/builtin,svgo/plugins/*,svgo/dist/svgo.browser}", "changelogId": 3}
+2025-09-01 04:12:39,307 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Tapir run successful for -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51
+2025-09-01 04:12:39,307 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Parsed detection output: []
+2025-09-01 04:12:39,307 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1079d51c0>, {})
+2025-09-01 04:12:39,307 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Updated package.json saved at -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51/package.json
+2025-09-01 04:12:39,307 | INFO | repair.aslStudio-hot-wallet-f14bc51 | END pattern 3 (pattern_3)
+2025-09-01 04:12:39,307 | INFO | repair.aslStudio-hot-wallet-f14bc51 | ============================================================
+2025-09-01 04:12:39,307 | INFO | repair.aslStudio-hot-wallet-f14bc51 | BEGIN pattern 5 (pattern_5)
+2025-09-01 04:12:39,307 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Pattern payload: {"type": "import", "pattern": "import svgo", "changelogId": 5}
+2025-09-01 04:12:39,490 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Tapir run successful for -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51
+2025-09-01 04:12:39,490 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Parsed detection output: [{'pattern_id': 5, 'file': 'scripts/optimizeSVG.js', 'line': 2, 'column': 0, 'confidence': 'high'}]
+2025-09-01 04:12:39,490 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1079d51c0>, {'scripts/optimizeSVG.js': defaultdict(<class 'list'>, {5: [{'line': 2, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 04:12:39,490 | INFO | repair.aslStudio-hot-wallet-f14bc51 | New context extracted from -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51/scripts/optimizeSVG.js
+2025-09-01 04:12:50,093 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import * as SVGO from \"svgo\";",
+  "additional_req": "Update any usage of the default-exported SVGO class (e.g. `new SVGO(...)` or `SVGO.optimize(...)`) to use the named exports provided by v4 (for example, `import { optimize } from 'svgo'` and call `optimize(...)`).",
+  "dependencies": []
+}
+2025-09-01 04:12:50,095 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Added to whole mode list: file=-2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51/scripts/optimizeSVG.js, context=dict, bc_desc={'Id': 5, 'BC_description': 'The SVGO library no longer provides a default export. All public APIs from \'svgo\' must no...
+2025-09-01 04:12:50,096 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Whole mode item: -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51/scripts/optimizeSVG.js
+2025-09-01 04:13:01,353 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': 'import fs from "fs"\nimport { optimize } from "svgo"\n\n/**\n * @description Функция для оптимизации svg изображения\n * @param {string} filePath - путь до svg-изображения\n * */\nexport async function optimizeSVG(filePath) {\n    const svgContent = fs.readFileSync(filePath)\n\n    const result = await optimize(svgContent.toString(), {\n        multipass: true,\n        js2svg: {\n            indent: 0,\n            pretty: true,\n            finalNewline: false,\n        },\n        plugins: [\n            \'preset-default\',\n            \'prefixIds\',\n            {\n                name: \'sortAttrs\',\n                params: {\n                    xmlnsOrder: \'alphabetical\',\n                },\n            },\n        ]\n    })\n    const optimizedSvg = result.data.replace(/\\n/g, \'\')\n    fs.writeFileSync(filePath, optimizedSvg, { flag: \'w\' })\n}', 'additional_req': '', 'dependencies': []}
+2025-09-01 04:13:01,354 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Replace whole file: -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51/scripts/optimizeSVG.js
+2025-09-01 04:13:01,355 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Updated package.json saved at -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51/package.json
+2025-09-01 04:13:01,355 | INFO | repair.aslStudio-hot-wallet-f14bc51 | END pattern 5 (pattern_5)
+2025-09-01 04:13:01,360 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Config BC: scanning 0 files
+2025-09-01 04:13:01,362 | INFO | repair.aslStudio-hot-wallet-f14bc51 | Config BC: scanning 0 files
+2025-09-01 04:13:01,363 | DEBUG | repair.aslStudio-hot-wallet-f14bc51 | Updated package.json saved at -2024/svgo/results/gpt-4.1/aslStudio-hot-wallet-f14bc51/package.json
+2025-09-01 04:13:01,363 | INFO | repair.aslStudio-hot-wallet-f14bc51 | token consumed 10702
+2025-09-01 04:13:01,363 | INFO | repair.aslStudio-hot-wallet-f14bc51 | parse consumption time: 21.857709334231913

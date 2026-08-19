@@ -1,0 +1,22 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<web-vitals>,<web-vitals/**/*>}?**.{onFID}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "write {<web-vitals>,<web-vitals/**/*>}?**.{onFID}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "read {<web-vitals>,<web-vitals/**/*>}?**.{onINP,onLCP,onCLS}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "write {<web-vitals>,<web-vitals/**/*>}?**.{onINP,onLCP,onCLS}",
+    "changelogId": 2
+  }
+]

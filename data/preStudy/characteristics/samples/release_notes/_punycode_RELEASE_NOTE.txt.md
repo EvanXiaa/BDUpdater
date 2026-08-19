@@ -1,0 +1,2 @@
+v2.0.0
+This release drops support for old environments. Punycode.js v2.0.0 targets Node.js v6+ and nothing else. For the old version that offers the same functionality with broader support, including Rhino, Ringo, Narwhal, and web browsers, see v1.4.1.

@@ -1,0 +1,7 @@
+{
+  "owner": "unifiedjs",
+  "repo": "unified",
+  "number": 52,
+  "pr_url": "https://github.com/unifiedjs/unified/pull/52",
+  "content": "# PR 52: Move types from dependencies to dev-dependencies\nBranches: types-as-dev-deps -> master\n\nCloses GH-45.\r\n\r\n/cc @Rokt33r\n\n## Commit titles\n- Move types from dependencies to dev-dependencies\n\n## Changed files\n- package.json\n- readme.md\n## Markdown changes\n### readme.md\n```diff\n@@ -71,6 +71,10 @@ and [opensource.guide][] ([GitHub][]).\n npm install unified\n ```\n \n+This package comes with types.\n+If you’re using TypeScript, make sure to also install [`@types/unist`][ts-unist]\n+and [`@types/vfile`][ts-vfile].\n+\n ## Use\n \n ```js\n@@ -1107,6 +1111,10 @@ work on [`ware`][ware], as it was a huge initial inspiration.\n \n [npm]: https://docs.npmjs.com/cli/install\n \n+[ts-unist]: https://www.npmjs.com/package/@types/unist\n+\n+[ts-vfile]: https://www.npmjs.com/package/@types/vfile\n+\n [site]: https://unified.js.org\n \n [medium]: https://medium.com/unifiedjs\n```\n## Reviews\n- @ChristianMurphy [APPROVED]"
+}

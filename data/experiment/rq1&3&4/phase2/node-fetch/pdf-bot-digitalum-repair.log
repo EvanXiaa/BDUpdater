@@ -1,0 +1,339 @@
+2025-08-31 00:14:25,874 | INFO | repair.pdf-bot-digitalum | Starting analysis for pdf-bot-digitalum
+2025-08-31 00:14:25,874 | INFO | repair.pdf-bot-digitalum | Starting breaking change analysis for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:25,874 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:25,874 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 2 (pattern_2)
+2025-08-31 00:14:25,874 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 00:14:26,385 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:26,386 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: [{'pattern_id': 2, 'file': 'src/webhook.js', 'line': 105, 'column': 13}, {'pattern_id': 2, 'file': 'src/webhook.js', 'line': 108, 'column': 11}]
+2025-08-31 00:14:26,386 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6d40>, {'src/webhook.js': defaultdict(<class 'list'>, {2: [{'line': 105, 'column': 13}, {'line': 108, 'column': 11}]})})
+2025-08-31 00:14:26,387 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:14:26,387 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:14:33,366 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please confirm whether your application ever needs to consume non-UTF8 response bodies (any encoding besides UTF-8). If you do, you should replace response.text() with response.textConverted().",
+  "dependencies": []
+}
+2025-08-31 00:14:33,367 | DEBUG | repair.pdf-bot-digitalum | Added to whole mode list: file=/node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js, context=Node, bc_desc={'Id': 2, 'BC_description': "The 'response.text()' method now always returns text as UTF-8 without attempting to detect ...
+2025-08-31 00:14:33,367 | INFO | repair.pdf-bot-digitalum | Whole mode item: /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:14:48,408 | DEBUG | repair.pdf-bot-digitalum | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "var crypto = require('crypto')\nvar debug = require('debug')('pdf:webhook')\nvar fetch = require('node-fetch')\nvar uuid = require('uuid')\nvar error = require('./error')\nvar utils = require('./utils')\n\nfunction ping (job, options) {\n  if (!options.url || !utils.isValidUrl(options.url)) {\n    throw new Error('Webhook is not valid url.')\n  }\n\n  if (!options.secret) {\n    throw new Error('You need to supply a secret for your webhooks')\n  }\n\n  var requestOptions = options.requestOptions || {}\n\n  var headerOptions = requestOptions.headers || {}\n\n  requestOptions.method = 'POST'\n  headerOptions['Content-Type'] = 'application/json'\n\n  var bodyRaw = {\n    id: job.id,\n    url: job.url,\n    meta: job.meta,\n    storage: job.storage\n  }\n  var body = JSON.stringify(bodyRaw)\n\n  var signature = generateSignature(body, options.secret)\n\n  var requestId = uuid()\n  var namespace = options.headerNamespace || 'X-PDF-'\n  headerOptions[namespace + 'Transaction'] = requestId\n  headerOptions[namespace + 'Signature'] = signature\n\n  var headers = new fetch.Headers()\n  for(var i in headerOptions) {\n    headers.set(i, headerOptions[i])\n  }\n\n  requestOptions.headers = headers\n  requestOptions.body = body\n\n  debug(\n    'Pinging job ID %s at URL %s with request options %s',\n    job.id,\n    options.url,\n    JSON.stringify(requestOptions)\n  )\n\n  var sent_at = utils.getCurrentDateTimeAsString()\n\n  function createResponse (response, error) {\n    var status = response.status\n\n    return getContentBody(response).then(body => {\n      return {\n        id: requestId,\n        status: response.status,\n        method: requestOptions.method,\n        payload: bodyRaw,\n        response: body,\n        url: options.url,\n        sent_at: sent_at,\n        error: !response.ok\n      }\n    })\n  }\n\n  return fetch(options.url, requestOptions)\n    .then(function (response) {\n      return createResponse(response, !response.ok)\n    })\n    .catch(function (response) {\n      return createResponse(response, true)\n    })\n}\n\nmodule.exports = {\n  generateSignature: generateSignature,\n  ping: ping\n}\n\nfunction generateSignature (payload, key) {\n  return crypto.createHmac('sha1', key).update(payload).digest('hex')\n}\n\nfunction getContentBody (response) {\n  return new Promise(function(resolve){\n    var emptyCodes = [204, 205]\n    if (emptyCodes.indexOf(response.status) !== -1) {\n      resolve({})\n    }\n\n    // Happens for instance on ECONNREFUSED\n    if (!(response instanceof fetch.Response)) {\n      resolve(response)\n    }\n\n    var contentType = response.headers.get('content-type');\n    if (contentType.indexOf('json') === -1) {\n      // Use textConverted() to preserve automatic encoding detection as in v1\n      return response.textConverted().then(resolve)\n    }\n\n    // Use textConverted() for JSON as well to detect encoding\n    return response.textConverted().then(text => {\n      if (!text) {\n        return resolve({});\n      }\n      try {\n        return resolve(JSON.parse(text))\n      } catch (e) {\n        return resolve(\n          Object.assign(\n            error.createErrorResponse(error.ERROR_INVALID_JSON_RESPONSE),\n            {\n              response: text\n            }\n          )\n        )\n      }\n    })\n  })\n}", 'additional_req': '', 'dependencies': []}
+2025-08-31 00:14:48,410 | INFO | repair.pdf-bot-digitalum | Replace whole file: /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:14:48,412 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:14:48,412 | INFO | repair.pdf-bot-digitalum | END pattern 2 (pattern_2)
+2025-08-31 00:14:48,413 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:48,413 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 2 (pattern_2)
+2025-08-31 00:14:48,414 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 00:14:48,874 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:48,874 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:14:48,874 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6e80>, {})
+2025-08-31 00:14:48,874 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:14:48,874 | INFO | repair.pdf-bot-digitalum | END pattern 2 (pattern_2)
+2025-08-31 00:14:48,875 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:48,875 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 3 (pattern_3)
+2025-08-31 00:14:48,875 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 00:14:49,118 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:49,118 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: [{'pattern_id': 3, 'file': 'src/api.js', 'line': 23, 'column': 6}, {'pattern_id': 3, 'file': 'src/api.js', 'line': 35, 'column': 10}, {'pattern_id': 3, 'file': 'src/api.js', 'line': 43, 'column': 8}]
+2025-08-31 00:14:49,118 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6e80>, {'src/api.js': defaultdict(<class 'list'>, {3: [{'line': 23, 'column': 6}, {'line': 35, 'column': 10}, {'line': 43, 'column': 8}]})})
+2025-08-31 00:14:49,119 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/api.js
+2025-08-31 00:14:49,119 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/api.js
+2025-08-31 00:14:49,119 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/api.js
+2025-08-31 00:14:54,756 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:14:54,757 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:14:54,757 | INFO | repair.pdf-bot-digitalum | END pattern 3 (pattern_3)
+2025-08-31 00:14:54,758 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:54,758 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 3 (pattern_3)
+2025-08-31 00:14:54,758 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 00:14:55,048 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:55,048 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:14:55,049 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6e80>, {})
+2025-08-31 00:14:55,049 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:14:55,049 | INFO | repair.pdf-bot-digitalum | END pattern 3 (pattern_3)
+2025-08-31 00:14:55,049 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:55,049 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 4 (pattern_4)
+2025-08-31 00:14:55,049 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "call {<node-fetch>,<node-fetch/**/*>}?**.{*}", "changelogId": 4}
+2025-08-31 00:14:55,304 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:55,304 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:14:55,304 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6e80>, {})
+2025-08-31 00:14:55,305 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:14:55,305 | INFO | repair.pdf-bot-digitalum | END pattern 4 (pattern_4)
+2025-08-31 00:14:55,305 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:55,305 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 5 (pattern_5)
+2025-08-31 00:14:55,305 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 00:14:55,560 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:55,560 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:14:55,560 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6e80>, {})
+2025-08-31 00:14:55,561 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:14:55,561 | INFO | repair.pdf-bot-digitalum | END pattern 5 (pattern_5)
+2025-08-31 00:14:55,561 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:55,561 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 5 (pattern_5)
+2025-08-31 00:14:55,561 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 00:14:55,814 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:55,815 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:14:55,815 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6e80>, {})
+2025-08-31 00:14:55,815 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:14:55,815 | INFO | repair.pdf-bot-digitalum | END pattern 5 (pattern_5)
+2025-08-31 00:14:55,815 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:55,815 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 6 (pattern_6)
+2025-08-31 00:14:55,815 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 00:14:56,074 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:56,074 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:14:56,074 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6e80>, {})
+2025-08-31 00:14:56,074 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:14:56,075 | INFO | repair.pdf-bot-digitalum | END pattern 6 (pattern_6)
+2025-08-31 00:14:56,075 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:56,075 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 6 (pattern_6)
+2025-08-31 00:14:56,075 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 00:14:56,326 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:56,327 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:14:56,327 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6e80>, {})
+2025-08-31 00:14:56,327 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:14:56,327 | INFO | repair.pdf-bot-digitalum | END pattern 6 (pattern_6)
+2025-08-31 00:14:56,327 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:14:56,328 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 7 (pattern_7)
+2025-08-31 00:14:56,328 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 00:14:56,587 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:14:56,587 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: [{'pattern_id': 7, 'file': 'examples/receiving-api.js', 'line': 8, 'column': 18}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 47, 'column': 2}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 60, 'column': 9}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 87, 'column': 9}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 94, 'column': 14}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 118, 'column': 9}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 154, 'column': 9}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 158, 'column': 14}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 182, 'column': 4}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 196, 'column': 9}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 209, 'column': 9}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 219, 'column': 9}, {'pattern_id': 7, 'file': 'src/db/lowdb.js', 'line': 227, 'column': 9}, {'pattern_id': 7, 'file': 'src/api.js', 'line': 20, 'column': 21}, {'pattern_id': 7, 'file': 'src/webhook.js', 'line': 103, 'column': 22}]
+2025-08-31 00:14:56,587 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1235b6e80>, {'examples/receiving-api.js': defaultdict(<class 'list'>, {7: [{'line': 8, 'column': 18}]}), 'src/db/lowdb.js': defaultdict(<class 'list'>, {7: [{'line': 47, 'column': 2}, {'line': 60, 'column': 9}, {'line': 87, 'column': 9}, {'line': 94, 'column': 14}, {'line': 118, 'column': 9}, {'line': 154, 'column': 9}, {'line': 158, 'column': 14}, {'line': 182, 'column': 4}, {'line': 196, 'column': 9}, {'line': 209, 'column': 9}, {'line': 219, 'column': 9}, {'line': 227, 'column': 9}]}), 'src/api.js': defaultdict(<class 'list'>, {7: [{'line': 20, 'column': 21}]}), 'src/webhook.js': defaultdict(<class 'list'>, {7: [{'line': 103, 'column': 22}]})})
+2025-08-31 00:14:56,587 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/examples/receiving-api.js
+2025-08-31 00:15:05,916 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:15:05,918 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,919 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,920 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,921 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,923 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,924 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,925 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,927 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,928 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,928 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,929 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:05,929 | INFO | repair.pdf-bot-digitalum | File /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js has too many contexts extracted
+2025-08-31 00:15:05,929 | INFO | repair.pdf-bot-digitalum | File size: 5150
+2025-08-31 00:15:08,682 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:15:08,685 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/api.js
+2025-08-31 00:15:21,402 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:15:21,405 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:15:29,673 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:15:29,676 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:15:29,676 | INFO | repair.pdf-bot-digitalum | END pattern 7 (pattern_7)
+2025-08-31 00:15:29,676 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:15:29,676 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 7 (pattern_7)
+2025-08-31 00:15:29,676 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 00:15:30,158 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:15:30,158 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:15:30,158 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e52de0>, {})
+2025-08-31 00:15:30,158 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:15:30,158 | INFO | repair.pdf-bot-digitalum | END pattern 7 (pattern_7)
+2025-08-31 00:15:30,158 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:15:30,158 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 8 (pattern_8)
+2025-08-31 00:15:30,158 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 00:15:30,421 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:15:30,421 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: [{'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 47, 'column': 2}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 60, 'column': 9}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 87, 'column': 9}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 94, 'column': 14}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 118, 'column': 9}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 154, 'column': 9}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 158, 'column': 14}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 182, 'column': 4}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 187, 'column': 2}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 196, 'column': 9}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 209, 'column': 9}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 219, 'column': 9}, {'pattern_id': 8, 'file': 'src/db/lowdb.js', 'line': 227, 'column': 9}, {'pattern_id': 8, 'file': 'examples/receiving-api.js', 'line': 8, 'column': 18}, {'pattern_id': 8, 'file': 'src/api.js', 'line': 20, 'column': 21}, {'pattern_id': 8, 'file': 'src/webhook.js', 'line': 41, 'column': 4}, {'pattern_id': 8, 'file': 'src/webhook.js', 'line': 103, 'column': 22}]
+2025-08-31 00:15:30,421 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e52de0>, {'src/db/lowdb.js': defaultdict(<class 'list'>, {8: [{'line': 47, 'column': 2}, {'line': 60, 'column': 9}, {'line': 87, 'column': 9}, {'line': 94, 'column': 14}, {'line': 118, 'column': 9}, {'line': 154, 'column': 9}, {'line': 158, 'column': 14}, {'line': 182, 'column': 4}, {'line': 187, 'column': 2}, {'line': 196, 'column': 9}, {'line': 209, 'column': 9}, {'line': 219, 'column': 9}, {'line': 227, 'column': 9}]}), 'examples/receiving-api.js': defaultdict(<class 'list'>, {8: [{'line': 8, 'column': 18}]}), 'src/api.js': defaultdict(<class 'list'>, {8: [{'line': 20, 'column': 21}]}), 'src/webhook.js': defaultdict(<class 'list'>, {8: [{'line': 41, 'column': 4}, {'line': 103, 'column': 22}]})})
+2025-08-31 00:15:30,422 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,422 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,423 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,423 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,424 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,424 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,424 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,425 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,425 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,426 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,426 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,427 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:15:30,427 | INFO | repair.pdf-bot-digitalum | File /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js has too many contexts extracted
+2025-08-31 00:15:30,427 | INFO | repair.pdf-bot-digitalum | File size: 5150
+2025-08-31 00:15:33,973 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:15:33,974 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/examples/receiving-api.js
+2025-08-31 00:15:43,849 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:15:43,852 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/api.js
+2025-08-31 00:15:46,879 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:15:46,882 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:15:46,884 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:15:50,255 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:16:07,433 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:16:07,436 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:16:07,436 | INFO | repair.pdf-bot-digitalum | END pattern 8 (pattern_8)
+2025-08-31 00:16:07,437 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:16:07,437 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 8 (pattern_8)
+2025-08-31 00:16:07,437 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 00:16:07,868 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:16:07,868 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:16:07,868 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e51300>, {})
+2025-08-31 00:16:07,869 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:16:07,869 | INFO | repair.pdf-bot-digitalum | END pattern 8 (pattern_8)
+2025-08-31 00:16:07,869 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:16:07,869 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 9 (pattern_9)
+2025-08-31 00:16:07,869 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 00:16:08,131 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:16:08,131 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: [{'pattern_id': 9, 'file': 'examples/receiving-api.js', 'line': 8, 'column': 18}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 47, 'column': 2}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 60, 'column': 9}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 87, 'column': 9}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 94, 'column': 14}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 118, 'column': 9}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 154, 'column': 9}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 158, 'column': 14}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 182, 'column': 4}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 187, 'column': 2}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 196, 'column': 9}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 209, 'column': 9}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 219, 'column': 9}, {'pattern_id': 9, 'file': 'src/db/lowdb.js', 'line': 227, 'column': 9}, {'pattern_id': 9, 'file': 'src/api.js', 'line': 20, 'column': 21}, {'pattern_id': 9, 'file': 'src/webhook.js', 'line': 39, 'column': 20}, {'pattern_id': 9, 'file': 'src/webhook.js', 'line': 41, 'column': 4}, {'pattern_id': 9, 'file': 'src/webhook.js', 'line': 103, 'column': 22}]
+2025-08-31 00:16:08,131 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e51300>, {'examples/receiving-api.js': defaultdict(<class 'list'>, {9: [{'line': 8, 'column': 18}]}), 'src/db/lowdb.js': defaultdict(<class 'list'>, {9: [{'line': 47, 'column': 2}, {'line': 60, 'column': 9}, {'line': 87, 'column': 9}, {'line': 94, 'column': 14}, {'line': 118, 'column': 9}, {'line': 154, 'column': 9}, {'line': 158, 'column': 14}, {'line': 182, 'column': 4}, {'line': 187, 'column': 2}, {'line': 196, 'column': 9}, {'line': 209, 'column': 9}, {'line': 219, 'column': 9}, {'line': 227, 'column': 9}]}), 'src/api.js': defaultdict(<class 'list'>, {9: [{'line': 20, 'column': 21}]}), 'src/webhook.js': defaultdict(<class 'list'>, {9: [{'line': 39, 'column': 20}, {'line': 41, 'column': 4}, {'line': 103, 'column': 22}]})})
+2025-08-31 00:16:08,131 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/examples/receiving-api.js
+2025-08-31 00:16:11,817 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:16:11,819 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,821 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,823 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,825 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,827 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,829 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,830 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,833 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,834 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,835 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,837 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,838 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js
+2025-08-31 00:16:11,838 | INFO | repair.pdf-bot-digitalum | File /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/db/lowdb.js has too many contexts extracted
+2025-08-31 00:16:11,838 | INFO | repair.pdf-bot-digitalum | File size: 5150
+2025-08-31 00:16:14,015 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:16:14,018 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/api.js
+2025-08-31 00:16:22,056 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:16:22,059 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:16:22,061 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:16:24,971 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:16:46,838 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "function ping (job, options) {\n  if (!options.url || !utils.isValidUrl(options.url)) {\n    throw new Error('Webhook is not valid url.')\n  }\n\n  if (!options.secret) {\n    throw new Error('You need to supply a secret for your webhooks')\n  }\n\n  var requestOptions = options.requestOptions || {}\n\n  var headerOptions = requestOptions.headers || {}\n\n  requestOptions.method = 'POST'\n  headerOptions['Content-Type'] = 'application/json'\n\n  var bodyRaw = {\n    id: job.id,\n    url: job.url,\n    meta: job.meta,\n    storage: job.storage\n  }\n  var body = JSON.stringify(bodyRaw)\n\n  var signature = generateSignature(body, options.secret)\n\n  var requestId = uuid()\n  var namespace = options.headerNamespace || 'X-PDF-'\n  headerOptions[namespace + 'Transaction'] = requestId\n  headerOptions[namespace + 'Signature'] = signature\n\n  var headers = new fetch.Headers()\n  // Patch: catch invalid header names or values to prevent runtime errors in node-fetch v2\n  for (var i in headerOptions) {\n    try {\n      headers.set(i, headerOptions[i])\n    } catch (err) {\n      debug('Skipping invalid header', i, headerOptions[i], err)\n    }\n  }\n\n  requestOptions.headers = headers\n  requestOptions.body = body\n\n  debug(\n    'Pinging job ID %s at URL %s with request options %s',\n    job.id,\n    options.url,\n    JSON.stringify(requestOptions)\n  )\n\n  var sent_at = utils.getCurrentDateTimeAsString()\n\n  function createResponse (response, error) {\n    var status = response.status\n\n    return getContentBody(response).then(body => {\n      return {\n        id: requestId,\n        status: response.status,\n        method: requestOptions.method,\n        payload: bodyRaw,\n        response: body,\n        url: options.url,\n        sent_at: sent_at,\n        error: !response.ok\n      }\n    })\n  }\n\n  return fetch(options.url, requestOptions)\n    .then(function (response) {\n      return createResponse(response, !response.ok)\n    })\n    .catch(function (response) {\n      return createResponse(response, true)\n    })\n}",
+  "additional_req": "",
+  "dependencies": [
+    "node-fetch@^2.0.0"
+  ]
+}
+2025-08-31 00:16:46,839 | INFO | repair.pdf-bot-digitalum | Replaced code in /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js at [199, 1992]
+2025-08-31 00:16:46,839 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:16:46,839 | INFO | repair.pdf-bot-digitalum | END pattern 9 (pattern_9)
+2025-08-31 00:16:46,840 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:16:46,840 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 9 (pattern_9)
+2025-08-31 00:16:46,840 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 00:16:47,692 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:16:47,692 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:16:47,692 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e53d80>, {})
+2025-08-31 00:16:47,693 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:16:47,693 | INFO | repair.pdf-bot-digitalum | END pattern 9 (pattern_9)
+2025-08-31 00:16:47,693 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:16:47,693 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 10 (pattern_10)
+2025-08-31 00:16:47,693 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 00:16:48,048 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:16:48,048 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: [{'pattern_id': 10, 'file': 'src/webhook.js', 'line': 39, 'column': 20}]
+2025-08-31 00:16:48,048 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e53d80>, {'src/webhook.js': defaultdict(<class 'list'>, {10: [{'line': 39, 'column': 20}]})})
+2025-08-31 00:16:48,048 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:16:52,924 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:16:52,925 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:16:52,925 | INFO | repair.pdf-bot-digitalum | END pattern 10 (pattern_10)
+2025-08-31 00:16:52,925 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:16:52,925 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 10 (pattern_10)
+2025-08-31 00:16:52,925 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 00:16:53,189 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:16:53,189 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:16:53,189 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e51440>, {})
+2025-08-31 00:16:53,189 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:16:53,189 | INFO | repair.pdf-bot-digitalum | END pattern 10 (pattern_10)
+2025-08-31 00:16:53,189 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:16:53,189 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 11 (pattern_11)
+2025-08-31 00:16:53,189 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "write", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{body,bodyUsed,method,url,headers,redirect}", "changelogId": 11}
+2025-08-31 00:16:53,438 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:16:53,438 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: [{'pattern_id': 11, 'file': 'src/webhook.js', 'line': 21, 'column': 2}, {'pattern_id': 11, 'file': 'src/webhook.js', 'line': 49, 'column': 2}, {'pattern_id': 11, 'file': 'src/webhook.js', 'line': 50, 'column': 2}]
+2025-08-31 00:16:53,438 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e51440>, {'src/webhook.js': defaultdict(<class 'list'>, {11: [{'line': 21, 'column': 2}, {'line': 49, 'column': 2}, {'line': 50, 'column': 2}]})})
+2025-08-31 00:16:53,439 | INFO | repair.pdf-bot-digitalum | New context extracted from /node-fetch/results/gpt-4.1/pdf-bot-digitalum/src/webhook.js
+2025-08-31 00:17:02,859 | DEBUG | repair.pdf-bot-digitalum | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:17:02,862 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:17:02,862 | INFO | repair.pdf-bot-digitalum | END pattern 11 (pattern_11)
+2025-08-31 00:17:02,863 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:17:02,863 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 1 (pattern_1)
+2025-08-31 00:17:02,864 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/response,node-fetch/lib/request,node-fetch/lib/headers,node-fetch/lib/*}", "changelogId": 1}
+2025-08-31 00:17:03,170 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:17:03,170 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:17:03,170 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e51440>, {})
+2025-08-31 00:17:03,171 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:17:03,171 | INFO | repair.pdf-bot-digitalum | END pattern 1 (pattern_1)
+2025-08-31 00:17:03,171 | INFO | repair.pdf-bot-digitalum | ============================================================
+2025-08-31 00:17:03,171 | INFO | repair.pdf-bot-digitalum | BEGIN pattern 4 (pattern_4)
+2025-08-31 00:17:03,171 | DEBUG | repair.pdf-bot-digitalum | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/*}", "changelogId": 4}
+2025-08-31 00:17:03,422 | INFO | repair.pdf-bot-digitalum | Tapir run successful for /node-fetch/results/gpt-4.1/pdf-bot-digitalum
+2025-08-31 00:17:03,422 | DEBUG | repair.pdf-bot-digitalum | Parsed detection output: []
+2025-08-31 00:17:03,422 | DEBUG | repair.pdf-bot-digitalum | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x123e51440>, {})
+2025-08-31 00:17:03,423 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:17:03,423 | INFO | repair.pdf-bot-digitalum | END pattern 4 (pattern_4)
+2025-08-31 00:17:03,423 | DEBUG | repair.pdf-bot-digitalum | Updated package.json saved at /node-fetch/results/gpt-4.1/pdf-bot-digitalum/package.json
+2025-08-31 00:17:03,423 | INFO | repair.pdf-bot-digitalum | token consumed 60003
+2025-08-31 00:17:03,424 | INFO | repair.pdf-bot-digitalum | parse consumption time: 150.68467241339386

@@ -1,0 +1,46 @@
+2025-09-01 02:06:00,303 | INFO | repair.icons | Starting analysis for icons
+2025-09-01 02:06:00,303 | INFO | repair.icons | Starting breaking change analysis for -2024/svgo/results/gpt-4.1/icons
+2025-09-01 02:06:00,303 | INFO | repair.icons | ============================================================
+2025-09-01 02:06:00,303 | INFO | repair.icons | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:06:00,303 | DEBUG | repair.icons | Pattern payload: {"type": "call", "pattern": "read {<svgo>,<svgo/**/*>}?**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 02:06:01,336 | INFO | repair.icons | Tapir run successful for -2024/svgo/results/gpt-4.1/icons
+2025-09-01 02:06:01,336 | DEBUG | repair.icons | Parsed detection output: []
+2025-09-01 02:06:01,336 | DEBUG | repair.icons | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10472c9a0>, {})
+2025-09-01 02:06:01,337 | DEBUG | repair.icons | Updated package.json saved at -2024/svgo/results/gpt-4.1/icons/package.json
+2025-09-01 02:06:01,337 | INFO | repair.icons | END pattern 4 (pattern_4)
+2025-09-01 02:06:01,337 | INFO | repair.icons | ============================================================
+2025-09-01 02:06:01,337 | INFO | repair.icons | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:06:01,337 | DEBUG | repair.icons | Pattern payload: {"type": "call", "pattern": "write {<svgo>,<svgo/**/*>}?**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 02:06:04,281 | INFO | repair.icons | Tapir run successful for -2024/svgo/results/gpt-4.1/icons
+2025-09-01 02:06:04,282 | DEBUG | repair.icons | Parsed detection output: []
+2025-09-01 02:06:04,282 | DEBUG | repair.icons | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10472c9a0>, {})
+2025-09-01 02:06:04,283 | DEBUG | repair.icons | Updated package.json saved at -2024/svgo/results/gpt-4.1/icons/package.json
+2025-09-01 02:06:04,283 | INFO | repair.icons | END pattern 4 (pattern_4)
+2025-09-01 02:06:04,284 | INFO | repair.icons | ============================================================
+2025-09-01 02:06:04,284 | INFO | repair.icons | BEGIN pattern 3 (pattern_3)
+2025-09-01 02:06:04,284 | DEBUG | repair.icons | Pattern payload: {"type": "import", "pattern": "import {svgo/lib/xast,svgo/lib/builtin,svgo/plugins/*,svgo/dist/svgo.browser}", "changelogId": 3}
+2025-09-01 02:06:05,801 | INFO | repair.icons | Tapir run successful for -2024/svgo/results/gpt-4.1/icons
+2025-09-01 02:06:05,802 | DEBUG | repair.icons | Parsed detection output: []
+2025-09-01 02:06:05,802 | DEBUG | repair.icons | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10472c9a0>, {})
+2025-09-01 02:06:05,802 | DEBUG | repair.icons | Updated package.json saved at -2024/svgo/results/gpt-4.1/icons/package.json
+2025-09-01 02:06:05,803 | INFO | repair.icons | END pattern 3 (pattern_3)
+2025-09-01 02:06:05,803 | INFO | repair.icons | ============================================================
+2025-09-01 02:06:05,803 | INFO | repair.icons | BEGIN pattern 5 (pattern_5)
+2025-09-01 02:06:05,803 | DEBUG | repair.icons | Pattern payload: {"type": "import", "pattern": "import svgo", "changelogId": 5}
+2025-09-01 02:06:06,701 | INFO | repair.icons | Tapir run successful for -2024/svgo/results/gpt-4.1/icons
+2025-09-01 02:06:06,701 | DEBUG | repair.icons | Parsed detection output: [{'pattern_id': 5, 'file': 'svgo/removeAttrsIfSameFill.js', 'line': 5, 'column': 23, 'confidence': 'high'}]
+2025-09-01 02:06:06,701 | DEBUG | repair.icons | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10472c9a0>, {'svgo/removeAttrsIfSameFill.js': defaultdict(<class 'list'>, {5: [{'line': 5, 'column': 23, 'confidence': 'high'}]})})
+2025-09-01 02:06:06,701 | INFO | repair.icons | New context extracted from -2024/svgo/results/gpt-4.1/icons/svgo/removeAttrsIfSameFill.js
+2025-09-01 02:06:12,576 | DEBUG | repair.icons | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:06:12,578 | DEBUG | repair.icons | Updated package.json saved at -2024/svgo/results/gpt-4.1/icons/package.json
+2025-09-01 02:06:12,578 | INFO | repair.icons | END pattern 5 (pattern_5)
+2025-09-01 02:06:12,582 | INFO | repair.icons | Config BC: scanning 1 files
+2025-09-01 02:06:16,157 | INFO | repair.icons | Config BC: scanning 1 files
+2025-09-01 02:06:19,356 | DEBUG | repair.icons | Updated package.json saved at -2024/svgo/results/gpt-4.1/icons/package.json
+2025-09-01 02:06:19,356 | INFO | repair.icons | token consumed 6973
+2025-09-01 02:06:19,357 | INFO | repair.icons | parse consumption time: 12.645308333449066

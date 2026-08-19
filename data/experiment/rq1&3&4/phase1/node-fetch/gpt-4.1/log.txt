@@ -1,0 +1,307 @@
+Extracting breaking changes for node-fetch
+[{'role': 'system', 'content': 'You are a software engineer who recently discovered that a library used\n          in your project has released a new major version. \n          Your top priority is to identify breaking changes \n          in the new version before updating and assessing its impact on your project.\n              - you only care about the breaking changes in version v2.0.0'}, {'role': 'user', 'content': 'The first step is to identify relevant files that may reference breaking changes.\nBelow is a JSON list of file entries from the repository:\n[\n  "release_note.md",\n  "LICENSE.md",\n  "UPGRADE-GUIDE.md",\n  "CHANGELOG.md",\n  "README.md",\n  "bcCommitMessages.txt"\n]\n### Task:\nReturn a **Python list** of file paths that are likely to contain any of the following:\n1. **API Change information** (e.g., `changelog.md`, `history.md`, "deprecation.md", "readme.md`))  \n2. **Release notes** (e.g., `releasenotes.md`, `release-notes.txt`)  \n3. **Version migration or upgrade guidance** (e.g., `migration-guide.md`, `upgrading.md`, `changes-in-version-3.md`)  \n4. **External links or references** related to (1)–(3) (e.g., `migrate-to-v2.html`)\n\n### Output:\nReturn only a raw Python list of matching file paths (e.g., `["docs/changelog.md", "RELEASE_NOTES.md"]`). Rank them by relevance.\n**Do not** include any explanations, formatting, or wrapper structures.\n**Only select files related to the target version.\n'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Candidate documentation files:
+['CHANGELOG.md', 'release_note.md', 'UPGRADE-GUIDE.md']
+Tokens till now: 417
+[{'role': 'system', 'content': "You're a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v2.0.0\n"}, {'role': 'user', 'content': "\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: []\n.\nNow you are provided with the file content of:\n\nCHANGELOG.md\n# 2.x release\n## v2.0.0\nThis is a major release. Check [our upgrade guide](https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md) for an overview on some key differences between v1 and v2.\n### General changes\n- Major: Node.js 0.10.x and 0.12.x support is dropped\n- Major: `require('node-fetch/lib/response')` etc. is now unsupported; use `require('node-fetch').Response` or ES6 module imports\n- Enhance: start testing on Node.js v4.x, v6.x, v8.x LTS, as well as v9.x stable\n- Enhance: use Rollup to produce a distributed bundle (less memory overhead and faster startup)\n- Enhance: make `Object.prototype.toString()` on Headers, Requests, and Responses return correct class strings\n- Other: rewrite in ES2015 using Babel\n- Other: use Codecov for code coverage tracking\n- Other: update package.json script for npm 5\n- Other: `encoding` module is now optional (alpha.7)\n- Other: expose browser.js through package.json, avoid bundling mishaps (alpha.9)\n- Other: allow TypeScript to `import` node-fetch by exposing default (alpha.9)\n### HTTP requests\n- Major: overwrite user's `Content-Length` if we can be sure our information is correct (per spec)\n- Fix: errors in a response are caught before the body is accessed\n- Fix: support WHATWG URL objects, created by `whatwg-url` package or `require('url').URL` in Node.js 7+\n### Response and Request classes\n- Major: `response.text()` no longer attempts to detect encoding, instead always opting for UTF-8 (per spec); use `response.textConverted()` for the v1 behavior\n- Major: make `response.json()` throw error instead of returning an empty object on 204 no-content respose (per spec; reverts behavior changed in v1.6.2)\n- Major: internal methods are no longer exposed\n- Major: throw error when a `GET` or `HEAD` Request is constructed with a non-null body (per spec)\n- Enhance: add `response.arrayBuffer()` (also applies to Requests)\n- Enhance: add experimental `response.blob()` (also applies to Requests)\n- Enhance: `URLSearchParams` is now accepted as a body\n- Enhance: wrap `response.json()` json parsing error as `FetchError`\n- Fix: fix Request and Response with `null` body\n### Headers class\n- Major: remove `headers.getAll()`; make `get()` return all headers delimited by commas (per spec)\n- Enhance: make Headers iterable\n- Enhance: make Headers constructor accept an array of tuples\n- Enhance: make sure header names and values are valid in HTTP\n- Fix: coerce Headers prototype function parameters to strings, where applicable\n### Documentation\n- Enhance: more comprehensive API docs\n- Enhance: add a list of default headers in README"}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': "You're a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v2.0.0\n"}, {'role': 'user', 'content': '\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as\').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: {"breaking_changes": [{"Id": 0, "BC_description": "Node.js 0.10.x and 0.12.x are no longer supported. Projects running on these Node versions will fail to use this library.", "Reference": ["CHANGELOG.md#v2.0.0", "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"], "Changed_object": {"type": "environment", "className": [], "methodName": [], "propertyName": [], "moduleName": []}, "Adaptation_method": "Upgrade your Node.js runtime to at least v4.x or higher to use v2.0.0 of node-fetch.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 1, "BC_description": "Directly requiring internal modules like \'node-fetch/lib/response\' is now unsupported. Instead, you must use \'require(\'node-fetch\').Response\' for CommonJS, or ES6 import syntax.", "Reference": ["CHANGELOG.md#v2.0.0", "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"], "Changed_object": {"type": "import", "className": ["Response", "Request", "Headers", "*"], "methodName": [], "propertyName": [], "moduleName": ["node-fetch/lib/response", "node-fetch/lib/request", "node-fetch/lib/headers", "node-fetch/lib/*"]}, "Adaptation_method": "// Before:\\nconst Response = require(\'node-fetch/lib/response\');\\n\\n// After:\\nconst { Response } = require(\'node-fetch\');\\n// or\\nimport { Response } from \'node-fetch\';", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 2, "BC_description": "The \'response.text()\' method now always returns text as UTF-8 without attempting to detect encoding. For the previous behavior, \'response.textConverted()\' should be used.", "Reference": ["CHANGELOG.md#v2.0.0", "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"], "Changed_object": {"type": "call", "className": ["Response"], "methodName": ["text"], "propertyName": [], "moduleName": []}, "Adaptation_method": "// Before:\\nconst text = await response.text(); // automatic encoding detection\\n\\n// After (for UTF-8 only):\\nconst text = await response.text();\\n\\n// After (if auto encoding detection needed, like v1):\\nconst text = await response.textConverted();", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 3, "BC_description": "response.json() now throws an error on HTTP 204 No Content response instead of returning an empty object.", "Reference": ["CHANGELOG.md#v2.0.0", "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"], "Changed_object": {"type": "call", "className": ["Response"], "methodName": ["json"], "propertyName": [], "moduleName": []}, "Adaptation_method": "// Before (v1):\\nconst data = await response.json(); // data is {} on 204\\n\\n// After (v2):\\ntry {\\n  const data = await response.json();\\n} catch (err) {\\n  if (response.status === 204) {\\n    // Handle no-content\\n    // possibly set data = {} or handle specially\\n  } else {\\n    throw err;\\n  }\\n}", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 4, "BC_description": "Internal methods of node-fetch are no longer exposed. Any code that imported and used undocumented internal methods will break.", "Reference": ["CHANGELOG.md#v2.0.0", "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"], "Changed_object": {"type": "import", "className": ["*"], "methodName": ["*"], "propertyName": [], "moduleName": ["node-fetch/lib/*"]}, "Adaptation_method": "Remove all usages of undocumented/internal APIs from node-fetch/lib/*. Use only public, documented APIs exposed in the main \'node-fetch\' module.", "RequireInfoFlag": true, "RequireInfo": "Precise enumeration of which internal methods were previously accessible and now are not is needed to fully enumerate affected APIs for downstream clients."}, {"Id": 5, "BC_description": "An error is now thrown when constructing a Request object with a GET or HEAD method and a non-null body, following the specification.", "Reference": ["CHANGELOG.md#v2.0.0", "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"], "Changed_object": {"type": "call", "className": ["Request"], "methodName": ["constructor"], "propertyName": [], "moduleName": []}, "Adaptation_method": "// Before (v1):\\nnew fetch.Request(\'https://example.com\', { method: \'GET\', body: \'data\' }); // previously allowed\\n\\n// After (v2):\\n// Remove \'body\' when using GET or HEAD:\\nnew fetch.Request(\'https://example.com\', { method: \'GET\' });", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 6, "BC_description": "The \'headers.getAll()\' method is removed. \'headers.get()\' now returns all matching header values joined by comma, per spec.", "Reference": ["CHANGELOG.md#v2.0.0", "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"], "Changed_object": {"type": "call", "className": ["Headers"], "methodName": ["getAll"], "propertyName": [], "moduleName": []}, "Adaptation_method": "// Before:\\nconst values = headers.getAll(\'set-cookie\');\\n\\n// After:\\nconst values = headers.get(\'set-cookie\').split(\',\'); // returns all values as a comma-delimited string", "RequireInfoFlag": false, "RequireInfo": ""}]}\n.\nNow you are provided with the file content of:\n\nUPGRADE-GUIDE.md\n# Upgrade to node-fetch v2.x\n\nnode-fetch v2.x brings about many changes that increase the compliance of\nWHATWG\'s [Fetch Standard][whatwg-fetch]. However, many of these changes mean\nthat apps written for node-fetch v1.x needs to be updated to work with\nnode-fetch v2.x and be conformant with the Fetch Standard. This document helps\nyou make this transition.\n\nNote that this document is not an exhaustive list of all changes made in v2.x,\nbut rather that of the most important breaking changes. See our [changelog] for\nother comparatively minor modifications.\n\n## `.text()` no longer tries to detect encoding\n\nIn v1.x, `response.text()` attempts to guess the text encoding of the input\nmaterial and decode it for the user. However, it runs counter to the Fetch\nStandard which demands `.text()` to always use UTF-8.\n\nIn "response" to that, we have changed `.text()` to use UTF-8. A new function\n**`response.textConverted()`** is created that maintains the behavior of\n`.text()` in v1.x.\n\n## Internal methods hidden\n\nIn v1.x, the user can access internal methods such as `_clone()`, `_decode()`,\nand `_convert()` on the `response` object. While these methods should never\nhave been used, node-fetch v2.x makes these functions completely inaccessible.\nIf your app makes use of these functions, it may break when upgrading to v2.x.\n\nIf you have a use case that requires these methods to be available, feel free\nto file an issue and we will be happy to help you solve the problem.\n\n## Headers\n\nThe main goal we have for the `Headers` class in v2.x is to make it completely\nspec-compliant. These changes are done in conjunction with GitHub\'s\n[`whatwg-fetch`][gh-fetch] polyfill, [Chrome][chrome-headers], and\n[Firefox][firefox-headers].\n\n```js\n//////////////////////////////////////////////////////////////////////////////\n// `get()` now returns **all** headers, joined by a comma, instead of only the\n// first one. Its original behavior can be emulated using\n// `get().split(\',\')[0]`.\n\nconst headers = new Headers({\n  \'Abc\': \'string\',\n  \'Multi\': [ \'header1\', \'header2\' ]\n});\n\n// before                             after\nheaders.get(\'Abc\') =>                 headers.get(\'Abc\') =>\n  \'string\'                              \'string\'\nheaders.get(\'Multi\') =>               headers.get(\'Multi\') =>\n  \'header1\';                            \'header1,header2\';\n                                      headers.get(\'Multi\').split(\',\')[0] =>\n                                        \'header1\';\n\n\n//////////////////////////////////////////////////////////////////////////////\n// `getAll()` is removed. Its behavior in v1 can be emulated with\n// `get().split(\',\')`.\n\nconst headers = new Headers({\n  \'Abc\': \'string\',\n  \'Multi\': [ \'header1\', \'header2\' ]\n});\n\n// before                             after\nheaders.getAll(\'Multi\') =>            headers.getAll(\'Multi\') =>\n  [ \'header1\', \'header2\' ];             throws ReferenceError\n                                      headers.get(\'Multi\').split(\',\') =>\n                                        [ \'header1\', \'header2\' ];\n\n\n//////////////////////////////////////////////////////////////////////////////\n// All method parameters are now stringified.\nconst headers = new Headers();\nheaders.set(\'null-header\', null);\nheaders.set(\'undefined\', undefined);\n\n// before                             after\nheaders.get(\'null-header\')            headers.get(\'null-header\')\n  => null                               => \'null\'\nheaders.get(undefined)                headers.get(undefined)\n  => throws                             => \'undefined\'\n\n\n//////////////////////////////////////////////////////////////////////////////\n// Invalid HTTP header names and values are now rejected outright.\nconst headers = new Headers();\nheaders.set(\'Héy\', \'ok\');          // now throws\nheaders.get(\'Héy\');                // now throws\nnew Headers({ \'Héy\': \'ok\' });      // now throws\n```\n\n## Node.js v0.x support dropped\n\nIf you are still using Node.js v0.10 or v0.12, upgrade ASAP. Not only has it\nbecome too much work for us to maintain, Node.js has also dropped support for\nthose release branches in 2016. Check out Node.js\' official [LTS plan] for more\ninformation on Node.js\' support lifetime.\n\n[whatwg-fetch]: https://fetch.spec.whatwg.org/\n[LTS plan]: https://github.com/nodejs/LTS#lts-plan\n[gh-fetch]: https://github.com/github/fetch\n[chrome-headers]: https://crbug.com/645492\n[firefox-headers]: https://bugzilla.mozilla.org/show_bug.cgi?id=1278275\n[changelog]: CHANGELOG.md'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Extracted BC candidate list:
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "Node.js 0.10.x and 0.12.x are no longer supported. Projects running on these Node versions will fail to use this library.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Upgrade your Node.js runtime to at least v4.x or higher to use v2.0.0 of node-fetch.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Directly requiring internal modules like 'node-fetch/lib/response' is now unsupported. Instead, you must use 'require('node-fetch').Response' for CommonJS, or ES6 import syntax.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [
+          "Response",
+          "Request",
+          "Headers",
+          "*"
+        ],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch/lib/response",
+          "node-fetch/lib/request",
+          "node-fetch/lib/headers",
+          "node-fetch/lib/*"
+        ]
+      },
+      "Adaptation_method": "// Before:\nconst Response = require('node-fetch/lib/response');\n\n// After:\nconst { Response } = require('node-fetch');\n// or\nimport { Response } from 'node-fetch';",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "The 'response.text()' method now always returns text as UTF-8 without attempting to detect encoding. For the previous behavior, 'response.textConverted()' should be used.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#text-no-longer-tries-to-detect-encoding"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "text"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nconst text = await response.text(); // automatic encoding detection\n\n// After (for UTF-8 only):\nconst text = await response.text();\n\n// After (if auto encoding detection needed, like v1):\nconst text = await response.textConverted();",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "response.json() now throws an error on HTTP 204 No Content response instead of returning an empty object.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "json"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before (v1):\nconst data = await response.json(); // data is {} on 204\n\n// After (v2):\ntry {\n  const data = await response.json();\n} catch (err) {\n  if (response.status === 204) {\n    // Handle no-content\n    // possibly set data = {} or handle specially\n  } else {\n    throw err;\n  }\n}",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "Internal methods of node-fetch are no longer exposed. Any code that imported and used undocumented internal methods will break. In v1.x, the user can access internal methods such as '_clone()', '_decode()', and '_convert()' on the 'response' object. In v2.x, these methods are completely inaccessible.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#internal-methods-hidden"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [
+          "*"
+        ],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch/lib/*"
+        ]
+      },
+      "Adaptation_method": "Remove all usages of undocumented/internal APIs from node-fetch/lib/*. Use only public, documented APIs exposed in the main 'node-fetch' module.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "Precise enumeration of which internal methods were previously accessible and now are not is needed to fully enumerate affected APIs for downstream clients."
+    },
+    {
+      "Id": 5,
+      "BC_description": "An error is now thrown when constructing a Request object with a GET or HEAD method and a non-null body, following the specification.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Request"
+        ],
+        "methodName": [
+          "constructor"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before (v1):\nnew fetch.Request('https://example.com', { method: 'GET', body: 'data' }); // previously allowed\n\n// After (v2):\n// Remove 'body' when using GET or HEAD:\nnew fetch.Request('https://example.com', { method: 'GET' });",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 6,
+      "BC_description": "The 'headers.getAll()' method is removed. 'headers.get()' now returns all matching header values joined by comma, per spec.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "getAll"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nconst values = headers.getAll('set-cookie');\n\n// After:\nconst values = headers.get('set-cookie').split(','); // returns all values as a comma-delimited string",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 7,
+      "BC_description": "The Headers 'get()' method now returns all matching header values joined by a comma string (not just the first match). Previous behavior can be emulated with 'get().split(',')[0]'.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "get"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nconst value = headers.get('Multi'); // 'header1'\n\n// After:\nconst value = headers.get('Multi'); // 'header1,header2'\nconst firstValue = headers.get('Multi').split(',')[0]; // 'header1'\n",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 8,
+      "BC_description": "All method parameters for Headers methods are now stringified. This means set/get/delete methods (and others) automatically convert non-string arguments to strings.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "set",
+          "get",
+          "delete"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nheaders.set('null-header', null); // get('null-header') returns null\nheaders.set('undefined', undefined); // get(undefined) throws\n\n// After:\nheaders.set('null-header', null); // get('null-header') returns 'null'\nheaders.set('undefined', undefined); // get(undefined) returns 'undefined'\n",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 9,
+      "BC_description": "Invalid HTTP header names and values are now rejected outright by Headers methods. Attempting to set/get headers with invalid (non-ASCII) characters like 'H\u00e9y' now throws an error.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "set",
+          "get"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before (v1.x):\nheaders.set('H\u00e9y', 'ok'); // accepted\nheaders.get('H\u00e9y'); // accepted\nnew Headers({ 'H\u00e9y': 'ok' }); // accepted\n\n// After (v2.x):\nheaders.set('H\u00e9y', 'ok'); // throws\nheaders.get('H\u00e9y'); // throws\nnew Headers({ 'H\u00e9y': 'ok' }); // throws",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}
+parse consumption token: 19082
+parse consumption time: 68.64199050050229
+Running UDBC exploration for node-fetch
+
+Merging UDBC with BC list and writing  /exp/jsfix/node-fetch/gpt-4.1/merge_result.json
+[{'role': 'system', 'content': 'You are a software engineering expert focused on API evolution and breaking change tracking.\n**This library is fully customized and non-public, do not use your knowledge of other public packages.**\nYou will be provided with two JSONs of breaking changes:\n- The **base list**: contains previously detected breaking changes.\n- The **extra list**: contains additional or refined breaking changes discovered later.\n\nYour task is to merge the extra list into the base list while avoiding redundancy. \nBreaking changes that describe the **same underlying change** or share a **substantially similar description or cause** should be consolidated.\nReply a new JSON.\n---\n\n## Instructions:\n\n- Consolidate two breaking change lists into one, removing duplicates or near-duplicates.\n- Two breaking changes are considered the same if they describe:\n  - The same entity or closely related ones (e.g., `Headers.constructor` and `Headers.append`)\n  - The same breaking behavior (e.g., throwing `TypeError` on invalid headers)\n  - The same reason or cause described in `description`\n- When merging:\n  - Keep the most complete version of the entry (e.g., the one with better explanation or more `evidence`)\n  - If necessary, merge evidence from both entries\n- If two changes are similar but describe **different scopes**, merge them under a broader `entity` or mark both with adjusted descriptions.\n'}, {'role': 'user', 'content': 'base: {\'breaking_changes\': [{\'Id\': 0, \'BC_description\': \'Node.js 0.10.x and 0.12.x are no longer supported. Projects running on these Node versions will fail to use this library.\', \'Reference\': [\'CHANGELOG.md#v2.0.0\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'environment\', \'className\': [], \'methodName\': [], \'propertyName\': [], \'moduleName\': []}, \'Adaptation_method\': \'Upgrade your Node.js runtime to at least v4.x or higher to use v2.0.0 of node-fetch.\', \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 1, \'BC_description\': "Directly requiring internal modules like \'node-fetch/lib/response\' is now unsupported. Instead, you must use \'require(\'node-fetch\').Response\' for CommonJS, or ES6 import syntax.", \'Reference\': [\'CHANGELOG.md#v2.0.0\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'import\', \'className\': [\'Response\', \'Request\', \'Headers\', \'*\'], \'methodName\': [], \'propertyName\': [], \'moduleName\': [\'node-fetch/lib/response\', \'node-fetch/lib/request\', \'node-fetch/lib/headers\', \'node-fetch/lib/*\']}, \'Adaptation_method\': "// Before:\\nconst Response = require(\'node-fetch/lib/response\');\\n\\n// After:\\nconst { Response } = require(\'node-fetch\');\\n// or\\nimport { Response } from \'node-fetch\';", \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 2, \'BC_description\': "The \'response.text()\' method now always returns text as UTF-8 without attempting to detect encoding. For the previous behavior, \'response.textConverted()\' should be used.", \'Reference\': [\'CHANGELOG.md#v2.0.0\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#text-no-longer-tries-to-detect-encoding\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Response\'], \'methodName\': [\'text\'], \'propertyName\': [], \'moduleName\': []}, \'Adaptation_method\': \'// Before:\\nconst text = await response.text(); // automatic encoding detection\\n\\n// After (for UTF-8 only):\\nconst text = await response.text();\\n\\n// After (if auto encoding detection needed, like v1):\\nconst text = await response.textConverted();\', \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 3, \'BC_description\': \'response.json() now throws an error on HTTP 204 No Content response instead of returning an empty object.\', \'Reference\': [\'CHANGELOG.md#v2.0.0\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Response\'], \'methodName\': [\'json\'], \'propertyName\': [], \'moduleName\': []}, \'Adaptation_method\': \'// Before (v1):\\nconst data = await response.json(); // data is {} on 204\\n\\n// After (v2):\\ntry {\\n  const data = await response.json();\\n} catch (err) {\\n  if (response.status === 204) {\\n    // Handle no-content\\n    // possibly set data = {} or handle specially\\n  } else {\\n    throw err;\\n  }\\n}\', \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 4, \'BC_description\': "Internal methods of node-fetch are no longer exposed. Any code that imported and used undocumented internal methods will break. In v1.x, the user can access internal methods such as \'_clone()\', \'_decode()\', and \'_convert()\' on the \'response\' object. In v2.x, these methods are completely inaccessible.", \'Reference\': [\'CHANGELOG.md#v2.0.0\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#internal-methods-hidden\'], \'Changed_object\': {\'type\': \'import\', \'className\': [\'*\'], \'methodName\': [\'*\'], \'propertyName\': [], \'moduleName\': [\'node-fetch/lib/*\']}, \'Adaptation_method\': "Remove all usages of undocumented/internal APIs from node-fetch/lib/*. Use only public, documented APIs exposed in the main \'node-fetch\' module.", \'RequireInfoFlag\': True, \'RequireInfo\': \'Precise enumeration of which internal methods were previously accessible and now are not is needed to fully enumerate affected APIs for downstream clients.\'}, {\'Id\': 5, \'BC_description\': \'An error is now thrown when constructing a Request object with a GET or HEAD method and a non-null body, following the specification.\', \'Reference\': [\'CHANGELOG.md#v2.0.0\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Request\'], \'methodName\': [\'constructor\'], \'propertyName\': [], \'moduleName\': []}, \'Adaptation_method\': "// Before (v1):\\nnew fetch.Request(\'https://example.com\', { method: \'GET\', body: \'data\' }); // previously allowed\\n\\n// After (v2):\\n// Remove \'body\' when using GET or HEAD:\\nnew fetch.Request(\'https://example.com\', { method: \'GET\' });", \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 6, \'BC_description\': "The \'headers.getAll()\' method is removed. \'headers.get()\' now returns all matching header values joined by comma, per spec.", \'Reference\': [\'CHANGELOG.md#v2.0.0\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': []}, \'Adaptation_method\': "// Before:\\nconst values = headers.getAll(\'set-cookie\');\\n\\n// After:\\nconst values = headers.get(\'set-cookie\').split(\',\'); // returns all values as a comma-delimited string", \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 7, \'BC_description\': "The Headers \'get()\' method now returns all matching header values joined by a comma string (not just the first match). Previous behavior can be emulated with \'get().split(\',\')[0]\'.", \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'get\'], \'propertyName\': [], \'moduleName\': []}, \'Adaptation_method\': "// Before:\\nconst value = headers.get(\'Multi\'); // \'header1\'\\n\\n// After:\\nconst value = headers.get(\'Multi\'); // \'header1,header2\'\\nconst firstValue = headers.get(\'Multi\').split(\',\')[0]; // \'header1\'\\n", \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 8, \'BC_description\': \'All method parameters for Headers methods are now stringified. This means set/get/delete methods (and others) automatically convert non-string arguments to strings.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'set\', \'get\', \'delete\'], \'propertyName\': [], \'moduleName\': []}, \'Adaptation_method\': "// Before:\\nheaders.set(\'null-header\', null); // get(\'null-header\') returns null\\nheaders.set(\'undefined\', undefined); // get(undefined) throws\\n\\n// After:\\nheaders.set(\'null-header\', null); // get(\'null-header\') returns \'null\'\\nheaders.set(\'undefined\', undefined); // get(undefined) returns \'undefined\'\\n", \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 9, \'BC_description\': "Invalid HTTP header names and values are now rejected outright by Headers methods. Attempting to set/get headers with invalid (non-ASCII) characters like \'Héy\' now throws an error.", \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'set\', \'get\'], \'propertyName\': [], \'moduleName\': []}, \'Adaptation_method\': "// Before (v1.x):\\nheaders.set(\'Héy\', \'ok\'); // accepted\\nheaders.get(\'Héy\'); // accepted\\nnew Headers({ \'Héy\': \'ok\' }); // accepted\\n\\n// After (v2.x):\\nheaders.set(\'Héy\', \'ok\'); // throws\\nheaders.get(\'Héy\'); // throws\\nnew Headers({ \'Héy\': \'ok\' }); // throws", \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}]}, new: [{\'Id\': 0, \'BC_description\': "Selected attributes (\'body\', \'bodyUsed\', \'method\', \'url\', \'headers\', \'redirect\') of the Request class are now enforced as read-only. Attempts to assign a value to these properties will throw an exception, reflecting a behavioral breaking change if they were previously writable.", \'Reference\': [], \'Changed_object\': {\'type\': \'write\', \'className\': [\'Request\'], \'methodName\': [], \'propertyName\': [\'body\', \'bodyUsed\', \'method\', \'url\', \'headers\', \'redirect\']}, \'Adaptation_method\': \'Refactor code to avoid direct assignment to these properties. If property values must be modified, create a new Request instance with the desired attributes, or use provided methods for safe data access and mutation.\', \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 0, \'BC_description\': \'The Request constructor now throws a TypeError if a body is provided for GET or HEAD requests. Previously, it may have accepted a body for these method types (possibly ignoring the body or sending it anyway). This enforces stricter input validation and introduces new error-throwing behavior for previously allowed (albeit unconventional) usage.\', \'Reference\': [], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Request\'], \'methodName\': [\'constructor\'], \'propertyName\': []}, \'Adaptation_method\': "Ensure that when constructing a Request object with method \'GET\' or \'HEAD\' (case-insensitive), the \'body\' option is not supplied. Refactor any code that creates such requests to omit the \'body\' parameter.", \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 0, \'BC_description\': \'The Headers API now throws a TypeError when attempting to use illegal header names (e.g., with spaces or non-ASCII code points) in both the constructor and instance methods (append, delete, get, has, set). Previously, such headers may have been silently accepted or handled differently. This is a breaking change as previously valid code may now throw.\', \'Reference\': [], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'constructor\', \'append\', \'delete\', \'get\', \'has\', \'set\'], \'propertyName\': []}, \'Adaptation_method\': \'Audit all locations in the codebase where headers are constructed or manipulated. Ensure that header names use only valid characters as now strictly enforced. Avoid spaces or non-ASCII in header names. Catch or prevent potential TypeErrors when manipulating headers and validate input before use.\', \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}, {\'Id\': 0, \'BC_description\': \'The Headers constructor now throws a TypeError when initialized with any value that is not a tuple, or with non-iterable or incorrectly shaped iterable values. This introduces stricter validation of headers input, making formerly accepted values (like solitary strings, objects with non-iterable iterators, or arrays with extra elements) invalid.\', \'Reference\': [], \'Affected_location\': {\'type\': \'call\', \'classPath\': \'\', \'className\': [\'Headers\'], \'methodName\': [\'constructor\'], \'propertyName\': []}, \'Adaptation_method\': \'Ensure that all usages of the Headers constructor provide an iterable of 2-element arrays (tuples) or a valid plain object. Review all code where Headers is instantiated, and update parameters that may now cause a TypeError (such as single strings, objects with invalid iterator symbols, or arrays with more than two elements per entry) to adhere to this stricter expectation.\', \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}]'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Validating BC list for node-fetch
+This BC lacks clarity {
+  "Id": 4,
+  "BC_description": "Internal methods of node-fetch are no longer exposed. Any code that imported and used undocumented internal methods will break. In v1.x, the user can access internal methods such as '_clone()', '_decode()', and '_convert()' on the 'response' object. In v2.x, these methods are completely inaccessible.",
+  "Reference": [
+    "CHANGELOG.md#v2.0.0",
+    "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md",
+    "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#internal-methods-hidden"
+  ],
+  "Changed_object": {
+    "type": "import",
+    "className": [
+      "*"
+    ],
+    "methodName": [
+      "*"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "node-fetch/lib/*"
+    ]
+  },
+  "Adaptation_method": "Remove all usages of undocumented/internal APIs from node-fetch/lib/*. Use only public, documented APIs exposed in the main 'node-fetch' module.",
+  "RequireInfoFlag": true,
+  "RequireInfo": "Precise enumeration of which internal methods were previously accessible and now are not is needed to fully enumerate affected APIs for downstream clients."
+}.
+[{'role': 'system', 'content': "\nTask:\nYou're a software engineer working with a JavaScript library node-fetch. \nYou need to strictly adhere to the information provided and not use any outside knowledge of public packages.\nThe BC_description describes a breaking change in the new major version of the library.\nEvaluate whether the provided JSON fully aligns with the BC_description field. \nEvaluation Criteria:\n    • Clarity – ensure every entity mentioned is explicit.  \n    • Scopes: \n        – Focus on existing BC_description field, only analyze API you think is related to it, do not introduce irrelevant new API in the given text since the context may include noise. \n        - Changed_object should lists **all** affected APIs according to the BC_description.\n    • Migration – Provide explicit adaptation instructions. Prioritize direct code examples and avoid instructions like `use customized alternatives` unless there is no available alternatives.\n    • Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the new context. \n    \nOnce a discrepancy occurs, you may invoke one or more of the available tools shown below. Determine the tool according to the breaking change types. \nPrioritize using detailed reference from repo issues/pull_request if current information is insufficient.\n    -Hard rule: If the description or references mention an issue/PR (e.g., #2251, /pull/2299) of current library, you must invoke searchForIssue with all referenced IDs. While if the issue/PR is from other library, invoke searchForWebsite.\n    -If the description or references mention a commit, you must invoke searchForCommit.\n    -if the description provides no migration step nor reference, try use `issueByKeywords`,\n    -if the API entry points is implicit, use `fetchDirectoryStruc`.\nResponse Format  \n- If no pitfall is found, return an empty JSON object.  \n"}, {'role': 'user', 'content': '{\'Id\': 4, \'BC_description\': "Internal methods of node-fetch are no longer exposed. Any code that imported and used undocumented internal methods will break. In v1.x, the user can access internal methods such as \'_clone()\', \'_decode()\', and \'_convert()\' on the \'response\' object. In v2.x, these methods are completely inaccessible.", \'Reference\': [\'CHANGELOG.md#v2.0.0\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md\', \'https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#internal-methods-hidden\'], \'Changed_object\': {\'type\': \'import\', \'className\': [\'*\'], \'methodName\': [\'*\'], \'propertyName\': [], \'moduleName\': [\'node-fetch/lib/*\']}, \'Adaptation_method\': "Remove all usages of undocumented/internal APIs from node-fetch/lib/*. Use only public, documented APIs exposed in the main \'node-fetch\' module.", \'RequireInfoFlag\': True, \'RequireInfo\': \'Precise enumeration of which internal methods were previously accessible and now are not is needed to fully enumerate affected APIs for downstream clients.\'}'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 4,
+  "BC_description": "Internal methods of node-fetch are no longer exposed. Any code that imported and used undocumented internal methods will break. In v1.x, the user can access internal methods such as '_clone()', '_decode()', and '_convert()' on the 'response' object. In v2.x, these methods are completely inaccessible.",
+  "Reference": [
+    "CHANGELOG.md#v2.0.0",
+    "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md",
+    "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#internal-methods-hidden"
+  ],
+  "Changed_object": {
+    "type": "import",
+    "className": [
+      "*"
+    ],
+    "methodName": [
+      "*"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "node-fetch/lib/*"
+    ]
+  },
+  "Adaptation_method": "Remove all usages of undocumented/internal APIs from node-fetch/lib/*. Use only public, documented APIs exposed in the main 'node-fetch' module.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+validation consumption token: 2035
+validation consumption time: 7.57253862451762
+Done: node-fetch
+Skipping unsupported type 'environment' (Id=0)
+Wrote 28 patterns to  /exp/jsfix/node-fetch/gpt-4.1/tapir.json

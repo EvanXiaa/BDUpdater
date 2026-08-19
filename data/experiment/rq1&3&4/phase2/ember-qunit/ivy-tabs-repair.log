@@ -1,0 +1,41 @@
+2025-09-01 17:13:35,293 | INFO | repair.ivy-tabs | Starting analysis for ivy-tabs
+2025-09-01 17:13:35,293 | INFO | repair.ivy-tabs | Starting breaking change analysis for -2024/ember-qunit/results/gpt-4.1/ivy-tabs
+2025-09-01 17:13:35,295 | INFO | repair.ivy-tabs | ============================================================
+2025-09-01 17:13:35,295 | INFO | repair.ivy-tabs | BEGIN pattern 0 (pattern_0)
+2025-09-01 17:13:35,295 | DEBUG | repair.ivy-tabs | Pattern payload: {"type": "call", "pattern": "read {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 17:13:35,602 | INFO | repair.ivy-tabs | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ivy-tabs
+2025-09-01 17:13:35,602 | DEBUG | repair.ivy-tabs | Parsed detection output: [{'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 6, 'column': 0, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 13, 'column': 0, 'confidence': 'high'}]
+2025-09-01 17:13:35,602 | DEBUG | repair.ivy-tabs | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107dbb060>, {'tests/test-helper.js': defaultdict(<class 'list'>, {0: [{'line': 6, 'column': 0, 'confidence': 'high'}, {'line': 13, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 17:13:35,604 | INFO | repair.ivy-tabs | New context extracted from -2024/ember-qunit/results/gpt-4.1/ivy-tabs/tests/test-helper.js
+2025-09-01 17:13:35,604 | INFO | repair.ivy-tabs | New context extracted from -2024/ember-qunit/results/gpt-4.1/ivy-tabs/tests/test-helper.js
+2025-09-01 17:13:46,808 | DEBUG | repair.ivy-tabs | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import { start, setupEmberOnerrorValidation } from 'ember-qunit';\nimport { loadTests } from 'ember-qunit/test-loader';\n\n// v9+ requires explicit error validation setup\nsetupEmberOnerrorValidation();\n// v9+ requires explicit test-module loading\nloadTests();\n// start the test run\nstart();",
+  "additional_req": "",
+  "dependencies": [
+    "ember-qunit@^9.0.0"
+  ]
+}
+2025-09-01 17:13:46,809 | INFO | repair.ivy-tabs | Replaced code in -2024/ember-qunit/results/gpt-4.1/ivy-tabs/tests/test-helper.js at [334, 342]
+2025-09-01 17:13:56,537 | DEBUG | repair.ivy-tabs | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the full test entry file (e.g., tests/test-helper.js), including where 'start()' is called, so that the required imports and explicit calls to 'setupEmberOnerrorValidation()' and 'loadTests()' can be correctly inserted.",
+  "dependencies": []
+}
+2025-09-01 17:13:56,538 | DEBUG | repair.ivy-tabs | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/ivy-tabs/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 17:13:56,538 | INFO | repair.ivy-tabs | Whole mode item: -2024/ember-qunit/results/gpt-4.1/ivy-tabs/tests/test-helper.js
+2025-09-01 17:14:04,108 | DEBUG | repair.ivy-tabs | AI whole-file repair suggestion: {'repairFlag': False, 'modified_code': '', 'additional_req': '', 'dependencies': []}
+2025-09-01 17:14:04,112 | DEBUG | repair.ivy-tabs | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ivy-tabs/package.json
+2025-09-01 17:14:04,113 | INFO | repair.ivy-tabs | END pattern 0 (pattern_0)
+2025-09-01 17:14:04,113 | INFO | repair.ivy-tabs | ============================================================
+2025-09-01 17:14:04,114 | INFO | repair.ivy-tabs | BEGIN pattern 0 (pattern_0)
+2025-09-01 17:14:04,114 | DEBUG | repair.ivy-tabs | Pattern payload: {"type": "call", "pattern": "write {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 17:14:04,344 | INFO | repair.ivy-tabs | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ivy-tabs
+2025-09-01 17:14:04,344 | DEBUG | repair.ivy-tabs | Parsed detection output: []
+2025-09-01 17:14:04,344 | DEBUG | repair.ivy-tabs | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107dbaac0>, {})
+2025-09-01 17:14:04,344 | DEBUG | repair.ivy-tabs | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ivy-tabs/package.json
+2025-09-01 17:14:04,344 | INFO | repair.ivy-tabs | END pattern 0 (pattern_0)
+2025-09-01 17:14:04,345 | DEBUG | repair.ivy-tabs | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ivy-tabs/package.json
+2025-09-01 17:14:04,345 | INFO | repair.ivy-tabs | token consumed 13085
+2025-09-01 17:14:04,345 | INFO | repair.ivy-tabs | parse consumption time: 28.49966104142368

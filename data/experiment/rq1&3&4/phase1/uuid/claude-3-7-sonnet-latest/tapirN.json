@@ -1,0 +1,22 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<uuid>,<uuid/**/*>}?**.{parse,unparse}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "write {<uuid>,<uuid/**/*>}?**.{parse,unparse}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "read {<uuid>,<uuid/**/*>}?**.{*}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "write {<uuid>,<uuid/**/*>}?**.{*}",
+    "changelogId": 1
+  }
+]

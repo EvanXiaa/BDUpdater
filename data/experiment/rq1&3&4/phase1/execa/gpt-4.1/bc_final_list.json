@@ -1,0 +1,357 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "Dropped support for Node.js versions <18.19.0 and 20.0.0 - 20.4.0. Projects running on those Node.js versions will no longer work with this library version.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "834e3726"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "node <18.19.0",
+          "node 20.0.0-20.4.0"
+        ]
+      },
+      "Adaptation_method": "Upgrade your Node.js installation to >=18.19.0 or >=20.5.0 before using this version of the library.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "In execa v9.0.0, when the 'encoding' option is set to 'buffer' in both execa() and execaSync(), the output properties result.stdout, result.stderr, and result.all now return a Uint8Array instead of a Buffer. Previously, these properties returned Node.js Buffer instances. This change also removes support for 'encoding: null'. Code relying on Buffer-specific methods or Buffer.isBuffer() will break and needs to adapt to the new return type. If a Buffer instance is necessary, convert the Uint8Array by using Buffer.from(stdout).",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#586",
+        "https://sindresorhus.com/blog/goodbye-nodejs-buffer",
+        "https://github.com/sindresorhus/execa/issues/584",
+        "https://github.com/sindresorhus/execa/issues/480",
+        "commit: fix: remove support for `encoding: null`",
+        "commit: feat: migrate to TypedArray",
+        "commit: fix: `execaSync` still returns Buffer value when passing encoding: 'buffer' option"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "execa",
+          "execaSync"
+        ],
+        "methodName": [
+          "stdout",
+          "stderr",
+          "all"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "execa"
+        ]
+      },
+      "Adaptation_method": "Before:\nconst {stdout} = await execa('node', ['file.js'], {encoding: 'buffer'});\nconsole.log(Buffer.isBuffer(stdout)); // true\n\nAfter:\nconst {stdout} = await execa('node', ['file.js'], {encoding: 'buffer'});\nconsole.log(stdout instanceof Uint8Array); // true\n// If Buffer is needed:\nconst buffer = Buffer.from(stdout);\n\nNote: The same applies to execaSync(). Also, remove any use of 'encoding: null', as it is no longer supported.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "The allowed values for the 'encoding' option in execa calls have been changed and some behaviors updated: 1) Support for 'encoding: null' has been removed entirely; use 'encoding: \"buffer\"' instead. 2) The allowed string values for 'encoding' have been renamed: 'utf-8'/'UTF8' are now 'utf8', 'utf-16le'/'ucs2'/'ucs-2' are now 'utf16le', and 'binary' is now 'latin1'. 3) When setting 'encoding: \"buffer\"', the returned 'stdout' and 'stderr' are now 'Uint8Array' instead of Node.js 'Buffer'.\n\nMigrating to this version requires updating all calls to execa (including execaSync and asynchronous execa) that use any of the affected 'encoding' values, and adapting code that consumes 'stdout'/'stderr' for 'buffer' encoding outputs from Buffer to Uint8Array.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#586",
+        "#928"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "execa",
+          "execaSync"
+        ],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [
+          "encoding"
+        ],
+        "moduleName": [
+          "execa"
+        ]
+      },
+      "Adaptation_method": "Update any execa and execaSync calls as follows:\n// Before:\nawait execa('node', ['file.js'], {encoding: null});\nawait execa('node', ['file.js'], {encoding: 'utf-8'});\nawait execa('node', ['file.js'], {encoding: 'binary'});\nconst {stdout} = await execa('node', ['file.js'], {encoding: 'buffer'}); // stdout is a Buffer\n\n// After:\nawait execa('node', ['file.js'], {encoding: 'buffer'}); // null is invalid\nawait execa('node', ['file.js'], {encoding: 'utf8'});\nawait execa('node', ['file.js'], {encoding: 'latin1'});\nconst {stdout} = await execa('node', ['file.js'], {encoding: 'buffer'}); // stdout is a Uint8Array\n\nIf your code expects 'Buffer', update type assertions and conversion as necessary for 'Uint8Array'.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "In version v9.0.0, the methods subprocess.pipeStdout(), subprocess.pipeStderr(), and subprocess.pipeAll() no longer accept a file path or a writable stream directly as their argument. These methods now require you to specify output destinations via the 'stdout' and 'stderr' options in the main execa call. To write to a file, use the option {stdout: {file: './path'}}. To write to a writable stream, use the option {stdout: ['pipe', stream]}. Passing child process objects to these methods is still supported. This change is breaking, as existing code passing a file path or writable stream directly to pipeStdout(), pipeStderr(), or pipeAll() will fail.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#752"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "subprocess"
+        ],
+        "methodName": [
+          "pipeStdout",
+          "pipeStderr",
+          "pipeAll"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Writing stdout or stderr to a file:\n// Before:\nawait execa('node', ['file.js']).pipeStdout('output.txt');\n// After:\nawait execa('node', ['file.js'], {stdout: {file: 'output.txt'}});\n\n// Writing stdout or stderr to a writable stream:\n// Before:\nawait execa('node', ['file.js']).pipeStdout(stream);\n// After:\nawait execa('node', ['file.js'], {stdout: ['pipe', stream]});",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "The subprocess.pipeStdout(), subprocess.pipeStderr(), and subprocess.pipeAll() methods have been removed and replaced with a unified subprocess.pipe() method. All usages of pipeStdout(), pipeStderr(), and pipeAll() must be refactored to call pipe() instead. The new pipe() method may require specifying the source of the pipe explicitly via a 'from' piping option, depending on previous usage. This change affects only the 'subprocess' class's methods related to process piping.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#757",
+        "Fixes #743",
+        "Fixes #580"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "subprocess"
+        ],
+        "methodName": [
+          "pipeStdout",
+          "pipeStderr",
+          "pipeAll",
+          "pipe"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nawait execa('node', ['file.js']).pipeStdout(execa('node', ['other.js']));\n// After:\nawait execa('node', ['file.js']).pipe('node', ['other.js']);\n\n// Before:\nawait execa('node', ['file.js']).pipeStderr(execa('node', ['other.js']));\n// After:\nawait execa('node', ['file.js']).pipe('node', ['other.js'], {from: 'stderr'});\n\n// Before:\nawait execa('node', ['file.js']).pipeAll(execa('node', ['other.js']));\n// After:\nawait execa('node', ['file.js']).pipe('node', ['other.js'], {from: 'all'});",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 5,
+      "BC_description": "The 'signal' option in the 'execa' method has been renamed to 'cancelSignal'. Passing 'signal' as an option now results in an error. Update all usages of the 'execa' method that use the 'signal' option to use 'cancelSignal' instead for abort controller or cancellation handling.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#880",
+        "f0cf6bc0915e89de7e625e384da819353c25bd2c",
+        "#856"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "execa"
+        ],
+        "methodName": [
+          "execa"
+        ],
+        "propertyName": [
+          "signal",
+          "cancelSignal"
+        ],
+        "moduleName": [
+          "execa"
+        ]
+      },
+      "Adaptation_method": "// Before:\nawait execa('node', ['file.js'], {signal: abortController.signal});\n// After:\nawait execa('node', ['file.js'], {cancelSignal: abortController.signal});",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 6,
+      "BC_description": "The property 'killed' on instances of the ExecaError class has been renamed to 'isTerminated'. Downstream code that previously relied on 'error.killed' to determine process termination status must be updated to use 'error.isTerminated' instead. Note: Both 'isTerminated' and 'signal' properties have partial platform support and may not reliably reflect process termination on Windows. Refer to release_note.md#v9.0.0 and issue #625 for additional context.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#625"
+      ],
+      "Changed_object": {
+        "type": "read",
+        "className": [
+          "ExecaError"
+        ],
+        "methodName": [],
+        "propertyName": [
+          "killed",
+          "isTerminated"
+        ],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nif (error.killed) { /* ... */ }\n// After:\nif (error.isTerminated) { /* ... */ }",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 7,
+      "BC_description": "The method subprocess.cancel() has been removed in this release. Any attempt to call subprocess.cancel() will fail. To terminate a subprocess, use subprocess.kill() instead, or use the cancelSignal option if supported by your implementation.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#711"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "subprocess"
+        ],
+        "methodName": [
+          "cancel"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nsubprocess.cancel();\n// After:\nsubprocess.kill();\n// Alternatively, use the cancelSignal option when supported.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 8,
+      "BC_description": "The option 'forceKillAfterTimeout' has been renamed to 'forceKillAfterDelay' and its location has changed. Previously, 'forceKillAfterTimeout' was passed as an option to the 'subprocess.kill()' method (i.e., subprocess.kill('SIGTERM', {forceKillAfterTimeout: 1000})). In the updated version, you must instead use 'forceKillAfterDelay', passed as a top-level option to the 'execa()' function (i.e., execa('node', ['file.js'], {forceKillAfterDelay: 1000})). The 'subprocess.kill()' method no longer accepts this option.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#714",
+        "#723"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "execa",
+          "subprocess"
+        ],
+        "methodName": [
+          "execa",
+          "kill"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nconst subprocess = execa('node', ['file.js']);\nsubprocess.kill('SIGTERM', {forceKillAfterTimeout: 1000});\n// After:\nconst subprocess = execa('node', ['file.js'], {forceKillAfterDelay: 1000});\nsubprocess.kill('SIGTERM');",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 9,
+      "BC_description": "The 'verbose' option in the execa function has changed from a boolean to a string enum. Previously, passing 'verbose: false' or 'verbose: true' would respectively disable or enable verbose output. Starting from v9.0.0, 'verbose' must be set to either 'none' (equivalent to false) or 'short' (equivalent to true). Update all usages of execa where the 'verbose' option is set as a boolean to use the corresponding string value.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#884"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "execa"
+        ],
+        "methodName": [
+          "execa"
+        ],
+        "propertyName": [
+          "verbose"
+        ],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nawait execa('node', ['file.js'], {verbose: false}); // or true\n// After:\nawait execa('node', ['file.js'], {verbose: 'none'}); // or 'short'",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 10,
+      "BC_description": "The 'execPath' option for the 'execa' function has been renamed to 'nodePath'. Additionally, the 'nodePath' option is only effective when the 'node' option is set to true, and it also applies when 'preferLocal' is false (no longer requiring 'preferLocal' to be true). Providing the deprecated 'execPath' option will now cause a validation error. All code using the 'execPath' option for the execa function must update to use 'nodePath' instead, and ensure that the 'node' option is correctly set.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#812",
+        "#815"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "execa"
+        ],
+        "methodName": [
+          "execa"
+        ],
+        "propertyName": [
+          "execPath",
+          "nodePath"
+        ],
+        "moduleName": [
+          "execa"
+        ]
+      },
+      "Adaptation_method": "// Before:\nawait execa('node', ['file.js'], {execPath: './path/to/node'});\n// After:\nawait execa('node', ['file.js'], {nodePath: './path/to/node'});",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 11,
+      "BC_description": "The default value of the 'serialization' option for 'subprocess.send()' is now 'advanced' (previously 'json'). As a result, if you pass objects containing functions or symbols to subprocess.send(), a runtime exception will be thrown instead of silently omitting these properties as before. This affects all code paths where subprocess.send() is called without explicitly specifying 'serialization' as 'json', and the sent object may contain function or symbol properties.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#905"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "subprocess"
+        ],
+        "methodName": [
+          "send"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Do not pass objects with functions or symbols to subprocess.send().\n// Before:\nsubprocess.send({example: true, getExample() {}});\n// After:\nsubprocess.send({example: true});\n\nIf you need to send functions or symbols, you must refactor your code so those properties are excluded before sending, or handle them separately. Alternatively, explicitly pass 'serialization: \"json\"' as an option to revert to the old behavior:\nsubprocess.send(obj, {serialization: 'json'});",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 12,
+      "BC_description": "In version 9.0.0, when using the subprocess class's stdout.pipe, stderr.pipe, or all.pipe methods, you must now call these methods immediately after the subprocess is created. Delaying the piping (for example, by calling them in a setTimeout or after any asynchronous operation) may result in missing early output from the subprocess. This breaking change ensures that all early output is captured, and failing to adapt will lead to incomplete data capture from subprocesses.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#658",
+        "#747"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "subprocess"
+        ],
+        "methodName": [
+          "stdout.pipe",
+          "stderr.pipe",
+          "all.pipe"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nconst subprocess = execa('node', ['file.js']);\nsetTimeout(() => subprocess.stdout.pipe(process.stdout), 0);\n// After:\nconst subprocess = execa('node', ['file.js']);\nsubprocess.stdout.pipe(process.stdout);",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 13,
+      "BC_description": "As of version 9.0.0, the 'subprocess.kill()' method and the 'killSignal' option for subprocesses no longer accept signal names in lowercase. Signal names must now be specified using uppercase strings (e.g., 'SIGTERM'). Passing a lowercase signal (e.g., 'sigterm') will result in an error. This affects both the direct call to subprocess.kill(signal) and the killSignal property in the subprocess launch options.",
+      "Reference": [
+        "release_note.md#v9.0.0",
+        "#1025"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "subprocess"
+        ],
+        "methodName": [
+          "kill"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nconst subprocess = execa('node', ['file.js'], {killSignal: 'sigterm'});\nsubprocess.kill('sigterm');\n// After:\nconst subprocess = execa('node', ['file.js'], {killSignal: 'SIGTERM'});\nsubprocess.kill('SIGTERM');",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

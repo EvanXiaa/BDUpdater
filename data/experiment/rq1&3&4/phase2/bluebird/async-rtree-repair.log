@@ -1,0 +1,246 @@
+2025-08-31 02:40:00,557 | INFO | repair.async-rtree | Starting analysis for async-rtree
+2025-08-31 02:40:00,557 | INFO | repair.async-rtree | Starting breaking change analysis for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:00,558 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:00,558 | INFO | repair.async-rtree | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:40:00,558 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:40:00,748 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:00,748 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:00,748 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108832980>, {})
+2025-08-31 02:40:00,748 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:00,748 | INFO | repair.async-rtree | END pattern 0 (pattern_0)
+2025-08-31 02:40:00,749 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:00,749 | INFO | repair.async-rtree | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:40:00,749 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:40:00,926 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:00,926 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:00,926 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108832980>, {})
+2025-08-31 02:40:00,927 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:00,927 | INFO | repair.async-rtree | END pattern 0 (pattern_0)
+2025-08-31 02:40:00,927 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:00,927 | INFO | repair.async-rtree | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:40:00,927 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:40:01,110 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:01,111 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:01,111 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108832980>, {})
+2025-08-31 02:40:01,111 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:01,111 | INFO | repair.async-rtree | END pattern 1 (pattern_1)
+2025-08-31 02:40:01,111 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:01,111 | INFO | repair.async-rtree | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:40:01,111 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:40:01,291 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:01,292 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:01,292 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108832980>, {})
+2025-08-31 02:40:01,292 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:01,292 | INFO | repair.async-rtree | END pattern 1 (pattern_1)
+2025-08-31 02:40:01,292 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:01,292 | INFO | repair.async-rtree | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:40:01,292 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:40:01,475 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:01,476 | DEBUG | repair.async-rtree | Parsed detection output: [{'pattern_id': 2, 'file': 'lib/append.js', 'line': 14, 'column': 9}, {'pattern_id': 2, 'file': 'lib/index.js', 'line': 119, 'column': 13}, {'pattern_id': 2, 'file': 'lib/findRoot.js', 'line': 5, 'column': 9}, {'pattern_id': 2, 'file': 'test.js', 'line': 26, 'column': 2}, {'pattern_id': 2, 'file': 'test.js', 'line': 50, 'column': 2}, {'pattern_id': 2, 'file': 'test.js', 'line': 72, 'column': 2}, {'pattern_id': 2, 'file': 'test.js', 'line': 94, 'column': 2}, {'pattern_id': 2, 'file': 'test.js', 'line': 127, 'column': 2}, {'pattern_id': 2, 'file': 'test.js', 'line': 160, 'column': 2}, {'pattern_id': 2, 'file': 'test.js', 'line': 200, 'column': 2}, {'pattern_id': 2, 'file': 'test.js', 'line': 224, 'column': 2}, {'pattern_id': 2, 'file': 'test.js', 'line': 247, 'column': 2}, {'pattern_id': 2, 'file': 'test.js', 'line': 273, 'column': 2}]
+2025-08-31 02:40:01,476 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108832980>, {'lib/append.js': defaultdict(<class 'list'>, {2: [{'line': 14, 'column': 9}]}), 'lib/index.js': defaultdict(<class 'list'>, {2: [{'line': 119, 'column': 13}]}), 'lib/findRoot.js': defaultdict(<class 'list'>, {2: [{'line': 5, 'column': 9}]}), 'test.js': defaultdict(<class 'list'>, {2: [{'line': 26, 'column': 2}, {'line': 50, 'column': 2}, {'line': 72, 'column': 2}, {'line': 94, 'column': 2}, {'line': 127, 'column': 2}, {'line': 160, 'column': 2}, {'line': 200, 'column': 2}, {'line': 224, 'column': 2}, {'line': 247, 'column': 2}, {'line': 273, 'column': 2}]})})
+2025-08-31 02:40:01,476 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/lib/append.js
+2025-08-31 02:40:04,647 | DEBUG | repair.async-rtree | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:40:04,648 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/lib/index.js
+2025-08-31 02:40:07,913 | DEBUG | repair.async-rtree | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:40:07,913 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/lib/findRoot.js
+2025-08-31 02:40:10,575 | DEBUG | repair.async-rtree | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:40:10,577 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,578 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,579 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,580 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,581 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,582 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,583 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,584 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,585 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,586 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/test.js
+2025-08-31 02:40:10,586 | INFO | repair.async-rtree | File /bluebird/results/gpt-4.1/async-rtree/test.js has too many contexts extracted
+2025-08-31 02:40:10,586 | INFO | repair.async-rtree | File size: 7650
+2025-08-31 02:40:15,385 | DEBUG | repair.async-rtree | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:40:15,387 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:15,387 | INFO | repair.async-rtree | END pattern 2 (pattern_2)
+2025-08-31 02:40:15,388 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:15,389 | INFO | repair.async-rtree | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:40:15,389 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:40:15,788 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:15,788 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:15,788 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108833380>, {})
+2025-08-31 02:40:15,789 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:15,789 | INFO | repair.async-rtree | END pattern 2 (pattern_2)
+2025-08-31 02:40:15,789 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:15,789 | INFO | repair.async-rtree | BEGIN pattern 4 (pattern_4)
+2025-08-31 02:40:15,789 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{Promise}", "changelogId": 4}
+2025-08-31 02:40:15,973 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:15,973 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:15,973 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108833380>, {})
+2025-08-31 02:40:15,973 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:15,973 | INFO | repair.async-rtree | END pattern 4 (pattern_4)
+2025-08-31 02:40:15,974 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:15,974 | INFO | repair.async-rtree | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:40:15,974 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:40:16,161 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:16,161 | DEBUG | repair.async-rtree | Parsed detection output: [{'pattern_id': 5, 'file': 'lib/index.js', 'line': 17, 'column': 15}]
+2025-08-31 02:40:16,161 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108833380>, {'lib/index.js': defaultdict(<class 'list'>, {5: [{'line': 17, 'column': 15}]})})
+2025-08-31 02:40:16,162 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/lib/index.js
+2025-08-31 02:40:33,421 | DEBUG | repair.async-rtree | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the callback signatures (number and meaning of success arguments) for the store.get, store.put, store.del, and store.batch methods, and indicate whether your code relies on receiving multiple resolved values as an array.",
+  "dependencies": []
+}
+2025-08-31 02:40:33,423 | DEBUG | repair.async-rtree | Added to whole mode list: file=/bluebird/results/gpt-4.1/async-rtree/lib/index.js, context=Node, bc_desc={'Id': 5, 'BC_description': 'Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default...
+2025-08-31 02:40:33,423 | INFO | repair.async-rtree | Whole mode item: /bluebird/results/gpt-4.1/async-rtree/lib/index.js
+2025-08-31 02:40:44,998 | DEBUG | repair.async-rtree | AI whole-file repair suggestion: {'repairFlag': False, 'modified_code': '', 'additional_req': 'Please confirm the callback signatures of your MemStore methods (get, put, del, batch) and whether they invoke callbacks with multiple success arguments and if the code currently relies on an array of values. This information is needed to determine if `{multiArgs: true}` must be passed to `Promise.promisify` to restore pre-upgrade behavior.', 'dependencies': []}
+2025-08-31 02:40:45,001 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:45,001 | INFO | repair.async-rtree | END pattern 5 (pattern_5)
+2025-08-31 02:40:45,002 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:45,002 | INFO | repair.async-rtree | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:40:45,002 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:40:45,355 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:45,355 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:45,355 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:45,355 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:45,355 | INFO | repair.async-rtree | END pattern 5 (pattern_5)
+2025-08-31 02:40:45,355 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:45,355 | INFO | repair.async-rtree | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:40:45,355 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:40:45,541 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:45,541 | DEBUG | repair.async-rtree | Parsed detection output: [{'pattern_id': 6, 'file': 'lib/index.js', 'line': 17, 'column': 15}]
+2025-08-31 02:40:45,541 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {'lib/index.js': defaultdict(<class 'list'>, {6: [{'line': 17, 'column': 15}]})})
+2025-08-31 02:40:45,542 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/lib/index.js
+2025-08-31 02:40:51,132 | DEBUG | repair.async-rtree | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "function promisify(store) {\n  var out = {};\n  ['get', 'put', 'del', 'batch'].forEach(function (key) {\n    // Adapted for Bluebird v3: second argument must be an options object\n    out[key] = Promise.promisify(store[key], {context: store});\n  });\n  return out;\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:40:51,133 | INFO | repair.async-rtree | Replaced code in /bluebird/results/gpt-4.1/async-rtree/lib/index.js at [422, 598]
+2025-08-31 02:40:51,133 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:51,133 | INFO | repair.async-rtree | END pattern 6 (pattern_6)
+2025-08-31 02:40:51,134 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:51,134 | INFO | repair.async-rtree | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:40:51,134 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:40:51,342 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:51,343 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:51,343 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:51,343 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:51,343 | INFO | repair.async-rtree | END pattern 6 (pattern_6)
+2025-08-31 02:40:51,343 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:51,343 | INFO | repair.async-rtree | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:40:51,343 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:40:51,523 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:51,523 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:51,523 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:51,524 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:51,524 | INFO | repair.async-rtree | END pattern 7 (pattern_7)
+2025-08-31 02:40:51,524 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:51,524 | INFO | repair.async-rtree | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:40:51,524 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:40:51,700 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:51,700 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:51,700 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:51,700 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:51,700 | INFO | repair.async-rtree | END pattern 7 (pattern_7)
+2025-08-31 02:40:51,700 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:51,700 | INFO | repair.async-rtree | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:40:51,700 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:40:51,878 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:51,878 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:51,878 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:51,878 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:51,879 | INFO | repair.async-rtree | END pattern 8 (pattern_8)
+2025-08-31 02:40:51,879 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:51,879 | INFO | repair.async-rtree | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:40:51,879 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:40:52,053 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:52,053 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:52,053 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:52,053 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:52,053 | INFO | repair.async-rtree | END pattern 8 (pattern_8)
+2025-08-31 02:40:52,053 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:52,053 | INFO | repair.async-rtree | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:40:52,053 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:40:52,233 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:52,233 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:52,233 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:52,233 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:52,233 | INFO | repair.async-rtree | END pattern 9 (pattern_9)
+2025-08-31 02:40:52,233 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:52,233 | INFO | repair.async-rtree | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:40:52,233 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:40:52,409 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:52,409 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:52,409 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:52,410 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:52,410 | INFO | repair.async-rtree | END pattern 9 (pattern_9)
+2025-08-31 02:40:52,410 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:52,410 | INFO | repair.async-rtree | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:40:52,410 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:40:52,589 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:52,589 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:52,589 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:52,589 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:52,589 | INFO | repair.async-rtree | END pattern 10 (pattern_10)
+2025-08-31 02:40:52,589 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:52,589 | INFO | repair.async-rtree | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:40:52,589 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:40:52,766 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:52,766 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:40:52,766 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:40:52,766 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:40:52,766 | INFO | repair.async-rtree | END pattern 10 (pattern_10)
+2025-08-31 02:40:52,766 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:40:52,766 | INFO | repair.async-rtree | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:40:52,766 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:40:52,945 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:40:52,945 | DEBUG | repair.async-rtree | Parsed detection output: [{'pattern_id': 11, 'file': 'lib/memmap.js', 'line': 24, 'column': 11}, {'pattern_id': 11, 'file': 'lib/remove.js', 'line': 20, 'column': 13}]
+2025-08-31 02:40:52,945 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {'lib/memmap.js': defaultdict(<class 'list'>, {11: [{'line': 24, 'column': 11}]}), 'lib/remove.js': defaultdict(<class 'list'>, {11: [{'line': 20, 'column': 13}]})})
+2025-08-31 02:40:52,946 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/lib/memmap.js
+2025-08-31 02:41:02,188 | DEBUG | repair.async-rtree | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if (key in this.store) {\n    return parseJSON(this.store[key]).nodeify(cb);\n  } else {\n    // Wrap in Bluebird's OperationalError so instanceof checks still pass\n    var err = new Promise.OperationalError('not found');\n    err.notFound = true;\n    return Promise.reject(err).nodeify(cb);\n  }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:41:02,191 | INFO | repair.async-rtree | Replaced code in /bluebird/results/gpt-4.1/async-rtree/lib/memmap.js at [436, 633]
+2025-08-31 02:41:02,193 | INFO | repair.async-rtree | New context extracted from /bluebird/results/gpt-4.1/async-rtree/lib/remove.js
+2025-08-31 02:41:05,688 | DEBUG | repair.async-rtree | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:41:05,689 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:41:05,689 | INFO | repair.async-rtree | END pattern 11 (pattern_11)
+2025-08-31 02:41:05,689 | INFO | repair.async-rtree | ============================================================
+2025-08-31 02:41:05,689 | INFO | repair.async-rtree | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:41:05,689 | DEBUG | repair.async-rtree | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:41:06,091 | INFO | repair.async-rtree | Tapir run successful for /bluebird/results/gpt-4.1/async-rtree
+2025-08-31 02:41:06,091 | DEBUG | repair.async-rtree | Parsed detection output: []
+2025-08-31 02:41:06,091 | DEBUG | repair.async-rtree | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108831bc0>, {})
+2025-08-31 02:41:06,092 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:41:06,092 | INFO | repair.async-rtree | END pattern 11 (pattern_11)
+2025-08-31 02:41:06,092 | INFO | repair.async-rtree | Config BC: scanning 0 files
+2025-08-31 02:41:06,092 | DEBUG | repair.async-rtree | Updated package.json saved at /bluebird/results/gpt-4.1/async-rtree/package.json
+2025-08-31 02:41:06,092 | INFO | repair.async-rtree | token consumed 33799
+2025-08-31 02:41:06,092 | INFO | repair.async-rtree | parse consumption time: 61.056670002639294

@@ -1,0 +1,21 @@
+{
+  "Id": 6,
+  "BC_description": "The during and doDuring functions have been removed from the async library. Their functionality is now provided by the enhanced whilst, doWhilst, until, and doUntil functions, which support asynchronous test functions. This change breaks code that directly uses during or doDuring, as these functions are no longer available.",
+  "Reference": [
+    "#850",
+    "#1557"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "during",
+      "doDuring"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Replace during with async.whilst or async.until, and doDuring with async.doWhilst or async.doUntil, ensuring the test function is asynchronous if needed. For example, change async.during(testFn, iteratee, callback) to async.whilst(testFn, iteratee, callback) or async.until(testFn, iteratee, callback), and async.doDuring(iteratee, testFn, callback) to async.doWhilst(iteratee, testFn, callback) or async.doUntil(iteratee, testFn, callback). Note that the test function may need to be made asynchronous to handle promises.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}

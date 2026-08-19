@@ -1,0 +1,7 @@
+{
+  "owner": "twbs",
+  "repo": "bootstrap",
+  "number": 32173,
+  "pr_url": "https://github.com/twbs/bootstrap/pull/32173",
+  "content": "# PR 32173: Make the attribute methods bs specific\nBranches: bs-data-cons -> main\n\nRef: https://github.com/twbs/bootstrap/pull/31827#issuecomment-728864694\n\n## Commit titles\n- Make the attribute methods bs specific\n- Update manipulator.spec.js\n- Update manipulator.spec.js\n- Merge branch 'main' into bs-data-cons\n- Check getDataAttribute doesn't get non-bs attr\n- Merge branch 'main' into bs-data-cons\n\n## Changed files\n- js/src/dom/manipulator.js\n- js/src/modal.js\n- js/tests/unit/dom/manipulator.spec.js\n## Issue comments\n- @XhmikosR: Perfect, thank you both!\n## Review comments\n- @Johann-S: can you add a test here with a non bs attribute please ? To check it doesn't get non bs attribute\n- @rohit2sharma95: Added @Johann-S 👍\n## Reviews\n- @Johann-S [COMMENTED]\n- @rohit2sharma95 [COMMENTED]\n- @Johann-S [APPROVED]: LGTM 👍 \r\nThanks @rohit2sharma95"
+}

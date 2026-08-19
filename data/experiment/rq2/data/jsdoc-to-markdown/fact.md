@@ -1,0 +1,1 @@
+Removed .renderSync(), .getTemplateDataSync() and .getJsdocDataSync(). The jsdoc2md API is now async-only.

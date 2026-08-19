@@ -1,0 +1,15 @@
+v20.0.0
+
+
+### ⚠ BREAKING CHANGES
+
+* do not ship type definitions (#318)
+
+### Bug Fixes
+
+* only strip camel case if hyphenated ([#316](https://www.github.com/yargs/yargs-parser/issues/316)) ([95a9e78](https://www.github.com/yargs/yargs-parser/commit/95a9e785127b9bbf2d1db1f1f808ca1fb100e82a)), closes [#315](https://www.github.com/yargs/yargs-parser/issues/315)
+
+
+### Code Refactoring
+
+* do not ship type definitions ([#318](https://www.github.com/yargs/yargs-parser/issues/318)) ([8fbd56f](https://www.github.com/yargs/yargs-parser/commit/8fbd56f1d0b6c44c30fca62708812151ca0ce330))

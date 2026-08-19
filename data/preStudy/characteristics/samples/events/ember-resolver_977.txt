@@ -1,0 +1,7 @@
+{
+  "owner": "ember-cli",
+  "repo": "ember-resolver",
+  "number": 977,
+  "pr_url": "https://github.com/ember-cli/ember-resolver/pull/977",
+  "content": "# PR 977: Convert to plain library and drop deprecated behaviors\nBranches: plain-library -> main\n\nThis drops long-deprecated behaviors and convert the package to a plain NPM library. It doesn't need to be an ember addon.\n\n## Commit titles\n- Converting to plain library.\n\n## Changed files\n- addon/addon/container-debug-adapter.js\n- addon/addon/features.js\n- addon/addon/index.js\n- addon/app/container-debug-adapter.js\n- addon/config/environment.js\n- addon/package.json\n- package-lock.json\n- test-app/tests/unit/container-debug-adapter-test.js\n- test-app/tests/unit/resolvers/classic/basic-test.js\n- test-app/tests/unit/resolvers/classic/logging-test.js\n## Review comments\n- @NullVoxPopuli: :raised_hands:\n## Reviews\n- @NullVoxPopuli [APPROVED]\n- @NullVoxPopuli [COMMENTED]"
+}

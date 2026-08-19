@@ -1,0 +1,47 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}**.{sync}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}**.{sync}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}**.{replace}",
+    "changelogId": 3
+  },
+  {
+    "type": "call",
+    "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}**.{replace}",
+    "changelogId": 3
+  },
+  {
+    "type": "call",
+    "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}**.{replaceInFile,replaceInFileSync}",
+    "changelogId": 5
+  },
+  {
+    "type": "call",
+    "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}**.{replaceInFile,replaceInFileSync}",
+    "changelogId": 5
+  },
+  {
+    "type": "call",
+    "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}**.{replaceInFile,replaceInFileSync}",
+    "changelogId": 6
+  },
+  {
+    "type": "call",
+    "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}**.{replaceInFile,replaceInFileSync}",
+    "changelogId": 6
+  },
+  {
+    "type": "import",
+    "pattern": "import {replace-in-file/**/*,replace-in-file}",
+    "changelogId": 1
+  }
+]

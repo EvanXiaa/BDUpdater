@@ -1,0 +1,41 @@
+2025-09-01 02:00:04,751 | INFO | repair.ember-reading-time | Starting analysis for ember-reading-time
+2025-09-01 02:00:04,752 | INFO | repair.ember-reading-time | Starting breaking change analysis for -2024/ember-qunit/results/gpt-4.1/ember-reading-time
+2025-09-01 02:00:04,752 | INFO | repair.ember-reading-time | ============================================================
+2025-09-01 02:00:04,753 | INFO | repair.ember-reading-time | BEGIN pattern 0 (pattern_0)
+2025-09-01 02:00:04,753 | DEBUG | repair.ember-reading-time | Pattern payload: {"type": "call", "pattern": "read {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 02:00:05,988 | INFO | repair.ember-reading-time | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ember-reading-time
+2025-09-01 02:00:05,988 | DEBUG | repair.ember-reading-time | Parsed detection output: [{'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 6, 'column': 0, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 12, 'column': 0, 'confidence': 'high'}]
+2025-09-01 02:00:05,988 | DEBUG | repair.ember-reading-time | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108e38c20>, {'tests/test-helper.js': defaultdict(<class 'list'>, {0: [{'line': 6, 'column': 0, 'confidence': 'high'}, {'line': 12, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 02:00:05,989 | INFO | repair.ember-reading-time | New context extracted from -2024/ember-qunit/results/gpt-4.1/ember-reading-time/tests/test-helper.js
+2025-09-01 02:00:05,989 | INFO | repair.ember-reading-time | New context extracted from -2024/ember-qunit/results/gpt-4.1/ember-reading-time/tests/test-helper.js
+2025-09-01 02:00:13,357 | DEBUG | repair.ember-reading-time | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the import statement for `start` (e.g., from 'ember-qunit' or 'ember-exam/test-support/start') and the surrounding test-helper.js file contents to determine the correct migration steps.",
+  "dependencies": []
+}
+2025-09-01 02:00:13,357 | DEBUG | repair.ember-reading-time | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/ember-reading-time/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 02:00:25,232 | DEBUG | repair.ember-reading-time | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import { start, setupEmberOnerrorValidation } from 'ember-qunit';\nimport { loadTests } from 'ember-qunit/test-loader';",
+  "additional_req": "Ensure you invoke setupEmberOnerrorValidation() and loadTests() before the call to start() in your test entry file (e.g., test-helper.js).",
+  "dependencies": []
+}
+2025-09-01 02:00:25,234 | DEBUG | repair.ember-reading-time | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/ember-reading-time/tests/test-helper.js, context=dict, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 02:00:25,235 | INFO | repair.ember-reading-time | Whole mode item: -2024/ember-qunit/results/gpt-4.1/ember-reading-time/tests/test-helper.js
+2025-09-01 02:00:37,212 | DEBUG | repair.ember-reading-time | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "import Application from 'dummy/app';\nimport config from 'dummy/config/environment';\nimport * as QUnit from 'qunit';\nimport { setApplication } from '@ember/test-helpers';\nimport { setup } from 'qunit-dom';\n// v9+ requires explicit calls to setupEmberOnerrorValidation and loadTests\nimport { start, setupEmberOnerrorValidation } from 'ember-qunit';\nimport { loadTests } from 'ember-qunit/test-loader';\n\nsetApplication(Application.create(config.APP));\n\nsetup(QUnit.assert);\n\n// enable global Ember.onerror validation\nsetupEmberOnerrorValidation();\n// load test modules explicitly\nloadTests();\n// start the test run\nstart();\n", 'additional_req': '', 'dependencies': ['ember-qunit@^9.0.0']}
+2025-09-01 02:00:37,214 | INFO | repair.ember-reading-time | Replace whole file: -2024/ember-qunit/results/gpt-4.1/ember-reading-time/tests/test-helper.js
+2025-09-01 02:00:37,215 | INFO | repair.ember-reading-time | Whole mode item: -2024/ember-qunit/results/gpt-4.1/ember-reading-time/tests/test-helper.js
+2025-09-01 02:00:37,217 | DEBUG | repair.ember-reading-time | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ember-reading-time/package.json
+2025-09-01 02:00:37,218 | INFO | repair.ember-reading-time | END pattern 0 (pattern_0)
+2025-09-01 02:00:37,219 | INFO | repair.ember-reading-time | ============================================================
+2025-09-01 02:00:37,220 | INFO | repair.ember-reading-time | BEGIN pattern 0 (pattern_0)
+2025-09-01 02:00:37,220 | DEBUG | repair.ember-reading-time | Pattern payload: {"type": "call", "pattern": "write {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 02:00:38,397 | INFO | repair.ember-reading-time | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/ember-reading-time
+2025-09-01 02:00:38,397 | DEBUG | repair.ember-reading-time | Parsed detection output: []
+2025-09-01 02:00:38,398 | DEBUG | repair.ember-reading-time | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108e38cc0>, {})
+2025-09-01 02:00:38,398 | DEBUG | repair.ember-reading-time | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ember-reading-time/package.json
+2025-09-01 02:00:38,398 | INFO | repair.ember-reading-time | END pattern 0 (pattern_0)
+2025-09-01 02:00:38,399 | DEBUG | repair.ember-reading-time | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/ember-reading-time/package.json
+2025-09-01 02:00:38,399 | INFO | repair.ember-reading-time | token consumed 15370
+2025-09-01 02:00:38,399 | INFO | repair.ember-reading-time | parse consumption time: 31.218212293460965

@@ -1,0 +1,7 @@
+{
+  "owner": "twbs",
+  "repo": "bootstrap",
+  "number": 32057,
+  "pr_url": "https://github.com/twbs/bootstrap/pull/32057",
+  "content": "# PR 32057: Remove the now redundant polyfills. \nBranches: main-xmr-rm-polyfill -> main-xmr-drop-edge\n\nDepends on #31972 \r\n\r\nPreview: <https://deploy-preview-32057--twbs-bootstrap.netlify.app/>\n\n## Commit titles\n- Remove polyfills.\n- Tighten bundlewatch limits.\n\n## Changed files\n- .bundlewatch.config.json\n- build/build-plugins.js\n- js/src/dom/polyfill.js\n- js/src/dom/selector-engine.js\n- js/tests/karma.conf.js\n- js/tests/visual/alert.html\n- js/tests/visual/button.html\n- js/tests/visual/carousel.html\n- js/tests/visual/collapse.html\n- js/tests/visual/dropdown.html\n- js/tests/visual/modal.html\n- js/tests/visual/popover.html\n- js/tests/visual/scrollspy.html\n- js/tests/visual/tab.html\n- js/tests/visual/toast.html\n- js/tests/visual/tooltip.html"
+}

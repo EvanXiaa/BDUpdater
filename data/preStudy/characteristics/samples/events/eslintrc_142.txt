@@ -1,0 +1,7 @@
+{
+  "owner": "eslint",
+  "repo": "eslintrc",
+  "number": 142,
+  "pr_url": "https://github.com/eslint/eslintrc/pull/142",
+  "content": "# PR 142: feat!: Require Node.js `^18.18.0 || ^20.9.0 || >=21.1.0`\nBranches: v3-update-nodejs -> main\n\nUpdates `package.json` to require:\r\n\r\n```\r\n\"node\": \"^18.18.0 || ^20.9.0 || >=21.1.0\"\r\n```\r\n\r\nto align these requirements with ESLint v9.\n\n## Commit titles\n- feat!: Require Node.js `^18.18.0 || ^20.9.0 || >=21.1.0`\n- use lts for Verify Files\n\n## Changed files\n- .github/workflows/ci.yml\n- package.json\n## Reviews\n- @nzakas [APPROVED]"
+}

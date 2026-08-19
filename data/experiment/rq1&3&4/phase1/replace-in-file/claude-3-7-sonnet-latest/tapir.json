@@ -1,0 +1,27 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}**.{sync}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}**.{sync}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile}",
+    "changelogId": 3
+  },
+  {
+    "type": "call",
+    "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile}",
+    "changelogId": 3
+  },
+  {
+    "type": "import",
+    "pattern": "import {replace-in-file}",
+    "changelogId": 1
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<jsdoc-to-markdown>,<jsdoc-to-markdown/**/*>}?**.{renderSync,getTemplateDataSync,getJsdocDataSync}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "write {<jsdoc-to-markdown>,<jsdoc-to-markdown/**/*>}?**.{renderSync,getTemplateDataSync,getJsdocDataSync}",
+    "changelogId": 0
+  }
+]

@@ -1,0 +1,29 @@
+2025-08-31 18:09:10,705 | INFO | repair.fingerprint-generator-master | Starting analysis for fingerprint-generator-master
+2025-08-31 18:09:10,705 | INFO | repair.fingerprint-generator-master | Starting breaking change analysis for -2024/jsdoc-to-markdown/results/gpt-4.1/fingerprint-generator-master
+2025-08-31 18:09:10,706 | INFO | repair.fingerprint-generator-master | ============================================================
+2025-08-31 18:09:10,706 | INFO | repair.fingerprint-generator-master | BEGIN pattern 0 (pattern_0)
+2025-08-31 18:09:10,706 | DEBUG | repair.fingerprint-generator-master | Pattern payload: {"type": "call", "pattern": "read {<jsdoc-to-markdown>,<jsdoc-to-markdown/**/*>}?**.{renderSync,getTemplateDataSync,getJsdocDataSync}", "changelogId": 0}
+2025-08-31 18:09:10,866 | INFO | repair.fingerprint-generator-master | Tapir run successful for -2024/jsdoc-to-markdown/results/gpt-4.1/fingerprint-generator-master
+2025-08-31 18:09:10,866 | DEBUG | repair.fingerprint-generator-master | Parsed detection output: [{'pattern_id': 0, 'file': 'docs/build-docs.js', 'line': 49, 'column': 19}]
+2025-08-31 18:09:10,866 | DEBUG | repair.fingerprint-generator-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x105eb6980>, {'docs/build-docs.js': defaultdict(<class 'list'>, {0: [{'line': 49, 'column': 19}]})})
+2025-08-31 18:09:10,867 | INFO | repair.fingerprint-generator-master | New context extracted from -2024/jsdoc-to-markdown/results/gpt-4.1/fingerprint-generator-master/docs/build-docs.js
+2025-08-31 18:09:13,678 | DEBUG | repair.fingerprint-generator-master | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async () => {\n    const indexData = await jsdoc2md.getTemplateData({\n        files: [path.join(SRC_DIR, 'main.js')],\n    });\n    const classData = await jsdoc2md.getTemplateData({\n        files: [\n            path.join(SRC_DIR, 'fingerprint-generator.js'),\n        ],\n    });\n\n    let templateData = indexData.concat(classData);\n\n    const EMPTY = Symbol('empty');\n    /* reduce templateData to an array of class names */\n    templateData.forEach((identifier) => {\n        // @hideconstructor does not work, so we nudge it\n        if (identifier.hideconstructor) {\n            const idx = templateData.findIndex((i) => i.id === `${identifier.name}()`);\n            templateData[idx] = EMPTY;\n        }\n    });\n\n    templateData = templateData.filter((d) => d !== EMPTY);\n\n    const template = await fs.readFile(TEMPLATE_PATH, 'utf8');\n    // BREAKING CHANGE: jsdoc2md.renderSync has been removed in v8.\n    // Change to the async version and await it.\n    const output = await jsdoc2md.render(getRenderOptions(template, templateData));\n    const markdown = generateFinalMarkdown(output);\n    await fs.writeFile(README_PATH, markdown);\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 18:09:13,679 | INFO | repair.fingerprint-generator-master | Replaced code in -2024/jsdoc-to-markdown/results/gpt-4.1/fingerprint-generator-master/docs/build-docs.js at [672, 1689]
+2025-08-31 18:09:13,680 | DEBUG | repair.fingerprint-generator-master | Updated package.json saved at -2024/jsdoc-to-markdown/results/gpt-4.1/fingerprint-generator-master/package.json
+2025-08-31 18:09:13,680 | INFO | repair.fingerprint-generator-master | END pattern 0 (pattern_0)
+2025-08-31 18:09:13,680 | INFO | repair.fingerprint-generator-master | ============================================================
+2025-08-31 18:09:13,682 | INFO | repair.fingerprint-generator-master | BEGIN pattern 0 (pattern_0)
+2025-08-31 18:09:13,682 | DEBUG | repair.fingerprint-generator-master | Pattern payload: {"type": "call", "pattern": "write {<jsdoc-to-markdown>,<jsdoc-to-markdown/**/*>}?**.{renderSync,getTemplateDataSync,getJsdocDataSync}", "changelogId": 0}
+2025-08-31 18:09:13,848 | INFO | repair.fingerprint-generator-master | Tapir run successful for -2024/jsdoc-to-markdown/results/gpt-4.1/fingerprint-generator-master
+2025-08-31 18:09:13,848 | DEBUG | repair.fingerprint-generator-master | Parsed detection output: []
+2025-08-31 18:09:13,848 | DEBUG | repair.fingerprint-generator-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x105eb6980>, {})
+2025-08-31 18:09:13,848 | DEBUG | repair.fingerprint-generator-master | Updated package.json saved at -2024/jsdoc-to-markdown/results/gpt-4.1/fingerprint-generator-master/package.json
+2025-08-31 18:09:13,849 | INFO | repair.fingerprint-generator-master | END pattern 0 (pattern_0)
+2025-08-31 18:09:13,849 | DEBUG | repair.fingerprint-generator-master | Updated package.json saved at -2024/jsdoc-to-markdown/results/gpt-4.1/fingerprint-generator-master/package.json
+2025-08-31 18:09:13,849 | INFO | repair.fingerprint-generator-master | token consumed 2480
+2025-08-31 18:09:13,849 | INFO | repair.fingerprint-generator-master | parse consumption time: 2.810827041976154

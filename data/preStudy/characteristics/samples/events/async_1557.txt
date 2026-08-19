@@ -1,0 +1,7 @@
+{
+  "owner": "caolan",
+  "repo": "async",
+  "number": 1557,
+  "pr_url": "https://github.com/caolan/async/pull/1557",
+  "content": "# PR 1557: breaking: remove during, make test functions in until/whilst async\nBranches: until-no-more -> master\n\nCloses #850 \n\n## Commit titles\n- remove during, make test functions in until/whilst async\n- add during aliases fix docs\n- regenerate index\n\n## Changed files\n- lib/doDuring.js\n- lib/doUntil.js\n- lib/doWhilst.js\n- lib/during.js\n- lib/index.js\n- lib/until.js\n- lib/whilst.js\n- support/aliases.txt\n- test/during.js\n- test/es2017/asyncFunctions.js\n- test/until.js\n- test/whilst.js\n## Issue comments\n- @hargasinski: LGTM. Should we add `during` aliases to the two whilst functions to make migration easier?\n- @Qix-: :clap: :feelsgood:\n## Review comments\n- @hargasinski: nit: I think the parameter type is `AsyncFunction`.\n- @hargasinski: nit: Sorry, same as before, I think the param type is `AsyncFunction`.\n## Reviews\n- @hargasinski [COMMENTED]\n- @hargasinski [COMMENTED]\n- @hargasinski [APPROVED]"
+}

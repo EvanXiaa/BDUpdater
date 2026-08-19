@@ -1,0 +1,7 @@
+{
+  "owner": "mochajs",
+  "repo": "mocha",
+  "number": 4863,
+  "pr_url": "https://github.com/mochajs/mocha/pull/4863",
+  "content": "# PR 4863: Rename 'bin/mocha' to 'bin/mocha.js'\nBranches: juergba/binMocha -> master\n\n### Description\r\n\r\nCurrently Mocha's executable `bin/mocha` has no extension. When using Node's `--loader` (alias: `--experimental-loader`) option, the process will crash since Node isn't able/willing to handle extensionless entry points:\r\n\r\n```\r\nNODE_OPTIONS=\"--loader=./lib/loader.mjs\" npx mocha\r\n\r\nTypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension \"\" for .../mocha/bin/mocha\r\n```\r\n\r\nSee also extensive discussion in https://github.com/nodejs/node/discussions/41711.\r\n\r\n### Description of the Change\r\n\r\nRename `bin/mocha` to `bin/mocha.js`.\r\n\r\n\r\n### Applicable issues\r\n\r\nrelated #4645 and #4720\n\n## Commit titles\n- refactor!: rename 'bin/mocha' to 'bin/mocha.js'\n\n## Changed files\n- .eslintignore\n- .gitignore\n- bin/mocha.js\n- package.json\n## Issue comments\n- @trusktr: I don't know if it was true back in March, but we can point the `bin` field to `mocha.js` and keep the `mocha` name for the executable command line.\n## Reviews\n- @giltayar [APPROVED]\n- @outsideris [APPROVED]"
+}

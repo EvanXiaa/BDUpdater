@@ -1,0 +1,340 @@
+2025-09-01 02:39:23,625 | INFO | repair.litapp-blog | Starting analysis for litapp-blog
+2025-09-01 02:39:23,625 | INFO | repair.litapp-blog | Starting breaking change analysis for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:39:23,626 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:39:23,626 | INFO | repair.litapp-blog | BEGIN pattern 1 (pattern_1)
+2025-09-01 02:39:23,626 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{stdout,stderr,all}", "changelogId": 1}
+2025-09-01 02:39:23,812 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:39:23,813 | DEBUG | repair.litapp-blog | Parsed detection output: [{'pattern_id': 1, 'file': 'scripts/dev.js', 'line': 14, 'column': 16, 'confidence': 'low'}, {'pattern_id': 1, 'file': 'scripts/dev.js', 'line': 15, 'column': 16, 'confidence': 'low'}, {'pattern_id': 1, 'file': 'scripts/dev.js', 'line': 35, 'column': 18, 'confidence': 'low'}, {'pattern_id': 1, 'file': 'scripts/dev.js', 'line': 36, 'column': 18, 'confidence': 'low'}]
+2025-09-01 02:39:23,813 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbab60>, {'scripts/dev.js': defaultdict(<class 'list'>, {1: [{'line': 14, 'column': 16, 'confidence': 'low'}, {'line': 15, 'column': 16, 'confidence': 'low'}, {'line': 35, 'column': 18, 'confidence': 'low'}, {'line': 36, 'column': 18, 'confidence': 'low'}]})})
+2025-09-01 02:39:23,815 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:39:23,815 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:39:29,283 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:39:34,052 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:39:34,055 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:39:34,055 | INFO | repair.litapp-blog | END pattern 1 (pattern_1)
+2025-09-01 02:39:34,056 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:39:34,056 | INFO | repair.litapp-blog | BEGIN pattern 1 (pattern_1)
+2025-09-01 02:39:34,057 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{stdout,stderr,all}", "changelogId": 1}
+2025-09-01 02:39:34,228 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:39:34,228 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:39:34,228 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {})
+2025-09-01 02:39:34,228 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:39:34,228 | INFO | repair.litapp-blog | END pattern 1 (pattern_1)
+2025-09-01 02:39:34,229 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:39:34,229 | INFO | repair.litapp-blog | BEGIN pattern 2 (pattern_2)
+2025-09-01 02:39:34,229 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "call {<execa>,<execa/**/*>}?**.{execa,execaSync}", "changelogId": 2}
+2025-09-01 02:39:34,339 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:39:34,340 | DEBUG | repair.litapp-blog | Parsed detection output: [{'pattern_id': 2, 'file': 'scripts/dev.js', 'line': 8, 'column': 9, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/dev.js', 'line': 34, 'column': 10, 'confidence': 'high'}]
+2025-09-01 02:39:34,340 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {'scripts/dev.js': defaultdict(<class 'list'>, {2: [{'line': 8, 'column': 9, 'confidence': 'high'}, {'line': 34, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 02:39:34,340 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:39:34,340 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:39:40,145 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:39:44,634 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:39:44,636 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:39:44,636 | INFO | repair.litapp-blog | END pattern 2 (pattern_2)
+2025-09-01 02:39:44,637 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:39:44,637 | INFO | repair.litapp-blog | BEGIN pattern 3 (pattern_3)
+2025-09-01 02:39:44,637 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}", "changelogId": 3}
+2025-09-01 02:39:44,809 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:39:44,809 | DEBUG | repair.litapp-blog | Parsed detection output: [{'pattern_id': 3, 'file': 'scripts/dev.js', 'line': 8, 'column': 9, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/dev.js', 'line': 8, 'column': 9, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/dev.js', 'line': 34, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/dev.js', 'line': 34, 'column': 10, 'confidence': 'high'}]
+2025-09-01 02:39:44,809 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {'scripts/dev.js': defaultdict(<class 'list'>, {3: [{'line': 8, 'column': 9, 'confidence': 'high'}, {'line': 8, 'column': 9, 'confidence': 'high'}, {'line': 34, 'column': 10, 'confidence': 'high'}, {'line': 34, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 02:39:44,809 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:39:44,810 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:40:01,837 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async (event, path) => {\n    console.log(event, path);\n\n    tw.kill(\"SIGTERM\", {\n      forceKillAfterTimeout: 2000,\n    });\n\n    tw = startTW();\n\n    // Adaptation for execa v9.0.0: use stdout and stderr options instead of pipeStdout/pipeStderr\n    await execa(\"yarn\", [\"build-blog\"], {\n      stdout: ['pipe', process.stdout],\n      stderr: ['pipe', process.stderr]\n    });\n\n    eventRes.write(\"event: change\\n\");\n    eventRes.write(`data: ${event} ${path}\\n\\n`);\n  }",
+  "additional_req": "",
+  "dependencies": [
+    "execa@^9.0.0"
+  ]
+}
+2025-09-01 02:40:01,840 | INFO | repair.litapp-blog | Replaced code in -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js at [573, 921]
+2025-09-01 02:40:13,306 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "() => {\n  console.log(\"Starting Tiddlywiki\");\n  return execa(\"tiddlywiki\", [\"editions/demo\", \"--listen\", \"--verbose\"], {\n    preferLocal: true,\n    env: {\n      TIDDLYWIKI_PLUGIN_PATH: \"./plugins\",\n    },\n    // In v9, pipeStdout/process streams must be configured via options\n    stdout: ['pipe', process.stdout],\n    stderr: ['pipe', process.stderr],\n  });\n}",
+  "additional_req": "",
+  "dependencies": [
+    "execa@^9.0.0"
+  ]
+}
+2025-09-01 02:40:13,309 | INFO | repair.litapp-blog | Replaced code in -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js at [143, 419]
+2025-09-01 02:40:13,310 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:40:13,311 | INFO | repair.litapp-blog | END pattern 3 (pattern_3)
+2025-09-01 02:40:13,311 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:40:13,311 | INFO | repair.litapp-blog | BEGIN pattern 3 (pattern_3)
+2025-09-01 02:40:13,312 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}", "changelogId": 3}
+2025-09-01 02:40:13,487 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:40:13,487 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:40:13,487 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {})
+2025-09-01 02:40:13,488 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:40:13,488 | INFO | repair.litapp-blog | END pattern 3 (pattern_3)
+2025-09-01 02:40:13,488 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:40:13,488 | INFO | repair.litapp-blog | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:40:13,488 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}", "changelogId": 4}
+2025-09-01 02:40:13,604 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:40:13,604 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:40:13,604 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {})
+2025-09-01 02:40:13,605 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:40:13,605 | INFO | repair.litapp-blog | END pattern 4 (pattern_4)
+2025-09-01 02:40:13,605 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:40:13,605 | INFO | repair.litapp-blog | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:40:13,605 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}", "changelogId": 4}
+2025-09-01 02:40:13,722 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:40:13,722 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:40:13,722 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {})
+2025-09-01 02:40:13,723 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:40:13,723 | INFO | repair.litapp-blog | END pattern 4 (pattern_4)
+2025-09-01 02:40:13,723 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:40:13,723 | INFO | repair.litapp-blog | BEGIN pattern 5 (pattern_5)
+2025-09-01 02:40:13,723 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{execa}", "changelogId": 5}
+2025-09-01 02:40:13,839 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:40:13,839 | DEBUG | repair.litapp-blog | Parsed detection output: [{'pattern_id': 5, 'file': 'scripts/dev.js', 'line': 2, 'column': 0, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/dev.js', 'line': 8, 'column': 9, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/dev.js', 'line': 36, 'column': 10, 'confidence': 'high'}]
+2025-09-01 02:40:13,839 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {'scripts/dev.js': defaultdict(<class 'list'>, {5: [{'line': 2, 'column': 0, 'confidence': 'high'}, {'line': 8, 'column': 9, 'confidence': 'high'}, {'line': 36, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 02:40:13,839 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:40:13,840 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:40:13,840 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:40:18,435 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:40:22,725 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:40:25,491 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:40:25,494 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:40:25,494 | INFO | repair.litapp-blog | END pattern 5 (pattern_5)
+2025-09-01 02:40:25,495 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:40:25,495 | INFO | repair.litapp-blog | BEGIN pattern 5 (pattern_5)
+2025-09-01 02:40:25,495 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{execa}", "changelogId": 5}
+2025-09-01 02:40:25,678 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:40:25,678 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:40:25,678 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {})
+2025-09-01 02:40:25,678 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:40:25,678 | INFO | repair.litapp-blog | END pattern 5 (pattern_5)
+2025-09-01 02:40:25,678 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:40:25,678 | INFO | repair.litapp-blog | BEGIN pattern 6 (pattern_6)
+2025-09-01 02:40:25,678 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "read", "pattern": "read {<execa>,<execa/**/*>}?**.{killed,isTerminated}", "changelogId": 6}
+2025-09-01 02:40:25,790 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:40:25,790 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:40:25,790 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {})
+2025-09-01 02:40:25,790 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:40:25,791 | INFO | repair.litapp-blog | END pattern 6 (pattern_6)
+2025-09-01 02:40:25,791 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:40:25,791 | INFO | repair.litapp-blog | BEGIN pattern 7 (pattern_7)
+2025-09-01 02:40:25,791 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{cancel}", "changelogId": 7}
+2025-09-01 02:40:25,901 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:40:25,902 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:40:25,902 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {})
+2025-09-01 02:40:25,902 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:40:25,902 | INFO | repair.litapp-blog | END pattern 7 (pattern_7)
+2025-09-01 02:40:25,902 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:40:25,902 | INFO | repair.litapp-blog | BEGIN pattern 7 (pattern_7)
+2025-09-01 02:40:25,902 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{cancel}", "changelogId": 7}
+2025-09-01 02:40:26,019 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:40:26,019 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:40:26,019 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {})
+2025-09-01 02:40:26,019 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:40:26,019 | INFO | repair.litapp-blog | END pattern 7 (pattern_7)
+2025-09-01 02:40:26,020 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:40:26,020 | INFO | repair.litapp-blog | BEGIN pattern 8 (pattern_8)
+2025-09-01 02:40:26,020 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{execa,kill}", "changelogId": 8}
+2025-09-01 02:40:26,135 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:40:26,135 | DEBUG | repair.litapp-blog | Parsed detection output: [{'pattern_id': 8, 'file': 'scripts/dev.js', 'line': 2, 'column': 0, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/dev.js', 'line': 8, 'column': 9, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/dev.js', 'line': 29, 'column': 4, 'confidence': 'low'}, {'pattern_id': 8, 'file': 'scripts/dev.js', 'line': 36, 'column': 10, 'confidence': 'high'}]
+2025-09-01 02:40:26,135 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x112cbade0>, {'scripts/dev.js': defaultdict(<class 'list'>, {8: [{'line': 2, 'column': 0, 'confidence': 'high'}, {'line': 8, 'column': 9, 'confidence': 'high'}, {'line': 29, 'column': 4, 'confidence': 'low'}, {'line': 36, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 02:40:26,135 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:40:26,135 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:40:26,136 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:40:44,128 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the implementation of startTW (the execa invocation inside it) so we can move the forceKillAfterTimeout option to the top\u2010level forceKillAfterDelay in the execa call.",
+  "dependencies": []
+}
+2025-09-01 02:40:44,130 | DEBUG | repair.litapp-blog | Added to whole mode list: file=-2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js, context=Node, bc_desc={'Id': 8, 'BC_description': "The option 'forceKillAfterTimeout' has been renamed to 'forceKillAfterDelay' and its locati...
+2025-09-01 02:40:47,610 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:40:55,085 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:40:55,086 | INFO | repair.litapp-blog | Whole mode item: -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:41:42,398 | DEBUG | repair.litapp-blog | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': 'import chokidar from "chokidar";\nimport { execa } from "execa";\nimport esbuild from "esbuild";\nimport express from \'express\';\n\nconst startTW = () => {\n  console.log("Starting Tiddlywiki");\n  return execa("tiddlywiki", ["editions/demo", "--listen", "--verbose"], {\n    preferLocal: true,\n    env: {\n      TIDDLYWIKI_PLUGIN_PATH: "./plugins",\n    },\n    // In v9, pipeStdout/process streams must be configured via options\n    stdout: [\'pipe\', process.stdout],\n    stderr: [\'pipe\', process.stderr],\n    // BC v9: renamed forceKillAfterTimeout to forceKillAfterDelay and moved to execa options\n    forceKillAfterDelay: 2000,\n  });\n};\n\nconst twWatcher = chokidar.watch("plugins", "editions");\n\nlet tw;\nlet eventRes;\n\ntwWatcher.on("ready", () => {\n  tw = startTW();\n  twWatcher.on("all", async (event, path) => {\n    console.log(event, path);\n\n    // BC v9: subprocess.kill no longer accepts forceKillAfterTimeout; delay is set on creation\n    tw.kill("SIGTERM");\n\n    tw = startTW();\n\n    // Adaptation for execa v9.0.0: use stdout and stderr options instead of pipeStdout/pipeStderr\n    await execa("yarn", ["build-blog"], {\n      stdout: [\'pipe\', process.stdout],\n      stderr: [\'pipe\', process.stderr]\n    });\n\n    eventRes.write("event: change\\n");\n    eventRes.write(`data: ${event} ${path}\\n\\n`);\n  });\n});\n\nconst app = express()\n\napp.use(express.static("./editions/demo/output/static"))\napp.get("/blog-build", (req, res)=>{\n      const headers = {\n        "Content-Type": "text/event-stream",\n        Connection: "keep-alive",\n        "Cache-Control": "no-cache",\n      };\n      res.writeHead(200, headers);\n      eventRes = res;\n\n      return;\n})\napp.listen(9021, ()=>{\n    console.log("static blog on 9021")\n})', 'additional_req': '', 'dependencies': []}
+2025-09-01 02:41:42,399 | INFO | repair.litapp-blog | Replace whole file: -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:41:42,401 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:41:42,402 | INFO | repair.litapp-blog | END pattern 8 (pattern_8)
+2025-09-01 02:41:42,402 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:41:42,403 | INFO | repair.litapp-blog | BEGIN pattern 8 (pattern_8)
+2025-09-01 02:41:42,403 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{execa,kill}", "changelogId": 8}
+2025-09-01 02:41:42,595 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:41:42,596 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:41:42,596 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a8e0>, {})
+2025-09-01 02:41:42,596 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:41:42,596 | INFO | repair.litapp-blog | END pattern 8 (pattern_8)
+2025-09-01 02:41:42,596 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:41:42,596 | INFO | repair.litapp-blog | BEGIN pattern 9 (pattern_9)
+2025-09-01 02:41:42,596 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{execa}", "changelogId": 9}
+2025-09-01 02:41:42,708 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:41:42,708 | DEBUG | repair.litapp-blog | Parsed detection output: [{'pattern_id': 9, 'file': 'scripts/dev.js', 'line': 2, 'column': 0, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/dev.js', 'line': 8, 'column': 9, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/dev.js', 'line': 37, 'column': 10, 'confidence': 'high'}]
+2025-09-01 02:41:42,708 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a8e0>, {'scripts/dev.js': defaultdict(<class 'list'>, {9: [{'line': 2, 'column': 0, 'confidence': 'high'}, {'line': 8, 'column': 9, 'confidence': 'high'}, {'line': 37, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 02:41:42,709 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:41:42,709 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:41:42,709 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:41:46,795 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:41:51,093 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:41:54,984 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:41:54,987 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:41:54,987 | INFO | repair.litapp-blog | END pattern 9 (pattern_9)
+2025-09-01 02:41:54,988 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:41:54,988 | INFO | repair.litapp-blog | BEGIN pattern 9 (pattern_9)
+2025-09-01 02:41:54,988 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{execa}", "changelogId": 9}
+2025-09-01 02:41:55,176 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:41:55,176 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:41:55,176 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a8e0>, {})
+2025-09-01 02:41:55,177 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:41:55,177 | INFO | repair.litapp-blog | END pattern 9 (pattern_9)
+2025-09-01 02:41:55,177 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:41:55,177 | INFO | repair.litapp-blog | BEGIN pattern 10 (pattern_10)
+2025-09-01 02:41:55,177 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{execa}", "changelogId": 10}
+2025-09-01 02:41:55,297 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:41:55,297 | DEBUG | repair.litapp-blog | Parsed detection output: [{'pattern_id': 10, 'file': 'scripts/dev.js', 'line': 2, 'column': 0, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/dev.js', 'line': 8, 'column': 9, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/dev.js', 'line': 37, 'column': 10, 'confidence': 'high'}]
+2025-09-01 02:41:55,297 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a8e0>, {'scripts/dev.js': defaultdict(<class 'list'>, {10: [{'line': 2, 'column': 0, 'confidence': 'high'}, {'line': 8, 'column': 9, 'confidence': 'high'}, {'line': 37, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 02:41:55,298 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:41:55,298 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:41:55,298 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:42:02,867 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:42:05,762 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:42:10,246 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:42:10,248 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:42:10,248 | INFO | repair.litapp-blog | END pattern 10 (pattern_10)
+2025-09-01 02:42:10,248 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:42:10,248 | INFO | repair.litapp-blog | BEGIN pattern 10 (pattern_10)
+2025-09-01 02:42:10,248 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{execa}", "changelogId": 10}
+2025-09-01 02:42:10,430 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:42:10,430 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:42:10,430 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a2a0>, {})
+2025-09-01 02:42:10,431 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:42:10,431 | INFO | repair.litapp-blog | END pattern 10 (pattern_10)
+2025-09-01 02:42:10,431 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:42:10,431 | INFO | repair.litapp-blog | BEGIN pattern 11 (pattern_11)
+2025-09-01 02:42:10,431 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{send}", "changelogId": 11}
+2025-09-01 02:42:10,545 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:42:10,545 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:42:10,545 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a2a0>, {})
+2025-09-01 02:42:10,545 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:42:10,545 | INFO | repair.litapp-blog | END pattern 11 (pattern_11)
+2025-09-01 02:42:10,546 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:42:10,546 | INFO | repair.litapp-blog | BEGIN pattern 11 (pattern_11)
+2025-09-01 02:42:10,546 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{send}", "changelogId": 11}
+2025-09-01 02:42:10,659 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:42:10,659 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:42:10,659 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a2a0>, {})
+2025-09-01 02:42:10,659 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:42:10,659 | INFO | repair.litapp-blog | END pattern 11 (pattern_11)
+2025-09-01 02:42:10,659 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:42:10,659 | INFO | repair.litapp-blog | BEGIN pattern 12 (pattern_12)
+2025-09-01 02:42:10,659 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{pipe,pipe,pipe}", "changelogId": 12}
+2025-09-01 02:42:10,776 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:42:10,776 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:42:10,776 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a2a0>, {})
+2025-09-01 02:42:10,776 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:42:10,776 | INFO | repair.litapp-blog | END pattern 12 (pattern_12)
+2025-09-01 02:42:10,776 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:42:10,776 | INFO | repair.litapp-blog | BEGIN pattern 12 (pattern_12)
+2025-09-01 02:42:10,776 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{pipe,pipe,pipe}", "changelogId": 12}
+2025-09-01 02:42:10,894 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:42:10,894 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:42:10,894 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a2a0>, {})
+2025-09-01 02:42:10,894 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:42:10,894 | INFO | repair.litapp-blog | END pattern 12 (pattern_12)
+2025-09-01 02:42:10,895 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:42:10,895 | INFO | repair.litapp-blog | BEGIN pattern 13 (pattern_13)
+2025-09-01 02:42:10,895 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{kill}", "changelogId": 13}
+2025-09-01 02:42:11,008 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:42:11,008 | DEBUG | repair.litapp-blog | Parsed detection output: [{'pattern_id': 13, 'file': 'scripts/dev.js', 'line': 32, 'column': 4, 'confidence': 'low'}]
+2025-09-01 02:42:11,008 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11355a2a0>, {'scripts/dev.js': defaultdict(<class 'list'>, {13: [{'line': 32, 'column': 4, 'confidence': 'low'}]})})
+2025-09-01 02:42:11,009 | INFO | repair.litapp-blog | New context extracted from -2024/execa/results/gpt-4.1/litapp-blog/scripts/dev.js
+2025-09-01 02:42:18,230 | DEBUG | repair.litapp-blog | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 02:42:18,234 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:42:18,234 | INFO | repair.litapp-blog | END pattern 13 (pattern_13)
+2025-09-01 02:42:18,235 | INFO | repair.litapp-blog | ============================================================
+2025-09-01 02:42:18,235 | INFO | repair.litapp-blog | BEGIN pattern 13 (pattern_13)
+2025-09-01 02:42:18,235 | DEBUG | repair.litapp-blog | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{kill}", "changelogId": 13}
+2025-09-01 02:42:18,388 | INFO | repair.litapp-blog | Tapir run successful for -2024/execa/results/gpt-4.1/litapp-blog
+2025-09-01 02:42:18,389 | DEBUG | repair.litapp-blog | Parsed detection output: []
+2025-09-01 02:42:18,389 | DEBUG | repair.litapp-blog | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x113559c60>, {})
+2025-09-01 02:42:18,389 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:42:18,389 | INFO | repair.litapp-blog | END pattern 13 (pattern_13)
+2025-09-01 02:42:18,389 | DEBUG | repair.litapp-blog | Updated package.json saved at -2024/execa/results/gpt-4.1/litapp-blog/package.json
+2025-09-01 02:42:18,389 | INFO | repair.litapp-blog | token consumed 72670
+2025-09-01 02:42:18,390 | INFO | repair.litapp-blog | parse consumption time: 171.36999374907464

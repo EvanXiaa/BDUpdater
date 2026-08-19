@@ -1,0 +1,7 @@
+{
+  "owner": "ember-cli",
+  "repo": "ember-resolver",
+  "number": 862,
+  "pr_url": "https://github.com/ember-cli/ember-resolver/pull/862",
+  "content": "# PR 862: Add @ember/string as a peerDep\nBranches: kg-ember-string -> master\n\n`@ember/string` without the external package is deprecated in `ember-source` v4.10\n\n## Commit titles\n- Add @ember/string as a peerDep\n\n## Changed files\n- addon/package.json\n- package-lock.json\n- test-app/package.json\n## Issue comments\n- @kategengler: From @ef4 in Discord, on why a peerDep vs a dep:\r\n\r\n> @ember/string contains shared module state (there are cache-based optimizations), which is one factor in trying to ensure a single copy.\r\n\r\n> It's not wrong for some addons to decide they'd rather use it as a dependency than a peerDependency, but it invites duplication, and in the case of @ember/string you'll also duplicate the caches.\n## Reviews\n- @MelSumner [APPROVED]\n- @wagenet [APPROVED]"
+}

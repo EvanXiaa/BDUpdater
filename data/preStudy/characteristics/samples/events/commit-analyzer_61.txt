@@ -1,0 +1,7 @@
+{
+  "owner": "semantic-release",
+  "repo": "commit-analyzer",
+  "number": 61,
+  "pr_url": "https://github.com/semantic-release/commit-analyzer/pull/61",
+  "content": "# PR 61: Fix breaking change documentation\nBranches: patch-1 -> master\n\nBreaking changes are a `major` release, not a `minor`.\n\n## Commit titles\n- Fix breaking change documentation\n\n## Changed files\n- README.md\n## Markdown changes\n### README.md\n```diff\n@@ -80,7 +80,7 @@ With the previous example:\n If a commit doesn't match any rule in `releaseRules` it will be evaluated against the [default release rules](lib/default-release-rules.js).\n \n With the previous example:\n-- Commits with a breaking change will be associated with a `minor` release.\n+- Commits with a breaking change will be associated with a `major` release.\n - Commits with `type` 'feat' will be associated with a `minor` release.\n - Commits with `type` 'fix' will be associated with a `patch` release.\n - Commits with `type` 'perf' will be associated with a `patch` release.\n```\n## Issue comments\n- @semantic-release-bot: :tada: This PR is included in version 5.0.4 :tada:\n\nThe release is available on:\n- [npm package (@next dist-tag)](https://www.npmjs.com/package/@semantic-release/commit-analyzer)\n- [GitHub release](https://github.com/semantic-release/commit-analyzer/releases/tag/v5.0.4)\n\nYour **[semantic-release](https://github.com/semantic-release/semantic-release)** bot :package::rocket:\n## Reviews\n- @gr2m [APPROVED]: thanks :)"
+}

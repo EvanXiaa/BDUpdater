@@ -1,0 +1,7 @@
+{
+  "owner": "tj",
+  "repo": "commander.js",
+  "number": 2350,
+  "pr_url": "https://github.com/tj/commander.js/pull/2350",
+  "content": "# PR 2350: Make .configureOutput() create copy of settings instead of in-place change\nBranches: feature/independent-configureOutput -> release/14.x\n\n## Problem\r\n\r\nModifying command using `.configureOutput()` modifies other commands sharing same settings.\r\n\r\nFixes: #2342\r\n\r\n## Solution\r\n\r\nMake a copy of settings instead of modifying in place. \r\n\r\n## ChangeLog\r\n\r\n- fixed: `.configureOutput()` now makes copy of settings instead of modifying in-place, fixing side-effects\r\n\n\n## Commit titles\n- Change configureOutput to create new settings instead of modify in place\n- Lint\n\n## Changed files\n- lib/command.js\n- tests/command.configureOutput.test.js\n## Issue comments\n- @shadowspawn: Could go in a minor version since a bug fix, but thinking hold until we do a release to drop node 18 since will break anyone who was inadvertently relying on previous behaviour.\n## Reviews\n- @abetomo [APPROVED]\n- @galaxycores [APPROVED]"
+}

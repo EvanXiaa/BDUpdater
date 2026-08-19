@@ -1,0 +1,94 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "Direct, private imports from Redux internal paths (like 'redux/lib/createStore') are no longer supported as Redux now bundles CommonJS and ES builds differently.",
+      "Reference": [
+        "https://github.com/reactjs/redux/compare/v3.7.2...v4.0.0",
+        "https://github.com/reactjs/redux/issues/1342",
+        "https://github.com/reactjs/redux/pull/2358"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "redux/lib/*"
+        ]
+      },
+      "Adaptation_method": "Replace private imports with public ones. For example, instead of `import createStore from 'redux/lib/createStore'`, use `import { createStore } from 'redux'`.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Redux now throws an error if getState, subscribe, or unsubscribe are called while dispatching (including inside a reducer).",
+      "Reference": [
+        "https://github.com/reactjs/redux/compare/v3.7.2...v4.0.0",
+        "https://github.com/reactjs/redux/pull/1569",
+        "https://github.com/reactjs/redux/issues/1569"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Store"
+        ],
+        "methodName": [
+          "getState",
+          "subscribe",
+          "unsubscribe"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "redux"
+        ]
+      },
+      "Adaptation_method": "Ensure that you don't call store.getState(), store.subscribe(), or store.unsubscribe() inside your reducers or while an action is being dispatched. Move any such logic outside of the reducer functions.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "Redux ActionTypes have been moved to a private export, making them inaccessible for direct import.",
+      "Reference": [
+        "https://github.com/reactjs/redux/compare/v3.7.2...v4.0.0",
+        "b62248b"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [
+          "ActionTypes"
+        ],
+        "moduleName": [
+          "redux"
+        ]
+      },
+      "Adaptation_method": "Do not rely on internal Redux ActionTypes in your code. If you need to check for specific action types, define your own constants instead of importing them from Redux.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "The legacy jsnext entry point has been removed from the package.",
+      "Reference": [
+        "https://github.com/reactjs/redux/compare/v3.7.2...v4.0.0",
+        "https://github.com/reactjs/redux/pull/2284"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "redux/jsnext"
+        ]
+      },
+      "Adaptation_method": "Use the standard ES modules entry point instead. Import Redux directly using `import { createStore } from 'redux'` without specifying a jsnext path.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<svgo>,<svgo/**/*>}**.{querySelectorAll,querySelector,matches}",
+    "changelogId": 8
+  },
+  {
+    "type": "call",
+    "pattern": "write {<svgo>,<svgo/**/*>}**.{querySelectorAll,querySelector,matches}",
+    "changelogId": 8
+  },
+  {
+    "type": "import",
+    "pattern": "import {svgo/lib/*,svgo/plugins/*}",
+    "changelogId": 4
+  },
+  {
+    "type": "import",
+    "pattern": "import {svgo/dist/svgo.browser}",
+    "changelogId": 5
+  },
+  {
+    "type": "import",
+    "pattern": "import {svgo/lib/xast,svgo/lib/builtin}",
+    "changelogId": 6
+  },
+  {
+    "type": "import",
+    "pattern": "import {svgo/plugins/*}",
+    "changelogId": 7
+  },
+  {
+    "type": "import",
+    "pattern": "import {svgo}",
+    "changelogId": 9
+  }
+]

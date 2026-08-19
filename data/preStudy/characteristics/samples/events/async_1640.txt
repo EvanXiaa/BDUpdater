@@ -1,0 +1,7 @@
+{
+  "owner": "caolan",
+  "repo": "async",
+  "number": 1640,
+  "pr_url": "https://github.com/caolan/async/pull/1640",
+  "content": "# PR 1640: BREAKING CHANGE: remove partial application feature of applyEach\nBranches: applyeach-no-partial -> master\n\nFixes #1228 , making it more type-able.\r\n\r\nThis reduces the utility of `applyEach`, though.\r\n\r\nI'm almost in favor of removing the whole method.   I couldn't find any examples of it being used in the wild, and has always been a strange method.\n\n## Commit titles\n- BREAKING CHANGE: remove partial application feature of applyEach\n- add awaitable tests for applyEach\n\n## Changed files\n- lib/eachSeries.js\n- lib/internal/applyEach.js\n- test/applyEach.js\n- test/es2017/asyncFunctions.js\n- test/es2017/awaitableFunctions.js\n- test/priorityQueue.js"
+}

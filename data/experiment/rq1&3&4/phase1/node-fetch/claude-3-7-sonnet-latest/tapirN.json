@@ -1,0 +1,97 @@
+[
+  {
+    "type": "write",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Content-Length}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{text}",
+    "changelogId": 3
+  },
+  {
+    "type": "call",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{text}",
+    "changelogId": 3
+  },
+  {
+    "type": "call",
+    "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{json}",
+    "changelogId": 4
+  },
+  {
+    "type": "call",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{json}",
+    "changelogId": 4
+  },
+  {
+    "type": "call",
+    "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{_clone,_decode,_convert}",
+    "changelogId": 5
+  },
+  {
+    "type": "call",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{_clone,_decode,_convert}",
+    "changelogId": 5
+  },
+  {
+    "type": "call",
+    "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Request}",
+    "changelogId": 6
+  },
+  {
+    "type": "call",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Request}",
+    "changelogId": 6
+  },
+  {
+    "type": "call",
+    "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{getAll,get}",
+    "changelogId": 7
+  },
+  {
+    "type": "call",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{getAll,get}",
+    "changelogId": 7
+  },
+  {
+    "type": "call",
+    "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{set,get}",
+    "changelogId": 8
+  },
+  {
+    "type": "call",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{set,get}",
+    "changelogId": 8
+  },
+  {
+    "type": "call",
+    "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}",
+    "changelogId": 9
+  },
+  {
+    "type": "call",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}",
+    "changelogId": 9
+  },
+  {
+    "type": "call",
+    "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers}",
+    "changelogId": 10
+  },
+  {
+    "type": "call",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers}",
+    "changelogId": 10
+  },
+  {
+    "type": "write",
+    "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{body,bodyUsed,method,url,headers,redirect}",
+    "changelogId": 11
+  },
+  {
+    "type": "import",
+    "pattern": "import {node-fetch/lib/*}",
+    "changelogId": 1
+  }
+]

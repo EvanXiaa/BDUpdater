@@ -1,0 +1,1 @@
+## [6.3.1](https://github.com/styled-components/jest-styled-components/compare/v6.3.0...v6.3.1) - 2018-11-11

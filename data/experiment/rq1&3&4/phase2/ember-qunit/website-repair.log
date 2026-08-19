@@ -1,0 +1,41 @@
+2025-09-01 02:00:39,168 | INFO | repair.website | Starting analysis for website
+2025-09-01 02:00:39,168 | INFO | repair.website | Starting breaking change analysis for -2024/ember-qunit/results/gpt-4.1/website
+2025-09-01 02:00:39,169 | INFO | repair.website | ============================================================
+2025-09-01 02:00:39,169 | INFO | repair.website | BEGIN pattern 0 (pattern_0)
+2025-09-01 02:00:39,169 | DEBUG | repair.website | Pattern payload: {"type": "call", "pattern": "read {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 02:00:39,625 | INFO | repair.website | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/website
+2025-09-01 02:00:39,625 | DEBUG | repair.website | Parsed detection output: [{'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 11, 'column': 0, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 67, 'column': 0, 'confidence': 'high'}]
+2025-09-01 02:00:39,625 | DEBUG | repair.website | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1096bdc60>, {'tests/test-helper.js': defaultdict(<class 'list'>, {0: [{'line': 11, 'column': 0, 'confidence': 'high'}, {'line': 67, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 02:00:39,628 | INFO | repair.website | New context extracted from -2024/ember-qunit/results/gpt-4.1/website/tests/test-helper.js
+2025-09-01 02:00:39,628 | INFO | repair.website | New context extracted from -2024/ember-qunit/results/gpt-4.1/website/tests/test-helper.js
+2025-09-01 02:00:50,409 | DEBUG | repair.website | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "// Explicitly enable Ember onerror validation and load test modules before starting the test run\nimport { start, setupEmberOnerrorValidation } from 'ember-qunit';\nimport { loadTests } from 'ember-qunit/test-loader';\n\nsetupEmberOnerrorValidation();\nloadTests();\nstart();",
+  "additional_req": "",
+  "dependencies": [
+    "ember-qunit@^9.0.0"
+  ]
+}
+2025-09-01 02:00:50,411 | INFO | repair.website | Replaced code in -2024/ember-qunit/results/gpt-4.1/website/tests/test-helper.js at [1792, 1800]
+2025-09-01 02:00:59,432 | DEBUG | repair.website | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the full contents of your test entry file (e.g., tests/test-helper.js), including where and how `start()` is being invoked, so we can correctly insert the `setupEmberOnerrorValidation()` and `loadTests()` calls.",
+  "dependencies": []
+}
+2025-09-01 02:00:59,433 | DEBUG | repair.website | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/website/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 02:00:59,433 | INFO | repair.website | Whole mode item: -2024/ember-qunit/results/gpt-4.1/website/tests/test-helper.js
+2025-09-01 02:01:07,008 | DEBUG | repair.website | AI whole-file repair suggestion: {'repairFlag': False, 'modified_code': '', 'additional_req': '', 'dependencies': []}
+2025-09-01 02:01:07,011 | DEBUG | repair.website | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/website/package.json
+2025-09-01 02:01:07,012 | INFO | repair.website | END pattern 0 (pattern_0)
+2025-09-01 02:01:07,012 | INFO | repair.website | ============================================================
+2025-09-01 02:01:07,013 | INFO | repair.website | BEGIN pattern 0 (pattern_0)
+2025-09-01 02:01:07,013 | DEBUG | repair.website | Pattern payload: {"type": "call", "pattern": "write {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 02:01:07,508 | INFO | repair.website | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/website
+2025-09-01 02:01:07,508 | DEBUG | repair.website | Parsed detection output: []
+2025-09-01 02:01:07,508 | DEBUG | repair.website | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1096bec00>, {})
+2025-09-01 02:01:07,509 | DEBUG | repair.website | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/website/package.json
+2025-09-01 02:01:07,509 | INFO | repair.website | END pattern 0 (pattern_0)
+2025-09-01 02:01:07,509 | DEBUG | repair.website | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/website/package.json
+2025-09-01 02:01:07,509 | INFO | repair.website | token consumed 14460
+2025-09-01 02:01:07,509 | INFO | repair.website | parse consumption time: 27.375377166084945

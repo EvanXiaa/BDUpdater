@@ -1,0 +1,25 @@
+{
+  "Id": 4,
+  "BC_description": "Internal methods of node-fetch are no longer exposed. Any code that imported and used undocumented internal methods will break. In v1.x, the user can access internal methods such as '_clone()', '_decode()', and '_convert()' on the 'response' object. In v2.x, these methods are completely inaccessible.",
+  "Reference": [
+    "CHANGELOG.md#v2.0.0",
+    "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md",
+    "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#internal-methods-hidden"
+  ],
+  "Changed_object": {
+    "type": "import",
+    "className": [
+      "*"
+    ],
+    "methodName": [
+      "*"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "node-fetch/lib/*"
+    ]
+  },
+  "Adaptation_method": "Remove all usages of undocumented/internal APIs from node-fetch/lib/*. Use only public, documented APIs exposed in the main 'node-fetch' module.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}

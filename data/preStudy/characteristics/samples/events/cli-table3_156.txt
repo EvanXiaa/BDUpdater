@@ -1,0 +1,7 @@
+{
+  "owner": "cli-table",
+  "repo": "cli-table3",
+  "number": 156,
+  "pr_url": "https://github.com/cli-table/cli-table3/pull/156",
+  "content": "# PR 156: Drop support for Node 6 and 8\nBranches: node-10 -> master\n\nThese versions are no longer maintained by the Node.js team, so we should drop support to unblock some of the open dependency updates.\r\n\r\nCloses #133\n\n## Commit titles\n- Drop support for Node 6 and 8\n\n## Changed files\n- .travis.yml\n- package.json"
+}

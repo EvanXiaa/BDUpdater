@@ -1,0 +1,220 @@
+2025-08-30 23:44:21,439 | INFO | repair.fetch-vcr | Starting analysis for fetch-vcr
+2025-08-30 23:44:21,439 | INFO | repair.fetch-vcr | Starting breaking change analysis for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:21,439 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:21,439 | INFO | repair.fetch-vcr | BEGIN pattern 2 (pattern_2)
+2025-08-30 23:44:21,439 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-30 23:44:21,571 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:21,571 | DEBUG | repair.fetch-vcr | Parsed detection output: [{'pattern_id': 2, 'file': 'lib/adapter/files-browser.js', 'line': 6, 'column': 11}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 16, 'column': 11}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 25, 'column': 11}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 61, 'column': 29}, {'pattern_id': 2, 'file': 'test/index.js', 'line': 66, 'column': 24}]
+2025-08-30 23:44:21,571 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {'lib/adapter/files-browser.js': defaultdict(<class 'list'>, {2: [{'line': 6, 'column': 11}]}), 'test/index.js': defaultdict(<class 'list'>, {2: [{'line': 16, 'column': 11}, {'line': 25, 'column': 11}, {'line': 61, 'column': 29}, {'line': 66, 'column': 24}]})})
+2025-08-30 23:44:21,572 | INFO | repair.fetch-vcr | New context extracted from /node-fetch/results/gpt-4.1/fetch-vcr/lib/adapter/files-browser.js
+2025-08-30 23:44:23,367 | DEBUG | repair.fetch-vcr | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "function loadFile(root, filename) {\n  return fetch(root + '/' + escape(filename))\n  .then(function(response) {\n    // node-fetch v2: response.text() always returns UTF-8 text\n    // If you need legacy automatic encoding detection, use response.textConverted() instead:\n    return response.textConverted();\n  })\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:44:23,368 | INFO | repair.fetch-vcr | Replaced code in /node-fetch/results/gpt-4.1/fetch-vcr/lib/adapter/files-browser.js at [40, 184]
+2025-08-30 23:44:23,369 | INFO | repair.fetch-vcr | New context extracted from /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js
+2025-08-30 23:44:23,369 | INFO | repair.fetch-vcr | New context extracted from /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js
+2025-08-30 23:44:23,370 | INFO | repair.fetch-vcr | New context extracted from /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js
+2025-08-30 23:44:27,261 | DEBUG | repair.fetch-vcr | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async t => {\n  const TEST_URL = 'https://openstax.org'\n  // Verify that the fixture does not yet exist\n  fetchVCR.configure({mode: 'playback'})\n  try {\n    await fetchVCR(TEST_URL)\n    t.fail('This URL Should not initially be in the fixtures directory')\n  } catch (e) {\n    assert(e)\n  }\n  // Save the response into the fixtures directory\n  fetchVCR.configure({mode: 'cache'})\n  const origResp = await fetchVCR(TEST_URL)\n  // Breaking change: response.text() now always returns UTF-8 text. To preserve previous encoding auto-detection, use textConverted().\n  const originalText = await origResp.textConverted()\n\n  // Verify that it was saved into the fixtures directory\n  fetchVCR.configure({mode: 'playback'})\n  const newResp = await fetchVCR(TEST_URL)\n  const newText = await newResp.textConverted()\n\n  assert.equal(originalText, newText)\n  t.pass()\n}",
+  "additional_req": "If fetchVCR returns a non-standard Response or not node-fetch Response, further validation required; assumes fetchVCR wraps node-fetch and Response objects are compatible. If that's not guaranteed, review fetchVCR implementation or test compatibility.",
+  "dependencies": [
+    "node-fetch@^2.0.0"
+  ]
+}
+2025-08-30 23:44:27,261 | DEBUG | repair.fetch-vcr | Added to whole mode list: file=/node-fetch/results/gpt-4.1/fetch-vcr/test/index.js, context=dict, bc_desc={'Id': 2, 'BC_description': "The 'response.text()' method now always returns text as UTF-8 without attempting to detect ...
+2025-08-30 23:44:29,203 | DEBUG | repair.fetch-vcr | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "response => {\n    // In node-fetch v2, response.text() always returns UTF-8 text. If legacy encoding detection is needed, use textConverted().\n    return response.textConverted()\n    .then(text => t.pass())\n  }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:44:29,204 | INFO | repair.fetch-vcr | Replaced code in /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js at [604, 676]
+2025-08-30 23:44:31,455 | DEBUG | repair.fetch-vcr | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "response => {\n    // In node-fetch v2.x, response.text() always returns text as UTF-8.\n    // To preserve auto-detected encoding as in v1, switch to textConverted().\n    return response.textConverted()\n    .then(text => t.pass())\n  }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:44:31,456 | INFO | repair.fetch-vcr | Replaced code in /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js at [399, 471]
+2025-08-30 23:44:31,456 | INFO | repair.fetch-vcr | Whole mode item: /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js
+2025-08-30 23:44:37,295 | DEBUG | repair.fetch-vcr | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "import test from 'ava'\nimport assert from 'assert'\nimport fetchVCR from '../lib/index'\n\ntest.before(t => {\n  fetchVCR.configure({\n    mode: 'playback',\n    fixturePath: __dirname + '/_fixtures'\n  })\n})\n\ntest('fetches from the fixture', t => {\n  // fetchVCR.configure({mode: 'record'})\n  return fetchVCR('https://cnx.org?') // the `?` is to make sure the fixture filename is escaped properly\n  .then(response => {\n    // In node-fetch v2.x, response.text() always returns text as UTF-8.\n    // To preserve auto-detected encoding as in v1, switch to textConverted().\n    return response.textConverted()\n    .then(text => t.pass())\n  })\n})\n\ntest('caches a 404 page', t => {\n  // fetchVCR.configure({mode: 'record'})\n  return fetchVCR('https://google.com/404')\n  .then(response => {\n    // In node-fetch v2, response.text() always returns UTF-8 text. If legacy encoding detection is needed, use textConverted().\n    return response.textConverted()\n    .then(text => t.pass())\n  })\n})\n\ntest('saves JSON properly', t => {\n  // fetchVCR.configure({mode: 'record'})\n  // return fetchVCR('https://api.github.com/search/repositories?q=octokat')\n  return fetchVCR('https://archive.cnx.org/contents/9a1df55a-b167-4736-b5ad-15d996704270%403.2.json')\n  .then(response => {\n    return response.json()\n    .then(text => t.pass())\n  })\n})\n\ntest('can recover from invalid JSON', t => {\n  return fetchVCR('https://example.com/invalid-because-of-extra.json')\n  .then(response => {\n    return response.json()\n    .then(text => t.pass())\n  })\n})\n\ntest('caches the fixture', async t => {\n  const TEST_URL = 'https://openstax.org'\n  // Verify that the fixture does not yet exist\n  fetchVCR.configure({mode: 'playback'})\n  try {\n    await fetchVCR(TEST_URL)\n    t.fail('This URL Should not initially be in the fixtures directory')\n  } catch (e) {\n    assert(e)\n  }\n  // Save the response into the fixtures directory\n  fetchVCR.configure({mode: 'cache'})\n  const origResp = await fetchVCR(TEST_URL)\n  // Breaking change: response.text() now always returns UTF-8 text. To preserve previous encoding auto-detection, use textConverted().\n  const originalText = await origResp.textConverted()\n\n  // Verify that it was saved into the fixtures directory\n  fetchVCR.configure({mode: 'playback'})\n  const newResp = await fetchVCR(TEST_URL)\n  const newText = await newResp.textConverted()\n\n  assert.equal(originalText, newText)\n  t.pass()\n})\n\ntest.cb('runs in jsdom', t => {\n  const fs = require('fs')\n  const jsdom = require('jsdom')\n  const JSDOM = jsdom.JSDOM\n\n  const virtualConsole = new jsdom.VirtualConsole()\n  virtualConsole.on('debug', () => {\n    t.end()\n  })\n\n  const dom = new JSDOM(fs.readFileSync(__dirname + '/jsdom-example.html'), {\n    virtualConsole: virtualConsole,\n    runScripts: 'dangerously',\n    beforeParse: (window) => {\n      window.fetch = fetchVCR\n    }\n  })\n\n})", 'additional_req': "If fetchVCR returns a non-standard Response or not node-fetch Response, further validation required; assumes fetchVCR wraps node-fetch and Response objects are compatible. If that's not guaranteed, review fetchVCR implementation or test compatibility.", 'dependencies': ['node-fetch@^2.0.0']}
+2025-08-30 23:44:37,295 | INFO | repair.fetch-vcr | Replace whole file: /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js
+2025-08-30 23:44:37,298 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:37,298 | INFO | repair.fetch-vcr | END pattern 2 (pattern_2)
+2025-08-30 23:44:37,299 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:37,299 | INFO | repair.fetch-vcr | BEGIN pattern 2 (pattern_2)
+2025-08-30 23:44:37,300 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-30 23:44:37,634 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:37,634 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:37,634 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107651260>, {})
+2025-08-30 23:44:37,635 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:37,635 | INFO | repair.fetch-vcr | END pattern 2 (pattern_2)
+2025-08-30 23:44:37,635 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:37,635 | INFO | repair.fetch-vcr | BEGIN pattern 3 (pattern_3)
+2025-08-30 23:44:37,635 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-30 23:44:37,772 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:37,772 | DEBUG | repair.fetch-vcr | Parsed detection output: [{'pattern_id': 3, 'file': 'test/index.js', 'line': 38, 'column': 11}, {'pattern_id': 3, 'file': 'test/index.js', 'line': 46, 'column': 11}]
+2025-08-30 23:44:37,772 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107651260>, {'test/index.js': defaultdict(<class 'list'>, {3: [{'line': 38, 'column': 11}, {'line': 46, 'column': 11}]})})
+2025-08-30 23:44:37,772 | INFO | repair.fetch-vcr | New context extracted from /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js
+2025-08-30 23:44:37,773 | INFO | repair.fetch-vcr | New context extracted from /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js
+2025-08-30 23:44:39,958 | DEBUG | repair.fetch-vcr | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "response => {\n    // response.json() can now throw on 204; handle accordingly\n    return response.json()\n    .then(text => t.pass())\n    .catch(err => {\n      if (response.status === 204) {\n        // Mimic previous behavior: treat as empty object or handle 204 specifically\n        t.pass();\n      } else {\n        throw err;\n      }\n    });\n  }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:44:39,959 | INFO | repair.fetch-vcr | Replaced code in /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js at [1447, 1519]
+2025-08-30 23:44:42,004 | DEBUG | repair.fetch-vcr | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "response => {\n    // In node-fetch v2, response.json() throws on 204; patch for compatibility\n    if (response.status === 204) {\n      // Handle 204 No Content as in v1: resolve with empty object\n      return Promise.resolve({}).then(text => t.pass());\n    }\n    return response.json()\n      .then(text => t.pass());\n  }",
+  "additional_req": "",
+  "dependencies": [
+    "node-fetch@^2.0.0"
+  ]
+}
+2025-08-30 23:44:42,005 | INFO | repair.fetch-vcr | Replaced code in /node-fetch/results/gpt-4.1/fetch-vcr/test/index.js at [1245, 1317]
+2025-08-30 23:44:42,006 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:42,006 | INFO | repair.fetch-vcr | END pattern 3 (pattern_3)
+2025-08-30 23:44:42,006 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:42,006 | INFO | repair.fetch-vcr | BEGIN pattern 3 (pattern_3)
+2025-08-30 23:44:42,006 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-30 23:44:42,183 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:42,183 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:42,183 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:42,183 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:42,183 | INFO | repair.fetch-vcr | END pattern 3 (pattern_3)
+2025-08-30 23:44:42,183 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:42,184 | INFO | repair.fetch-vcr | BEGIN pattern 4 (pattern_4)
+2025-08-30 23:44:42,184 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "call {<node-fetch>,<node-fetch/**/*>}?**.{*}", "changelogId": 4}
+2025-08-30 23:44:42,324 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:42,324 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:42,324 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:42,324 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:42,324 | INFO | repair.fetch-vcr | END pattern 4 (pattern_4)
+2025-08-30 23:44:42,324 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:42,324 | INFO | repair.fetch-vcr | BEGIN pattern 5 (pattern_5)
+2025-08-30 23:44:42,325 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-30 23:44:42,465 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:42,465 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:42,465 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:42,466 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:42,466 | INFO | repair.fetch-vcr | END pattern 5 (pattern_5)
+2025-08-30 23:44:42,466 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:42,466 | INFO | repair.fetch-vcr | BEGIN pattern 5 (pattern_5)
+2025-08-30 23:44:42,466 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-30 23:44:42,606 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:42,607 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:42,607 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:42,607 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:42,607 | INFO | repair.fetch-vcr | END pattern 5 (pattern_5)
+2025-08-30 23:44:42,607 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:42,607 | INFO | repair.fetch-vcr | BEGIN pattern 6 (pattern_6)
+2025-08-30 23:44:42,607 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-30 23:44:42,744 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:42,745 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:42,745 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:42,745 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:42,745 | INFO | repair.fetch-vcr | END pattern 6 (pattern_6)
+2025-08-30 23:44:42,745 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:42,745 | INFO | repair.fetch-vcr | BEGIN pattern 6 (pattern_6)
+2025-08-30 23:44:42,745 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-30 23:44:42,882 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:42,882 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:42,882 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:42,883 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:42,883 | INFO | repair.fetch-vcr | END pattern 6 (pattern_6)
+2025-08-30 23:44:42,883 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:42,883 | INFO | repair.fetch-vcr | BEGIN pattern 7 (pattern_7)
+2025-08-30 23:44:42,883 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-30 23:44:43,020 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:43,020 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:43,020 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:43,020 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:43,020 | INFO | repair.fetch-vcr | END pattern 7 (pattern_7)
+2025-08-30 23:44:43,021 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:43,021 | INFO | repair.fetch-vcr | BEGIN pattern 7 (pattern_7)
+2025-08-30 23:44:43,021 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-30 23:44:43,154 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:43,154 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:43,154 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:43,155 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:43,155 | INFO | repair.fetch-vcr | END pattern 7 (pattern_7)
+2025-08-30 23:44:43,155 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:43,155 | INFO | repair.fetch-vcr | BEGIN pattern 8 (pattern_8)
+2025-08-30 23:44:43,155 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-30 23:44:43,288 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:43,288 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:43,288 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:43,288 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:43,288 | INFO | repair.fetch-vcr | END pattern 8 (pattern_8)
+2025-08-30 23:44:43,289 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:43,289 | INFO | repair.fetch-vcr | BEGIN pattern 8 (pattern_8)
+2025-08-30 23:44:43,289 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-30 23:44:43,422 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:43,422 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:43,422 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106e6b100>, {})
+2025-08-30 23:44:43,423 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:43,423 | INFO | repair.fetch-vcr | END pattern 8 (pattern_8)
+2025-08-30 23:44:43,423 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:43,423 | INFO | repair.fetch-vcr | BEGIN pattern 9 (pattern_9)
+2025-08-30 23:44:43,423 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-30 23:44:43,559 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:43,559 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:43,559 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106e6b100>, {})
+2025-08-30 23:44:43,559 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:43,559 | INFO | repair.fetch-vcr | END pattern 9 (pattern_9)
+2025-08-30 23:44:43,559 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:43,559 | INFO | repair.fetch-vcr | BEGIN pattern 9 (pattern_9)
+2025-08-30 23:44:43,559 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-30 23:44:43,697 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:43,697 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:43,697 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106e6b100>, {})
+2025-08-30 23:44:43,698 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:43,698 | INFO | repair.fetch-vcr | END pattern 9 (pattern_9)
+2025-08-30 23:44:43,698 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:43,698 | INFO | repair.fetch-vcr | BEGIN pattern 10 (pattern_10)
+2025-08-30 23:44:43,698 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-30 23:44:43,833 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:43,833 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:43,833 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106e6b100>, {})
+2025-08-30 23:44:43,833 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:43,833 | INFO | repair.fetch-vcr | END pattern 10 (pattern_10)
+2025-08-30 23:44:43,834 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:43,834 | INFO | repair.fetch-vcr | BEGIN pattern 10 (pattern_10)
+2025-08-30 23:44:43,834 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-30 23:44:43,970 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:43,970 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:43,970 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106e6b100>, {})
+2025-08-30 23:44:43,971 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:43,971 | INFO | repair.fetch-vcr | END pattern 10 (pattern_10)
+2025-08-30 23:44:43,971 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:43,971 | INFO | repair.fetch-vcr | BEGIN pattern 11 (pattern_11)
+2025-08-30 23:44:43,971 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "write", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{body,bodyUsed,method,url,headers,redirect}", "changelogId": 11}
+2025-08-30 23:44:44,105 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:44,105 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:44,105 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106e6b100>, {})
+2025-08-30 23:44:44,105 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:44,105 | INFO | repair.fetch-vcr | END pattern 11 (pattern_11)
+2025-08-30 23:44:44,105 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:44,105 | INFO | repair.fetch-vcr | BEGIN pattern 1 (pattern_1)
+2025-08-30 23:44:44,105 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/response,node-fetch/lib/request,node-fetch/lib/headers,node-fetch/lib/*}", "changelogId": 1}
+2025-08-30 23:44:44,240 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:44,241 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:44,241 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106e6b100>, {})
+2025-08-30 23:44:44,241 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:44,241 | INFO | repair.fetch-vcr | END pattern 1 (pattern_1)
+2025-08-30 23:44:44,241 | INFO | repair.fetch-vcr | ============================================================
+2025-08-30 23:44:44,241 | INFO | repair.fetch-vcr | BEGIN pattern 4 (pattern_4)
+2025-08-30 23:44:44,241 | DEBUG | repair.fetch-vcr | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/*}", "changelogId": 4}
+2025-08-30 23:44:44,374 | INFO | repair.fetch-vcr | Tapir run successful for /node-fetch/results/gpt-4.1/fetch-vcr
+2025-08-30 23:44:44,375 | DEBUG | repair.fetch-vcr | Parsed detection output: []
+2025-08-30 23:44:44,375 | DEBUG | repair.fetch-vcr | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106e6b100>, {})
+2025-08-30 23:44:44,375 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:44,375 | INFO | repair.fetch-vcr | END pattern 4 (pattern_4)
+2025-08-30 23:44:44,375 | DEBUG | repair.fetch-vcr | Updated package.json saved at /node-fetch/results/gpt-4.1/fetch-vcr/package.json
+2025-08-30 23:44:44,375 | INFO | repair.fetch-vcr | token consumed 14940
+2025-08-30 23:44:44,375 | INFO | repair.fetch-vcr | parse consumption time: 19.942275665700436

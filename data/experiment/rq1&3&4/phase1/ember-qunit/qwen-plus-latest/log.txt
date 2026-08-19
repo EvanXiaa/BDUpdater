@@ -1,0 +1,209 @@
+Extracting breaking changes for ember-qunit
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Candidate documentation files:
+['addon/CHANGELOG.md', 'CHANGELOG.md', 'docs/migration.md', 'RELEASE.md', 'addon/RELEASE.md', 'README.md', 'addon/README.md']
+Tokens till now: 644
+Extracted BC candidate list:
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "In version 9.0.0 of ember-qunit, explicit calls to `loadTests` and `setupEmberOnerrorValidation` are now required. These functions are no longer automatically invoked, meaning test setup code that relied on implicit initialization will fail unless updated to call these functions explicitly.",
+      "Reference": [
+        "https://github.com/emberjs/ember-qunit/pull/1182"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "loadTests",
+          "setupEmberOnerrorValidation"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Before: No explicit call needed \u2014 initialization was automatic.\nAfter: Explicitly call `loadTests()` and `setupEmberOnerrorValidation()` in test setup.\n\nExample:\n```javascript\nimport { loadTests, setupEmberOnerrorValidation } from '@ember/test-helpers';\n\n// Ensure these are called\nloadTests();\nsetupEmberOnerrorValidation();\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}
+parse consumption token: 0
+parse consumption time: 0
+Validating BC list for ember-qunit
+We still do validate once for raw bc {
+  "Id": 0,
+  "BC_description": "In version 9.0.0 of ember-qunit, explicit calls to `loadTests` and `setupEmberOnerrorValidation` are now required. These functions are no longer automatically invoked, meaning test setup code that relied on implicit initialization will fail unless updated to call these functions explicitly.",
+  "Reference": [
+    "https://github.com/emberjs/ember-qunit/pull/1182"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "loadTests",
+      "setupEmberOnerrorValidation"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Before: No explicit call needed \u2014 initialization was automatic.\nAfter: Explicitly call `loadTests()` and `setupEmberOnerrorValidation()` in test setup.\n\nExample:\n```javascript\nimport { loadTests, setupEmberOnerrorValidation } from '@ember/test-helpers';\n\n// Ensure these are called\nloadTests();\nsetupEmberOnerrorValidation();\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}.
+Validating by searchForIssue
+
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Refined description:
+{'type': 'json_schema', 'json_schema': {'name': 'breaking_change', 'strict': True, 'schema': {'type': 'object', 'properties': {'Id': {'type': 'integer', 'description': 'A unique identifier, assigned sequentially starting from 0.'}, 'BC_description': {'type': 'string', 'description': 'A clear, detailed, and comprehensive description of the breaking change.'}, 'Reference': {'type': 'array', 'items': {'type': 'string'}, 'description': 'All references related to this change, including parsing sources, issue numbers, commit SHAs.'}, 'Changed_object': {'type': 'object', 'properties': {'type': {'type': 'string', 'enum': ['environment', 'config', 'import', 'call', 'read', 'write'], 'description': "The type of changed object: 'call' for method call change (e.g.,method signature, arguments and option change), 'read' and 'write' for reading and setting properties, 'environment' for environment changes, 'config' for configuration changes in an external file (e.g., *.config.js) , and 'import' for import/require related changes."}, 'className': {'type': 'array', 'items': {'type': 'string'}, 'description': 'Explicit class names impacted by the change. Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)'}, 'methodName': {'type': 'array', 'items': {'type': 'string'}, 'description': "Exact method names affected (required when type is 'call').  Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, 'propertyName': {'type': 'array', 'items': {'type': 'string'}, 'description': "Explicit property names affected (required when type is 'read' or 'write'). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, 'moduleName': {'type': 'array', 'items': {'type': 'string'}, 'description': "Explicit module names affected (required when type is 'import' or 'config'). If type is 'config', specify the configration file name (e.g., webpack.config.js). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}}, 'required': ['type', 'className', 'methodName', 'propertyName', 'moduleName'], 'additionalProperties': False, 'description': 'All information about the changed API which could help locate the affected code in downstream clients*.'}, 'Adaptation_method': {'type': 'string', 'description': "A structured recommendation for adapting to the change. Prioritize direct code examples. (e.g., 'base.text() -> base.textConverted())'"}, 'RequireInfoFlag': {'type': 'boolean', 'description': "Set to true if any aspect of the breaking change, including affected entities, adaptation methods, or specific terminology, is not fully clear, explicitly defined, or completely specified in the provided documentation. If set to true, you must precisely specify the missing or unclear details in the 'RequireInfo' field."}, 'RequireInfo': {'type': 'string', 'description': "Explicitly describe the missing information, clarification, definitions, or additional details required to fully understand or accurately resolve the breaking change. This field must remain empty only if 'RequireInfoFlag' is false."}}, 'required': ['Id', 'Reference', 'BC_description', 'Changed_object', 'Adaptation_method', 'RequireInfo', 'RequireInfoFlag'], 'additionalProperties': False}}, 'Id': 0, 'BC_description': 'In ember-qunit v9.0.0, the automatic initialization previously handled by `start` has been split into two explicit functions: `loadTests` and `setupEmberOnerrorValidation`. These functions are no longer called implicitly and must be invoked manually in test setup code. This change was made to decouple test loading from test execution and to support modern build systems like Embroider that do not rely on AMD-based test loading. As a result, test suites that do not explicitly call these functions may appear to pass but will actually run zero tests, leading to potentially undetected breakages. The `setupEmberOnerrorValidation` function was previously exported but lacked a type declaration; it is now required to be called directly to maintain error validation behavior.', 'Reference': ['https://github.com/emberjs/ember-qunit/pull/1182'], 'Changed_object': {'type': 'call', 'className': [], 'methodName': ['loadTests', 'setupEmberOnerrorValidation'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': "Before: No explicit calls were needed — initialization was automatic via `start()`.\nAfter: Explicitly call `loadTests()` and `setupEmberOnerrorValidation()` before calling `start()`.\n\nExample:\n```javascript\nimport { loadTests } from 'ember-qunit/test-loader';\nimport { start, setupEmberOnerrorValidation } from 'ember-qunit';\n\nsetupEmberOnerrorValidation();\nloadTests();\nstart();\n```\n\nIf using `ember-exam`, note that its `start()` function calls `loadTests()` automatically as of v9.0.0, but does not call `setupEmberOnerrorValidation()`. Therefore, you must still call `setupEmberOnerrorValidation()` manually:\n\n```javascript\nimport { setupEmberOnerrorValidation } from 'ember-qunit';\nimport start from 'ember-exam/test-support/start';\n\nsetupEmberOnerrorValidation();\nstart();\n```", 'RequireInfoFlag': False, 'RequireInfo': ''}
+New description: {
+  "Id": 0,
+  "BC_description": "In ember-qunit v9.0.0, the automatic initialization previously handled by `start` has been split into two explicit functions: `loadTests` and `setupEmberOnerrorValidation`. These functions are no longer called implicitly and must be invoked manually in test setup code. This change was made to decouple test loading from test execution and to support modern build systems like Embroider that do not rely on AMD-based test loading. As a result, test suites that do not explicitly call these functions may appear to pass but will actually run zero tests, leading to potentially undetected breakages. The `setupEmberOnerrorValidation` function was previously exported but lacked a type declaration; it is now required to be called directly to maintain error validation behavior.",
+  "Reference": [
+    "https://github.com/emberjs/ember-qunit/pull/1182"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "loadTests",
+      "setupEmberOnerrorValidation"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Before: No explicit calls were needed \u2014 initialization was automatic via `start()`.\nAfter: Explicitly call `loadTests()` and `setupEmberOnerrorValidation()` before calling `start()`.\n\nExample:\n```javascript\nimport { loadTests } from 'ember-qunit/test-loader';\nimport { start, setupEmberOnerrorValidation } from 'ember-qunit';\n\nsetupEmberOnerrorValidation();\nloadTests();\nstart();\n```\n\nIf using `ember-exam`, note that its `start()` function calls `loadTests()` automatically as of v9.0.0, but does not call `setupEmberOnerrorValidation()`. Therefore, you must still call `setupEmberOnerrorValidation()` manually:\n\n```javascript\nimport { setupEmberOnerrorValidation } from 'ember-qunit';\nimport start from 'ember-exam/test-support/start';\n\nsetupEmberOnerrorValidation();\nstart();\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": "",
+  "type": "json_schema",
+  "json_schema": {
+    "name": "breaking_change",
+    "strict": true,
+    "schema": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "description": "A unique identifier, assigned sequentially starting from 0."
+        },
+        "BC_description": {
+          "type": "string",
+          "description": "A clear, detailed, and comprehensive description of the breaking change."
+        },
+        "Reference": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "All references related to this change, including parsing sources, issue numbers, commit SHAs."
+        },
+        "Changed_object": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "environment",
+                "config",
+                "import",
+                "call",
+                "read",
+                "write"
+              ],
+              "description": "The type of changed object: 'call' for method call change (e.g.,method signature, arguments and option change), 'read' and 'write' for reading and setting properties, 'environment' for environment changes, 'config' for configuration changes in an external file (e.g., *.config.js) , and 'import' for import/require related changes."
+            },
+            "className": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Explicit class names impacted by the change. Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"
+            },
+            "methodName": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Exact method names affected (required when type is 'call').  Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"
+            },
+            "propertyName": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Explicit property names affected (required when type is 'read' or 'write'). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"
+            },
+            "moduleName": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Explicit module names affected (required when type is 'import' or 'config'). If type is 'config', specify the configration file name (e.g., webpack.config.js). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"
+            }
+          },
+          "required": [
+            "type",
+            "className",
+            "methodName",
+            "propertyName",
+            "moduleName"
+          ],
+          "additionalProperties": false,
+          "description": "All information about the changed API which could help locate the affected code in downstream clients*."
+        },
+        "Adaptation_method": {
+          "type": "string",
+          "description": "A structured recommendation for adapting to the change. Prioritize direct code examples. (e.g., 'base.text() -> base.textConverted())'"
+        },
+        "RequireInfoFlag": {
+          "type": "boolean",
+          "description": "Set to true if any aspect of the breaking change, including affected entities, adaptation methods, or specific terminology, is not fully clear, explicitly defined, or completely specified in the provided documentation. If set to true, you must precisely specify the missing or unclear details in the 'RequireInfo' field."
+        },
+        "RequireInfo": {
+          "type": "string",
+          "description": "Explicitly describe the missing information, clarification, definitions, or additional details required to fully understand or accurately resolve the breaking change. This field must remain empty only if 'RequireInfoFlag' is false."
+        }
+      },
+      "required": [
+        "Id",
+        "Reference",
+        "BC_description",
+        "Changed_object",
+        "Adaptation_method",
+        "RequireInfo",
+        "RequireInfoFlag"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 0,
+  "BC_description": "In ember-qunit v9.0.0, the automatic initialization previously handled by `start` has been split into two explicit functions: `loadTests` and `setupEmberOnerrorValidation`. These functions are no longer called implicitly and must be invoked manually in test setup code. This change was made to decouple test loading from test execution and to support modern build systems like Embroider that do not rely on AMD-based test loading. As a result, test suites that do not explicitly call these functions may appear to pass but will actually run zero tests, leading to potentially undetected breakages. The `setupEmberOnerrorValidation` function was previously exported but lacked a type declaration; it is now required to be called directly to maintain error validation behavior.",
+  "Reference": [
+    "https://github.com/emberjs/ember-qunit/pull/1182"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "loadTests",
+      "setupEmberOnerrorValidation",
+      "start"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "ember-qunit/test-loader",
+      "ember-qunit",
+      "ember-exam/test-support/start"
+    ]
+  },
+  "Adaptation_method": "Before: No explicit calls were needed \u2014 initialization was automatic via `start()`.\nAfter: Explicitly call `loadTests()` and `setupEmberOnerrorValidation()` before calling `start()`.\n\nExample:\n```javascript\nimport { loadTests } from 'ember-qunit/test-loader';\nimport { start, setupEmberOnerrorValidation } from 'ember-qunit';\n\nsetupEmberOnerrorValidation();\nloadTests();\nstart();\n```\n\nIf using `ember-exam`, note that its `start()` function calls `loadTests()` automatically as of v9.0.0, but does not call `setupEmberOnerrorValidation()`. Therefore, you must still call `setupEmberOnerrorValidation()` manually:\n\n```javascript\nimport { setupEmberOnerrorValidation } from 'ember-qunit';\nimport start from 'ember-exam/test-support/start';\n\nsetupEmberOnerrorValidation();\nstart();\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+validation consumption token: 11858
+validation consumption time: 77.01025929115713
+Done: ember-qunit
+Wrote 2 patterns to  /exp/after-2024/ember-qunit/qwen-plus-latest/tapir.json

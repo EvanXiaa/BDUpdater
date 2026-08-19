@@ -1,0 +1,237 @@
+2025-08-31 03:11:09,748 | INFO | repair.gulp-cache | Starting analysis for gulp-cache
+2025-08-31 03:11:09,748 | INFO | repair.gulp-cache | Starting breaking change analysis for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:09,748 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:09,748 | INFO | repair.gulp-cache | BEGIN pattern 0 (pattern_0)
+2025-08-31 03:11:09,748 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 03:11:10,073 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:10,074 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:11:10,074 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3ed40>, {})
+2025-08-31 03:11:10,074 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:11:10,074 | INFO | repair.gulp-cache | END pattern 0 (pattern_0)
+2025-08-31 03:11:10,074 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:10,074 | INFO | repair.gulp-cache | BEGIN pattern 0 (pattern_0)
+2025-08-31 03:11:10,074 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 03:11:10,219 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:10,219 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:11:10,219 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3ed40>, {})
+2025-08-31 03:11:10,219 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:11:10,219 | INFO | repair.gulp-cache | END pattern 0 (pattern_0)
+2025-08-31 03:11:10,219 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:10,219 | INFO | repair.gulp-cache | BEGIN pattern 1 (pattern_1)
+2025-08-31 03:11:10,220 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 03:11:10,375 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:10,375 | DEBUG | repair.gulp-cache | Parsed detection output: [{'pattern_id': 1, 'file': 'lib/TaskProxy.js', 'line': 127, 'column': 14}]
+2025-08-31 03:11:10,375 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3ed40>, {'lib/TaskProxy.js': defaultdict(<class 'list'>, {1: [{'line': 127, 'column': 14}]})})
+2025-08-31 03:11:10,377 | INFO | repair.gulp-cache | New context extracted from /bluebird/results/gpt-4.1/gulp-cache/lib/TaskProxy.js
+2025-08-31 03:11:34,049 | DEBUG | repair.gulp-cache | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "objectAssign(TaskProxy.prototype, {\n  processFile: function() {\n    var self = this;\n\n    return this._checkForCachedValue().then(function(cached) {\n      // If we found a cached value\n      if (cached.value) {\n        // Extend the cached value onto the file, but don't overwrite original path info\n        return objectAssign(\n          self.file,\n          objectOmit(cached.value, ['cwd', 'path', 'base', 'stat'])\n        );\n      }\n\n      // Otherwise, run the proxied task\n      return self._runProxiedTaskAndCache(cached.key);\n    });\n  },\n\n  removeCachedResult: function() {\n    var self = this;\n\n    return this._getFileKey().then(function(cachedKey) {\n      var removeCached = Bluebird.promisify(\n        self.opts.fileCache.removeCached,\n        self.opts.fileCache\n      );\n\n      return removeCached(self.opts.name, cachedKey);\n    });\n  },\n\n  _getFileKey: function() {\n    var getKey = this.opts.key;\n\n    if (typeof getKey === 'function' && getKey.length === 2) {\n      getKey = Bluebird.promisify(getKey, this.opts);\n    }\n\n    return Bluebird.resolve(getKey(this.file)).then(function(key) {\n      if (!key) {\n        return key;\n      }\n\n      return makeHash(key);\n    });\n  },\n\n  _checkForCachedValue: function() {\n    var self = this;\n\n    return this._getFileKey().then(function(key) {\n      // If no key returned, bug out early\n      if (!key) {\n        return {\n          key: key,\n          value: null\n        };\n      }\n\n      var getCached = Bluebird.promisify(self.opts.fileCache.getCached, self.opts.fileCache);\n\n      return getCached(self.opts.name, key).then(function(cached) {\n        if (!cached) {\n          return {\n            key: key,\n            value: null\n          };\n        }\n\n        var parsedContents = tryJsonParse(cached.contents);\n        if (parsedContents === undefined) {\n          parsedContents = {cached: cached.contents};\n        }\n\n        if (self.opts.restore) {\n          parsedContents = self.opts.restore(parsedContents);\n        }\n\n        return {\n          key: key,\n          value: parsedContents\n        };\n      });\n    });\n  },\n\n  _runProxiedTaskAndCache: function(cachedKey) {\n    var self = this;\n\n    return self._runProxiedTask().then(function(result) {\n      // If this wasn't a success, continue to next task\n      // TODO: Should this also offer an async option?\n      if (self.opts.success !== true && !self.opts.success(result)) {\n        return result;\n      }\n\n      return self._storeCachedResult(cachedKey, result).then(function() {\n        return result;\n      });\n    });\n  },\n\n  _runProxiedTask: function() {\n    var self = this;\n    // Adapted for Bluebird v3: Promise.defer() removed\n    var def = {};\n    def.promise = new Bluebird(function(resolve, reject) {\n      def.resolve = resolve;\n      def.reject = reject;\n    });\n\n    function handleError(err) {\n      // TODO: Errors will step on each other here\n\n      // Reduce the maxListeners back down\n      self.task.setMaxListeners(self.task._maxListeners - 1);\n\n      def.reject(err);\n    }\n\n    function handleData(datum) {\n      // Wait for data (can be out of order, so check for matching file we wrote)\n      if (self.file !== datum) {\n        return;\n      }\n\n      // Be good citizens and remove our listeners\n      self.task.removeListener('error', handleError);\n      self.task.removeListener('data', handleData);\n\n      // Reduce the maxListeners back down\n      self.task.setMaxListeners(self.task._maxListeners - 2);\n\n      def.resolve(datum);\n    }\n\n    // Bump up max listeners to prevent memory leak warnings\n    var currMaxListeners = this.task._maxListeners || 0;\n    this.task.setMaxListeners(currMaxListeners + 2);\n\n    this.task.on('data', handleData);\n    this.task.once('error', handleError);\n\n    // Run through the other task and grab output (or error)\n    // Not sure if a _.defer is necessary here\n    self.task.write(self.file);\n\n    return def.promise;\n  },\n\n  _getValueFromResult: function(result) {\n    var getValue;\n\n    if (typeof this.opts.value !== 'function') {\n      if (typeof this.opts.value === 'string') {\n        getValue = {};\n        getValue[this.opts.value] = result[this.opts.value];\n      }\n\n      return Bluebird.resolve(getValue);\n    } else if (this.opts.value.length === 2) {\n      // Promisify if passed a node style function\n      getValue = Bluebird.promisify(this.opts.value, this.opts);\n    } else {\n      getValue = this.opts.value;\n    }\n\n    return Bluebird.resolve(getValue(result));\n  },\n\n  _storeCachedResult: function(key, result) {\n    var self = this;\n\n    // If we didn't have a cachedKey, skip caching result\n    if (!key) {\n      return Bluebird.resolve(result);\n    }\n\n    return this._getValueFromResult(result).then(function(value) {\n      var val;\n      var addCached = Bluebird.promisify(self.opts.fileCache.addCached, self.opts.fileCache);\n\n      if (typeof value !== 'string') {\n        if (value && typeof value === 'object' && Buffer.isBuffer(value.contents)) {\n          // Shallow copy so \"contents\" can be safely modified\n          val = objectAssign({}, value);\n          val.contents = val.contents.toString('utf8');\n        }\n\n        val = JSON.stringify(value, null, 2);\n      } else {\n        val = value;\n      }\n\n      return addCached(self.opts.name, key, val);\n    });\n  }\n});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 03:11:34,050 | INFO | repair.gulp-cache | Replaced code in /bluebird/results/gpt-4.1/gulp-cache/lib/TaskProxy.js at [434, 5578]
+2025-08-31 03:11:34,050 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:11:34,050 | INFO | repair.gulp-cache | END pattern 1 (pattern_1)
+2025-08-31 03:11:34,051 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:34,051 | INFO | repair.gulp-cache | BEGIN pattern 1 (pattern_1)
+2025-08-31 03:11:34,051 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 03:11:34,395 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:34,396 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:11:34,396 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:11:34,396 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:11:34,396 | INFO | repair.gulp-cache | END pattern 1 (pattern_1)
+2025-08-31 03:11:34,396 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:34,396 | INFO | repair.gulp-cache | BEGIN pattern 2 (pattern_2)
+2025-08-31 03:11:34,396 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 03:11:34,549 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:34,549 | DEBUG | repair.gulp-cache | Parsed detection output: [{'pattern_id': 2, 'file': 'index.js', 'line': 113, 'column': 6}]
+2025-08-31 03:11:34,549 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {'index.js': defaultdict(<class 'list'>, {2: [{'line': 113, 'column': 6}]})})
+2025-08-31 03:11:34,550 | INFO | repair.gulp-cache | New context extracted from /bluebird/results/gpt-4.1/gulp-cache/index.js
+2025-08-31 03:11:38,141 | DEBUG | repair.gulp-cache | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 03:11:38,143 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:11:38,143 | INFO | repair.gulp-cache | END pattern 2 (pattern_2)
+2025-08-31 03:11:38,144 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:38,144 | INFO | repair.gulp-cache | BEGIN pattern 2 (pattern_2)
+2025-08-31 03:11:38,144 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 03:11:38,330 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:38,330 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:11:38,330 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:11:38,330 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:11:38,331 | INFO | repair.gulp-cache | END pattern 2 (pattern_2)
+2025-08-31 03:11:38,331 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:38,331 | INFO | repair.gulp-cache | BEGIN pattern 4 (pattern_4)
+2025-08-31 03:11:38,331 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{Promise}", "changelogId": 4}
+2025-08-31 03:11:38,486 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:38,486 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:11:38,486 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:11:38,487 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:11:38,487 | INFO | repair.gulp-cache | END pattern 4 (pattern_4)
+2025-08-31 03:11:38,487 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:38,487 | INFO | repair.gulp-cache | BEGIN pattern 5 (pattern_5)
+2025-08-31 03:11:38,487 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 03:11:38,637 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:38,637 | DEBUG | repair.gulp-cache | Parsed detection output: [{'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 45, 'column': 25}, {'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 58, 'column': 15}, {'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 82, 'column': 22}, {'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 185, 'column': 17}, {'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 203, 'column': 22}]
+2025-08-31 03:11:38,637 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {'lib/TaskProxy.js': defaultdict(<class 'list'>, {5: [{'line': 45, 'column': 25}, {'line': 58, 'column': 15}, {'line': 82, 'column': 22}, {'line': 185, 'column': 17}, {'line': 203, 'column': 22}]})})
+2025-08-31 03:11:38,638 | INFO | repair.gulp-cache | New context extracted from /bluebird/results/gpt-4.1/gulp-cache/lib/TaskProxy.js
+2025-08-31 03:11:54,579 | DEBUG | repair.gulp-cache | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 03:11:54,586 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:11:54,586 | INFO | repair.gulp-cache | END pattern 5 (pattern_5)
+2025-08-31 03:11:54,587 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:54,587 | INFO | repair.gulp-cache | BEGIN pattern 5 (pattern_5)
+2025-08-31 03:11:54,587 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 03:11:54,984 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:54,984 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:11:54,984 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:11:54,984 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:11:54,984 | INFO | repair.gulp-cache | END pattern 5 (pattern_5)
+2025-08-31 03:11:54,985 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:11:54,985 | INFO | repair.gulp-cache | BEGIN pattern 5 (pattern_5)
+2025-08-31 03:11:54,985 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 03:11:55,217 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:11:55,217 | DEBUG | repair.gulp-cache | Parsed detection output: [{'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 45, 'column': 25}, {'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 58, 'column': 15}, {'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 82, 'column': 22}, {'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 185, 'column': 17}, {'pattern_id': 5, 'file': 'lib/TaskProxy.js', 'line': 203, 'column': 22}]
+2025-08-31 03:11:55,217 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {'lib/TaskProxy.js': defaultdict(<class 'list'>, {5: [{'line': 45, 'column': 25}, {'line': 58, 'column': 15}, {'line': 82, 'column': 22}, {'line': 185, 'column': 17}, {'line': 203, 'column': 22}]})})
+2025-08-31 03:11:55,218 | INFO | repair.gulp-cache | New context extracted from /bluebird/results/gpt-4.1/gulp-cache/lib/TaskProxy.js
+2025-08-31 03:12:05,723 | DEBUG | repair.gulp-cache | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please confirm the callback signatures for the following functions:\n  \u2022 self.opts.fileCache.removeCached\n  \u2022 self.opts.fileCache.getCached\n  \u2022 self.opts.fileCache.addCached\n  \u2022 this.opts.value (when length === 2)\nSpecifically, do any of these invoke their callback with more than one success value (i.e. beyond the first argument)? And does any consuming code rely on receiving an array of values from the promisified function?",
+  "dependencies": []
+}
+2025-08-31 03:12:05,724 | DEBUG | repair.gulp-cache | Added to whole mode list: file=/bluebird/results/gpt-4.1/gulp-cache/lib/TaskProxy.js, context=Node, bc_desc={'Id': 5, 'BC_description': 'Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default...
+2025-08-31 03:12:05,724 | INFO | repair.gulp-cache | Whole mode item: /bluebird/results/gpt-4.1/gulp-cache/lib/TaskProxy.js
+2025-08-31 03:12:20,232 | DEBUG | repair.gulp-cache | AI whole-file repair suggestion: {'repairFlag': False, 'modified_code': '', 'additional_req': '', 'dependencies': []}
+2025-08-31 03:12:20,236 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:20,236 | INFO | repair.gulp-cache | END pattern 5 (pattern_5)
+2025-08-31 03:12:20,237 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:20,237 | INFO | repair.gulp-cache | BEGIN pattern 6 (pattern_6)
+2025-08-31 03:12:20,237 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 03:12:20,566 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:20,566 | DEBUG | repair.gulp-cache | Parsed detection output: [{'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 45, 'column': 25}, {'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 58, 'column': 15}, {'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 82, 'column': 22}, {'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 185, 'column': 17}, {'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 203, 'column': 22}]
+2025-08-31 03:12:20,566 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {'lib/TaskProxy.js': defaultdict(<class 'list'>, {6: [{'line': 45, 'column': 25}, {'line': 58, 'column': 15}, {'line': 82, 'column': 22}, {'line': 185, 'column': 17}, {'line': 203, 'column': 22}]})})
+2025-08-31 03:12:20,567 | INFO | repair.gulp-cache | New context extracted from /bluebird/results/gpt-4.1/gulp-cache/lib/TaskProxy.js
+2025-08-31 03:12:42,972 | DEBUG | repair.gulp-cache | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "objectAssign(TaskProxy.prototype, {\n  processFile: function() {\n    var self = this;\n\n    return this._checkForCachedValue().then(function(cached) {\n      // If we found a cached value\n      if (cached.value) {\n        // Extend the cached value onto the file, but don't overwrite original path info\n        return objectAssign(\n          self.file,\n          objectOmit(cached.value, ['cwd', 'path', 'base', 'stat'])\n        );\n      }\n\n      // Otherwise, run the proxied task\n      return self._runProxiedTaskAndCache(cached.key);\n    });\n  },\n\n  removeCachedResult: function() {\n    var self = this;\n\n    return this._getFileKey().then(function(cachedKey) {\n      // Adapted for Bluebird v3: second argument must be an options object\n      var removeCached = Bluebird.promisify(\n        self.opts.fileCache.removeCached,\n        {context: self.opts.fileCache}\n      );\n\n      return removeCached(self.opts.name, cachedKey);\n    });\n  },\n\n  _getFileKey: function() {\n    var getKey = this.opts.key;\n\n    if (typeof getKey === 'function' && getKey.length === 2) {\n      // Adapted for Bluebird v3: pass context as options object\n      getKey = Bluebird.promisify(getKey, {context: this.opts});\n    }\n\n    return Bluebird.resolve(getKey(this.file)).then(function(key) {\n      if (!key) {\n        return key;\n      }\n\n      return makeHash(key);\n    });\n  },\n\n  _checkForCachedValue: function() {\n    var self = this;\n\n    return this._getFileKey().then(function(key) {\n      // If no key returned, bug out early\n      if (!key) {\n        return {\n          key: key,\n          value: null\n        };\n      }\n\n      // Adapted for Bluebird v3: second argument must be an options object\n      var getCached = Bluebird.promisify(\n        self.opts.fileCache.getCached,\n        {context: self.opts.fileCache}\n      );\n\n      return getCached(self.opts.name, key).then(function(cached) {\n        if (!cached) {\n          return {\n            key: key,\n            value: null\n          };\n        }\n\n        var parsedContents = tryJsonParse(cached.contents);\n        if (parsedContents === undefined) {\n          parsedContents = {cached: cached.contents};\n        }\n\n        if (self.opts.restore) {\n          parsedContents = self.opts.restore(parsedContents);\n        }\n\n        return {\n          key: key,\n          value: parsedContents\n        };\n      });\n    });\n  },\n\n  _runProxiedTaskAndCache: function(cachedKey) {\n    var self = this;\n\n    return self._runProxiedTask().then(function(result) {\n      // If this wasn't a success, continue to next task\n      // TODO: Should this also offer an async option?\n      if (self.opts.success !== true && !self.opts.success(result)) {\n        return result;\n      }\n\n      return self._storeCachedResult(cachedKey, result).then(function() {\n        return result;\n      });\n    });\n  },\n\n  _runProxiedTask: function() {\n    var self = this;\n    // Adapted for Bluebird v3: Promise.defer() removed\n    var def = {};\n    def.promise = new Bluebird(function(resolve, reject) {\n      def.resolve = resolve;\n      def.reject = reject;\n    });\n\n    function handleError(err) {\n      // TODO: Errors will step on each other here\n\n      // Reduce the maxListeners back down\n      self.task.setMaxListeners(self.task._maxListeners - 1);\n\n      def.reject(err);\n    }\n\n    function handleData(datum) {\n      // Wait for data (can be out of order, so check for matching file we wrote)\n      if (self.file !== datum) {\n        return;\n      }\n\n      // Be good citizens and remove our listeners\n      self.task.removeListener('error', handleError);\n      self.task.removeListener('data', handleData);\n\n      // Reduce the maxListeners back down\n      self.task.setMaxListeners(self.task._maxListeners - 2);\n\n      def.resolve(datum);\n    }\n\n    // Bump up max listeners to prevent memory leak warnings\n    var currMaxListeners = this.task._maxListeners || 0;\n    this.task.setMaxListeners(currMaxListeners + 2);\n\n    this.task.on('data', handleData);\n    this.task.once('error', handleError);\n\n    // Run through the other task and grab output (or error)\n    // Not sure if a _.defer is necessary here\n    self.task.write(self.file);\n\n    return def.promise;\n  },\n\n  _getValueFromResult: function(result) {\n    var getValue;\n\n    if (typeof this.opts.value !== 'function') {\n      if (typeof this.opts.value === 'string') {\n        getValue = {};\n        getValue[this.opts.value] = result[this.opts.value];\n      }\n\n      return Bluebird.resolve(getValue);\n    } else if (this.opts.value.length === 2) {\n      // Adapted for Bluebird v3: pass context as options object\n      getValue = Bluebird.promisify(this.opts.value, {context: this.opts});\n    } else {\n      getValue = this.opts.value;\n    }\n\n    return Bluebird.resolve(getValue(result));\n  },\n\n  _storeCachedResult: function(key, result) {\n    var self = this;\n\n    // If we didn't have a cachedKey, skip caching result\n    if (!key) {\n      return Bluebird.resolve(result);\n    }\n\n    return this._getValueFromResult(result).then(function(value) {\n      var val;\n      // Adapted for Bluebird v3: second argument must be an options object\n      var addCached = Bluebird.promisify(\n        self.opts.fileCache.addCached,\n        {context: self.opts.fileCache}\n      );\n\n      if (typeof value !== 'string') {\n        if (value && typeof value === 'object' && Buffer.isBuffer(value.contents)) {\n          // Shallow copy so \"contents\" can be safely modified\n          val = objectAssign({}, value);\n          val.contents = val.contents.toString('utf8');\n        }\n\n        val = JSON.stringify(value, null, 2);\n      } else {\n        val = value;\n      }\n\n      return addCached(self.opts.name, key, val);\n    });\n  }\n});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 03:12:42,975 | INFO | repair.gulp-cache | Replaced code in /bluebird/results/gpt-4.1/gulp-cache/lib/TaskProxy.js at [434, 5743]
+2025-08-31 03:12:42,976 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:42,976 | INFO | repair.gulp-cache | END pattern 6 (pattern_6)
+2025-08-31 03:12:42,977 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:42,977 | INFO | repair.gulp-cache | BEGIN pattern 6 (pattern_6)
+2025-08-31 03:12:42,977 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 03:12:43,332 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:43,332 | DEBUG | repair.gulp-cache | Parsed detection output: [{'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 46, 'column': 25}, {'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 60, 'column': 15}, {'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 85, 'column': 22}, {'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 191, 'column': 17}, {'pattern_id': 6, 'file': 'lib/TaskProxy.js', 'line': 210, 'column': 22}]
+2025-08-31 03:12:43,333 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {'lib/TaskProxy.js': defaultdict(<class 'list'>, {6: [{'line': 46, 'column': 25}, {'line': 60, 'column': 15}, {'line': 85, 'column': 22}, {'line': 191, 'column': 17}, {'line': 210, 'column': 22}]})})
+2025-08-31 03:12:43,333 | INFO | repair.gulp-cache | New context extracted from /bluebird/results/gpt-4.1/gulp-cache/lib/TaskProxy.js
+2025-08-31 03:12:48,329 | DEBUG | repair.gulp-cache | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 03:12:48,331 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:48,331 | INFO | repair.gulp-cache | END pattern 6 (pattern_6)
+2025-08-31 03:12:48,335 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:48,335 | INFO | repair.gulp-cache | BEGIN pattern 6 (pattern_6)
+2025-08-31 03:12:48,335 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 03:12:48,528 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:48,529 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:48,529 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x104223b00>, {})
+2025-08-31 03:12:48,530 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:48,530 | INFO | repair.gulp-cache | END pattern 6 (pattern_6)
+2025-08-31 03:12:48,530 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:48,530 | INFO | repair.gulp-cache | BEGIN pattern 7 (pattern_7)
+2025-08-31 03:12:48,530 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 03:12:48,714 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:48,714 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:48,714 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:48,714 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:48,714 | INFO | repair.gulp-cache | END pattern 7 (pattern_7)
+2025-08-31 03:12:48,714 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:48,714 | INFO | repair.gulp-cache | BEGIN pattern 7 (pattern_7)
+2025-08-31 03:12:48,714 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 03:12:48,871 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:48,871 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:48,871 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:48,872 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:48,872 | INFO | repair.gulp-cache | END pattern 7 (pattern_7)
+2025-08-31 03:12:48,872 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:48,872 | INFO | repair.gulp-cache | BEGIN pattern 8 (pattern_8)
+2025-08-31 03:12:48,872 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 03:12:49,106 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:49,106 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:49,106 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:49,107 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:49,107 | INFO | repair.gulp-cache | END pattern 8 (pattern_8)
+2025-08-31 03:12:49,107 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:49,107 | INFO | repair.gulp-cache | BEGIN pattern 8 (pattern_8)
+2025-08-31 03:12:49,107 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 03:12:49,462 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:49,462 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:49,463 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:49,463 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:49,463 | INFO | repair.gulp-cache | END pattern 8 (pattern_8)
+2025-08-31 03:12:49,464 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:49,464 | INFO | repair.gulp-cache | BEGIN pattern 9 (pattern_9)
+2025-08-31 03:12:49,464 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 03:12:49,794 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:49,795 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:49,795 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:49,795 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:49,795 | INFO | repair.gulp-cache | END pattern 9 (pattern_9)
+2025-08-31 03:12:49,795 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:49,795 | INFO | repair.gulp-cache | BEGIN pattern 9 (pattern_9)
+2025-08-31 03:12:49,795 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 03:12:50,073 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:50,073 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:50,073 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:50,074 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:50,074 | INFO | repair.gulp-cache | END pattern 9 (pattern_9)
+2025-08-31 03:12:50,074 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:50,074 | INFO | repair.gulp-cache | BEGIN pattern 10 (pattern_10)
+2025-08-31 03:12:50,074 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 03:12:50,303 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:50,303 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:50,303 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:50,303 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:50,303 | INFO | repair.gulp-cache | END pattern 10 (pattern_10)
+2025-08-31 03:12:50,304 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:50,304 | INFO | repair.gulp-cache | BEGIN pattern 10 (pattern_10)
+2025-08-31 03:12:50,304 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 03:12:50,492 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:50,492 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:50,492 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:50,492 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:50,492 | INFO | repair.gulp-cache | END pattern 10 (pattern_10)
+2025-08-31 03:12:50,493 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:50,493 | INFO | repair.gulp-cache | BEGIN pattern 11 (pattern_11)
+2025-08-31 03:12:50,493 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 03:12:50,656 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:50,657 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:50,657 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:50,657 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:50,657 | INFO | repair.gulp-cache | END pattern 11 (pattern_11)
+2025-08-31 03:12:50,657 | INFO | repair.gulp-cache | ============================================================
+2025-08-31 03:12:50,657 | INFO | repair.gulp-cache | BEGIN pattern 11 (pattern_11)
+2025-08-31 03:12:50,657 | DEBUG | repair.gulp-cache | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 03:12:50,821 | INFO | repair.gulp-cache | Tapir run successful for /bluebird/results/gpt-4.1/gulp-cache
+2025-08-31 03:12:50,821 | DEBUG | repair.gulp-cache | Parsed detection output: []
+2025-08-31 03:12:50,821 | DEBUG | repair.gulp-cache | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103b3f920>, {})
+2025-08-31 03:12:50,822 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:50,822 | INFO | repair.gulp-cache | END pattern 11 (pattern_11)
+2025-08-31 03:12:50,825 | INFO | repair.gulp-cache | Config BC: scanning 0 files
+2025-08-31 03:12:50,825 | DEBUG | repair.gulp-cache | Updated package.json saved at /bluebird/results/gpt-4.1/gulp-cache/package.json
+2025-08-31 03:12:50,825 | INFO | repair.gulp-cache | token consumed 56257
+2025-08-31 03:12:50,835 | INFO | repair.gulp-cache | parse consumption time: 95.60869829263538

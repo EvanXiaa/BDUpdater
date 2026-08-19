@@ -1,0 +1,186 @@
+2025-08-30 21:07:36,392 | INFO | repair.al-azure-collector-js | Starting analysis for al-azure-collector-js
+2025-08-30 21:07:36,392 | INFO | repair.al-azure-collector-js | Starting breaking change analysis for /async/results/gpt-4.1/al-azure-collector-js
+2025-08-30 21:07:36,392 | INFO | repair.al-azure-collector-js | ============================================================
+2025-08-30 21:07:36,392 | INFO | repair.al-azure-collector-js | BEGIN pattern 0 (pattern_0)
+2025-08-30 21:07:36,392 | DEBUG | repair.al-azure-collector-js | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{each,concat,detect,every,filter,groupBy,map,mapValues,reduce,reject,some,transform,times,auto,compose,seq,whilst,until,forever,parallel,race,retry,series,tryEach,waterfall}", "changelogId": 0}
+2025-08-30 21:07:36,622 | INFO | repair.al-azure-collector-js | Tapir run successful for /async/results/gpt-4.1/al-azure-collector-js
+2025-08-30 21:07:36,623 | DEBUG | repair.al-azure-collector-js | Parsed detection output: [{'pattern_id': 0, 'file': 'test/dlblob_test.js', 'line': 155, 'column': 12}, {'pattern_id': 0, 'file': 'test/dlblob_test.js', 'line': 191, 'column': 12}, {'pattern_id': 0, 'file': 'appstats.js', 'line': 74, 'column': 15}, {'pattern_id': 0, 'file': 'appstats.js', 'line': 147, 'column': 8}, {'pattern_id': 0, 'file': 'appstats.js', 'line': 202, 'column': 15}, {'pattern_id': 0, 'file': 'appstats.js', 'line': 262, 'column': 16}, {'pattern_id': 0, 'file': 'appstats.js', 'line': 332, 'column': 19}, {'pattern_id': 0, 'file': 'dlblob.js', 'line': 79, 'column': 8}, {'pattern_id': 0, 'file': 'master.js', 'line': 153, 'column': 8}, {'pattern_id': 0, 'file': 'master.js', 'line': 208, 'column': 12}, {'pattern_id': 0, 'file': 'master.js', 'line': 304, 'column': 15}, {'pattern_id': 0, 'file': 'master.js', 'line': 333, 'column': 31}, {'pattern_id': 0, 'file': 'master.js', 'line': 314, 'column': 8}, {'pattern_id': 0, 'file': 'master.js', 'line': 348, 'column': 8}, {'pattern_id': 0, 'file': 'master.js', 'line': 378, 'column': 8}, {'pattern_id': 0, 'file': 'master.js', 'line': 468, 'column': 8}]
+2025-08-30 21:07:36,623 | DEBUG | repair.al-azure-collector-js | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b6e80>, {'test/dlblob_test.js': defaultdict(<class 'list'>, {0: [{'line': 155, 'column': 12}, {'line': 191, 'column': 12}]}), 'appstats.js': defaultdict(<class 'list'>, {0: [{'line': 74, 'column': 15}, {'line': 147, 'column': 8}, {'line': 202, 'column': 15}, {'line': 262, 'column': 16}, {'line': 332, 'column': 19}]}), 'dlblob.js': defaultdict(<class 'list'>, {0: [{'line': 79, 'column': 8}]}), 'master.js': defaultdict(<class 'list'>, {0: [{'line': 153, 'column': 8}, {'line': 208, 'column': 12}, {'line': 304, 'column': 15}, {'line': 333, 'column': 31}, {'line': 314, 'column': 8}, {'line': 348, 'column': 8}, {'line': 378, 'column': 8}, {'line': 468, 'column': 8}]})})
+2025-08-30 21:07:36,623 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/test/dlblob_test.js
+2025-08-30 21:07:37,858 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:37,861 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/appstats.js
+2025-08-30 21:07:37,864 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/appstats.js
+2025-08-30 21:07:37,866 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/appstats.js
+2025-08-30 21:07:37,868 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/appstats.js
+2025-08-30 21:07:37,870 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/appstats.js
+2025-08-30 21:07:38,799 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:39,719 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:40,755 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:41,951 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:42,933 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:42,935 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/dlblob.js
+2025-08-30 21:07:44,183 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:44,187 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/master.js
+2025-08-30 21:07:44,190 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/master.js
+2025-08-30 21:07:44,193 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/master.js
+2025-08-30 21:07:44,196 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/master.js
+2025-08-30 21:07:44,201 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/master.js
+2025-08-30 21:07:44,203 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/master.js
+2025-08-30 21:07:44,205 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/master.js
+2025-08-30 21:07:45,153 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:46,313 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:47,199 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:48,561 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:49,459 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:50,482 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:51,414 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:51,417 | DEBUG | repair.al-azure-collector-js | Updated package.json saved at /async/results/gpt-4.1/al-azure-collector-js/package.json
+2025-08-30 21:07:51,417 | INFO | repair.al-azure-collector-js | END pattern 0 (pattern_0)
+2025-08-30 21:07:51,417 | INFO | repair.al-azure-collector-js | ============================================================
+2025-08-30 21:07:51,418 | INFO | repair.al-azure-collector-js | BEGIN pattern 2 (pattern_2)
+2025-08-30 21:07:51,418 | DEBUG | repair.al-azure-collector-js | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{drain,saturated,unsaturated,empty,error}", "changelogId": 2}
+2025-08-30 21:07:51,832 | INFO | repair.al-azure-collector-js | Tapir run successful for /async/results/gpt-4.1/al-azure-collector-js
+2025-08-30 21:07:51,832 | DEBUG | repair.al-azure-collector-js | Parsed detection output: []
+2025-08-30 21:07:51,832 | DEBUG | repair.al-azure-collector-js | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7240>, {})
+2025-08-30 21:07:51,833 | DEBUG | repair.al-azure-collector-js | Updated package.json saved at /async/results/gpt-4.1/al-azure-collector-js/package.json
+2025-08-30 21:07:51,833 | INFO | repair.al-azure-collector-js | END pattern 2 (pattern_2)
+2025-08-30 21:07:51,833 | INFO | repair.al-azure-collector-js | ============================================================
+2025-08-30 21:07:51,833 | INFO | repair.al-azure-collector-js | BEGIN pattern 3 (pattern_3)
+2025-08-30 21:07:51,833 | DEBUG | repair.al-azure-collector-js | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{eachOfLimit*,each*,eachSeries*,compose*,seq*,waterfall*,auto*,autoInject*,whilst*,until*,forever*}", "changelogId": 3}
+2025-08-30 21:07:52,063 | INFO | repair.al-azure-collector-js | Tapir run successful for /async/results/gpt-4.1/al-azure-collector-js
+2025-08-30 21:07:52,064 | DEBUG | repair.al-azure-collector-js | Parsed detection output: []
+2025-08-30 21:07:52,064 | DEBUG | repair.al-azure-collector-js | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7240>, {})
+2025-08-30 21:07:52,064 | DEBUG | repair.al-azure-collector-js | Updated package.json saved at /async/results/gpt-4.1/al-azure-collector-js/package.json
+2025-08-30 21:07:52,064 | INFO | repair.al-azure-collector-js | END pattern 3 (pattern_3)
+2025-08-30 21:07:52,064 | INFO | repair.al-azure-collector-js | ============================================================
+2025-08-30 21:07:52,064 | INFO | repair.al-azure-collector-js | BEGIN pattern 4 (pattern_4)
+2025-08-30 21:07:52,064 | DEBUG | repair.al-azure-collector-js | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{during,doDuring,whilst,doWhilst,until,doUntil}", "changelogId": 4}
+2025-08-30 21:07:52,303 | INFO | repair.al-azure-collector-js | Tapir run successful for /async/results/gpt-4.1/al-azure-collector-js
+2025-08-30 21:07:52,303 | DEBUG | repair.al-azure-collector-js | Parsed detection output: [{'pattern_id': 4, 'file': 'appstats.js', 'line': 288, 'column': 16}]
+2025-08-30 21:07:52,303 | DEBUG | repair.al-azure-collector-js | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7240>, {'appstats.js': defaultdict(<class 'list'>, {4: [{'line': 288, 'column': 16}]})})
+2025-08-30 21:07:52,304 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/appstats.js
+2025-08-30 21:07:54,749 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if (!error) {\n                var processed = 0;\n                async.doWhilst(function(callback) {\n                    stats._getStatsBatch(function(error, aggrStatsBatch) {\n                        resultError = error ? error + resultError : resultError;\n                        resultStats.add(aggrStatsBatch);\n                        processed += STAT_MSG_NUMBER_PER_BATCH;\n                        return callback();\n                    });\n                }, function(cb) {\n                    // Adapt 'test' argument to be async for async.doWhilst v3.0.0+\n                    cb(null, processed < metadata.approximateMessageCount);\n                }, function() {\n                    if (!resultError) {\n                        return callback(null, resultStats);\n                    } else {\n                        return callback(resultError, resultStats);\n                    }\n                });\n            } else if (error && error.code === 'QueueNotFound') {\n                return callback(null, resultStats);\n            } else {\n                return callback(error, resultStats);\n            }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:07:54,751 | INFO | repair.al-azure-collector-js | Replaced code in /async/results/gpt-4.1/al-azure-collector-js/appstats.js at [9504, 10529]
+2025-08-30 21:07:54,752 | DEBUG | repair.al-azure-collector-js | Updated package.json saved at /async/results/gpt-4.1/al-azure-collector-js/package.json
+2025-08-30 21:07:54,752 | INFO | repair.al-azure-collector-js | END pattern 4 (pattern_4)
+2025-08-30 21:07:54,752 | INFO | repair.al-azure-collector-js | ============================================================
+2025-08-30 21:07:54,752 | INFO | repair.al-azure-collector-js | BEGIN pattern 5 (pattern_5)
+2025-08-30 21:07:54,753 | DEBUG | repair.al-azure-collector-js | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{queue,mapLimit,eachLimit,filterLimit,reduceLimit,concatLimit,eachOfLimit,forEachOfLimit,groupByLimit}", "changelogId": 5}
+2025-08-30 21:07:55,017 | INFO | repair.al-azure-collector-js | Tapir run successful for /async/results/gpt-4.1/al-azure-collector-js
+2025-08-30 21:07:55,017 | DEBUG | repair.al-azure-collector-js | Parsed detection output: [{'pattern_id': 5, 'file': 'dlblob.js', 'line': 69, 'column': 20}]
+2025-08-30 21:07:55,017 | DEBUG | repair.al-azure-collector-js | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7240>, {'dlblob.js': defaultdict(<class 'list'>, {5: [{'line': 69, 'column': 20}]})})
+2025-08-30 21:07:55,017 | INFO | repair.al-azure-collector-js | New context extracted from /async/results/gpt-4.1/al-azure-collector-js/dlblob.js
+2025-08-30 21:07:57,719 | DEBUG | repair.al-azure-collector-js | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if (listErr) {\n    return callback(listErr);\n} else {\n    dlblob._context.log.verbose('Listed blobs: ', data.entries.length);\n    // BREAKING CHANGE PATCH: ensure CONCURRENT_BLOB_PROCESS_NUM is at least 1 to avoid RangeError in async.mapLimit (async v3)\n    const safeLimit = Math.max(1, CONCURRENT_BLOB_PROCESS_NUM); // ensure value >= 1\n    async.mapLimit(data.entries, safeLimit, async.reflect(function(blob, asyncCallback) {\n        return dlblob._processDlBlob(blob, asyncCallback);\n    }), callback);\n}",
+  "additional_req": "If other code relies on passing 'limit' as 0 or less (e.g., to disable concurrency), application-level logic may need further review elsewhere. Check initialization of CONCURRENT_BLOB_PROCESS_NUM.",
+  "dependencies": []
+}
+2025-08-30 21:07:57,720 | DEBUG | repair.al-azure-collector-js | Added to whole mode list: file=/async/results/gpt-4.1/al-azure-collector-js/dlblob.js, context=dict, bc_desc={'Id': 5, 'BC_description': "All queue and collection methods in the library now throw an error if the 'limit' or 'concu...
+2025-08-30 21:07:57,720 | INFO | repair.al-azure-collector-js | Whole mode item: /async/results/gpt-4.1/al-azure-collector-js/dlblob.js
+2025-08-30 21:08:04,581 | DEBUG | repair.al-azure-collector-js | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': '/* ----------------------------------------------------------------------------\n * @copyright (C) 2019, Alert Logic, Inc\n * @doc\n * \n * Basic class for a dead letter blob processing.\n * Dead letter blobs are located in \'alertlogic-dl\' container located in the\n * web application storage account.\n * The actual collector function.json blob binding for dead letters should looks like:\n * {\n *     "name": "dlBlob",\n *     "type": "blob",\n *     "path": "%APP_DL_CONTAINER_NAME%/%WEBSITE_SITE_NAME%/<collect-function-name-here>/{DateTime}",\n *     "connection": "AzureWebJobsStorage",\n *     "direction": "out"\n * }\n * \n * @end\n * ----------------------------------------------------------------------------\n */\n \n\'use strict\';\n\nconst async = require(\'async\');\nconst azure = require(\'azure\');\n\nconst CONCURRENT_BLOB_PROCESS_NUM = 20;\nconst LIST_BLOB_PAGE_SIZE = 100;\nconst DEFAULT_DL_CONTAINER_NAME = \'alertlogic-dl\';\n\n\n/**\n * @class\n * Dead letter blobs processing class.\n *\n * @constructor\n * @param {Object} context - context of Azure function.\n * @param {Function} processCallback - a blob processing callback(context, dlblob, dlblobText, callback)\n *\n */\nclass AlAzureDlBlob {\n    constructor(context, processCallback) {\n        this._context = context;\n        this._blobService = azure.createBlobService(process.env.AzureWebJobsStorage);\n        this._processCallback = processCallback;\n        this._listPageSize = process.env.DL_BLOB_PAGE_SIZE ? \n                parseInt(process.env.DL_BLOB_PAGE_SIZE) : LIST_BLOB_PAGE_SIZE;\n        this._dlContainerName = process.env.APP_DL_CONTAINER_NAME ? \n                process.env.APP_DL_CONTAINER_NAME : DEFAULT_DL_CONTAINER_NAME;\n    };\n    \n    getBlobService() {\n        return this._blobService;\n    };\n    \n    processDlBlobs(timer, callback) {\n        var dlblob = this;\n        const options = {\n            maxResults: dlblob._listPageSize\n        };\n        this._blobService.listBlobsSegmentedWithPrefix(\n            dlblob._dlContainerName,\n            process.env.WEBSITE_SITE_NAME,\n            null, options,\n            function(listErr, data) {\n                if (listErr) {\n                    return callback(listErr);\n                } else {\n                    dlblob._context.log.verbose(\'Listed blobs: \', data.entries.length);\n                    // BREAKING CHANGE PATCH: ensure CONCURRENT_BLOB_PROCESS_NUM is at least 1 to avoid RangeError in async.mapLimit (async v3)\n                    const safeLimit = Math.max(1, CONCURRENT_BLOB_PROCESS_NUM); // ensure value >= 1\n                    async.mapLimit(data.entries, safeLimit, async.reflect(function(blob, asyncCallback) {\n                        return dlblob._processDlBlob(blob, asyncCallback);\n                    }), callback);\n                }\n        });\n    };\n    \n    _processDlBlob(blob, callback) {\n        var dlblob = this;\n        dlblob._context.log.verbose(\'Processing blob: \', blob.name);\n        async.waterfall([\n            function(asyncCallback) {\n                return dlblob._blobService.getBlobToText(dlblob._dlContainerName, blob.name, asyncCallback);\n            },\n            function(blobData, blobReq, blobResp, asyncCallback) {\n                try {\n                    return dlblob._processCallback(dlblob._context, blob, blobData, asyncCallback);\n                } catch (ex) {\n                    return asyncCallback(ex);\n                }\n            },\n            function(asyncCallback) {\n                return dlblob._blobService.deleteBlob(dlblob._dlContainerName, blob.name, asyncCallback);\n            }\n        ], callback);\n    };\n};\nmodule.exports = {\n    AlAzureDlBlob: AlAzureDlBlob\n};\n', 'additional_req': "If other code relies on passing 'limit' as 0 or less (e.g., to disable concurrency), application-level logic may need further review elsewhere. Check initialization and assignment of CONCURRENT_BLOB_PROCESS_NUM throughout the codebase.", 'dependencies': []}
+2025-08-30 21:08:04,582 | INFO | repair.al-azure-collector-js | Replace whole file: /async/results/gpt-4.1/al-azure-collector-js/dlblob.js
+2025-08-30 21:08:04,584 | DEBUG | repair.al-azure-collector-js | Updated package.json saved at /async/results/gpt-4.1/al-azure-collector-js/package.json
+2025-08-30 21:08:04,585 | INFO | repair.al-azure-collector-js | END pattern 5 (pattern_5)
+2025-08-30 21:08:04,586 | INFO | repair.al-azure-collector-js | ============================================================
+2025-08-30 21:08:04,586 | INFO | repair.al-azure-collector-js | BEGIN pattern 6 (pattern_6)
+2025-08-30 21:08:04,586 | DEBUG | repair.al-azure-collector-js | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{memoize}", "changelogId": 6}
+2025-08-30 21:08:04,848 | INFO | repair.al-azure-collector-js | Tapir run successful for /async/results/gpt-4.1/al-azure-collector-js
+2025-08-30 21:08:04,848 | DEBUG | repair.al-azure-collector-js | Parsed detection output: []
+2025-08-30 21:08:04,848 | DEBUG | repair.al-azure-collector-js | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315ab60>, {})
+2025-08-30 21:08:04,849 | DEBUG | repair.al-azure-collector-js | Updated package.json saved at /async/results/gpt-4.1/al-azure-collector-js/package.json
+2025-08-30 21:08:04,849 | INFO | repair.al-azure-collector-js | END pattern 6 (pattern_6)
+2025-08-30 21:08:04,849 | INFO | repair.al-azure-collector-js | ============================================================
+2025-08-30 21:08:04,849 | INFO | repair.al-azure-collector-js | BEGIN pattern 7 (pattern_7)
+2025-08-30 21:08:04,849 | DEBUG | repair.al-azure-collector-js | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}", "changelogId": 7}
+2025-08-30 21:08:05,077 | INFO | repair.al-azure-collector-js | Tapir run successful for /async/results/gpt-4.1/al-azure-collector-js
+2025-08-30 21:08:05,077 | DEBUG | repair.al-azure-collector-js | Parsed detection output: []
+2025-08-30 21:08:05,077 | DEBUG | repair.al-azure-collector-js | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315ab60>, {})
+2025-08-30 21:08:05,077 | DEBUG | repair.al-azure-collector-js | Updated package.json saved at /async/results/gpt-4.1/al-azure-collector-js/package.json
+2025-08-30 21:08:05,077 | INFO | repair.al-azure-collector-js | END pattern 7 (pattern_7)
+2025-08-30 21:08:05,077 | INFO | repair.al-azure-collector-js | ============================================================
+2025-08-30 21:08:05,077 | INFO | repair.al-azure-collector-js | BEGIN pattern 8 (pattern_8)
+2025-08-30 21:08:05,077 | DEBUG | repair.al-azure-collector-js | Pattern payload: {"type": "import", "pattern": "import {async.mjs}", "changelogId": 8}
+2025-08-30 21:08:05,310 | INFO | repair.al-azure-collector-js | Tapir run successful for /async/results/gpt-4.1/al-azure-collector-js
+2025-08-30 21:08:05,310 | DEBUG | repair.al-azure-collector-js | Parsed detection output: []
+2025-08-30 21:08:05,310 | DEBUG | repair.al-azure-collector-js | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315ab60>, {})
+2025-08-30 21:08:05,310 | DEBUG | repair.al-azure-collector-js | Updated package.json saved at /async/results/gpt-4.1/al-azure-collector-js/package.json
+2025-08-30 21:08:05,310 | INFO | repair.al-azure-collector-js | END pattern 8 (pattern_8)
+2025-08-30 21:08:05,311 | DEBUG | repair.al-azure-collector-js | Updated package.json saved at /async/results/gpt-4.1/al-azure-collector-js/package.json
+2025-08-30 21:08:05,311 | INFO | repair.al-azure-collector-js | token consumed 33910
+2025-08-30 21:08:05,311 | INFO | repair.al-azure-collector-js | parse consumption time: 26.753370499238372

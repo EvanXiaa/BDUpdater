@@ -1,0 +1,86 @@
+2025-08-31 22:49:34,934 | INFO | repair.juice-11.0.0 | Starting analysis for juice-11.0.0
+2025-08-31 22:49:34,934 | INFO | repair.juice-11.0.0 | Starting breaking change analysis for -2024/commander.js/results/gpt-4.1/juice-11.0.0
+2025-08-31 22:49:34,935 | INFO | repair.juice-11.0.0 | ============================================================
+2025-08-31 22:49:34,935 | INFO | repair.juice-11.0.0 | BEGIN pattern 0 (pattern_0)
+2025-08-31 22:49:34,935 | DEBUG | repair.juice-11.0.0 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{parse,allowExcessArguments}", "changelogId": 0}
+2025-08-31 22:49:35,343 | INFO | repair.juice-11.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/juice-11.0.0
+2025-08-31 22:49:35,344 | DEBUG | repair.juice-11.0.0 | Parsed detection output: [{'pattern_id': 0, 'file': 'lib/cli.js', 'line': 21, 'column': 2}]
+2025-08-31 22:49:35,344 | DEBUG | repair.juice-11.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b16aca0>, {'lib/cli.js': defaultdict(<class 'list'>, {0: [{'line': 21, 'column': 2}]})})
+2025-08-31 22:49:35,345 | INFO | repair.juice-11.0.0 | New context extracted from -2024/commander.js/results/gpt-4.1/juice-11.0.0/lib/cli.js
+2025-08-31 22:49:45,839 | DEBUG | repair.juice-11.0.0 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "cli.getProgram = function() {\n  program\n    .name(pkg.name)\n    .description(pkg.description)\n    .version(pkg.version)\n    .usage('[options] input.html output.html')\n    // Preserve previous behavior by allowing excess arguments in Commander v13\n    .allowExcessArguments();\n\n  Object.keys(cli.options).forEach(function(key) {\n    program.option('--' + key + ' [value]', cli.options[key].def);\n  });\n\n  program.parse(process.argv);\n\n  return program;\n};",
+  "additional_req": "",
+  "dependencies": [
+    "commander@^13.0.0"
+  ]
+}
+2025-08-31 22:49:45,842 | INFO | repair.juice-11.0.0 | Replaced code in -2024/commander.js/results/gpt-4.1/juice-11.0.0/lib/cli.js at [127, 473]
+2025-08-31 22:49:45,844 | DEBUG | repair.juice-11.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/juice-11.0.0/package.json
+2025-08-31 22:49:45,844 | INFO | repair.juice-11.0.0 | END pattern 0 (pattern_0)
+2025-08-31 22:49:45,845 | INFO | repair.juice-11.0.0 | ============================================================
+2025-08-31 22:49:45,845 | INFO | repair.juice-11.0.0 | BEGIN pattern 0 (pattern_0)
+2025-08-31 22:49:45,845 | DEBUG | repair.juice-11.0.0 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{parse,allowExcessArguments}", "changelogId": 0}
+2025-08-31 22:49:46,097 | INFO | repair.juice-11.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/juice-11.0.0
+2025-08-31 22:49:46,097 | DEBUG | repair.juice-11.0.0 | Parsed detection output: []
+2025-08-31 22:49:46,097 | DEBUG | repair.juice-11.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b16ad40>, {})
+2025-08-31 22:49:46,098 | DEBUG | repair.juice-11.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/juice-11.0.0/package.json
+2025-08-31 22:49:46,098 | INFO | repair.juice-11.0.0 | END pattern 0 (pattern_0)
+2025-08-31 22:49:46,098 | INFO | repair.juice-11.0.0 | ============================================================
+2025-08-31 22:49:46,098 | INFO | repair.juice-11.0.0 | BEGIN pattern 1 (pattern_1)
+2025-08-31 22:49:46,098 | DEBUG | repair.juice-11.0.0 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{Option}", "changelogId": 1}
+2025-08-31 22:49:46,287 | INFO | repair.juice-11.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/juice-11.0.0
+2025-08-31 22:49:46,287 | DEBUG | repair.juice-11.0.0 | Parsed detection output: []
+2025-08-31 22:49:46,287 | DEBUG | repair.juice-11.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b16ad40>, {})
+2025-08-31 22:49:46,287 | DEBUG | repair.juice-11.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/juice-11.0.0/package.json
+2025-08-31 22:49:46,287 | INFO | repair.juice-11.0.0 | END pattern 1 (pattern_1)
+2025-08-31 22:49:46,288 | INFO | repair.juice-11.0.0 | ============================================================
+2025-08-31 22:49:46,288 | INFO | repair.juice-11.0.0 | BEGIN pattern 1 (pattern_1)
+2025-08-31 22:49:46,288 | DEBUG | repair.juice-11.0.0 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{Option}", "changelogId": 1}
+2025-08-31 22:49:46,472 | INFO | repair.juice-11.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/juice-11.0.0
+2025-08-31 22:49:46,472 | DEBUG | repair.juice-11.0.0 | Parsed detection output: []
+2025-08-31 22:49:46,472 | DEBUG | repair.juice-11.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b16ad40>, {})
+2025-08-31 22:49:46,473 | DEBUG | repair.juice-11.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/juice-11.0.0/package.json
+2025-08-31 22:49:46,473 | INFO | repair.juice-11.0.0 | END pattern 1 (pattern_1)
+2025-08-31 22:49:46,473 | INFO | repair.juice-11.0.0 | ============================================================
+2025-08-31 22:49:46,473 | INFO | repair.juice-11.0.0 | BEGIN pattern 2 (pattern_2)
+2025-08-31 22:49:46,473 | DEBUG | repair.juice-11.0.0 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{parse}", "changelogId": 2}
+2025-08-31 22:49:46,659 | INFO | repair.juice-11.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/juice-11.0.0
+2025-08-31 22:49:46,659 | DEBUG | repair.juice-11.0.0 | Parsed detection output: [{'pattern_id': 2, 'file': 'lib/cli.js', 'line': 23, 'column': 2}]
+2025-08-31 22:49:46,659 | DEBUG | repair.juice-11.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b16ad40>, {'lib/cli.js': defaultdict(<class 'list'>, {2: [{'line': 23, 'column': 2}]})})
+2025-08-31 22:49:46,659 | INFO | repair.juice-11.0.0 | New context extracted from -2024/commander.js/results/gpt-4.1/juice-11.0.0/lib/cli.js
+2025-08-31 22:49:51,566 | DEBUG | repair.juice-11.0.0 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:49:51,566 | DEBUG | repair.juice-11.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/juice-11.0.0/package.json
+2025-08-31 22:49:51,567 | INFO | repair.juice-11.0.0 | END pattern 2 (pattern_2)
+2025-08-31 22:49:51,567 | INFO | repair.juice-11.0.0 | ============================================================
+2025-08-31 22:49:51,567 | INFO | repair.juice-11.0.0 | BEGIN pattern 2 (pattern_2)
+2025-08-31 22:49:51,567 | DEBUG | repair.juice-11.0.0 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{parse}", "changelogId": 2}
+2025-08-31 22:49:51,789 | INFO | repair.juice-11.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/juice-11.0.0
+2025-08-31 22:49:51,789 | DEBUG | repair.juice-11.0.0 | Parsed detection output: []
+2025-08-31 22:49:51,789 | DEBUG | repair.juice-11.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b16ad40>, {})
+2025-08-31 22:49:51,790 | DEBUG | repair.juice-11.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/juice-11.0.0/package.json
+2025-08-31 22:49:51,790 | INFO | repair.juice-11.0.0 | END pattern 2 (pattern_2)
+2025-08-31 22:49:51,790 | INFO | repair.juice-11.0.0 | ============================================================
+2025-08-31 22:49:51,790 | INFO | repair.juice-11.0.0 | BEGIN pattern 3 (pattern_3)
+2025-08-31 22:49:51,790 | DEBUG | repair.juice-11.0.0 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{wrap}", "changelogId": 3}
+2025-08-31 22:49:51,984 | INFO | repair.juice-11.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/juice-11.0.0
+2025-08-31 22:49:51,984 | DEBUG | repair.juice-11.0.0 | Parsed detection output: []
+2025-08-31 22:49:51,985 | DEBUG | repair.juice-11.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b16ad40>, {})
+2025-08-31 22:49:51,985 | DEBUG | repair.juice-11.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/juice-11.0.0/package.json
+2025-08-31 22:49:51,985 | INFO | repair.juice-11.0.0 | END pattern 3 (pattern_3)
+2025-08-31 22:49:51,985 | INFO | repair.juice-11.0.0 | ============================================================
+2025-08-31 22:49:51,985 | INFO | repair.juice-11.0.0 | BEGIN pattern 3 (pattern_3)
+2025-08-31 22:49:51,985 | DEBUG | repair.juice-11.0.0 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{wrap}", "changelogId": 3}
+2025-08-31 22:49:52,180 | INFO | repair.juice-11.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/juice-11.0.0
+2025-08-31 22:49:52,180 | DEBUG | repair.juice-11.0.0 | Parsed detection output: []
+2025-08-31 22:49:52,180 | DEBUG | repair.juice-11.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11b16ad40>, {})
+2025-08-31 22:49:52,181 | DEBUG | repair.juice-11.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/juice-11.0.0/package.json
+2025-08-31 22:49:52,181 | INFO | repair.juice-11.0.0 | END pattern 3 (pattern_3)
+2025-08-31 22:49:52,181 | DEBUG | repair.juice-11.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/juice-11.0.0/package.json
+2025-08-31 22:49:52,181 | INFO | repair.juice-11.0.0 | token consumed 7654
+2025-08-31 22:49:52,181 | INFO | repair.juice-11.0.0 | parse consumption time: 15.399437207728624

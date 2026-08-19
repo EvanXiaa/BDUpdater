@@ -1,0 +1,13 @@
+# 4.0.0-alpha.3
+
+[diff](https://github.com/prettier/prettier/compare/4.0.0-alpha.2...4.0.0-alpha.3)
+
+🔗 [Release Notes](https://prettier.io/blog/2023/12/01/4.0.0-alpha.3.html)
+*/ expresssion
+*/ expresssion;
+*/ expresssion
+{{on "clik" this.modify}}
+{{on "clik" this.modify}}
+{{on "clik" this.modify}}
+```typescript
+When using [`overrides`](https://prettier.io/docs/en/configuration.html#configuration-overrides) in the config file, Prettier was not matching dotfiles (files that start with `.`). This was fixed in 1.18.1

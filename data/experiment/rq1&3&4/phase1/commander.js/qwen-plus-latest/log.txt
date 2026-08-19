@@ -1,0 +1,501 @@
+Extracting breaking changes for commander.js
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Candidate documentation files:
+['CHANGELOG.md', 'Readme.md', 'docs/deprecated.md', 'bcCommitMessages.txt']
+Tokens till now: 612
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Extracted BC candidate list:
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "By default, specifying more command-arguments than expected now causes a parsing error. Previously, excess arguments were accepted silently. This change enforces stricter argument validation to improve command-line interface correctness and help accuracy.",
+      "Reference": [
+        "https://github.com/tj/commander.js/pull/2223"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Command"
+        ],
+        "methodName": [
+          "parse"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Declare expected arguments explicitly using `.argument()` or re-enable lenient behavior with `.allowExcessArguments()`. Example:\n\nBefore:\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.action((options) => {\n  console.log(program.args);\n});\n```\n\nAfter (recommended):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.argument('[args...]', 'remote command and arguments');\nprogram.action((args, options) => {\n  console.log(args);\n});\n```\n\nOr (for minimal changes in legacy code):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.allowExcessArguments();\nprogram.action((options) => {\n  console.log(program.args);\n});\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Option construction now throws an error if unsupported option flags are used, such as multiple characters following a single dash (e.g., `-ab` is invalid unless defined as `-a -b` or `-ab` as a combined short flag). This prevents malformed or ambiguous option definitions.",
+      "Reference": [
+        "https://github.com/tj/commander.js/pull/2270"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Option"
+        ],
+        "methodName": [
+          "constructor"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Ensure all option flags follow valid syntax: single-character short flags must be separated by spaces or combined properly. For example:\n\nBefore (invalid):\n```js\nnew Option('-ab <value>', 'description') // throws error in v13\n```\n\nAfter:\n```js\n// Use separate options\nprogram.option('-a', 'enable feature A');\nprogram.option('-b <value>', 'set value for B');\n\n// Or use a combined short flag if intended\nprogram.option('-ab <value>', 'combined flag') // valid if intentional and documented\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "Calling `.parse()` multiple times will now throw an error if the `storeOptionsAsProperties` option is set to `true`. This prevents inconsistent state and unintended side effects when options are stored directly on the command instance.",
+      "Reference": [
+        "https://github.com/tj/commander.js/pull/2299"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Command"
+        ],
+        "methodName": [
+          "parse"
+        ],
+        "propertyName": [
+          "storeOptionsAsProperties"
+        ],
+        "moduleName": []
+      },
+      "Adaptation_method": "Avoid multiple calls to `.parse()` when `storeOptionsAsProperties: true`, or disable the option and access parsed values via `.opts()`. Example:\n\nBefore:\n```js\nprogram.storeOptionsAsProperties(true);\nprogram.parse(process.argv);\nprogram.parse(['--port', '3000']); // throws in v13\n```\n\nAfter:\n```js\n// Option 1: Use .opts() instead\nprogram.storeOptionsAsProperties(false);\nprogram.option('--port <number>');\nprogram.parse(process.argv);\nconst opts = program.opts();\n\n// Option 2: Parse only once and reuse\nprogram.parse(process.argv);\n// Avoid second .parse() call\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "The `Help.wrap()` method has been removed and refactored into `formatItem()` and `boxWrap()`. Direct calls to `Help.wrap()` will now result in a runtime error.",
+      "Reference": [
+        "https://github.com/tj/commander.js/pull/2251"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Help"
+        ],
+        "methodName": [
+          "wrap"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Replace usage of `Help.wrap()` with `Help.boxWrap()` for text wrapping functionality, or use `Help.formatItem()` for formatting help items. Example:\n\nBefore:\n```js\nconst wrapped = Help.wrap(text, width);\n```\n\nAfter:\n```js\nconst wrapped = Help.boxWrap(text, { width }); // or use displayWidth() to calculate\n```\n\nAlternatively, for help item formatting:\n```js\nconst item = Help.formatItem({ name: 'start', summary: 'Start the server' }, { width });\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}
+parse consumption token: 23469
+parse consumption time: 169.3778812084347
+Validating BC list for commander.js
+We still do validate once for raw bc {
+  "Id": 0,
+  "BC_description": "By default, specifying more command-arguments than expected now causes a parsing error. Previously, excess arguments were accepted silently. This change enforces stricter argument validation to improve command-line interface correctness and help accuracy.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2223"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Command"
+    ],
+    "methodName": [
+      "parse"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Declare expected arguments explicitly using `.argument()` or re-enable lenient behavior with `.allowExcessArguments()`. Example:\n\nBefore:\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.action((options) => {\n  console.log(program.args);\n});\n```\n\nAfter (recommended):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.argument('[args...]', 'remote command and arguments');\nprogram.action((args, options) => {\n  console.log(args);\n});\n```\n\nOr (for minimal changes in legacy code):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.allowExcessArguments();\nprogram.action((options) => {\n  console.log(program.args);\n});\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}.
+Validating by searchForIssue
+
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Refined description:
+{'Id': 0, 'BC_description': 'By default, passing more command-line arguments than explicitly declared now results in a parsing error. Previously, excess arguments were accepted silently, which could lead to user errors being overlooked, such as unquoted strings with spaces being misinterpreted. This change improves CLI correctness by enforcing strict argument validation. The behavior can be reverted using `.allowExcessArguments(true)` if needed.', 'Reference': ['https://github.com/tj/commander.js/pull/2223'], 'Changed_object': {'type': 'call', 'className': ['Command'], 'methodName': ['parse', 'allowExcessArguments'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': "Declare expected arguments explicitly using `.argument()` to handle variable input, or re-enable the previous lenient behavior by calling `.allowExcessArguments(true)`. Example:\n\nBefore:\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.action((options) => {\n  console.log(program.args);\n});\n```\n\nAfter (recommended):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.argument('[args...]', 'remote command and arguments');\nprogram.action((args, options) => {\n  console.log(args);\n});\n```\n\nOr (for backward compatibility):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.allowExcessArguments(true);\nprogram.action((options) => {\n  console.log(program.args);\n});\n```", 'RequireInfoFlag': False, 'RequireInfo': ''}
+New description: {
+  "Id": 0,
+  "BC_description": "By default, passing more command-line arguments than explicitly declared now results in a parsing error. Previously, excess arguments were accepted silently, which could lead to user errors being overlooked, such as unquoted strings with spaces being misinterpreted. This change improves CLI correctness by enforcing strict argument validation. The behavior can be reverted using `.allowExcessArguments(true)` if needed.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2223"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Command"
+    ],
+    "methodName": [
+      "parse",
+      "allowExcessArguments"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Declare expected arguments explicitly using `.argument()` to handle variable input, or re-enable the previous lenient behavior by calling `.allowExcessArguments(true)`. Example:\n\nBefore:\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.action((options) => {\n  console.log(program.args);\n});\n```\n\nAfter (recommended):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.argument('[args...]', 'remote command and arguments');\nprogram.action((args, options) => {\n  console.log(args);\n});\n```\n\nOr (for backward compatibility):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.allowExcessArguments(true);\nprogram.action((options) => {\n  console.log(program.args);\n});\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 0,
+  "BC_description": "By default, passing more command-line arguments than explicitly declared now results in a parsing error. Previously, excess arguments were accepted silently, which could lead to user errors being overlooked, such as unquoted strings with spaces being misinterpreted. This change improves CLI correctness by enforcing strict argument validation. The behavior can be reverted using `.allowExcessArguments(true)` if needed.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2223"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Command"
+    ],
+    "methodName": [
+      "parse",
+      "allowExcessArguments"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Declare expected arguments explicitly using `.argument()` to handle variable input, or re-enable the previous lenient behavior by calling `.allowExcessArguments(true)`. Example:\n\nBefore:\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.action((options) => {\n  console.log(program.args);\n});\n```\n\nAfter (recommended):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.argument('[args...]', 'remote command and arguments');\nprogram.action((args, options) => {\n  console.log(args);\n});\n```\n\nOr (for backward compatibility):\n```js\nprogram.option('-p, --port <number>', 'port number');\nprogram.allowExcessArguments(true);\nprogram.action((options) => {\n  console.log(program.args);\n});\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+We still do validate once for raw bc {
+  "Id": 1,
+  "BC_description": "Option construction now throws an error if unsupported option flags are used, such as multiple characters following a single dash (e.g., `-ab` is invalid unless defined as `-a -b` or `-ab` as a combined short flag). This prevents malformed or ambiguous option definitions.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2270"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Option"
+    ],
+    "methodName": [
+      "constructor"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Ensure all option flags follow valid syntax: single-character short flags must be separated by spaces or combined properly. For example:\n\nBefore (invalid):\n```js\nnew Option('-ab <value>', 'description') // throws error in v13\n```\n\nAfter:\n```js\n// Use separate options\nprogram.option('-a', 'enable feature A');\nprogram.option('-b <value>', 'set value for B');\n\n// Or use a combined short flag if intended\nprogram.option('-ab <value>', 'combined flag') // valid if intentional and documented\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}.
+Validating by searchForIssue
+
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Refined description:
+{'Id': 1, 'BC_description': 'In Commander.js v13.0.0, the `Option` constructor now throws an error during initialization if unsupported option flag syntax is used. This includes short flags with more than one character following a single dash (e.g., `-ab` unless explicitly defined as a combined short flag) and multiple long flags (e.g., `--es --ecmascript`) that were previously accepted silently. This change enforces stricter POSIX-compliant flag definitions to prevent ambiguous or malformed option configurations. Support for dual long flags was reintroduced in v13.1.0 via #2312, allowing legitimate use cases like `--es` and `--ecmascript` to coexist.', 'Reference': ['https://github.com/tj/commander.js/pull/2270'], 'Changed_object': {'type': 'call', 'className': ['Option'], 'methodName': ['constructor'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': "Ensure all option flags use valid syntax:\n\n- For multi-character short flags (e.g., `-ab`), either split them into individual flags or define them intentionally as a combined flag.\n- For dual long flags (e.g., `--es --ecmascript`), ensure you are using Commander v13.1.0 or later.\n\nBefore (invalid in v13.0.0):\n```js\nnew Option('-ab <value>', 'description') // throws error\nprogram.option('--es --ecmascript', 'enable ECMAScript');\n```\n\nAfter (valid):\n```js\n// Use separate short flags\nprogram.option('-a', 'enable feature A');\nprogram.option('-b <value>', 'set value for B');\n\n// Or use a combined short flag if intended\nprogram.option('-ab <value>', 'combined flag');\n\n// Dual long flags are supported in v13.1+\nprogram.option('--es --ecmascript', 'enable ECMAScript');\n```", 'RequireInfoFlag': False, 'RequireInfo': ''}
+New description: {
+  "Id": 1,
+  "BC_description": "In Commander.js v13.0.0, the `Option` constructor now throws an error during initialization if unsupported option flag syntax is used. This includes short flags with more than one character following a single dash (e.g., `-ab` unless explicitly defined as a combined short flag) and multiple long flags (e.g., `--es --ecmascript`) that were previously accepted silently. This change enforces stricter POSIX-compliant flag definitions to prevent ambiguous or malformed option configurations. Support for dual long flags was reintroduced in v13.1.0 via #2312, allowing legitimate use cases like `--es` and `--ecmascript` to coexist.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2270"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Option"
+    ],
+    "methodName": [
+      "constructor"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Ensure all option flags use valid syntax:\n\n- For multi-character short flags (e.g., `-ab`), either split them into individual flags or define them intentionally as a combined flag.\n- For dual long flags (e.g., `--es --ecmascript`), ensure you are using Commander v13.1.0 or later.\n\nBefore (invalid in v13.0.0):\n```js\nnew Option('-ab <value>', 'description') // throws error\nprogram.option('--es --ecmascript', 'enable ECMAScript');\n```\n\nAfter (valid):\n```js\n// Use separate short flags\nprogram.option('-a', 'enable feature A');\nprogram.option('-b <value>', 'set value for B');\n\n// Or use a combined short flag if intended\nprogram.option('-ab <value>', 'combined flag');\n\n// Dual long flags are supported in v13.1+\nprogram.option('--es --ecmascript', 'enable ECMAScript');\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 1,
+  "BC_description": "In Commander.js v13.0.0, the `Option` constructor now throws an error during initialization if unsupported option flag syntax is used. This includes short flags with more than one character following a single dash (e.g., `-ab` unless explicitly defined as a combined short flag) and multiple long flags (e.g., `--es --ecmascript`) that were previously accepted silently. This change enforces stricter POSIX-compliant flag definitions to prevent ambiguous or malformed option configurations. Support for dual long flags was reintroduced in v13.1.0 via #2312, allowing legitimate use cases like `--es` and `--ecmascript` to coexist.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2270"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Option"
+    ],
+    "methodName": [
+      "constructor"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Ensure all option flags use valid syntax:\n\n- For multi-character short flags (e.g., `-ab`), either split them into individual flags or define them intentionally as a combined flag.\n- For dual long flags (e.g., `--es --ecmascript`), ensure you are using Commander v13.1.0 or later.\n\nBefore (invalid in v13.0.0):\n```js\nnew Option('-ab <value>', 'description') // throws error\nprogram.option('--es --ecmascript', 'enable ECMAScript');\n```\n\nAfter (valid):\n```js\n// Use separate short flags\nprogram.option('-a', 'enable feature A');\nprogram.option('-b <value>', 'set value for B');\n\n// Or use a combined short flag if intended\nprogram.option('-ab <value>', 'combined flag');\n\n// Dual long flags are supported in v13.1+\nprogram.option('--es --ecmascript', 'enable ECMAScript');\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+We still do validate once for raw bc {
+  "Id": 2,
+  "BC_description": "Calling `.parse()` multiple times will now throw an error if the `storeOptionsAsProperties` option is set to `true`. This prevents inconsistent state and unintended side effects when options are stored directly on the command instance.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2299"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Command"
+    ],
+    "methodName": [
+      "parse"
+    ],
+    "propertyName": [
+      "storeOptionsAsProperties"
+    ],
+    "moduleName": []
+  },
+  "Adaptation_method": "Avoid multiple calls to `.parse()` when `storeOptionsAsProperties: true`, or disable the option and access parsed values via `.opts()`. Example:\n\nBefore:\n```js\nprogram.storeOptionsAsProperties(true);\nprogram.parse(process.argv);\nprogram.parse(['--port', '3000']); // throws in v13\n```\n\nAfter:\n```js\n// Option 1: Use .opts() instead\nprogram.storeOptionsAsProperties(false);\nprogram.option('--port <number>');\nprogram.parse(process.argv);\nconst opts = program.opts();\n\n// Option 2: Parse only once and reuse\nprogram.parse(process.argv);\n// Avoid second .parse() call\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}.
+Validating by searchForIssue
+
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Refined description:
+{'Id': 2, 'BC_description': 'In Commander.js v13.0.0, calling `.parse()` multiple times on a Command instance will now throw an error if the `storeOptionsAsProperties` option is set to `true`. This change prevents inconsistent state and unintended side effects that could occur when options are stored directly as properties on the command instance. When `storeOptionsAsProperties` is `false` (the default), multiple calls to `.parse()` are allowed, as the internal state is safely saved and restored. The breaking change specifically targets cases where `storeOptionsAsProperties(true)` is explicitly used.', 'Reference': ['https://github.com/tj/commander.js/pull/2299'], 'Changed_object': {'type': 'call', 'className': ['Command'], 'methodName': ['parse'], 'propertyName': ['storeOptionsAsProperties'], 'moduleName': []}, 'Adaptation_method': "Avoid multiple calls to `.parse()` when `storeOptionsAsProperties: true`, or disable the option and access parsed values via `.opts()`. Example:\n\nBefore:\n```js\nprogram.storeOptionsAsProperties(true);\nprogram.parse(process.argv);\nprogram.parse(['--port', '3000']); // throws in v13\n```\n\nAfter:\n```js\n// Option 1: Use .opts() instead (recommended)\nprogram.storeOptionsAsProperties(false);\nprogram.option('--port <number>');\nprogram.parse(process.argv);\nconst opts = program.opts();\n\n// Option 2: Parse only once and avoid subsequent .parse() calls\nprogram.parse(process.argv);\n// Do not call .parse() again\n```", 'RequireInfoFlag': False, 'RequireInfo': ''}
+New description: {
+  "Id": 2,
+  "BC_description": "In Commander.js v13.0.0, calling `.parse()` multiple times on a Command instance will now throw an error if the `storeOptionsAsProperties` option is set to `true`. This change prevents inconsistent state and unintended side effects that could occur when options are stored directly as properties on the command instance. When `storeOptionsAsProperties` is `false` (the default), multiple calls to `.parse()` are allowed, as the internal state is safely saved and restored. The breaking change specifically targets cases where `storeOptionsAsProperties(true)` is explicitly used.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2299"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Command"
+    ],
+    "methodName": [
+      "parse"
+    ],
+    "propertyName": [
+      "storeOptionsAsProperties"
+    ],
+    "moduleName": []
+  },
+  "Adaptation_method": "Avoid multiple calls to `.parse()` when `storeOptionsAsProperties: true`, or disable the option and access parsed values via `.opts()`. Example:\n\nBefore:\n```js\nprogram.storeOptionsAsProperties(true);\nprogram.parse(process.argv);\nprogram.parse(['--port', '3000']); // throws in v13\n```\n\nAfter:\n```js\n// Option 1: Use .opts() instead (recommended)\nprogram.storeOptionsAsProperties(false);\nprogram.option('--port <number>');\nprogram.parse(process.argv);\nconst opts = program.opts();\n\n// Option 2: Parse only once and avoid subsequent .parse() calls\nprogram.parse(process.argv);\n// Do not call .parse() again\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 2,
+  "BC_description": "In Commander.js v13.0.0, calling `.parse()` multiple times on a Command instance will now throw an error if the `storeOptionsAsProperties` option is set to `true`. This change prevents inconsistent state and unintended side effects that could occur when options are stored directly as properties on the command instance. When `storeOptionsAsProperties` is `false` (the default), multiple calls to `.parse()` are allowed, as the internal state is safely saved and restored. The breaking change specifically targets cases where `storeOptionsAsProperties(true)` is explicitly used.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2299"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Command"
+    ],
+    "methodName": [
+      "parse"
+    ],
+    "propertyName": [
+      "storeOptionsAsProperties"
+    ],
+    "moduleName": []
+  },
+  "Adaptation_method": "Avoid multiple calls to `.parse()` when `storeOptionsAsProperties: true`, or disable the option and access parsed values via `.opts()`. Example:\n\nBefore:\n```js\nprogram.storeOptionsAsProperties(true);\nprogram.parse(process.argv);\nprogram.parse(['--port', '3000']); // throws in v13\n```\n\nAfter:\n```js\n// Option 1: Use .opts() instead (recommended)\nprogram.storeOptionsAsProperties(false);\nprogram.option('--port <number>');\nprogram.parse(process.argv);\nconst opts = program.opts();\n\n// Option 2: Parse only once and avoid subsequent .parse() calls\nprogram.parse(process.argv);\n// Do not call .parse() again\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+We still do validate once for raw bc {
+  "Id": 3,
+  "BC_description": "The `Help.wrap()` method has been removed and refactored into `formatItem()` and `boxWrap()`. Direct calls to `Help.wrap()` will now result in a runtime error.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2251"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Help"
+    ],
+    "methodName": [
+      "wrap"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Replace usage of `Help.wrap()` with `Help.boxWrap()` for text wrapping functionality, or use `Help.formatItem()` for formatting help items. Example:\n\nBefore:\n```js\nconst wrapped = Help.wrap(text, width);\n```\n\nAfter:\n```js\nconst wrapped = Help.boxWrap(text, { width }); // or use displayWidth() to calculate\n```\n\nAlternatively, for help item formatting:\n```js\nconst item = Help.formatItem({ name: 'start', summary: 'Start the server' }, { width });\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}.
+Validating by searchForIssue
+
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Refined description:
+{'Id': 3, 'BC_description': 'The `Help.wrap()` method has been removed in Commander.js v13 and refactored into two more focused methods: `Help.boxWrap()` for wrapping text with proper handling of ANSI color sequences and zero-width characters, and `Help.formatItem()` for formatting help items such as options, arguments, and subcommands. Direct calls to `Help.wrap()` will now result in a runtime error. This change was made to improve support for colored text in custom help output and to simplify the internal logic of text wrapping and formatting, especially in the presence of ANSI escape codes used for styling.', 'Reference': ['https://github.com/tj/commander.js/pull/2251'], 'Changed_object': {'type': 'call', 'className': ['Help'], 'methodName': ['wrap'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': "Replace all calls to `Help.wrap(text, width)` with `Help.boxWrap(text, { width })`. The `boxWrap` method now accepts an options object that includes `width` and properly handles ANSI color codes by treating them as zero-width characters. For formatting help items (e.g., options or commands with descriptions), use `Help.formatItem()` instead. Example:\n\nBefore:\n```js\nconst wrapped = Help.wrap('long text here', 40);\n```\n\nAfter:\n```js\nconst wrapped = Help.boxWrap('long text here', { width: 40 });\n```\n\nFor formatting help items:\n```js\nconst item = Help.formatItem({ name: 'start', summary: 'Start the server' }, { width: 40 });\n```", 'RequireInfoFlag': False, 'RequireInfo': ''}
+New description: {
+  "Id": 3,
+  "BC_description": "The `Help.wrap()` method has been removed in Commander.js v13 and refactored into two more focused methods: `Help.boxWrap()` for wrapping text with proper handling of ANSI color sequences and zero-width characters, and `Help.formatItem()` for formatting help items such as options, arguments, and subcommands. Direct calls to `Help.wrap()` will now result in a runtime error. This change was made to improve support for colored text in custom help output and to simplify the internal logic of text wrapping and formatting, especially in the presence of ANSI escape codes used for styling.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2251"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Help"
+    ],
+    "methodName": [
+      "wrap"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Replace all calls to `Help.wrap(text, width)` with `Help.boxWrap(text, { width })`. The `boxWrap` method now accepts an options object that includes `width` and properly handles ANSI color codes by treating them as zero-width characters. For formatting help items (e.g., options or commands with descriptions), use `Help.formatItem()` instead. Example:\n\nBefore:\n```js\nconst wrapped = Help.wrap('long text here', 40);\n```\n\nAfter:\n```js\nconst wrapped = Help.boxWrap('long text here', { width: 40 });\n```\n\nFor formatting help items:\n```js\nconst item = Help.formatItem({ name: 'start', summary: 'Start the server' }, { width: 40 });\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 3,
+  "BC_description": "The `Help.wrap()` method has been removed in Commander.js v13 and refactored into two more focused methods: `Help.boxWrap()` for wrapping text with proper handling of ANSI color sequences and zero-width characters, and `Help.formatItem()` for formatting help items such as options, arguments, and subcommands. Direct calls to `Help.wrap()` will now result in a runtime error. This change was made to improve support for colored text in custom help output and to simplify the internal logic of text wrapping and formatting, especially in the presence of ANSI escape codes used for styling.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2251"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Help"
+    ],
+    "methodName": [
+      "wrap",
+      "boxWrap",
+      "formatItem"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Replace all calls to `Help.wrap(text, width)` with `Help.boxWrap(text, { width })`. The `boxWrap` method now accepts an options object that includes `width` and properly handles ANSI color codes by treating them as zero-width characters. For formatting help items (e.g., options or commands with descriptions), use `Help.formatItem()` instead. Example:\n\nBefore:\n```js\nconst wrapped = Help.wrap('long text here', 40);\n```\n\nAfter:\n```js\nconst wrapped = Help.boxWrap('long text here', { width: 40 });\n```\n\nFor formatting help items:\n```js\nconst item = Help.formatItem({ name: 'start', summary: 'Start the server' }, { width: 40 });\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+validation consumption token: 26575
+validation consumption time: 110.5176452063024
+Done: commander.js
+Wrote 8 patterns to  /exp/after-2024/commander.js/qwen-plus-latest/tapir.json
+Extracting breaking changes for ember-qunit
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Candidate documentation files:
+['addon/CHANGELOG.md', 'CHANGELOG.md', 'docs/migration.md', 'RELEASE.md', 'addon/RELEASE.md', 'README.md', 'addon/README.md']
+Tokens till now: 644
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Extracted BC candidate list:
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "In version 9.0.0 of ember-qunit, explicit calls to `loadTests` and `setupEmberOnerrorValidation` are now required. These functions are no longer automatically invoked, meaning test setups that relied on implicit initialization will break unless updated to call these functions explicitly.",
+      "Reference": [
+        "https://github.com/emberjs/ember-qunit/pull/1182"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "loadTests",
+          "setupEmberOnerrorValidation"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Before: No explicit call to `loadTests` or `setupEmberOnerrorValidation` was needed.\nAfter: Users must explicitly call `loadTests()` and `setupEmberOnerrorValidation()` in their test setup.\n\nExample:\n```javascript\nimport { loadTests, setupEmberOnerrorValidation } from '@ember/test-helpers';\n\n// Ensure these are called\nloadTests();\nsetupEmberOnerrorValidation();\n```\n\nThis change ensures that test infrastructure is intentionally initialized.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}
+parse consumption token: 13902
+parse consumption time: 46.91634883265942
+Validating BC list for ember-qunit
+We still do validate once for raw bc {
+  "Id": 0,
+  "BC_description": "In version 9.0.0 of ember-qunit, explicit calls to `loadTests` and `setupEmberOnerrorValidation` are now required. These functions are no longer automatically invoked, meaning test setups that relied on implicit initialization will break unless updated to call these functions explicitly.",
+  "Reference": [
+    "https://github.com/emberjs/ember-qunit/pull/1182"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "loadTests",
+      "setupEmberOnerrorValidation"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Before: No explicit call to `loadTests` or `setupEmberOnerrorValidation` was needed.\nAfter: Users must explicitly call `loadTests()` and `setupEmberOnerrorValidation()` in their test setup.\n\nExample:\n```javascript\nimport { loadTests, setupEmberOnerrorValidation } from '@ember/test-helpers';\n\n// Ensure these are called\nloadTests();\nsetupEmberOnerrorValidation();\n```\n\nThis change ensures that test infrastructure is intentionally initialized.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}.
+Validating by searchForIssue
+
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Refined description:
+{'Id': 0, 'BC_description': 'In version 9.0.0 of ember-qunit, the functions `loadTests` and `setupEmberOnerrorValidation` must now be explicitly called during test setup. These were previously invoked implicitly when calling `start` from `ember-qunit`, but are no longer automatically executed. This change was made to decouple test loading and error validation logic from the `start` function, aligning with modern Ember apps that use Embroider and do not rely on AMD-based test loading. As a result, test suites that do not explicitly invoke `loadTests()` and `setupEmberOnerrorValidation()` will run with no tests discovered (empty test suite) or may miss critical error validation, leading to potential silent failures.', 'Reference': ['https://github.com/emberjs/ember-qunit/pull/1182'], 'Changed_object': {'type': 'call', 'className': [], 'methodName': ['loadTests', 'setupEmberOnerrorValidation'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': "Before: No explicit call to `loadTests` or `setupEmberOnerrorValidation` was needed — initialization occurred implicitly via `start()`.\nAfter: Users must explicitly call `loadTests()` and `setupEmberOnerrorValidation()` before calling `start()`.\n\nExample for standard usage:\n```javascript\nimport { loadTests, setupEmberOnerrorValidation, start } from 'ember-qunit';\n\nsetupEmberOnerrorValidation();\nloadTests();\nstart();\n```\n\nFor users of `ember-exam`, note that as of `ember-exam@9.0.0`, `loadTests()` is called internally, but `setupEmberOnerrorValidation()` is not. Therefore, end users must explicitly call it:\n\n```javascript\nimport { setupEmberOnerrorValidation } from 'ember-qunit';\nimport { setApplication } from '@ember/test-helpers';\nimport Application from 'my-app/app';\nimport config from 'my-app/config/environment';\nimport start from 'ember-exam/test-support/start';\n\nsetApplication(Application.create(config.APP));\nsetupEmberOnerrorValidation();\nstart();\n```\n\nThis ensures proper error validation is set up while maintaining compatibility with modern build systems.", 'RequireInfoFlag': False, 'RequireInfo': ''}
+New description: {
+  "Id": 0,
+  "BC_description": "In version 9.0.0 of ember-qunit, the functions `loadTests` and `setupEmberOnerrorValidation` must now be explicitly called during test setup. These were previously invoked implicitly when calling `start` from `ember-qunit`, but are no longer automatically executed. This change was made to decouple test loading and error validation logic from the `start` function, aligning with modern Ember apps that use Embroider and do not rely on AMD-based test loading. As a result, test suites that do not explicitly invoke `loadTests()` and `setupEmberOnerrorValidation()` will run with no tests discovered (empty test suite) or may miss critical error validation, leading to potential silent failures.",
+  "Reference": [
+    "https://github.com/emberjs/ember-qunit/pull/1182"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "loadTests",
+      "setupEmberOnerrorValidation"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Before: No explicit call to `loadTests` or `setupEmberOnerrorValidation` was needed \u2014 initialization occurred implicitly via `start()`.\nAfter: Users must explicitly call `loadTests()` and `setupEmberOnerrorValidation()` before calling `start()`.\n\nExample for standard usage:\n```javascript\nimport { loadTests, setupEmberOnerrorValidation, start } from 'ember-qunit';\n\nsetupEmberOnerrorValidation();\nloadTests();\nstart();\n```\n\nFor users of `ember-exam`, note that as of `ember-exam@9.0.0`, `loadTests()` is called internally, but `setupEmberOnerrorValidation()` is not. Therefore, end users must explicitly call it:\n\n```javascript\nimport { setupEmberOnerrorValidation } from 'ember-qunit';\nimport { setApplication } from '@ember/test-helpers';\nimport Application from 'my-app/app';\nimport config from 'my-app/config/environment';\nimport start from 'ember-exam/test-support/start';\n\nsetApplication(Application.create(config.APP));\nsetupEmberOnerrorValidation();\nstart();\n```\n\nThis ensures proper error validation is set up while maintaining compatibility with modern build systems.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 0,
+  "BC_description": "In version 9.0.0 of ember-qunit, the functions `loadTests` and `setupEmberOnerrorValidation` must now be explicitly called during test setup. These were previously invoked implicitly when calling `start` from `ember-qunit`, but are no longer automatically executed. This change was made to decouple test loading and error validation logic from the `start` function, aligning with modern Ember apps that use Embroider and do not rely on AMD-based test loading. As a result, test suites that do not explicitly invoke `loadTests()` and `setupEmberOnerrorValidation()` will run with no tests discovered (empty test suite) or may miss critical error validation, leading to potential silent failures.",
+  "Reference": [
+    "https://github.com/emberjs/ember-qunit/pull/1182"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "loadTests",
+      "setupEmberOnerrorValidation"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "ember-qunit"
+    ]
+  },
+  "Adaptation_method": "Before: No explicit call to `loadTests` or `setupEmberOnerrorValidation` was needed \u2014 initialization occurred implicitly via `start()`.\nAfter: Users must explicitly call `loadTests()` and `setupEmberOnerrorValidation()` before calling `start()`.\n\nExample for standard usage:\n```javascript\nimport { loadTests, setupEmberOnerrorValidation, start } from 'ember-qunit';\n\nsetupEmberOnerrorValidation();\nloadTests();\nstart();\n```\n\nFor users of `ember-exam`, note that as of `ember-exam@9.0.0`, `loadTests()` is called internally, but `setupEmberOnerrorValidation()` is not. Therefore, end users must explicitly call it:\n\n```javascript\nimport { setupEmberOnerrorValidation } from 'ember-qunit';\nimport { setApplication } from '@ember/test-helpers';\nimport Application from 'my-app/app';\nimport config from 'my-app/config/environment';\nimport start from 'ember-exam/test-support/start';\n\nsetApplication(Application.create(config.APP));\nsetupEmberOnerrorValidation();\nstart();\n```\n\nThis ensures proper error validation is set up while maintaining compatibility with modern build systems.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+validation consumption token: 8408
+validation consumption time: 34.51496950071305
+Done: ember-qunit
+Wrote 2 patterns to  /exp/after-2024/ember-qunit/qwen-plus-latest/tapir.json

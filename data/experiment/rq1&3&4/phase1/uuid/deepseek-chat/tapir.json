@@ -1,0 +1,27 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<uuid>,<uuid/**/*>}?**.{parse,unparse}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "write {<uuid>,<uuid/**/*>}?**.{parse,unparse}",
+    "changelogId": 0
+  },
+  {
+    "type": "read",
+    "pattern": "read {<uuid>,<uuid/**/*>}?**.{BufferClass}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "read {<uuid>,<uuid/**/*>}?**.{mathRNG,nodeRNG,whatwgRNG}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "write {<uuid>,<uuid/**/*>}?**.{mathRNG,nodeRNG,whatwgRNG}",
+    "changelogId": 2
+  }
+]

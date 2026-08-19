@@ -1,0 +1,27 @@
+{
+  "Id": 2,
+  "BC_description": "Most Async methods, including collection methods (e.g., map, filter, reduce), control flow methods (e.g., series, parallel, waterfall), and utility methods (e.g., timeout, retry), now return a Promise when the final callback is omitted, making them awaitable. This may break code that relies on synchronous return values or callback-based flows, as the return type changes from undefined to a Promise in such cases.",
+  "Reference": [
+    "#1572"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "map",
+      "filter",
+      "reduce",
+      "series",
+      "parallel",
+      "waterfall",
+      "timeout",
+      "retry",
+      "*"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Use await or promises for methods that now return promises when callbacks are omitted. For example, replace async.mapLimit(array, limit, iterator, callback) with await async.mapLimit(array, limit, iterator) or use the callback version. Specifically: if you were using async.map(array, iterator, callback), you can now use await async.map(array, iterator) or continue with the callback. Similarly, for other methods like async.series(tasks, callback), use await async.series(tasks) or the callback.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}

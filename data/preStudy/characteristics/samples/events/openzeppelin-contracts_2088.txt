@@ -1,0 +1,7 @@
+{
+  "owner": "OpenZeppelin",
+  "repo": "openzeppelin-contracts",
+  "number": 2088,
+  "pr_url": "https://github.com/OpenZeppelin/openzeppelin-contracts/pull/2088",
+  "content": "# PR 2088: Use bytes32 explicitly for Create2.computeAddress()\nBranches: fix/create2-bytes32 -> master\n\nThis possibly would push users to cache hash of the bytecode, to increate computation efficiency.\n\n## Commit titles\n- Use bytes32 explicitly for Create2.computeAddress(), to force users cache hash of the bytecode\n- Remove only from test :)\n- Merge branch 'master' into fix/create2-bytes32\n- Merge branch 'master' into fix/create2-bytes32\n\n## Changed files\n- contracts/mocks/Create2Impl.sol\n- contracts/utils/Create2.sol\n- test/utils/Create2.test.js\n## Issue comments\n- @stale[bot]: Hi all!\nThis Pull Request has not had any recent activity, is it still relevant? If so, what is blocking it? Is there anything we can do to help move it forward?\nThanks!\n- @k06a: @nventuro what do you think?\n- @frangio: Yes I think this is a good idea and we should merge it.\n## Reviews\n- @nventuro [APPROVED]: I like this suggestion! The old behaviour can still be implemented by simply computing the hash before calling the library function, and while this does break backwards compatibility, the fact that we're changing the type of the `code` argument should prevent errors during a migration.\r\n\r\n@frangio any thoughts on this?"
+}

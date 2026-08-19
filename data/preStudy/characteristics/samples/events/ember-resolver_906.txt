@@ -1,0 +1,7 @@
+{
+  "owner": "ember-cli",
+  "repo": "ember-resolver",
+  "number": 906,
+  "pr_url": "https://github.com/ember-cli/ember-resolver/pull/906",
+  "content": "# PR 906: Simplify repository structure (remove `addon/resolvers/classic`)\nBranches: remove-legacy-subdirs -> master\n\nThe `resolvers` subdirectory was created in order to support both the classic resolver and the module unification resolver. Some time later, the MU resolver was removed.\n\nThis cleans the repo up a bit to make it much simpler (and more \"normal\").\n\n\n## Commit titles\n- Simplify repository structure (remove `addon/resolvers/classic`)\n\n## Changed files\n- addon/addon/container-debug-adapter.js\n- addon/addon/index.js\n- addon/addon/resolver.js\n- addon/addon/resolvers/classic/index.js\n- addon/app/container-debug-adapter.js\n- test-app/tests/unit/exports-test.js\n- test-app/tests/unit/resolvers/classic/basic-test.js"
+}

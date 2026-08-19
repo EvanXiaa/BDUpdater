@@ -1,0 +1,7 @@
+{
+  "owner": "avajs",
+  "repo": "ava",
+  "number": 3216,
+  "pr_url": "https://github.com/avajs/ava/pull/3216",
+  "content": "# PR 3216: Drop support for Node.js 14, update minimal requirements for 16, 18 and 20\nBranches: bump-minimal-node-versions -> main\n\nRequire the latest versions with new features.\n\n\n## Commit titles\n- Drop support for Node.js 14, update minimal requirements for 16, 18 and 20\n\n## Changed files\n- .github/workflows/ci.yml\n- package-lock.json\n- package.json\n- test-tap/reporters/default.edgecases.v14.log\n- test-tap/reporters/default.failfast.v14.log\n- test-tap/reporters/default.failfast2.v14.log\n- test-tap/reporters/default.only.v14.log\n- test-tap/reporters/default.regular.v14.log\n- test-tap/reporters/default.timeoutcontextlogs.v14.log\n- test-tap/reporters/default.timeoutinmultiplefiles.v14.log\n- test-tap/reporters/default.timeoutinsinglefile.v14.log\n- test-tap/reporters/default.timeoutwithmatch.v14.log\n- test-tap/reporters/default.watch.v14.log\n- test-tap/reporters/tap.edgecases.v14.log\n- test-tap/reporters/tap.failfast.v14.log\n- test-tap/reporters/tap.failfast2.v14.log\n- test-tap/reporters/tap.only.v14.log\n- test-tap/reporters/tap.regular.v14.log"
+}

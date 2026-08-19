@@ -1,0 +1,107 @@
+Extracting breaking changes for ember-qunit
+HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+Candidate documentation files:
+['addon/CHANGELOG.md', 'CHANGELOG.md', 'RELEASE.md', 'docs/migration.md', 'addon/RELEASE.md', 'README.md', 'addon/README.md']
+Tokens till now: 705
+Extracted BC candidate list:
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "Explicit calls to loadTests and setupEmberOnerrorValidation are now required, whereas they might have been handled automatically or implicitly in previous versions. This change could break client projects that rely on the previous behavior without explicit calls.",
+      "Reference": [
+        "https://github.com/emberjs/ember-qunit/pull/1182"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "loadTests",
+          "setupEmberOnerrorValidation"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "In client code, explicitly call loadTests and setupEmberOnerrorValidation where they were previously not called. For example, if tests were running without these calls, add them in the appropriate setup or initialization code. Before: No explicit calls needed. After: Add calls like loadTests(); and setupEmberOnerrorValidation(); in your test setup.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The exact context, parameters, and return types for loadTests and setupEmberOnerrorValidation methods are not specified in the provided content. Please provide detailed information on how and where to call these methods, including any required arguments or module imports."
+    }
+  ]
+}
+parse consumption token: 0
+parse consumption time: 0
+Validating BC list for ember-qunit
+We still do validate once for raw bc {
+  "Id": 0,
+  "BC_description": "Explicit calls to loadTests and setupEmberOnerrorValidation are now required, whereas they might have been handled automatically or implicitly in previous versions. This change could break client projects that rely on the previous behavior without explicit calls.",
+  "Reference": [
+    "https://github.com/emberjs/ember-qunit/pull/1182"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "loadTests",
+      "setupEmberOnerrorValidation"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "In client code, explicitly call loadTests and setupEmberOnerrorValidation where they were previously not called. For example, if tests were running without these calls, add them in the appropriate setup or initialization code. Before: No explicit calls needed. After: Add calls like loadTests(); and setupEmberOnerrorValidation(); in your test setup.",
+  "RequireInfoFlag": true,
+  "RequireInfo": "The exact context, parameters, and return types for loadTests and setupEmberOnerrorValidation methods are not specified in the provided content. Please provide detailed information on how and where to call these methods, including any required arguments or module imports."
+}.
+Validating by searchForIssue
+
+HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+Refined description:
+{'Id': 0, 'BC_description': 'In ember-qunit, explicit calls to loadTests and setupEmberOnerrorValidation are now required in test setup code, whereas they were previously handled automatically by the start function. This change breaks client projects that rely on the automatic behavior, as tests may not load or onerror validation may not be set up without these explicit calls.', 'Reference': ['https://github.com/emberjs/ember-qunit/pull/1182'], 'Changed_object': {'type': 'call', 'className': [], 'methodName': ['loadTests', 'setupEmberOnerrorValidation'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': "Update your test-helper.js file to explicitly call loadTests and setupEmberOnerrorValidation before calling start. For example: import { loadTests } from 'ember-qunit/test-loader'; import { start, setupEmberOnerrorValidation } from 'ember-qunit'; setupEmberOnerrorValidation(); loadTests(); start();", 'RequireInfoFlag': False, 'RequireInfo': ''}
+New description: {
+  "Id": 0,
+  "BC_description": "In ember-qunit, explicit calls to loadTests and setupEmberOnerrorValidation are now required in test setup code, whereas they were previously handled automatically by the start function. This change breaks client projects that rely on the automatic behavior, as tests may not load or onerror validation may not be set up without these explicit calls.",
+  "Reference": [
+    "https://github.com/emberjs/ember-qunit/pull/1182"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "loadTests",
+      "setupEmberOnerrorValidation"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Update your test-helper.js file to explicitly call loadTests and setupEmberOnerrorValidation before calling start. For example: import { loadTests } from 'ember-qunit/test-loader'; import { start, setupEmberOnerrorValidation } from 'ember-qunit'; setupEmberOnerrorValidation(); loadTests(); start();",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 0,
+  "BC_description": "In ember-qunit, explicit calls to loadTests and setupEmberOnerrorValidation are now required in test setup code, whereas they were previously handled automatically by the start function. This change breaks client projects that rely on the automatic behavior, as tests may not load or onerror validation may not be set up without these explicit calls.",
+  "Reference": [
+    "https://github.com/emberjs/ember-qunit/pull/1182"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "loadTests",
+      "setupEmberOnerrorValidation",
+      "start"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "ember-qunit",
+      "ember-qunit/test-loader"
+    ]
+  },
+  "Adaptation_method": "Update your test-helper.js file to explicitly call loadTests and setupEmberOnerrorValidation before calling start. For example: import { loadTests } from 'ember-qunit/test-loader'; import { start, setupEmberOnerrorValidation } from 'ember-qunit'; setupEmberOnerrorValidation(); loadTests(); start();",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+validation consumption token: 6068
+validation consumption time: 29.835840083658695
+Done: ember-qunit
+Wrote 2 patterns to  /exp/after-2024/ember-qunit/deepseek-chat/tapir.json

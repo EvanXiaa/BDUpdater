@@ -1,0 +1,41 @@
+2025-09-01 17:14:04,373 | INFO | repair.submission-mss-web | Starting analysis for submission-mss-web
+2025-09-01 17:14:04,373 | INFO | repair.submission-mss-web | Starting breaking change analysis for -2024/ember-qunit/results/gpt-4.1/submission-mss-web
+2025-09-01 17:14:04,373 | INFO | repair.submission-mss-web | ============================================================
+2025-09-01 17:14:04,373 | INFO | repair.submission-mss-web | BEGIN pattern 0 (pattern_0)
+2025-09-01 17:14:04,373 | DEBUG | repair.submission-mss-web | Pattern payload: {"type": "call", "pattern": "read {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 17:14:04,562 | INFO | repair.submission-mss-web | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/submission-mss-web
+2025-09-01 17:14:04,562 | DEBUG | repair.submission-mss-web | Parsed detection output: [{'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 6, 'column': 0, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'tests/test-helper.js', 'line': 13, 'column': 0, 'confidence': 'high'}]
+2025-09-01 17:14:04,562 | DEBUG | repair.submission-mss-web | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107dbb380>, {'tests/test-helper.js': defaultdict(<class 'list'>, {0: [{'line': 6, 'column': 0, 'confidence': 'high'}, {'line': 13, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 17:14:04,563 | INFO | repair.submission-mss-web | New context extracted from -2024/ember-qunit/results/gpt-4.1/submission-mss-web/tests/test-helper.js
+2025-09-01 17:14:04,563 | INFO | repair.submission-mss-web | New context extracted from -2024/ember-qunit/results/gpt-4.1/submission-mss-web/tests/test-helper.js
+2025-09-01 17:14:10,670 | DEBUG | repair.submission-mss-web | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the import statement for `start()` so we can determine whether it comes from `ember-qunit` or `ember-exam/test-support/start` and apply the correct migration.",
+  "dependencies": []
+}
+2025-09-01 17:14:10,671 | DEBUG | repair.submission-mss-web | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/submission-mss-web/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 17:14:16,508 | DEBUG | repair.submission-mss-web | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please provide the full contents of the test entry file (e.g., tests/test-helper.js) to confirm where and how `start()` is called and whether `ember-exam` is in use; this is needed to determine the correct placement and imports of `setupEmberOnerrorValidation()` and `loadTests()`.",
+  "dependencies": []
+}
+2025-09-01 17:14:16,510 | DEBUG | repair.submission-mss-web | Added to whole mode list: file=-2024/ember-qunit/results/gpt-4.1/submission-mss-web/tests/test-helper.js, context=Node, bc_desc={'Id': 0, 'BC_description': "Starting in v9.0.0, explicit calls to 'loadTests' and 'setupEmberOnerrorValidation' are now...
+2025-09-01 17:14:16,511 | INFO | repair.submission-mss-web | Whole mode item: -2024/ember-qunit/results/gpt-4.1/submission-mss-web/tests/test-helper.js
+2025-09-01 17:14:29,297 | DEBUG | repair.submission-mss-web | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "import Application from 'mssform/app';\nimport config from 'mssform/config/environment';\nimport * as QUnit from 'qunit';\nimport { setApplication } from '@ember/test-helpers';\nimport { setup } from 'qunit-dom';\nimport { start } from 'ember-qunit';\nimport { setupEmberOnerrorValidation } from 'ember-qunit'; // explicit error validation setup (v9+)\nimport { loadTests } from 'ember-qunit/test-loader'; // explicit test loading (v9+)\n\nsetApplication(Application.create(config.APP));\n\nsetup(QUnit.assert);\n\n// v9+ requires explicit calls in this order:\nsetupEmberOnerrorValidation();\nloadTests();\nstart();", 'additional_req': '', 'dependencies': ['ember-qunit@^9.0.0']}
+2025-09-01 17:14:29,298 | INFO | repair.submission-mss-web | Replace whole file: -2024/ember-qunit/results/gpt-4.1/submission-mss-web/tests/test-helper.js
+2025-09-01 17:14:29,299 | INFO | repair.submission-mss-web | Whole mode item: -2024/ember-qunit/results/gpt-4.1/submission-mss-web/tests/test-helper.js
+2025-09-01 17:14:29,300 | DEBUG | repair.submission-mss-web | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/submission-mss-web/package.json
+2025-09-01 17:14:29,300 | INFO | repair.submission-mss-web | END pattern 0 (pattern_0)
+2025-09-01 17:14:29,300 | INFO | repair.submission-mss-web | ============================================================
+2025-09-01 17:14:29,300 | INFO | repair.submission-mss-web | BEGIN pattern 0 (pattern_0)
+2025-09-01 17:14:29,300 | DEBUG | repair.submission-mss-web | Pattern payload: {"type": "call", "pattern": "write {<ember-qunit>,<ember-qunit/**/*>}?**.{start,loadTests,setupEmberOnerrorValidation}", "changelogId": 0}
+2025-09-01 17:14:29,529 | INFO | repair.submission-mss-web | Tapir run successful for -2024/ember-qunit/results/gpt-4.1/submission-mss-web
+2025-09-01 17:14:29,530 | DEBUG | repair.submission-mss-web | Parsed detection output: []
+2025-09-01 17:14:29,530 | DEBUG | repair.submission-mss-web | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107dbaac0>, {})
+2025-09-01 17:14:29,530 | DEBUG | repair.submission-mss-web | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/submission-mss-web/package.json
+2025-09-01 17:14:29,530 | INFO | repair.submission-mss-web | END pattern 0 (pattern_0)
+2025-09-01 17:14:29,530 | DEBUG | repair.submission-mss-web | Updated package.json saved at -2024/ember-qunit/results/gpt-4.1/submission-mss-web/package.json
+2025-09-01 17:14:29,530 | INFO | repair.submission-mss-web | token consumed 12802
+2025-09-01 17:14:29,530 | INFO | repair.submission-mss-web | parse consumption time: 24.727807208895683

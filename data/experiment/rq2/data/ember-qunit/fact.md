@@ -1,0 +1,1 @@
+Require explicit calls to loadTests and setupEmberOnerrorValidation 

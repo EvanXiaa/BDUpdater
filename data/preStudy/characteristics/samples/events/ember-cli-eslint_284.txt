@@ -1,0 +1,7 @@
+{
+  "owner": "ember-cli",
+  "repo": "ember-cli-eslint",
+  "number": 284,
+  "pr_url": "https://github.com/ember-cli/ember-cli-eslint/pull/284",
+  "content": "# PR 284: Upgrade `broccoli-lint-eslint` to v5.0.0\nBranches: eslint_5 -> master\n\nBreaking.\r\n\r\nWill update once broccoli-lint-eslint 5 is released to point to the release.\n\n## Commit titles\n- Upgrade to broccoli-lint-eslint 5\n\n## Changed files\n- package.json\n- yarn.lock\n## Issue comments\n- @Gaurav0: @Turbo87 @rwjblue rebased\n- @Gaurav0: FYI, I am using this branch with great success at work."
+}

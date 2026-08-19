@@ -1,0 +1,7 @@
+{
+  "owner": "yargs",
+  "repo": "yargs",
+  "number": 1574,
+  "pr_url": "https://github.com/yargs/yargs/pull/1574",
+  "content": "# PR 1574: feat(usage): single char aliases first in help\nBranches: 1403-single-char-aliases-first-in-help -> master\n\nDisplay short switches first in usage,\r\nand indent long switches only options.\r\n\r\nFix #1403\n\n## Commit titles\n- feat(usage): single char aliases first in help\n- fix(usage): additional test help message indentation fix\n- fix(usage): indentation in new test from #1682\n\n## Changed files\n- lib/usage.ts\n- test/usage.js\n- test/yargs.js\n## Issue comments\n- @bcoe: this seems great to me, I'm wondering if we should call it a breaking change though, as it will require a lot of upstream folks to change their unit tests. I was thinking we'd drop Node 8 relatively soon any ways.\n- @mleguen: I rebased and handled conflicts with #1580.\r\n\r\nIt was the occasion to change somehow my way of doing this (no longer compatible with #1580), which is not bad as I personally find it more readable.\n- @mleguen: Rebased to adapt to usage being a typescript module now.\n- @bcoe: @mleguen bother you to rebase this, now that we're moving towards the next major.\n- @mleguen: @bcoe done.\r\n\r\nFirst time in 2 months I had time to have a look at yargs, sorry...\n## Reviews\n- @bcoe [APPROVED]"
+}

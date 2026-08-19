@@ -1,0 +1,7 @@
+{
+  "owner": "eslint",
+  "repo": "eslintrc",
+  "number": 139,
+  "pr_url": "https://github.com/eslint/eslintrc/pull/139",
+  "content": "# PR 139: feat!: Set default `schema: []`, drop support for function-style rules\nBranches: eslint-issue14709 -> main\n\nPart of https://github.com/eslint/eslint/pull/17792\n\n## Commit titles\n- drop support for function-style rules\n- implement schema changes\n- add unit tests for ConfigValidator#getRuleOptionsSchema\n- add regression tests for ConfigValidator#validateRuleOptions\n- add tests for error code\n- update fixture rules to use object-style\n\n## Changed files\n- lib/config-array/config-array.js\n- lib/shared/config-validator.js\n- tests/fixtures/rules/custom-rule.cjs\n- tests/fixtures/rules/dir1/no-strings.cjs\n- tests/fixtures/rules/dir2/no-literals.cjs\n- tests/fixtures/rules/make-syntax-error-rule.cjs\n- tests/fixtures/rules/wrong/custom-rule.cjs\n- tests/lib/shared/config-validator.js\n## Issue comments\n- @mdjermanovic: This is ready for review.\n## Reviews\n- @nzakas [APPROVED]: LGTM. The explicit error messaging is a nice touch. :+1:"
+}

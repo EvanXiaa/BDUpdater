@@ -1,0 +1,92 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<bluebird>,<bluebird/**/*>}**.{cancel}",
+    "changelogId": 16
+  },
+  {
+    "type": "call",
+    "pattern": "write {<bluebird>,<bluebird/**/*>}**.{cancel}",
+    "changelogId": 16
+  },
+  {
+    "type": "call",
+    "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}",
+    "changelogId": 17
+  },
+  {
+    "type": "call",
+    "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}",
+    "changelogId": 17
+  },
+  {
+    "type": "call",
+    "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify}",
+    "changelogId": 18
+  },
+  {
+    "type": "call",
+    "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify}",
+    "changelogId": 18
+  },
+  {
+    "type": "call",
+    "pattern": "read {<bluebird>,<bluebird/**/*>}**.{each}",
+    "changelogId": 19
+  },
+  {
+    "type": "call",
+    "pattern": "write {<bluebird>,<bluebird/**/*>}**.{each}",
+    "changelogId": 19
+  },
+  {
+    "type": "call",
+    "pattern": "read {<bluebird>,<bluebird/**/*>}**.{progressed,progress,then,done,fork}",
+    "changelogId": 20
+  },
+  {
+    "type": "call",
+    "pattern": "write {<bluebird>,<bluebird/**/*>}**.{progressed,progress,then,done,fork}",
+    "changelogId": 20
+  },
+  {
+    "type": "call",
+    "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{spread}",
+    "changelogId": 21
+  },
+  {
+    "type": "call",
+    "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{spread}",
+    "changelogId": 21
+  },
+  {
+    "type": "call",
+    "pattern": "read {<bluebird>,<bluebird/**/*>}**.{done}",
+    "changelogId": 22
+  },
+  {
+    "type": "call",
+    "pattern": "write {<bluebird>,<bluebird/**/*>}**.{done}",
+    "changelogId": 22
+  },
+  {
+    "type": "call",
+    "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{reject,new Promise,fromCallback}",
+    "changelogId": 23
+  },
+  {
+    "type": "call",
+    "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{reject,new Promise,fromCallback}",
+    "changelogId": 23
+  },
+  {
+    "type": "call",
+    "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{defer,resolve,reject,progress}",
+    "changelogId": 24
+  },
+  {
+    "type": "call",
+    "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{defer,resolve,reject,progress}",
+    "changelogId": 24
+  }
+]

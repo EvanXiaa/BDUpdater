@@ -1,0 +1,211 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "SVGO now requires Node.js >=16.0.0, which is a higher version requirement than in v3.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx",
+        "docs/01-index.mdx"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "svgo"
+        ]
+      },
+      "Adaptation_method": "Upgrade your Node.js environment to version 16.0.0 or higher.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "The removeViewBox plugin is no longer a default plugin in preset-default, which means viewBox attributes will be preserved by default.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx"
+      ],
+      "Changed_object": {
+        "type": "config",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "svgo.config.js"
+        ]
+      },
+      "Adaptation_method": "To continue using removeViewBox, add it explicitly to your SVGO config:\n```js\nexport default {\n  plugins: [\n    'preset-default', // built-in plugins enabled by default\n    'removeViewBox',\n  ],\n};\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "The removeTitle plugin is no longer a default plugin in preset-default, which means title elements will be preserved by default.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx"
+      ],
+      "Changed_object": {
+        "type": "config",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "svgo.config.js"
+        ]
+      },
+      "Adaptation_method": "To continue using removeTitle, add it explicitly to your SVGO config:\n```js\nexport default {\n  plugins: [\n    'preset-default', // built-in plugins enabled by default\n    'removeTitle',\n  ],\n};\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "The removeScriptElement plugin has been renamed to removeScripts, as it not only removes the <script> element, but also event handlers, and script URIs.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx"
+      ],
+      "Changed_object": {
+        "type": "config",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "svgo.config.js"
+        ]
+      },
+      "Adaptation_method": "If you were using the removeScriptElement plugin, update your SVGO config to use removeScripts instead:\n```js\nexport default {\n  plugins: [\n    'preset-default', // built-in plugins enabled by default\n    'removeScripts', // instead of 'removeScriptElement'\n  ],\n};\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "SVGO now enforces a boundary between public and internal API. It's no longer possible to arbitrarily import any code declared by SVGO, but only the public API declared as part of semantic versioning.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "svgo/lib/*",
+          "svgo/plugins/*"
+        ]
+      },
+      "Adaptation_method": "Use the public API exports from 'svgo' or 'svgo/browser' instead of importing from internal paths.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 5,
+      "BC_description": "The browser bundle import path has changed from 'svgo/dist/svgo.browser.js' to 'svgo/browser'.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "svgo/dist/svgo.browser.js"
+        ]
+      },
+      "Adaptation_method": "Change the import path for browser usage:\n```js\n// Before\nimport { optimize } from 'svgo/dist/svgo.browser.js';\n\n// After\nimport { optimize } from 'svgo/browser';\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 6,
+      "BC_description": "The import paths for helpers and plugins have changed. Previously internal helpers like 'querySelector', 'querySelectorAll' were imported from 'svgo/lib/xast.js', now they are top-level exports from 'svgo'.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "svgo/lib/xast.js",
+          "svgo/lib/builtin"
+        ]
+      },
+      "Adaptation_method": "Import helpers directly from 'svgo':\n```js\n// Before\nimport { querySelector, querySelectorAll } from 'svgo/lib/xast.js';\n\n// After\nimport { querySelector, querySelectorAll } from 'svgo';\n```\n\nFor built-in plugins:\n```js\n// Before\nimport { builtin } from 'svgo/lib/builtin';\n\n// After\nimport { builtinPlugins } from 'svgo';\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 7,
+      "BC_description": "Importing individual plugins has changed. Previously, you could import a specific plugin from 'svgo/plugins/{plugin-name}', now you need to find the plugin in the builtinPlugins array.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "svgo/plugins/*"
+        ]
+      },
+      "Adaptation_method": "Find a specific plugin from the builtinPlugins array:\n```js\n// Before\nimport presetDefault from 'svgo/plugins/preset-default';\n\n// After\nimport { builtinPlugins } from 'svgo';\nconst presetDefault = builtinPlugins.find(plugin => plugin.name === 'preset-default');\n\n// Or create a map of all plugins\nconst pluginMap = builtinPlugins.reduce((acc, val) => acc.set(val.name, val), new Map());\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 8,
+      "BC_description": "The CSS selector helpers (querySelectorAll, querySelector, matches) have changed behavior when selecting nodes that reference parent or sibling nodes. These must now be imported from 'svgo' and require a parent node map to be passed as a third argument for certain selectors.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [],
+        "methodName": [
+          "querySelectorAll",
+          "querySelector",
+          "matches"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "svgo"
+        ]
+      },
+      "Adaptation_method": "For selectors that traverse parent or sibling nodes, use the new mapNodesToParents helper:\n```js\n// Before\nimport { querySelectorAll } from 'svgo/lib/xast.js';\nconst nodes = querySelectorAll(childNode, selector);\n\n// After\nimport { querySelectorAll, mapNodesToParents } from 'svgo';\nconst nodes = querySelectorAll(childNode, selector, mapNodesToParents(rootNode));\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 9,
+      "BC_description": "SVGO now only has named exports; there are no default exports in the public API.",
+      "Reference": [
+        "https://github.com/svg/svgo/releases/tag/v4.0.0",
+        "docs/06-migrations/01-migration-from-v3-to-v4.mdx"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "svgo"
+        ]
+      },
+      "Adaptation_method": "Use named exports or import everything as a namespace:\n```js\n// Before\nimport svgo from 'svgo';\nsvgo.optimize('<svg></svg>');\n\n// Option 1: Use named exports\nimport { optimize } from 'svgo';\noptimize('<svg></svg>');\n\n// Option 2: Import everything as namespace\nimport * as svgo from 'svgo';\nsvgo.optimize('<svg></svg>');\n```",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

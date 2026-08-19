@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "dep_bc_repair_supplemental_run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "backend",
+    "target_dir",
+    "pattern_file",
+    "pattern_file_sha256",
+    "locations_file",
+    "locations_file_sha256",
+    "location_count",
+    "attempted_bc_ids",
+    "skipped_patterns",
+    "complete"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "status": { "const": "passed" },
+    "backend": { "const": "ripgrep" },
+    "target_dir": { "type": "string", "minLength": 1 },
+    "pattern_file": { "type": "string", "minLength": 1 },
+    "pattern_file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "locations_file": { "type": "string", "minLength": 1 },
+    "locations_file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "location_count": { "type": "integer", "minimum": 0 },
+    "attempted_bc_ids": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0 }
+    },
+    "skipped_patterns": { "type": "array", "items": { "type": "string" } },
+    "complete": { "type": "boolean" }
+  }
+}

@@ -1,0 +1,5 @@
+v5.0.0:
+date: 2020-07-16
+changes:
+- Requires node 10+.
+- Update dependencies.

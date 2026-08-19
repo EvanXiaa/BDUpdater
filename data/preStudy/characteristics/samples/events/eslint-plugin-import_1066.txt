@@ -1,0 +1,7 @@
+{
+  "owner": "import-js",
+  "repo": "eslint-plugin-import",
+  "number": 1066,
+  "pr_url": "https://github.com/import-js/eslint-plugin-import/pull/1066",
+  "content": "# PR 1066: Update recommended.js\nBranches: patch-2 -> master\n\nCloses #1063\n\n## Commit titles\n- Update recommended.js\n\n## Changed files\n- config/recommended.js\n## Issue comments\n- @coveralls: [![Coverage Status](https://coveralls.io/builds/16372736/badge)](https://coveralls.io/builds/16372736)\n\nCoverage remained the same at 96.47% when pulling **93aa68d9dab8ae7397d153b9737ff3a08b9a8354 on briandipalma:patch-2** into **ee15fa4c61df2ddba6fc10109f1a60bb7bddb7b6 on benmosher:master**."
+}

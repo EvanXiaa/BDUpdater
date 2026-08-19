@@ -1,0 +1,1 @@
+## [4.0.0](https://github.com/webpack-contrib/eslint-loader/compare/v3.0.4...v4.0.0) (2020-04-03)

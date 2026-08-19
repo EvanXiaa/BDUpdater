@@ -1,0 +1,17 @@
+[
+  {
+    "type": "read",
+    "pattern": "read {<chalk>,<chalk/**/*>}?**.{hasColor}",
+    "changelogId": 1
+  },
+    {
+    "type": "read",
+    "pattern": "read {<chalk>,<chalk/**/*>}?**.{stripColor}",
+    "changelogId": 2
+  },
+  {
+    "type": "read",
+    "pattern": "read {<chalk>,<chalk/**/*>}?**.{styles}",
+    "changelogId": 3
+  }
+]

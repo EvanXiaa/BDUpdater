@@ -1,0 +1,49 @@
+2025-09-01 02:05:53,830 | INFO | repair.hashmd | Starting analysis for hashmd
+2025-09-01 02:05:53,830 | INFO | repair.hashmd | Starting breaking change analysis for -2024/svgo/results/gpt-4.1/hashmd
+2025-09-01 02:05:53,830 | INFO | repair.hashmd | ============================================================
+2025-09-01 02:05:53,830 | INFO | repair.hashmd | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:05:53,831 | DEBUG | repair.hashmd | Pattern payload: {"type": "call", "pattern": "read {<svgo>,<svgo/**/*>}?**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 02:05:53,962 | INFO | repair.hashmd | Tapir run successful for -2024/svgo/results/gpt-4.1/hashmd
+2025-09-01 02:05:53,962 | DEBUG | repair.hashmd | Parsed detection output: []
+2025-09-01 02:05:53,962 | DEBUG | repair.hashmd | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x104602840>, {})
+2025-09-01 02:05:53,962 | DEBUG | repair.hashmd | Updated package.json saved at -2024/svgo/results/gpt-4.1/hashmd/package.json
+2025-09-01 02:05:53,962 | INFO | repair.hashmd | END pattern 4 (pattern_4)
+2025-09-01 02:05:53,963 | INFO | repair.hashmd | ============================================================
+2025-09-01 02:05:53,963 | INFO | repair.hashmd | BEGIN pattern 4 (pattern_4)
+2025-09-01 02:05:53,963 | DEBUG | repair.hashmd | Pattern payload: {"type": "call", "pattern": "write {<svgo>,<svgo/**/*>}?**.{querySelectorAll,querySelector,matches}", "changelogId": 4}
+2025-09-01 02:05:54,095 | INFO | repair.hashmd | Tapir run successful for -2024/svgo/results/gpt-4.1/hashmd
+2025-09-01 02:05:54,095 | DEBUG | repair.hashmd | Parsed detection output: []
+2025-09-01 02:05:54,095 | DEBUG | repair.hashmd | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x104602840>, {})
+2025-09-01 02:05:54,096 | DEBUG | repair.hashmd | Updated package.json saved at -2024/svgo/results/gpt-4.1/hashmd/package.json
+2025-09-01 02:05:54,096 | INFO | repair.hashmd | END pattern 4 (pattern_4)
+2025-09-01 02:05:54,096 | INFO | repair.hashmd | ============================================================
+2025-09-01 02:05:54,096 | INFO | repair.hashmd | BEGIN pattern 3 (pattern_3)
+2025-09-01 02:05:54,096 | DEBUG | repair.hashmd | Pattern payload: {"type": "import", "pattern": "import {svgo/lib/xast,svgo/lib/builtin,svgo/plugins/*,svgo/dist/svgo.browser}", "changelogId": 3}
+2025-09-01 02:05:54,224 | INFO | repair.hashmd | Tapir run successful for -2024/svgo/results/gpt-4.1/hashmd
+2025-09-01 02:05:54,224 | DEBUG | repair.hashmd | Parsed detection output: []
+2025-09-01 02:05:54,225 | DEBUG | repair.hashmd | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x104602840>, {})
+2025-09-01 02:05:54,225 | DEBUG | repair.hashmd | Updated package.json saved at -2024/svgo/results/gpt-4.1/hashmd/package.json
+2025-09-01 02:05:54,225 | INFO | repair.hashmd | END pattern 3 (pattern_3)
+2025-09-01 02:05:54,225 | INFO | repair.hashmd | ============================================================
+2025-09-01 02:05:54,225 | INFO | repair.hashmd | BEGIN pattern 5 (pattern_5)
+2025-09-01 02:05:54,225 | DEBUG | repair.hashmd | Pattern payload: {"type": "import", "pattern": "import svgo", "changelogId": 5}
+2025-09-01 02:05:54,349 | INFO | repair.hashmd | Tapir run successful for -2024/svgo/results/gpt-4.1/hashmd
+2025-09-01 02:05:54,349 | DEBUG | repair.hashmd | Parsed detection output: [{'pattern_id': 5, 'file': 'scripts/icon.js', 'line': 4, 'column': 0, 'confidence': 'high'}]
+2025-09-01 02:05:54,349 | DEBUG | repair.hashmd | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x104602840>, {'scripts/icon.js': defaultdict(<class 'list'>, {5: [{'line': 4, 'column': 0, 'confidence': 'high'}]})})
+2025-09-01 02:05:54,350 | INFO | repair.hashmd | New context extracted from -2024/svgo/results/gpt-4.1/hashmd/scripts/icon.js
+2025-09-01 02:05:59,865 | DEBUG | repair.hashmd | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "import * as svgo from \"svgo\";",
+  "additional_req": "",
+  "dependencies": [
+    "svgo@^4.0.0"
+  ]
+}
+2025-09-01 02:05:59,866 | INFO | repair.hashmd | Replaced code in -2024/svgo/results/gpt-4.1/hashmd/scripts/icon.js at [81, 105]
+2025-09-01 02:05:59,868 | DEBUG | repair.hashmd | Updated package.json saved at -2024/svgo/results/gpt-4.1/hashmd/package.json
+2025-09-01 02:05:59,868 | INFO | repair.hashmd | END pattern 5 (pattern_5)
+2025-09-01 02:05:59,873 | INFO | repair.hashmd | Config BC: scanning 0 files
+2025-09-01 02:05:59,876 | INFO | repair.hashmd | Config BC: scanning 0 files
+2025-09-01 02:05:59,877 | DEBUG | repair.hashmd | Updated package.json saved at -2024/svgo/results/gpt-4.1/hashmd/package.json
+2025-09-01 02:05:59,877 | INFO | repair.hashmd | token consumed 3162
+2025-09-01 02:05:59,877 | INFO | repair.hashmd | parse consumption time: 5.518009500578046

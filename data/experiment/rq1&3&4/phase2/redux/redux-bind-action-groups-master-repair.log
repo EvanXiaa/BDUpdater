@@ -1,0 +1,37 @@
+2025-08-30 01:10:47,421 | INFO | repair.redux-bind-action-groups-master | Starting analysis for redux-bind-action-groups-master
+2025-08-30 01:10:47,421 | INFO | repair.redux-bind-action-groups-master | Starting breaking change analysis for /redux/results/gpt-4.1/redux-bind-action-groups-master
+2025-08-30 01:10:47,421 | INFO | repair.redux-bind-action-groups-master | ============================================================
+2025-08-30 01:10:47,421 | INFO | repair.redux-bind-action-groups-master | BEGIN pattern 0 (pattern_0)
+2025-08-30 01:10:47,421 | DEBUG | repair.redux-bind-action-groups-master | Pattern payload: {"type": "call", "pattern": "call {<redux>,<redux/**/*>}?**.{getState,subscribe,unsubscribe}", "changelogId": 0}
+2025-08-30 01:10:47,721 | INFO | repair.redux-bind-action-groups-master | Tapir run successful for /redux/results/gpt-4.1/redux-bind-action-groups-master
+2025-08-30 01:10:47,721 | DEBUG | repair.redux-bind-action-groups-master | Parsed detection output: [{'pattern_id': 0, 'file': 'src/__test__/index.js', 'line': 23, 'column': 11}]
+2025-08-30 01:10:47,721 | DEBUG | repair.redux-bind-action-groups-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103beeac0>, {'src/__test__/index.js': defaultdict(<class 'list'>, {0: [{'line': 23, 'column': 11}]})})
+2025-08-30 01:10:47,723 | INFO | repair.redux-bind-action-groups-master | New context extracted from /redux/results/gpt-4.1/redux-bind-action-groups-master/src/__test__/index.js
+2025-08-30 01:10:49,655 | DEBUG | repair.redux-bind-action-groups-master | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 01:10:49,656 | DEBUG | repair.redux-bind-action-groups-master | Updated package.json saved at /redux/results/gpt-4.1/redux-bind-action-groups-master/package.json
+2025-08-30 01:10:49,656 | INFO | repair.redux-bind-action-groups-master | END pattern 0 (pattern_0)
+2025-08-30 01:10:49,657 | INFO | repair.redux-bind-action-groups-master | ============================================================
+2025-08-30 01:10:49,657 | INFO | repair.redux-bind-action-groups-master | BEGIN pattern 1 (pattern_1)
+2025-08-30 01:10:49,657 | DEBUG | repair.redux-bind-action-groups-master | Pattern payload: {"type": "import", "pattern": "import {redux/lib/*,redux/es/*,redux/lib/createStore,redux/es/createStore,redux/lib/combineReducers,redux/es/combineReducers,redux/lib/applyMiddleware,redux/es/applyMiddleware,redux/lib/bindActionCreators,redux/es/bindActionCreators,redux/lib/compose,redux/es/compose,redux/lib/actionTypes,redux/es/actionTypes,redux/lib/utils/*,redux/es/utils/*}", "changelogId": 1}
+2025-08-30 01:10:49,806 | INFO | repair.redux-bind-action-groups-master | Tapir run successful for /redux/results/gpt-4.1/redux-bind-action-groups-master
+2025-08-30 01:10:49,806 | DEBUG | repair.redux-bind-action-groups-master | Parsed detection output: [{'pattern_id': 1, 'file': 'src/index.js', 'line': 1, 'column': 0}]
+2025-08-30 01:10:49,806 | DEBUG | repair.redux-bind-action-groups-master | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x103bee5c0>, {'src/index.js': defaultdict(<class 'list'>, {1: [{'line': 1, 'column': 0}]})})
+2025-08-30 01:10:49,807 | INFO | repair.redux-bind-action-groups-master | New context extracted from /redux/results/gpt-4.1/redux-bind-action-groups-master/src/index.js
+2025-08-30 01:10:51,105 | DEBUG | repair.redux-bind-action-groups-master | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "// Updated to import from the main Redux entry point as direct internal imports are no longer supported in v2.0.0 and up\nimport { bindActionCreators } from 'redux';",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 01:10:51,106 | INFO | repair.redux-bind-action-groups-master | Replaced code in /redux/results/gpt-4.1/redux-bind-action-groups-master/src/index.js at [0, 62]
+2025-08-30 01:10:51,108 | DEBUG | repair.redux-bind-action-groups-master | Updated package.json saved at /redux/results/gpt-4.1/redux-bind-action-groups-master/package.json
+2025-08-30 01:10:51,108 | INFO | repair.redux-bind-action-groups-master | END pattern 1 (pattern_1)
+2025-08-30 01:10:51,109 | INFO | repair.redux-bind-action-groups-master | Config BC: scanning 0 files
+2025-08-30 01:10:51,110 | DEBUG | repair.redux-bind-action-groups-master | Updated package.json saved at /redux/results/gpt-4.1/redux-bind-action-groups-master/package.json
+2025-08-30 01:10:51,110 | INFO | repair.redux-bind-action-groups-master | token consumed 2671
+2025-08-30 01:10:51,110 | INFO | repair.redux-bind-action-groups-master | parse consumption time: 3.2285838751122355

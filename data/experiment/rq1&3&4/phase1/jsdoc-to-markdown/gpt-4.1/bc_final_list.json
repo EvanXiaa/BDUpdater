@@ -1,0 +1,28 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "The synchronous APIs `.renderSync()`, `.getTemplateDataSync()`, and `.getJsdocDataSync()` have been removed. The jsdoc2md API is now async-only.",
+      "Reference": [
+        "release_note.md",
+        "https://github.com/jsdoc2md/jsdoc-to-markdown/wiki/How-to-create-one-output-file-per-class"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "*"
+        ],
+        "methodName": [
+          "renderSync",
+          "getTemplateDataSync",
+          "getJsdocDataSync"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Replace synchronous calls with their asynchronous equivalents:\n\n// Before:\nconst result = jsdoc2md.renderSync(options);\n\n// After:\nconst result = await jsdoc2md.render(options);",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

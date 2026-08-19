@@ -1,0 +1,300 @@
+2025-08-31 00:19:51,862 | INFO | repair.akita | Starting analysis for akita
+2025-08-31 00:19:51,863 | INFO | repair.akita | Starting breaking change analysis for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:19:51,863 | INFO | repair.akita | ============================================================
+2025-08-31 00:19:51,863 | INFO | repair.akita | BEGIN pattern 2 (pattern_2)
+2025-08-31 00:19:51,863 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 00:19:52,243 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:19:52,243 | DEBUG | repair.akita | Parsed detection output: [{'pattern_id': 2, 'file': 'test/http.js', 'line': 88, 'column': 4}]
+2025-08-31 00:19:52,244 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6d40>, {'test/http.js': defaultdict(<class 'list'>, {2: [{'line': 88, 'column': 4}]})})
+2025-08-31 00:19:52,245 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:19:58,172 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:19:58,173 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:19:58,173 | INFO | repair.akita | END pattern 2 (pattern_2)
+2025-08-31 00:19:58,174 | INFO | repair.akita | ============================================================
+2025-08-31 00:19:58,174 | INFO | repair.akita | BEGIN pattern 2 (pattern_2)
+2025-08-31 00:19:58,174 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-31 00:19:58,366 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:19:58,366 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:19:58,366 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:19:58,367 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:19:58,367 | INFO | repair.akita | END pattern 2 (pattern_2)
+2025-08-31 00:19:58,367 | INFO | repair.akita | ============================================================
+2025-08-31 00:19:58,367 | INFO | repair.akita | BEGIN pattern 3 (pattern_3)
+2025-08-31 00:19:58,367 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 00:19:58,555 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:19:58,555 | DEBUG | repair.akita | Parsed detection output: [{'pattern_id': 3, 'file': 'lib/client.js', 'line': 207, 'column': 17}]
+2025-08-31 00:19:58,555 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {'lib/client.js': defaultdict(<class 'list'>, {3: [{'line': 207, 'column': 17}]})})
+2025-08-31 00:19:58,556 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/lib/client.js
+2025-08-31 00:20:01,753 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:20:01,754 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:20:01,754 | INFO | repair.akita | END pattern 3 (pattern_3)
+2025-08-31 00:20:01,755 | INFO | repair.akita | ============================================================
+2025-08-31 00:20:01,755 | INFO | repair.akita | BEGIN pattern 3 (pattern_3)
+2025-08-31 00:20:01,755 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-31 00:20:01,974 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:20:01,975 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:20:01,975 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:20:01,975 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:20:01,975 | INFO | repair.akita | END pattern 3 (pattern_3)
+2025-08-31 00:20:01,975 | INFO | repair.akita | ============================================================
+2025-08-31 00:20:01,975 | INFO | repair.akita | BEGIN pattern 4 (pattern_4)
+2025-08-31 00:20:01,975 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "call {<node-fetch>,<node-fetch/**/*>}?**.{*}", "changelogId": 4}
+2025-08-31 00:20:02,147 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:20:02,147 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:20:02,147 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:20:02,148 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:20:02,148 | INFO | repair.akita | END pattern 4 (pattern_4)
+2025-08-31 00:20:02,148 | INFO | repair.akita | ============================================================
+2025-08-31 00:20:02,148 | INFO | repair.akita | BEGIN pattern 5 (pattern_5)
+2025-08-31 00:20:02,148 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 00:20:02,316 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:20:02,316 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:20:02,316 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:20:02,316 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:20:02,316 | INFO | repair.akita | END pattern 5 (pattern_5)
+2025-08-31 00:20:02,317 | INFO | repair.akita | ============================================================
+2025-08-31 00:20:02,317 | INFO | repair.akita | BEGIN pattern 5 (pattern_5)
+2025-08-31 00:20:02,317 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-31 00:20:02,479 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:20:02,480 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:20:02,480 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:20:02,480 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:20:02,480 | INFO | repair.akita | END pattern 5 (pattern_5)
+2025-08-31 00:20:02,480 | INFO | repair.akita | ============================================================
+2025-08-31 00:20:02,480 | INFO | repair.akita | BEGIN pattern 6 (pattern_6)
+2025-08-31 00:20:02,480 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 00:20:02,642 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:20:02,642 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:20:02,642 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:20:02,643 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:20:02,643 | INFO | repair.akita | END pattern 6 (pattern_6)
+2025-08-31 00:20:02,643 | INFO | repair.akita | ============================================================
+2025-08-31 00:20:02,643 | INFO | repair.akita | BEGIN pattern 6 (pattern_6)
+2025-08-31 00:20:02,643 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-31 00:20:02,805 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:20:02,805 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:20:02,805 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:20:02,805 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:20:02,805 | INFO | repair.akita | END pattern 6 (pattern_6)
+2025-08-31 00:20:02,805 | INFO | repair.akita | ============================================================
+2025-08-31 00:20:02,805 | INFO | repair.akita | BEGIN pattern 7 (pattern_7)
+2025-08-31 00:20:02,805 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 00:20:02,973 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:20:02,974 | DEBUG | repair.akita | Parsed detection output: [{'pattern_id': 7, 'file': 'test/http.js', 'line': 25, 'column': 4}, {'pattern_id': 7, 'file': 'test/http.js', 'line': 34, 'column': 4}, {'pattern_id': 7, 'file': 'test/http.js', 'line': 41, 'column': 4}, {'pattern_id': 7, 'file': 'test/http.js', 'line': 88, 'column': 4}, {'pattern_id': 7, 'file': 'test/http.js', 'line': 95, 'column': 4}]
+2025-08-31 00:20:02,974 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {'test/http.js': defaultdict(<class 'list'>, {7: [{'line': 25, 'column': 4}, {'line': 34, 'column': 4}, {'line': 41, 'column': 4}, {'line': 88, 'column': 4}, {'line': 95, 'column': 4}]})})
+2025-08-31 00:20:02,974 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:02,974 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:02,975 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:02,975 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:02,975 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:08,203 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:20:11,075 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:20:18,339 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:20:22,539 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:20:27,899 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:20:27,902 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:20:27,902 | INFO | repair.akita | END pattern 7 (pattern_7)
+2025-08-31 00:20:27,903 | INFO | repair.akita | ============================================================
+2025-08-31 00:20:27,903 | INFO | repair.akita | BEGIN pattern 7 (pattern_7)
+2025-08-31 00:20:27,903 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-31 00:20:28,268 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:20:28,268 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:20:28,268 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:20:28,268 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:20:28,268 | INFO | repair.akita | END pattern 7 (pattern_7)
+2025-08-31 00:20:28,269 | INFO | repair.akita | ============================================================
+2025-08-31 00:20:28,269 | INFO | repair.akita | BEGIN pattern 8 (pattern_8)
+2025-08-31 00:20:28,269 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 00:20:28,430 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:20:28,431 | DEBUG | repair.akita | Parsed detection output: [{'pattern_id': 8, 'file': 'test/http.js', 'line': 25, 'column': 4}, {'pattern_id': 8, 'file': 'test/http.js', 'line': 34, 'column': 4}, {'pattern_id': 8, 'file': 'test/http.js', 'line': 41, 'column': 4}, {'pattern_id': 8, 'file': 'test/http.js', 'line': 88, 'column': 4}, {'pattern_id': 8, 'file': 'test/http.js', 'line': 95, 'column': 4}]
+2025-08-31 00:20:28,431 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {'test/http.js': defaultdict(<class 'list'>, {8: [{'line': 25, 'column': 4}, {'line': 34, 'column': 4}, {'line': 41, 'column': 4}, {'line': 88, 'column': 4}, {'line': 95, 'column': 4}]})})
+2025-08-31 00:20:28,431 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:28,431 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:28,432 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:28,432 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:28,432 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:20:31,857 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:20:38,207 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:20:43,942 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:20:53,868 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:21:04,015 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:21:04,017 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:04,017 | INFO | repair.akita | END pattern 8 (pattern_8)
+2025-08-31 00:21:04,018 | INFO | repair.akita | ============================================================
+2025-08-31 00:21:04,018 | INFO | repair.akita | BEGIN pattern 8 (pattern_8)
+2025-08-31 00:21:04,018 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-31 00:21:04,411 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:21:04,411 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:21:04,411 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:21:04,411 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:04,411 | INFO | repair.akita | END pattern 8 (pattern_8)
+2025-08-31 00:21:04,411 | INFO | repair.akita | ============================================================
+2025-08-31 00:21:04,411 | INFO | repair.akita | BEGIN pattern 9 (pattern_9)
+2025-08-31 00:21:04,411 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 00:21:04,569 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:21:04,569 | DEBUG | repair.akita | Parsed detection output: [{'pattern_id': 9, 'file': 'lib/client.js', 'line': 78, 'column': 12}, {'pattern_id': 9, 'file': 'test/http.js', 'line': 25, 'column': 4}, {'pattern_id': 9, 'file': 'test/http.js', 'line': 34, 'column': 4}, {'pattern_id': 9, 'file': 'test/http.js', 'line': 41, 'column': 4}, {'pattern_id': 9, 'file': 'test/http.js', 'line': 88, 'column': 4}, {'pattern_id': 9, 'file': 'test/http.js', 'line': 95, 'column': 4}]
+2025-08-31 00:21:04,569 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {'lib/client.js': defaultdict(<class 'list'>, {9: [{'line': 78, 'column': 12}]}), 'test/http.js': defaultdict(<class 'list'>, {9: [{'line': 25, 'column': 4}, {'line': 34, 'column': 4}, {'line': 41, 'column': 4}, {'line': 88, 'column': 4}, {'line': 95, 'column': 4}]})})
+2025-08-31 00:21:04,570 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/lib/client.js
+2025-08-31 00:21:07,349 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:21:07,351 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:21:07,352 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:21:07,352 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:21:07,354 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:21:07,355 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/test/http.js
+2025-08-31 00:21:10,670 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:21:14,255 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:21:27,878 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:21:33,094 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:21:36,371 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:21:36,373 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:36,374 | INFO | repair.akita | END pattern 9 (pattern_9)
+2025-08-31 00:21:36,374 | INFO | repair.akita | ============================================================
+2025-08-31 00:21:36,375 | INFO | repair.akita | BEGIN pattern 9 (pattern_9)
+2025-08-31 00:21:36,375 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-31 00:21:36,710 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:21:36,710 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:21:36,710 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:21:36,710 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:36,710 | INFO | repair.akita | END pattern 9 (pattern_9)
+2025-08-31 00:21:36,710 | INFO | repair.akita | ============================================================
+2025-08-31 00:21:36,710 | INFO | repair.akita | BEGIN pattern 10 (pattern_10)
+2025-08-31 00:21:36,710 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 00:21:36,867 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:21:36,867 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:21:36,867 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:21:36,867 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:36,867 | INFO | repair.akita | END pattern 10 (pattern_10)
+2025-08-31 00:21:36,868 | INFO | repair.akita | ============================================================
+2025-08-31 00:21:36,868 | INFO | repair.akita | BEGIN pattern 10 (pattern_10)
+2025-08-31 00:21:36,868 | DEBUG | repair.akita | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-31 00:21:37,035 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:21:37,035 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:21:37,035 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:21:37,035 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:37,035 | INFO | repair.akita | END pattern 10 (pattern_10)
+2025-08-31 00:21:37,035 | INFO | repair.akita | ============================================================
+2025-08-31 00:21:37,035 | INFO | repair.akita | BEGIN pattern 11 (pattern_11)
+2025-08-31 00:21:37,035 | DEBUG | repair.akita | Pattern payload: {"type": "write", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{body,bodyUsed,method,url,headers,redirect}", "changelogId": 11}
+2025-08-31 00:21:37,191 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:21:37,191 | DEBUG | repair.akita | Parsed detection output: [{'pattern_id': 11, 'file': 'lib/client.js', 'line': 69, 'column': 8}, {'pattern_id': 11, 'file': 'lib/client.js', 'line': 80, 'column': 10}, {'pattern_id': 11, 'file': 'lib/client.js', 'line': 85, 'column': 10}, {'pattern_id': 11, 'file': 'lib/client.js', 'line': 89, 'column': 10}, {'pattern_id': 11, 'file': 'lib/client.js', 'line': 91, 'column': 10}, {'pattern_id': 11, 'file': 'lib/client.js', 'line': 102, 'column': 8}, {'pattern_id': 11, 'file': 'lib/client.js', 'line': 251, 'column': 6}]
+2025-08-31 00:21:37,191 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {'lib/client.js': defaultdict(<class 'list'>, {11: [{'line': 69, 'column': 8}, {'line': 80, 'column': 10}, {'line': 85, 'column': 10}, {'line': 89, 'column': 10}, {'line': 91, 'column': 10}, {'line': 102, 'column': 8}, {'line': 251, 'column': 6}]})})
+2025-08-31 00:21:37,192 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/lib/client.js
+2025-08-31 00:21:37,195 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/lib/client.js
+2025-08-31 00:21:37,195 | INFO | repair.akita | New context extracted from /node-fetch/results/gpt-4.1/akita/lib/client.js
+2025-08-31 00:21:56,953 | DEBUG | repair.akita | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 00:21:56,956 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:56,956 | INFO | repair.akita | END pattern 11 (pattern_11)
+2025-08-31 00:21:56,957 | INFO | repair.akita | ============================================================
+2025-08-31 00:21:56,957 | INFO | repair.akita | BEGIN pattern 1 (pattern_1)
+2025-08-31 00:21:56,957 | DEBUG | repair.akita | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/response,node-fetch/lib/request,node-fetch/lib/headers,node-fetch/lib/*}", "changelogId": 1}
+2025-08-31 00:21:57,295 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:21:57,295 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:21:57,295 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:21:57,295 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:57,296 | INFO | repair.akita | END pattern 1 (pattern_1)
+2025-08-31 00:21:57,296 | INFO | repair.akita | ============================================================
+2025-08-31 00:21:57,296 | INFO | repair.akita | BEGIN pattern 4 (pattern_4)
+2025-08-31 00:21:57,296 | DEBUG | repair.akita | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/*}", "changelogId": 4}
+2025-08-31 00:21:57,446 | INFO | repair.akita | Tapir run successful for /node-fetch/results/gpt-4.1/akita
+2025-08-31 00:21:57,446 | DEBUG | repair.akita | Parsed detection output: []
+2025-08-31 00:21:57,446 | DEBUG | repair.akita | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1206b6de0>, {})
+2025-08-31 00:21:57,446 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:57,446 | INFO | repair.akita | END pattern 4 (pattern_4)
+2025-08-31 00:21:57,447 | DEBUG | repair.akita | Updated package.json saved at /node-fetch/results/gpt-4.1/akita/package.json
+2025-08-31 00:21:57,447 | INFO | repair.akita | token consumed 40212
+2025-08-31 00:21:57,448 | INFO | repair.akita | parse consumption time: 121.16814012266695

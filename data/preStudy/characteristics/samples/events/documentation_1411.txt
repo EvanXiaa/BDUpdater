@@ -1,0 +1,7 @@
+{
+  "owner": "documentationjs",
+  "repo": "documentation",
+  "number": 1411,
+  "pr_url": "https://github.com/documentationjs/documentation/pull/1411",
+  "content": "# PR 1411: fix: remove private parameter, use access (BREAKING CHANGES)\nBranches: master -> master\n\n\n\n## Commit titles\n- fix: remove private parameter, use access (BREAKING CHANGES)\n\n## Changed files\n- bin/documentation.js\n- src/commands/shared_options.js"
+}

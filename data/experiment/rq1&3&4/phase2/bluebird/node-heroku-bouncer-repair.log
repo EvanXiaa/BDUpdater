@@ -1,0 +1,273 @@
+2025-08-31 02:19:25,195 | INFO | repair.node-heroku-bouncer | Starting analysis for node-heroku-bouncer
+2025-08-31 02:19:25,195 | INFO | repair.node-heroku-bouncer | Starting breaking change analysis for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:19:25,196 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:19:25,196 | INFO | repair.node-heroku-bouncer | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:19:25,196 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:19:25,373 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:19:25,373 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:19:25,373 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204736a0>, {})
+2025-08-31 02:19:25,373 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:19:25,373 | INFO | repair.node-heroku-bouncer | END pattern 0 (pattern_0)
+2025-08-31 02:19:25,373 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:19:25,374 | INFO | repair.node-heroku-bouncer | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:19:25,374 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:19:25,562 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:19:25,563 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:19:25,563 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204736a0>, {})
+2025-08-31 02:19:25,563 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:19:25,563 | INFO | repair.node-heroku-bouncer | END pattern 0 (pattern_0)
+2025-08-31 02:19:25,563 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:19:25,563 | INFO | repair.node-heroku-bouncer | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:19:25,563 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:19:25,788 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:19:25,789 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:19:25,789 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204736a0>, {})
+2025-08-31 02:19:25,789 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:19:25,789 | INFO | repair.node-heroku-bouncer | END pattern 1 (pattern_1)
+2025-08-31 02:19:25,789 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:19:25,790 | INFO | repair.node-heroku-bouncer | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:19:25,790 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:19:25,964 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:19:25,964 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:19:25,964 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204736a0>, {})
+2025-08-31 02:19:25,964 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:19:25,964 | INFO | repair.node-heroku-bouncer | END pattern 1 (pattern_1)
+2025-08-31 02:19:25,964 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:19:25,964 | INFO | repair.node-heroku-bouncer | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:19:25,964 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:19:26,136 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:19:26,136 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: [{'pattern_id': 2, 'file': 'lib/router.js', 'line': 89, 'column': 10}]
+2025-08-31 02:19:26,137 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204736a0>, {'lib/router.js': defaultdict(<class 'list'>, {2: [{'line': 89, 'column': 10}]})})
+2025-08-31 02:19:26,137 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/lib/router.js
+2025-08-31 02:19:30,548 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:19:30,549 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:19:30,549 | INFO | repair.node-heroku-bouncer | END pattern 2 (pattern_2)
+2025-08-31 02:19:30,549 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:19:30,549 | INFO | repair.node-heroku-bouncer | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:19:30,549 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:19:30,712 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:19:30,712 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:19:30,712 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7920>, {})
+2025-08-31 02:19:30,712 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:19:30,712 | INFO | repair.node-heroku-bouncer | END pattern 2 (pattern_2)
+2025-08-31 02:19:30,713 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:19:30,713 | INFO | repair.node-heroku-bouncer | BEGIN pattern 4 (pattern_4)
+2025-08-31 02:19:30,713 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{Promise}", "changelogId": 4}
+2025-08-31 02:19:30,873 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:19:30,874 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:19:30,874 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7920>, {})
+2025-08-31 02:19:30,874 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:19:30,874 | INFO | repair.node-heroku-bouncer | END pattern 4 (pattern_4)
+2025-08-31 02:19:30,874 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:19:30,874 | INFO | repair.node-heroku-bouncer | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:19:30,874 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:19:31,039 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:19:31,039 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: [{'pattern_id': 5, 'file': 'test/helpers/shared.js', 'line': 5, 'column': 14}, {'pattern_id': 5, 'file': 'test/bouncer-test.js', 'line': 13, 'column': 20}, {'pattern_id': 5, 'file': 'test/bouncer-test.js', 'line': 14, 'column': 20}]
+2025-08-31 02:19:31,039 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7920>, {'test/helpers/shared.js': defaultdict(<class 'list'>, {5: [{'line': 5, 'column': 14}]}), 'test/bouncer-test.js': defaultdict(<class 'list'>, {5: [{'line': 13, 'column': 20}, {'line': 14, 'column': 20}]})})
+2025-08-31 02:19:31,041 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/helpers/shared.js
+2025-08-31 02:19:37,388 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "var get     = Promise.promisify(request.get, {multiArgs: true});",
+  "additional_req": "",
+  "dependencies": [
+    "bluebird@^3.0.0"
+  ]
+}
+2025-08-31 02:19:37,389 | INFO | repair.node-heroku-bouncer | Replaced code in /bluebird/results/gpt-4.1/node-heroku-bouncer/test/helpers/shared.js at [84, 129]
+2025-08-31 02:19:37,392 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:19:37,395 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:19:43,040 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "var post          = Promise.promisify(request.post, {multiArgs: true});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:19:43,042 | INFO | repair.node-heroku-bouncer | Replaced code in /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js at [361, 413]
+2025-08-31 02:19:49,013 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please confirm how the promisified `get` is consumed\u2014specifically, whether downstream `.then` handlers expect an array of `[response, body]`. Without that information, we cannot determine if `{ multiArgs: true }` must be added.",
+  "dependencies": []
+}
+2025-08-31 02:19:49,015 | DEBUG | repair.node-heroku-bouncer | Added to whole mode list: file=/bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js, context=Node, bc_desc={'Id': 5, 'BC_description': 'Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default...
+2025-08-31 02:19:49,015 | INFO | repair.node-heroku-bouncer | Whole mode item: /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:20:36,940 | DEBUG | repair.node-heroku-bouncer | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': "// jshint -W030\n\n'use strict';\n\nrequire('should');\nrequire('./test-helper');\n\nvar Promise       = require('bluebird');\nvar request       = require('request');\nvar tough         = require('tough-cookie');\nvar createClient  = require('./helpers/create-client');\nvar herokuStubber = require('./helpers/heroku');\n// Adaptation for Bluebird 3.x: restore 2.x behavior of resolving all callback args as an array\nvar get           = Promise.promisify(request.get, {multiArgs: true});\nvar post          = Promise.promisify(request.post, {multiArgs: true});\nvar client;\n\ndescribe('bouncer', function() {\n  afterEach(function() {\n    return new Promise(function(resolve) {\n      if (client.address()) {\n        client.close(resolve);\n      } else {\n        resolve();\n      }\n    });\n  });\n\n  describe('when the user is not logged in', function() {\n    context('and it is a non-JSON GET request', function() {\n      it('redirects to /auth/heroku', function() {\n        return withClient().spread(function(client, url) {\n          return get(url, { followRedirect: false });\n        }).spread(function(res) {\n          res.headers.location.should.eql('/auth/heroku');\n        });\n      });\n    });\n\n    context('and it is a non-GET request', function() {\n      it('returns a 401', function() {\n        return withClient().spread(function(client, url) {\n          return post(url);\n        }).spread(function(res) {\n          res.statusCode.should.eql(401);\n        });\n      });\n\n      it('returns an unauthorized message', function() {\n        return withClient().spread(function(client, url) {\n          return post(url);\n        }).spread(function(res, body) {\n          JSON.parse(body).should.eql({ id: 'unauthorized', message: 'Please authenticate.' });\n        });\n      });\n    });\n\n    context('and it is a JSON request', function() {\n      it('returns a 401', function() {\n        return withClient().spread(function(client, url) {\n          return get(url, { json: true });\n        }).spread(function(res) {\n          res.statusCode.should.eql(401);\n        });\n      });\n\n      it('returns an unauthorized message', function() {\n        return withClient().spread(function(client, url) {\n          return get(url, { json: true });\n        }).spread(function(res, body) {\n          body.should.eql({ id: 'unauthorized', message: 'Please authenticate.' });\n        });\n      });\n    });\n  });\n\n  context('when the user is logged in', function() {\n    it('performs the request like normal', function() {\n      return itBehavesLikeANormalRequest();\n    });\n\n    context('when the access token has expired', function() {\n      context('and the refresh errors', function() {\n        it('clears the session');\n\n        context('and it is a non-JSON GET request', function() {\n          it('redirects to /auth/heroku');\n        });\n\n        context('and it is a non-GET request', function() {\n          it('returns a 401');\n          it('returns an unable to reauthenticate error message');\n        });\n\n        context('and it is a JSON request', function() {\n          it('returns a 401');\n          it('returns an unable to reauthenticate error message');\n        });\n      });\n\n      context('and the refresh responds with a non-200 status code', function() {\n        it('clears the session');\n\n        context('and it is a non-JSON GET request', function() {\n          it('redirects to /auth/heroku');\n        });\n\n        context('and it is a non-GET request', function() {\n          it('returns a 401');\n          it('returns an unable to reauthenticate error message');\n        });\n\n        context('and it is a JSON request', function() {\n          it('returns a 401');\n          it('returns an unable to reauthenticate error message');\n        });\n      });\n\n      context('and the refresh succeeds', function() {\n        // access tokens expire in 0 seconds in mock server\n        it('sets the new access token', function() {\n          return authenticate().spread(function(client, url, jar) {\n            return get(url + '/hello-world', { jar: jar });\n          }).spread(function(res) {\n            var userSession = JSON.parse(res.headers['x-user-session']);\n            userSession.accessToken.should.eql('refresh-token');\n          });\n        });\n\n        it('sets the new expiresIn', function() {\n          return authenticate().spread(function(client, url, jar) {\n            return get(url + '/hello-world', { jar: jar });\n          }).spread(function(res) {\n            var userSession = JSON.parse(res.headers['x-user-session']);\n            userSession.expiresIn.should.eql(28800);\n          });\n        });\n      });\n\n      context('and userSession does not contain user info', function() {\n        beforeEach(function(){\n          herokuStubber.stubUser({ email: undefined });\n        });\n\n        it('forces to reauthenticate', function() {\n          return withClient().spread(function(client, url) {\n            return get(url, { followRedirect: false });\n          }).spread(function(res) {\n            res.headers.location.should.eql('/auth/heroku');\n          });\n        });\n      });\n    });\n\n    context('and sessionSyncNonce is set', function() {\n      var clientOptions, jar;\n\n      beforeEach(function() {\n        clientOptions = { sessionSyncNonce: 'my_session_nonce' };\n\n        var cookie = new tough.Cookie({\n          key  : 'my_session_nonce',\n          value: 'my_session_nonce_value'\n        });\n\n        jar = request.jar();\n        jar.setCookie(cookie, 'http://localhost');\n      });\n\n      it('adds a sessionSyncNonce to the session', function() {\n        return authenticate(clientOptions, jar).spread(function(client, url) {\n          return get(url + '/hello-world', { jar: jar });\n        }).spread(function(res) {\n          var session = JSON.parse(res.headers['x-session']);\n          session.herokuBouncerSessionNonce.should.eql('my_session_nonce_value');\n        });\n      });\n\n      context('and the sessionSyncNonce has changed', function() {\n        var cookie;\n\n        beforeEach(function() {\n          cookie = new tough.Cookie({\n            key  : 'my_session_nonce',\n            value: 'my_new_session_nonce_value'\n          });\n        });\n\n        it('clears the session', function() {\n          return authenticate(clientOptions, jar).spread(function(client, url) {\n            jar.setCookie(cookie, 'http://localhost');\n\n            return get(url + '/hello-world', { jar: jar, followRedirect: false }).then(function() {\n              return get(url + '/ignore', { jar: jar });\n            });\n          }).spread(function(res) {\n            var session = JSON.parse(res.headers['x-session']);\n            session.should.eql({ redirectPath: '/hello-world' });\n          });\n        });\n\n        context('and it is a non-JSON GET request', function() {\n          it('redirects the user to reauthenticate', function() {\n            return authenticate(clientOptions, jar).spread(function(client, url) {\n              jar.setCookie(cookie, 'http://localhost');\n              return get(url + '/hello-world', { jar: jar, followRedirect: false });\n            }).spread(function(res) {\n              res.headers.location.should.eql('/auth/heroku');\n            });\n          });\n        });\n\n        context('and it is a non-GET request', function() {\n          it('returns a 401', function() {\n            return authenticate(clientOptions, jar).spread(function(client, url) {\n              jar.setCookie(cookie, 'http://localhost');\n              return post(url + '/hello-world', { jar: jar });\n            }).spread(function(res) {\n              res.statusCode.should.eql(401);\n            });\n          });\n\n          it('returns an unauthorized message', function() {\n            return authenticate(clientOptions, jar).spread(function(client, url) {\n              jar.setCookie(cookie, 'http://localhost');\n              return post(url + '/hello-world', { jar: jar });\n            }).spread(function(res, body) {\n              JSON.parse(body).should.eql({ id: 'unauthorized', message: 'Please authenticate.' });\n            });\n          });\n        });\n\n        context('and it is a JSON request', function() {\n          it('returns a 401', function() {\n            return authenticate(clientOptions, jar).spread(function(client, url) {\n              jar.setCookie(cookie, 'http://localhost');\n              return get(url + '/hello-world', { jar: jar, json: true });\n            }).spread(function(res) {\n              res.statusCode.should.eql(401);\n            });\n          });\n\n          it('returns an unauthorized message', function() {\n            return authenticate(clientOptions, jar).spread(function(client, url) {\n              jar.setCookie(cookie, 'http://localhost');\n              return get(url + '/hello-world', { jar: jar, json: true });\n            }).spread(function(res, body) {\n              body.should.eql({ id: 'unauthorized', message: 'Please authenticate.' });\n            });\n          });\n        });\n      });\n    });\n\n    context('and herokaiOnly is set', function() {\n      var clientOptions;\n\n      beforeEach(function() {\n        clientOptions = { herokaiOnlyHandler: function(req, res) {\n          res.end('You are not a Herokai.');\n        } };\n      });\n\n      context('and the user is a Herokai', function() {\n        it('performs the request like normal', function() {\n          herokuStubber.stubUser({ email: 'user@heroku.com' });\n          return itBehavesLikeANormalRequest(clientOptions);\n        });\n      });\n\n      context('and the user is not a Herokai', function() {\n        /*\n         * Non-GET and JSON requests for non-Herokai are not tested, because a\n         * session couldn't be established for them in the first place (since\n         * sessions are cleared on every re-auth, they coudn't establish a\n         * session with a GET first, and then do a POST with the same session).\n         */\n        context('and it is a non-JSON GET request', function() {\n          it('uses the custom request handler', function() {\n            return authenticate(clientOptions).spread(function(client, url, jar) {\n              return get(url, { jar: jar });\n            }).spread(function(res, body) {\n              body.should.eql('You are not a Herokai.');\n            });\n          });\n        });\n      });\n    });\n  });\n\n  describe('logging out', function() {\n    it('redirects to the logout path', function() {\n      return authenticate().spread(function(client, url, jar) {\n        return get(url + '/auth/heroku/logout', { jar: jar, followRedirect: false });\n      }).spread(function(res) {\n        // `client` is set in the scope of this module :\\\n        res.headers.location.should.eql('http://localhost:' + client.serverPort + '/logout');\n      });\n    });\n\n    it('clears the session', function() {\n      return authenticate().spread(function(client, url, jar) {\n        return get(url + '/auth/heroku/logout', { jar: jar, followRedirect: false }).then(function() {\n          return get(url + '/ignore', { jar: jar });\n        });\n      }).spread(function(res) {\n        var session = JSON.parse(res.headers['x-session']);\n        session.should.eql({});\n      });\n    });\n  });\n\n  describe('ignored routes', function() {\n    context('when there is no user logged in', function() {\n      it('ignores the specified routes', function() {\n        return withClient().spread(function(client, url) {\n          return get(url + '/ignore', { followRedirect: false });\n        }).spread(function(res) {\n          res.statusCode.should.eql(200);\n        });\n      });\n    });\n\n    context('when there is a user logged in', function() {\n      it('uses its normal middleware', function() {\n        return authenticate().spread(function(client, url, jar) {\n          return get(url + '/token', { jar: jar });\n        }).spread(function(res, body) {\n          body.should.not.be.empty;\n        });\n      });\n    });\n  });\n\n  describe('redirects', function() {\n    context('when there is a redirect query param', function() {\n      it('redirects', function() {\n        return withClient().spread(function(client, url) {\n          return get(url + '/auth/heroku?redirectPath=/hello-world', { jar: request.jar() });\n        }).spread(function(res, body) {\n          body.should.eql('hello world');\n        });\n      });\n    });\n\n    context('when there is a referer header', function() {\n      it('redirects', function() {\n        return withClient().spread(function(client, url) {\n          return get(url + '/auth/heroku', { jar: request.jar(), headers: { referer: '/hello-world' } });\n        }).spread(function(res, body) {\n          body.should.eql('hello world');\n        });\n      });\n    });\n  });\n});\n\nfunction authenticate(clientOptions, jar) {\n  return withClient(clientOptions).spread(function(client, url) {\n    jar = jar || request.jar();\n\n    return get(url, { jar: jar }).then(function() {\n      return [client, url, jar];\n    });\n  });\n}\n\nfunction itBehavesLikeANormalRequest(clientOptions) {\n  return authenticate(clientOptions).spread(function(client, url, jar) {\n    return get(url + '/hello-world', { jar: jar });\n  }).spread(function(res, body) {\n    body.should.eql('hello world');\n  });\n}\n\nfunction withClient(options) {\n  options = options || {};\n\n  return createClient(options).spread(function(_client, url) {\n    client = _client;\n    return [client, url];\n  });\n}", 'additional_req': '', 'dependencies': []}
+2025-08-31 02:20:36,942 | INFO | repair.node-heroku-bouncer | Replace whole file: /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:20:36,945 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:20:36,945 | INFO | repair.node-heroku-bouncer | END pattern 5 (pattern_5)
+2025-08-31 02:20:36,946 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:20:36,946 | INFO | repair.node-heroku-bouncer | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:20:36,946 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:20:37,266 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:20:37,266 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:20:37,266 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7920>, {})
+2025-08-31 02:20:37,266 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:20:37,266 | INFO | repair.node-heroku-bouncer | END pattern 5 (pattern_5)
+2025-08-31 02:20:37,267 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:20:37,267 | INFO | repair.node-heroku-bouncer | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:20:37,267 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:20:37,420 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:20:37,420 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: [{'pattern_id': 6, 'file': 'test/helpers/shared.js', 'line': 5, 'column': 14}, {'pattern_id': 6, 'file': 'test/bouncer-test.js', 'line': 14, 'column': 20}, {'pattern_id': 6, 'file': 'test/bouncer-test.js', 'line': 15, 'column': 20}]
+2025-08-31 02:20:37,420 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7920>, {'test/helpers/shared.js': defaultdict(<class 'list'>, {6: [{'line': 5, 'column': 14}]}), 'test/bouncer-test.js': defaultdict(<class 'list'>, {6: [{'line': 14, 'column': 20}, {'line': 15, 'column': 20}]})})
+2025-08-31 02:20:37,421 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/helpers/shared.js
+2025-08-31 02:20:42,819 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:20:42,823 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:20:42,826 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:20:47,322 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:20:50,866 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:20:50,868 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:20:50,868 | INFO | repair.node-heroku-bouncer | END pattern 6 (pattern_6)
+2025-08-31 02:20:50,869 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:20:50,870 | INFO | repair.node-heroku-bouncer | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:20:50,870 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:20:51,205 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:20:51,205 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:20:51,205 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7920>, {})
+2025-08-31 02:20:51,205 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:20:51,205 | INFO | repair.node-heroku-bouncer | END pattern 6 (pattern_6)
+2025-08-31 02:20:51,206 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:20:51,206 | INFO | repair.node-heroku-bouncer | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:20:51,206 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:20:51,359 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:20:51,359 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:20:51,359 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7920>, {})
+2025-08-31 02:20:51,359 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:20:51,359 | INFO | repair.node-heroku-bouncer | END pattern 7 (pattern_7)
+2025-08-31 02:20:51,360 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:20:51,360 | INFO | repair.node-heroku-bouncer | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:20:51,360 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:20:51,513 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:20:51,513 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:20:51,513 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7920>, {})
+2025-08-31 02:20:51,514 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:20:51,514 | INFO | repair.node-heroku-bouncer | END pattern 7 (pattern_7)
+2025-08-31 02:20:51,514 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:20:51,514 | INFO | repair.node-heroku-bouncer | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:20:51,514 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:20:51,668 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:20:51,668 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: [{'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 32, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 32, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 42, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 42, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 50, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 50, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 60, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 60, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 68, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 68, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 122, 'column': 17}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 122, 'column': 17}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 131, 'column': 17}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 131, 'column': 17}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 146, 'column': 17}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 146, 'column': 17}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 171, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 171, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 190, 'column': 17}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 190, 'column': 17}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 204, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 204, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 215, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 215, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 224, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 224, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 235, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 235, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 244, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 244, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 280, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 280, 'column': 19}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 293, 'column': 13}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 293, 'column': 13}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 302, 'column': 13}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 302, 'column': 13}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 316, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 316, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 326, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 326, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 338, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 338, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 348, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 348, 'column': 15}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 359, 'column': 9}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 369, 'column': 9}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 369, 'column': 9}, {'pattern_id': 8, 'file': 'test/bouncer-test.js', 'line': 379, 'column': 9}, {'pattern_id': 8, 'file': 'test/helpers/shared.js', 'line': 10, 'column': 9}, {'pattern_id': 8, 'file': 'test/helpers/shared.js', 'line': 27, 'column': 9}]
+2025-08-31 02:20:51,668 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7920>, {'test/bouncer-test.js': defaultdict(<class 'list'>, {8: [{'line': 32, 'column': 15}, {'line': 32, 'column': 15}, {'line': 42, 'column': 15}, {'line': 42, 'column': 15}, {'line': 50, 'column': 15}, {'line': 50, 'column': 15}, {'line': 60, 'column': 15}, {'line': 60, 'column': 15}, {'line': 68, 'column': 15}, {'line': 68, 'column': 15}, {'line': 122, 'column': 17}, {'line': 122, 'column': 17}, {'line': 131, 'column': 17}, {'line': 131, 'column': 17}, {'line': 146, 'column': 17}, {'line': 146, 'column': 17}, {'line': 171, 'column': 15}, {'line': 171, 'column': 15}, {'line': 190, 'column': 17}, {'line': 190, 'column': 17}, {'line': 204, 'column': 19}, {'line': 204, 'column': 19}, {'line': 215, 'column': 19}, {'line': 215, 'column': 19}, {'line': 224, 'column': 19}, {'line': 224, 'column': 19}, {'line': 235, 'column': 19}, {'line': 235, 'column': 19}, {'line': 244, 'column': 19}, {'line': 244, 'column': 19}, {'line': 280, 'column': 19}, {'line': 280, 'column': 19}, {'line': 293, 'column': 13}, {'line': 293, 'column': 13}, {'line': 302, 'column': 13}, {'line': 302, 'column': 13}, {'line': 316, 'column': 15}, {'line': 316, 'column': 15}, {'line': 326, 'column': 15}, {'line': 326, 'column': 15}, {'line': 338, 'column': 15}, {'line': 338, 'column': 15}, {'line': 348, 'column': 15}, {'line': 348, 'column': 15}, {'line': 359, 'column': 9}, {'line': 369, 'column': 9}, {'line': 369, 'column': 9}, {'line': 379, 'column': 9}]}), 'test/helpers/shared.js': defaultdict(<class 'list'>, {8: [{'line': 10, 'column': 9}, {'line': 27, 'column': 9}]})})
+2025-08-31 02:20:51,670 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:20:51,708 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:20:51,709 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:20:51,711 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/bouncer-test.js
+2025-08-31 02:20:55,513 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:21:00,159 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:21:05,345 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:21:13,128 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:21:13,131 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/helpers/shared.js
+2025-08-31 02:21:13,132 | INFO | repair.node-heroku-bouncer | New context extracted from /bluebird/results/gpt-4.1/node-heroku-bouncer/test/helpers/shared.js
+2025-08-31 02:21:18,146 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:21:22,283 | DEBUG | repair.node-heroku-bouncer | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:21:22,285 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:21:22,285 | INFO | repair.node-heroku-bouncer | END pattern 8 (pattern_8)
+2025-08-31 02:21:22,286 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:21:22,286 | INFO | repair.node-heroku-bouncer | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:21:22,286 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:21:22,639 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:21:22,640 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:21:22,640 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ec0>, {})
+2025-08-31 02:21:22,640 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:21:22,640 | INFO | repair.node-heroku-bouncer | END pattern 8 (pattern_8)
+2025-08-31 02:21:22,640 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:21:22,640 | INFO | repair.node-heroku-bouncer | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:21:22,640 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:21:22,791 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:21:22,791 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:21:22,791 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ec0>, {})
+2025-08-31 02:21:22,792 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:21:22,792 | INFO | repair.node-heroku-bouncer | END pattern 9 (pattern_9)
+2025-08-31 02:21:22,792 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:21:22,792 | INFO | repair.node-heroku-bouncer | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:21:22,792 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:21:22,943 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:21:22,944 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:21:22,944 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ec0>, {})
+2025-08-31 02:21:22,944 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:21:22,944 | INFO | repair.node-heroku-bouncer | END pattern 9 (pattern_9)
+2025-08-31 02:21:22,944 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:21:22,944 | INFO | repair.node-heroku-bouncer | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:21:22,944 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:21:23,094 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:21:23,094 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:21:23,094 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ec0>, {})
+2025-08-31 02:21:23,095 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:21:23,095 | INFO | repair.node-heroku-bouncer | END pattern 10 (pattern_10)
+2025-08-31 02:21:23,095 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:21:23,095 | INFO | repair.node-heroku-bouncer | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:21:23,095 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:21:23,245 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:21:23,246 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:21:23,246 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ec0>, {})
+2025-08-31 02:21:23,246 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:21:23,246 | INFO | repair.node-heroku-bouncer | END pattern 10 (pattern_10)
+2025-08-31 02:21:23,246 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:21:23,246 | INFO | repair.node-heroku-bouncer | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:21:23,246 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:21:23,398 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:21:23,398 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:21:23,398 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ec0>, {})
+2025-08-31 02:21:23,399 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:21:23,399 | INFO | repair.node-heroku-bouncer | END pattern 11 (pattern_11)
+2025-08-31 02:21:23,399 | INFO | repair.node-heroku-bouncer | ============================================================
+2025-08-31 02:21:23,399 | INFO | repair.node-heroku-bouncer | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:21:23,399 | DEBUG | repair.node-heroku-bouncer | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:21:23,551 | INFO | repair.node-heroku-bouncer | Tapir run successful for /bluebird/results/gpt-4.1/node-heroku-bouncer
+2025-08-31 02:21:23,552 | DEBUG | repair.node-heroku-bouncer | Parsed detection output: []
+2025-08-31 02:21:23,552 | DEBUG | repair.node-heroku-bouncer | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473ec0>, {})
+2025-08-31 02:21:23,552 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:21:23,552 | INFO | repair.node-heroku-bouncer | END pattern 11 (pattern_11)
+2025-08-31 02:21:23,552 | INFO | repair.node-heroku-bouncer | Config BC: scanning 0 files
+2025-08-31 02:21:23,552 | DEBUG | repair.node-heroku-bouncer | Updated package.json saved at /bluebird/results/gpt-4.1/node-heroku-bouncer/package.json
+2025-08-31 02:21:23,552 | INFO | repair.node-heroku-bouncer | token consumed 59480
+2025-08-31 02:21:23,552 | INFO | repair.node-heroku-bouncer | parse consumption time: 114.29922433476895

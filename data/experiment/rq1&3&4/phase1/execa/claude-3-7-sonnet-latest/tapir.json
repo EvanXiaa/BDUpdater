@@ -1,0 +1,132 @@
+[
+  {
+    "type": "read",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{stdout,stderr,all}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{execa,execaSync}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{execa,execaSync}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}",
+    "changelogId": 3
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}",
+    "changelogId": 3
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}",
+    "changelogId": 4
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}",
+    "changelogId": 4
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}",
+    "changelogId": 5
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}",
+    "changelogId": 5
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{execa,execaSync,execaCommand,execaCommandSync,execaNode}",
+    "changelogId": 6
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{execa,execaSync,execaCommand,execaCommandSync,execaNode}",
+    "changelogId": 6
+  },
+  {
+    "type": "read",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{killed,isTerminated}",
+    "changelogId": 7
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{cancel}",
+    "changelogId": 8
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{cancel}",
+    "changelogId": 8
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{execa,kill}",
+    "changelogId": 9
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{execa,kill}",
+    "changelogId": 9
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{execa,execaSync}",
+    "changelogId": 10
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{execa,execaSync}",
+    "changelogId": 10
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{execa,execaSync}",
+    "changelogId": 11
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{execa,execaSync}",
+    "changelogId": 11
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{send}",
+    "changelogId": 12
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{send}",
+    "changelogId": 12
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{pipe}",
+    "changelogId": 13
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{pipe}",
+    "changelogId": 13
+  },
+  {
+    "type": "call",
+    "pattern": "read {<execa>,<execa/**/*>}?**.{kill,execa,execaSync}",
+    "changelogId": 14
+  },
+  {
+    "type": "call",
+    "pattern": "write {<execa>,<execa/**/*>}?**.{kill,execa,execaSync}",
+    "changelogId": 14
+  }
+]

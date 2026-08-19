@@ -1,0 +1,91 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "In v4.0.0, calling store.getState(), store.subscribe(), or store.unsubscribe() while a dispatch is in progress (including from within a reducer function) now throws a runtime error. This enforcement replaces previous behavior, where such calls were allowed but discouraged. The errors clarify that state should be accessed through reducer arguments and subscription changes should only occur outside reducers and running dispatches. This change impacts all client code, middleware, custom reducers, or libraries that invoked getState(), subscribe(), or unsubscribe during store updates or from within reducers.",
+      "Reference": [
+        "#1569",
+        "https://github.com/reactjs/redux/compare/v3.7.2...v4.0.0",
+        "release_note.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "redux/store",
+          "redux/lib/store/Store"
+        ],
+        "methodName": [
+          "getState",
+          "subscribe",
+          "unsubscribe"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Do not call store.getState(), store.subscribe(), or store.unsubscribe() from within reducer functions or during a dispatch. Access state via reducer arguments (state, action). Manage subscribe/unsubscribe operations in components, middleware, or lifecycle methods outside reducer execution. For example:\n\n// Before (invalid):\nfunction myReducer(state, action) {\n  store.getState(); // Throws in v4.0.0\n  return state;\n}\n\n// After (migrated):\nfunction myReducer(state, action) {\n  // Avoid store.getState() here\n  return state;\n}\n// Access state before or after dispatch:\nconst state = store.getState();\nstore.dispatch({ type: '...' });\n\n// Handle subscribe/unsubscribe outside reducers, e.g. in component mount/unmount.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Direct imports of internal Redux modules (such as 'redux/lib/createStore', 'redux/es/createStore', or any file under 'redux/lib/*' and 'redux/es/*') are no longer supported due to changes in the module bundling approach introduced in v4.0.0. Going forward, only imports from the main public entry point 'redux' are allowed. This means any downstream code that relies on internal module paths (for example, importing functions or classes from 'redux/lib/*' or 'redux/es/*') will break, regardless of whether CommonJS or ES module syntax is used. All public APIs\u2014including 'createStore', 'combineReducers', etc.\u2014must now be imported exclusively from the package entry ('redux'). This change was made to improve bundle size, consistency, and user experience by producing a single, optimized output file for each format, and aligning the build process with modern best practices. Downstream clients must update imports to ensure compatibility with Redux v4.0.0 and later.",
+      "Reference": [
+        "#2358",
+        "release_note.md",
+        "https://github.com/reactjs/redux/compare/v3.7.2...v4.0.0"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "redux/lib/*",
+          "redux/es/*",
+          "redux/lib/createStore",
+          "redux/es/createStore",
+          "redux/lib/combineReducers",
+          "redux/es/combineReducers",
+          "redux/lib/applyMiddleware",
+          "redux/es/applyMiddleware",
+          "redux/lib/bindActionCreators",
+          "redux/es/bindActionCreators",
+          "redux/lib/compose",
+          "redux/es/compose",
+          "redux/lib/actionTypes",
+          "redux/es/actionTypes",
+          "redux/lib/utils/*",
+          "redux/es/utils/*"
+        ]
+      },
+      "Adaptation_method": "Replace any direct import of internal Redux modules with imports from the main entry. For example:\n\n// Before (INVALID):\nimport createStore from 'redux/lib/createStore';\n\n// After (VALID):\nimport { createStore } from 'redux';",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "The 'jsnext:main' field has been removed from Redux's package.json. Tools or build configurations that previously relied on 'jsnext:main' to determine the ES module entry point will no longer recognize this field in Redux. Bundlers and build tools should instead use the 'module' or 'main' fields, which are still present and maintained. This change affects any direct reading or configuration that references 'jsnext:main' in package.json.",
+      "Reference": [
+        "#2284",
+        "release_note.md",
+        "https://github.com/reactjs/redux/compare/v3.7.2...v4.0.0",
+        "https://github.com/reactjs/redux/pull/2283#issuecomment-284915101",
+        "0Remove legacy jsnext entry"
+      ],
+      "Changed_object": {
+        "type": "config",
+        "className": [],
+        "methodName": [],
+        "propertyName": [
+          "jsnext:main"
+        ],
+        "moduleName": [
+          "package.json"
+        ]
+      },
+      "Adaptation_method": "Update your bundler or build tool configuration to reference the 'module' or 'main' fields instead of 'jsnext:main'. For example, in Rollup, if you previously relied on:\nresolve({ mainFields: ['jsnext:main', 'main'] })\nYou should update to:\nresolve({ mainFields: ['module', 'main'] })\nMost modern bundlers will automatically use 'module' or 'main' as entry points if not explicitly overridden.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

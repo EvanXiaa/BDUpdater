@@ -1,0 +1,79 @@
+2025-08-30 00:20:44,772 | INFO | repair.npm-install-que | Starting analysis for npm-install-que
+2025-08-30 00:20:44,772 | INFO | repair.npm-install-que | Starting breaking change analysis for /chalk/results/gpt-4.1/npm-install-que
+2025-08-30 00:20:44,772 | INFO | repair.npm-install-que | ============================================================
+2025-08-30 00:20:44,772 | INFO | repair.npm-install-que | BEGIN pattern 1 (pattern_1)
+2025-08-30 00:20:44,772 | DEBUG | repair.npm-install-que | Pattern payload: {"type": "read", "pattern": "read {<chalk>,<chalk/**/*>}?**.{hasColor}", "changelogId": 1}
+2025-08-30 00:20:44,907 | INFO | repair.npm-install-que | Tapir run successful for /chalk/results/gpt-4.1/npm-install-que
+2025-08-30 00:20:44,907 | DEBUG | repair.npm-install-que | Parsed detection output: []
+2025-08-30 00:20:44,907 | DEBUG | repair.npm-install-que | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ef32e0>, {})
+2025-08-30 00:20:44,907 | DEBUG | repair.npm-install-que | Updated package.json saved at /chalk/results/gpt-4.1/npm-install-que/package.json
+2025-08-30 00:20:44,907 | INFO | repair.npm-install-que | END pattern 1 (pattern_1)
+2025-08-30 00:20:44,907 | INFO | repair.npm-install-que | ============================================================
+2025-08-30 00:20:44,907 | INFO | repair.npm-install-que | BEGIN pattern 2 (pattern_2)
+2025-08-30 00:20:44,907 | DEBUG | repair.npm-install-que | Pattern payload: {"type": "read", "pattern": "read {<chalk>,<chalk/**/*>}?**.{stripColor}", "changelogId": 2}
+2025-08-30 00:20:45,033 | INFO | repair.npm-install-que | Tapir run successful for /chalk/results/gpt-4.1/npm-install-que
+2025-08-30 00:20:45,033 | DEBUG | repair.npm-install-que | Parsed detection output: [{'pattern_id': 2, 'file': 'test/test.js', 'line': 18, 'column': 13}, {'pattern_id': 2, 'file': 'test/test.js', 'line': 27, 'column': 13}, {'pattern_id': 2, 'file': 'test/test.js', 'line': 38, 'column': 13}, {'pattern_id': 2, 'file': 'test/test.js', 'line': 50, 'column': 13}, {'pattern_id': 2, 'file': 'test/test.js', 'line': 58, 'column': 13}]
+2025-08-30 00:20:45,033 | DEBUG | repair.npm-install-que | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ef32e0>, {'test/test.js': defaultdict(<class 'list'>, {2: [{'line': 18, 'column': 13}, {'line': 27, 'column': 13}, {'line': 38, 'column': 13}, {'line': 50, 'column': 13}, {'line': 58, 'column': 13}]})})
+2025-08-30 00:20:45,033 | INFO | repair.npm-install-que | New context extracted from /chalk/results/gpt-4.1/npm-install-que/test/test.js
+2025-08-30 00:20:45,034 | INFO | repair.npm-install-que | New context extracted from /chalk/results/gpt-4.1/npm-install-que/test/test.js
+2025-08-30 00:20:45,034 | INFO | repair.npm-install-que | New context extracted from /chalk/results/gpt-4.1/npm-install-que/test/test.js
+2025-08-30 00:20:45,034 | INFO | repair.npm-install-que | New context extracted from /chalk/results/gpt-4.1/npm-install-que/test/test.js
+2025-08-30 00:20:45,034 | INFO | repair.npm-install-que | New context extracted from /chalk/results/gpt-4.1/npm-install-que/test/test.js
+2025-08-30 00:20:48,595 | DEBUG | repair.npm-install-que | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async t => {\n\tlet status = await que(onlyDevsPkg);\n\t// chalk.stripColor() has been removed in v2.0.0, use strip-ansi instead\n\tconst stripAnsi = require('strip-ansi');\n\tstatus = stripAnsi(status);\n\n\tt.true(/100% installed successfully/g.test(status));\n\tt.true(/installed: emtee/g.test(status));\n}",
+  "additional_req": "",
+  "dependencies": [
+    "strip-ansi@^6.0.0"
+  ]
+}
+2025-08-30 00:20:48,596 | INFO | repair.npm-install-que | Replaced code in /chalk/results/gpt-4.1/npm-install-que/test/test.js at [1870, 2056]
+2025-08-30 00:20:50,271 | DEBUG | repair.npm-install-que | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async t => {\n\tlet status = await que(noDevsPkg);\n\t// chalk.stripColor has been removed; use strip-ansi package instead\n\tconst stripAnsi = require('strip-ansi');\n\tstatus = stripAnsi(status);\n\n\tt.true(/100% installed successfully/g.test(status));\n\tt.true(/installed: emtee/g.test(status));\n}",
+  "additional_req": "",
+  "dependencies": [
+    "strip-ansi@^6.0.0"
+  ]
+}
+2025-08-30 00:20:50,272 | INFO | repair.npm-install-que | Replaced code in /chalk/results/gpt-4.1/npm-install-que/test/test.js at [1653, 1837]
+2025-08-30 00:20:52,901 | DEBUG | repair.npm-install-que | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async t => {\n\tlet status = await que(manyFailPkg);\n\t// 'chalk.stripColor()' has been removed in chalk v2.0.0. Use 'strip-ansi' package instead.\n\tconst stripAnsi = require('strip-ansi');\n\tstatus = stripAnsi(status);\n\n\tt.false(/installed successfully/g.test(status));\n\tt.true(/100% failed install/g.test(status));\n\tt.true(/failed: THISMODULEWILLNEVEREXIST/g.test(status));\n\tt.true(/failed: ALSOTHISMODULEWILLNEVEREXIST/g.test(status));\n\tt.true(/Retry failed installs by running the following command:/g.test(status));\n\tt.true(/npm install THISMODULEWILLNEVEREXIST && npm install ALSOTHISMODULEWILLNEVEREXIST/g.test(status));\n}",
+  "additional_req": "",
+  "dependencies": [
+    "strip-ansi@^5.2.0"
+  ]
+}
+2025-08-30 00:20:52,901 | INFO | repair.npm-install-que | Replaced code in /chalk/results/gpt-4.1/npm-install-que/test/test.js at [1126, 1622]
+2025-08-30 00:20:55,562 | DEBUG | repair.npm-install-que | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async t => {\n\tlet status = await que(failPkg);\n\t// 'chalk.stripColor' has been removed in chalk v2.0.0. Replacing with 'strip-ansi' package.\n\tconst stripAnsi = require('strip-ansi');\n\tstatus = stripAnsi(status);\n\n\tt.true(/50% installed successfully/g.test(status));\n\tt.true(/installed: emtee/g.test(status));\n\tt.true(/failed: THISMODULEWILLNEVEREXIST/g.test(status));\n\tt.true(/Retry failed installs by running the following command:/g.test(status));\n\tt.true(/npm install THISMODULEWILLNEVEREXIST/g.test(status));\n}",
+  "additional_req": "",
+  "dependencies": [
+    "strip-ansi@^3.0.1"
+  ]
+}
+2025-08-30 00:20:55,563 | INFO | repair.npm-install-que | Replaced code in /chalk/results/gpt-4.1/npm-install-que/test/test.js at [701, 1086]
+2025-08-30 00:20:58,406 | DEBUG | repair.npm-install-que | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async t => {\n\tlet status = await que(goodPkg);\n\t// chalk.stripColor is removed in chalk v2.0.0\n\t// Use 'strip-ansi' package instead, as per migration advice.\n\tconst stripAnsi = require('strip-ansi'); // Safe local require with no side effects\n\tstatus = stripAnsi(status);\n\n\tt.true(/100% installed successfully/g.test(status));\n\tt.true(/installed: noop/g.test(status));\n\tt.true(/installed: emtee/g.test(status));\n}",
+  "additional_req": "",
+  "dependencies": [
+    "strip-ansi@^3.0.1"
+  ]
+}
+2025-08-30 00:20:58,408 | INFO | repair.npm-install-que | Replaced code in /chalk/results/gpt-4.1/npm-install-que/test/test.js at [443, 667]
+2025-08-30 00:20:58,409 | DEBUG | repair.npm-install-que | Updated package.json saved at /chalk/results/gpt-4.1/npm-install-que/package.json
+2025-08-30 00:20:58,409 | INFO | repair.npm-install-que | END pattern 2 (pattern_2)
+2025-08-30 00:20:58,409 | INFO | repair.npm-install-que | ============================================================
+2025-08-30 00:20:58,410 | INFO | repair.npm-install-que | BEGIN pattern 3 (pattern_3)
+2025-08-30 00:20:58,410 | DEBUG | repair.npm-install-que | Pattern payload: {"type": "read", "pattern": "read {<chalk>,<chalk/**/*>}?**.{styles}", "changelogId": 3}
+2025-08-30 00:20:58,735 | INFO | repair.npm-install-que | Tapir run successful for /chalk/results/gpt-4.1/npm-install-que
+2025-08-30 00:20:58,736 | DEBUG | repair.npm-install-que | Parsed detection output: []
+2025-08-30 00:20:58,736 | DEBUG | repair.npm-install-que | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x10776fd80>, {})
+2025-08-30 00:20:58,736 | DEBUG | repair.npm-install-que | Updated package.json saved at /chalk/results/gpt-4.1/npm-install-que/package.json
+2025-08-30 00:20:58,736 | INFO | repair.npm-install-que | END pattern 3 (pattern_3)
+2025-08-30 00:20:58,736 | DEBUG | repair.npm-install-que | Updated package.json saved at /chalk/results/gpt-4.1/npm-install-que/package.json
+2025-08-30 00:20:58,736 | INFO | repair.npm-install-que | token consumed 8186
+2025-08-30 00:20:58,736 | INFO | repair.npm-install-que | parse consumption time: 302.9822891280055

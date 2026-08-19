@@ -1,0 +1,133 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "breaking_change",
+  "description": "One breaking change. bc_final_list.json is {\"breaking_changes\": [<this>, ...]}.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["Id", "Reference", "BC_description", "Changed_object", "Adaptation_method", "RequireInfo", "RequireInfoFlag"],
+  "properties": {
+    "Id": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unique id, sequential from 0. Used as TAPIR changelogId."
+    },
+    "BC_description": {
+      "type": "string",
+      "description": "Clear, detailed, evidence-backed description of the breaking change."
+    },
+    "Reference": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "All sources: doc paths, URLs, issue/PR numbers, commit SHAs."
+    },
+    "Changed_object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "className", "methodName", "propertyName", "moduleName"],
+      "description": "Everything needed to locate the affected code downstream.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["environment", "config", "import", "call", "read", "write"],
+          "description": "call=method call changes; read/write=property get/set; import=import/require; config=external config file; environment=runtime env. Drives pattern generation."
+        },
+        "className": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Explicit class names impacted. '*' only if truly unknown. Wildcards allowed."
+        },
+        "methodName": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Exact method names (required when type is 'call'). Wildcards allowed."
+        },
+        "propertyName": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Explicit property names (required when type is 'read'/'write'). Wildcards allowed."
+        },
+        "moduleName": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Module names (required when type is 'import'/'config'). For 'config', the config file name (e.g. webpack.config.js). Use '*' alone only when the root package and all subpaths are affected."
+        },
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Preferred structured locator targets. Use this when module/class/member pairing or export shape matters; it takes precedence over legacy parallel arrays.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["exportStyle", "uncertain"],
+            "properties": {
+              "moduleName": { "type": ["string", "null"] },
+              "className": { "type": ["string", "null"] },
+              "memberName": { "type": ["string", "null"] },
+              "exportStyle": {
+                "type": "string",
+                "enum": ["direct", "default", "named", "member", "instance", "deep-module"]
+              },
+              "uncertain": {
+                "type": "boolean",
+                "description": "Whether TAPIR may match unknown receiver provenance with ?**."
+              }
+            }
+          }
+        },
+        "argFilters": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "OPTIONAL, type='call' only. Narrows a call BC to specific argument shapes (TAPIR call filters). WRITE THIS ONLY WHEN the docs/evidence clearly state the break is CONDITIONAL on argument count/type — it narrows matching and a wrong filter causes false negatives (missed affected code). Omit entirely when in doubt. See pattern-language.md.",
+          "properties": {
+            "minArgs": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Minimum argument count. Emits [minArgs,maxArgs]. For 'at least N', set maxArgs to a large number (open ranges [n,] are not supported by the matcher)."
+            },
+            "maxArgs": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Maximum argument count. Both minArgs and maxArgs must be set together to emit an arity filter."
+            },
+            "argTypes": {
+              "type": "array",
+              "minItems": 1,
+              "description": "Per-argument type constraints. Each entry filters one positional argument.",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["index", "types"],
+                "properties": {
+                  "index": { "type": "integer", "minimum": 0, "description": "0-based argument position." },
+                  "types": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": { "type": "string", "minLength": 1 },
+                    "description": "Allowed types (union). One of: string, number, boolean, undefined, object, array, function, function1, function2, function3 — or a literal value. TAPIR reports high confidence when the current AST shape determines the predicate, and low confidence when it must conservatively assume a match."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Adaptation_method": {
+      "type": "string",
+      "description": "Structured adaptation. Prefer direct Before->After code, e.g. 'base.text() -> base.textConverted()'."
+    },
+    "RequireInfoFlag": {
+      "type": "boolean",
+      "description": "true if affected entities, adaptation, or terminology are not fully clear/specified. If true, fill RequireInfo and refine via validation.md before pattern generation."
+    },
+    "RequireInfo": {
+      "type": "string",
+      "description": "What is missing/unclear. Empty only when RequireInfoFlag is false."
+    }
+  }
+}

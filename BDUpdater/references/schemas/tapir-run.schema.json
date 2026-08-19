@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "dep_bc_repair_tapir_run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "backend",
+    "target_dir",
+    "pattern_file",
+    "pattern_file_sha256",
+    "locations_file",
+    "locations_file_sha256",
+    "location_count",
+    "unsupported_sources",
+    "complete"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "status": { "const": "passed" },
+    "backend": { "const": "tapir" },
+    "target_dir": { "type": "string", "minLength": 1 },
+    "pattern_file": { "type": "string", "minLength": 1 },
+    "pattern_file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "locations_file": { "type": "string", "minLength": 1 },
+    "locations_file_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "location_count": { "type": "integer", "minimum": 0 },
+    "unsupported_sources": { "type": "array", "items": { "type": "string" } },
+    "complete": { "type": "boolean" }
+  }
+}

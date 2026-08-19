@@ -1,0 +1,89 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "Chalk now requires Node.js version 4 or later. Attempting to use Chalk in earlier Node.js versions will result in runtime errors or incompatibility.",
+      "Reference": [
+        "release_note.md"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [
+          "chalk/**/*"
+        ],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Upgrade the Node.js runtime to version 4 or later before using Chalk v2.0.0.\n\nBefore (Node.js <4):\n# Not supported\n\nAfter (Node.js >=4):\n$ node --version\nv4.0.0\n// Your code can safely require('chalk')",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "The method 'chalk.hasColor()' has been removed. Clients must now use the external 'has-ansi' package as a replacement API.",
+      "Reference": [
+        "release_note.md",
+        "https://github.com/chalk/chalk/commit/04cae226cc0fc11fd7898f3fa91fdc4a3b3e496b"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "chalk"
+        ],
+        "methodName": [
+          "hasColor"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Replace usage of 'chalk.hasColor()' with 'require(\"has-ansi\")' from the external package.\n\nBefore:\nconst has = chalk.hasColor(str);\n\nAfter:\nconst hasAnsi = require('has-ansi');\nconst has = hasAnsi(str);",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "The method 'chalk.stripColor()' has been removed. Clients must now use the external 'strip-ansi' package as a replacement API.",
+      "Reference": [
+        "release_note.md",
+        "https://github.com/chalk/chalk/commit/04cae226cc0fc11fd7898f3fa91fdc4a3b3e496b"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "chalk"
+        ],
+        "methodName": [
+          "stripColor"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Replace usage of 'chalk.stripColor()' with 'require(\"strip-ansi\")' from the external package.\n\nBefore:\nconst str = chalk.stripColor(coloredStr);\n\nAfter:\nconst stripAnsi = require('strip-ansi');\nconst str = stripAnsi(coloredStr);",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "The property 'chalk.styles' has been removed. Clients must instead use the external 'ansi-styles' package to access style information.",
+      "Reference": [
+        "release_note.md",
+        "https://github.com/chalk/chalk/commit/870249689acc6b04e81e96d2c09c39b76c640a94"
+      ],
+      "Changed_object": {
+        "type": "read",
+        "className": [
+          "chalk"
+        ],
+        "methodName": [],
+        "propertyName": [
+          "styles"
+        ],
+        "moduleName": []
+      },
+      "Adaptation_method": "Replace usage of 'chalk.styles' with 'require(\"ansi-styles\")' from the external package.\n\nBefore:\nconst styles = chalk.styles;\n\nAfter:\nconst ansiStyles = require('ansi-styles');\nconst styles = ansiStyles;\n// Use ansiStyles as per its documentation",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

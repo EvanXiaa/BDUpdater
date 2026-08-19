@@ -1,0 +1,226 @@
+2025-08-31 02:17:21,904 | INFO | repair.express-promise-router | Starting analysis for express-promise-router
+2025-08-31 02:17:21,904 | INFO | repair.express-promise-router | Starting breaking change analysis for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:21,905 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:21,905 | INFO | repair.express-promise-router | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:17:21,905 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:17:22,204 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:22,204 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:22,204 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6b60>, {})
+2025-08-31 02:17:22,204 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:22,204 | INFO | repair.express-promise-router | END pattern 0 (pattern_0)
+2025-08-31 02:17:22,205 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:22,205 | INFO | repair.express-promise-router | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:17:22,205 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:17:22,356 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:22,356 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:22,356 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6b60>, {})
+2025-08-31 02:17:22,356 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:22,356 | INFO | repair.express-promise-router | END pattern 0 (pattern_0)
+2025-08-31 02:17:22,357 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:22,357 | INFO | repair.express-promise-router | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:17:22,357 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:17:22,515 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:22,515 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:22,515 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6b60>, {})
+2025-08-31 02:17:22,516 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:22,516 | INFO | repair.express-promise-router | END pattern 1 (pattern_1)
+2025-08-31 02:17:22,516 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:22,516 | INFO | repair.express-promise-router | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:17:22,516 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:17:22,668 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:22,668 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:22,669 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6b60>, {})
+2025-08-31 02:17:22,669 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:22,669 | INFO | repair.express-promise-router | END pattern 1 (pattern_1)
+2025-08-31 02:17:22,669 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:22,669 | INFO | repair.express-promise-router | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:17:22,669 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:17:22,829 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:22,829 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:22,830 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6b60>, {})
+2025-08-31 02:17:22,830 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:22,830 | INFO | repair.express-promise-router | END pattern 2 (pattern_2)
+2025-08-31 02:17:22,830 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:22,830 | INFO | repair.express-promise-router | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:17:22,830 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:17:22,976 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:22,976 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:22,976 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6b60>, {})
+2025-08-31 02:17:22,977 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:22,977 | INFO | repair.express-promise-router | END pattern 2 (pattern_2)
+2025-08-31 02:17:22,977 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:22,977 | INFO | repair.express-promise-router | BEGIN pattern 4 (pattern_4)
+2025-08-31 02:17:22,977 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{Promise}", "changelogId": 4}
+2025-08-31 02:17:23,136 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:23,137 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:23,137 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6b60>, {})
+2025-08-31 02:17:23,137 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:23,137 | INFO | repair.express-promise-router | END pattern 4 (pattern_4)
+2025-08-31 02:17:23,137 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:23,137 | INFO | repair.express-promise-router | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:17:23,137 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:17:23,293 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:23,293 | DEBUG | repair.express-promise-router | Parsed detection output: [{'pattern_id': 5, 'file': 'test/express-promise-router.route.test.js', 'line': 7, 'column': 14}, {'pattern_id': 5, 'file': 'test/express-promise-router.test.js', 'line': 7, 'column': 14}]
+2025-08-31 02:17:23,293 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6b60>, {'test/express-promise-router.route.test.js': defaultdict(<class 'list'>, {5: [{'line': 7, 'column': 14}]}), 'test/express-promise-router.test.js': defaultdict(<class 'list'>, {5: [{'line': 7, 'column': 14}]})})
+2025-08-31 02:17:23,295 | INFO | repair.express-promise-router | New context extracted from /bluebird/results/gpt-4.1/express-promise-router/test/express-promise-router.route.test.js
+2025-08-31 02:17:29,518 | DEBUG | repair.express-promise-router | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "var request = Promise.promisify(require('request'), { multiArgs: true });",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:17:29,520 | INFO | repair.express-promise-router | Replaced code in /bluebird/results/gpt-4.1/express-promise-router/test/express-promise-router.route.test.js at [151, 203]
+2025-08-31 02:17:29,523 | INFO | repair.express-promise-router | New context extracted from /bluebird/results/gpt-4.1/express-promise-router/test/express-promise-router.test.js
+2025-08-31 02:17:34,610 | DEBUG | repair.express-promise-router | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "var request = Promise.promisify(require('request'), {multiArgs: true});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:17:34,612 | INFO | repair.express-promise-router | Replaced code in /bluebird/results/gpt-4.1/express-promise-router/test/express-promise-router.test.js at [151, 203]
+2025-08-31 02:17:34,613 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:34,614 | INFO | repair.express-promise-router | END pattern 5 (pattern_5)
+2025-08-31 02:17:34,614 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:34,614 | INFO | repair.express-promise-router | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:17:34,614 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:17:34,851 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:34,852 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:34,852 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7ce0>, {})
+2025-08-31 02:17:34,852 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:34,852 | INFO | repair.express-promise-router | END pattern 5 (pattern_5)
+2025-08-31 02:17:34,852 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:34,852 | INFO | repair.express-promise-router | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:17:34,852 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:17:35,014 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:35,014 | DEBUG | repair.express-promise-router | Parsed detection output: [{'pattern_id': 6, 'file': 'test/express-promise-router.test.js', 'line': 7, 'column': 14}, {'pattern_id': 6, 'file': 'test/express-promise-router.route.test.js', 'line': 7, 'column': 14}]
+2025-08-31 02:17:35,014 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7ce0>, {'test/express-promise-router.test.js': defaultdict(<class 'list'>, {6: [{'line': 7, 'column': 14}]}), 'test/express-promise-router.route.test.js': defaultdict(<class 'list'>, {6: [{'line': 7, 'column': 14}]})})
+2025-08-31 02:17:35,015 | INFO | repair.express-promise-router | New context extracted from /bluebird/results/gpt-4.1/express-promise-router/test/express-promise-router.test.js
+2025-08-31 02:17:39,011 | DEBUG | repair.express-promise-router | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:17:39,014 | INFO | repair.express-promise-router | New context extracted from /bluebird/results/gpt-4.1/express-promise-router/test/express-promise-router.route.test.js
+2025-08-31 02:17:43,617 | DEBUG | repair.express-promise-router | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:17:43,620 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:43,620 | INFO | repair.express-promise-router | END pattern 6 (pattern_6)
+2025-08-31 02:17:43,621 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:43,621 | INFO | repair.express-promise-router | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:17:43,621 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:17:43,805 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:43,805 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:43,805 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7ce0>, {})
+2025-08-31 02:17:43,806 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:43,806 | INFO | repair.express-promise-router | END pattern 6 (pattern_6)
+2025-08-31 02:17:43,806 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:43,806 | INFO | repair.express-promise-router | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:17:43,806 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:17:43,964 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:43,964 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:43,964 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7ce0>, {})
+2025-08-31 02:17:43,965 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:43,965 | INFO | repair.express-promise-router | END pattern 7 (pattern_7)
+2025-08-31 02:17:43,965 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:43,965 | INFO | repair.express-promise-router | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:17:43,965 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:17:44,109 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:44,109 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:44,109 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7ce0>, {})
+2025-08-31 02:17:44,110 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:44,110 | INFO | repair.express-promise-router | END pattern 7 (pattern_7)
+2025-08-31 02:17:44,110 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:44,110 | INFO | repair.express-promise-router | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:17:44,110 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:17:44,268 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:44,268 | DEBUG | repair.express-promise-router | Parsed detection output: [{'pattern_id': 8, 'file': 'test/express-promise-router.test.js', 'line': 24, 'column': 15}, {'pattern_id': 8, 'file': 'test/express-promise-router.route.test.js', 'line': 24, 'column': 15}]
+2025-08-31 02:17:44,268 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7ce0>, {'test/express-promise-router.test.js': defaultdict(<class 'list'>, {8: [{'line': 24, 'column': 15}]}), 'test/express-promise-router.route.test.js': defaultdict(<class 'list'>, {8: [{'line': 24, 'column': 15}]})})
+2025-08-31 02:17:44,269 | INFO | repair.express-promise-router | New context extracted from /bluebird/results/gpt-4.1/express-promise-router/test/express-promise-router.test.js
+2025-08-31 02:17:48,173 | DEBUG | repair.express-promise-router | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:17:48,175 | INFO | repair.express-promise-router | New context extracted from /bluebird/results/gpt-4.1/express-promise-router/test/express-promise-router.route.test.js
+2025-08-31 02:17:52,731 | DEBUG | repair.express-promise-router | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:17:52,732 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:52,732 | INFO | repair.express-promise-router | END pattern 8 (pattern_8)
+2025-08-31 02:17:52,732 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:52,733 | INFO | repair.express-promise-router | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:17:52,733 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:17:52,921 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:52,922 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:52,922 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473b00>, {})
+2025-08-31 02:17:52,923 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:52,923 | INFO | repair.express-promise-router | END pattern 8 (pattern_8)
+2025-08-31 02:17:52,923 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:52,923 | INFO | repair.express-promise-router | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:17:52,923 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:17:53,089 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:53,089 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:53,089 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473b00>, {})
+2025-08-31 02:17:53,089 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:53,089 | INFO | repair.express-promise-router | END pattern 9 (pattern_9)
+2025-08-31 02:17:53,090 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:53,090 | INFO | repair.express-promise-router | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:17:53,090 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:17:53,242 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:53,242 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:17:53,242 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473b00>, {})
+2025-08-31 02:17:53,242 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:17:53,242 | INFO | repair.express-promise-router | END pattern 9 (pattern_9)
+2025-08-31 02:17:53,242 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:17:53,242 | INFO | repair.express-promise-router | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:17:53,242 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:17:53,400 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:17:53,400 | DEBUG | repair.express-promise-router | Parsed detection output: [{'pattern_id': 10, 'file': 'lib/express-promise-router.js', 'line': 43, 'column': 8}]
+2025-08-31 02:17:53,401 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473b00>, {'lib/express-promise-router.js': defaultdict(<class 'list'>, {10: [{'line': 43, 'column': 8}]})})
+2025-08-31 02:17:53,402 | INFO | repair.express-promise-router | New context extracted from /bluebird/results/gpt-4.1/express-promise-router/lib/express-promise-router.js
+2025-08-31 02:18:07,682 | DEBUG | repair.express-promise-router | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "var wrapHandler = function (handler) {\n    if ('function' !== typeof handler) {\n        var type = Object.prototype.toString.call(handler);\n        var msg = 'Expected a callback function but got a ' + type;\n        throw new Error(msg);\n    }\n\n    var handleReturn = function (args) {\n        var wrappedNext;\n        var nextPromise = new Promise(function (resolve, reject) {\n            wrappedNext = function (err) {\n                if (err && err !== 'route') {\n                    reject(err);\n                } else {\n                    resolve(err || 'next');\n                }\n            };\n        });\n\n        var promises = [nextPromise];\n\n        var next = args.slice(-1)[0];\n\n        if ('string' === typeof next) {\n            next = args.slice(-2)[0];\n        }\n\n        var ret = handler.apply(null, args);\n\n        if (isPromise(ret)) {\n            promises.push(ret);\n        }\n\n        Promise.race(promises)\n            .then(function (d) {\n                if (d === 'next') {\n                    next();\n                } else if (d === 'route') {\n                    next('route');\n                }\n            }, function (err) {\n                if (!err) {\n                    err = new Error('returned promise was rejected but did not have a reason');\n                }\n                next(err);\n            }); // Removed .done() to avoid irrecoverable fatal error under Bluebird v3\n    };\n\n    if (handler.length === 4) {\n        return function (err, req, res, next) {\n            handleReturn([err, req, res, next]);\n        };\n    }\n\n    return function (req, res, next) {\n        handleReturn([req, res, next]);\n    };\n};",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:18:07,684 | INFO | repair.express-promise-router | Replaced code in /bluebird/results/gpt-4.1/express-promise-router/lib/express-promise-router.js at [263, 1856]
+2025-08-31 02:18:07,684 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:18:07,684 | INFO | repair.express-promise-router | END pattern 10 (pattern_10)
+2025-08-31 02:18:07,685 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:18:07,685 | INFO | repair.express-promise-router | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:18:07,685 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:18:07,863 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:18:07,863 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:18:07,863 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120472660>, {})
+2025-08-31 02:18:07,863 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:18:07,863 | INFO | repair.express-promise-router | END pattern 10 (pattern_10)
+2025-08-31 02:18:07,864 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:18:07,864 | INFO | repair.express-promise-router | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:18:07,864 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:18:08,023 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:18:08,023 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:18:08,023 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120472660>, {})
+2025-08-31 02:18:08,023 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:18:08,023 | INFO | repair.express-promise-router | END pattern 11 (pattern_11)
+2025-08-31 02:18:08,023 | INFO | repair.express-promise-router | ============================================================
+2025-08-31 02:18:08,024 | INFO | repair.express-promise-router | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:18:08,024 | DEBUG | repair.express-promise-router | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:18:08,181 | INFO | repair.express-promise-router | Tapir run successful for /bluebird/results/gpt-4.1/express-promise-router
+2025-08-31 02:18:08,181 | DEBUG | repair.express-promise-router | Parsed detection output: []
+2025-08-31 02:18:08,181 | DEBUG | repair.express-promise-router | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120472660>, {})
+2025-08-31 02:18:08,181 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:18:08,181 | INFO | repair.express-promise-router | END pattern 11 (pattern_11)
+2025-08-31 02:18:08,182 | INFO | repair.express-promise-router | Config BC: scanning 0 files
+2025-08-31 02:18:08,182 | DEBUG | repair.express-promise-router | Updated package.json saved at /bluebird/results/gpt-4.1/express-promise-router/package.json
+2025-08-31 02:18:08,182 | INFO | repair.express-promise-router | token consumed 26122
+2025-08-31 02:18:08,182 | INFO | repair.express-promise-router | parse consumption time: 42.647085251286626

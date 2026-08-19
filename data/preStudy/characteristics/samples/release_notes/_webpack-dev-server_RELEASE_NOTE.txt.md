@@ -1,0 +1,4 @@
+v5.0.0
+## [5.0.0](https://github.com/webpack/webpack-dev-server/compare/v4.15.1...v5.0.0) (2024-02-12)
+
+[Migration Guide and Changes](https://github.com/webpack/webpack-dev-server/blob/master/migration-v5.md).

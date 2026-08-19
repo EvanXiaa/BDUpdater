@@ -1,0 +1,7 @@
+{
+  "owner": "jshint",
+  "repo": "jshint",
+  "number": 2597,
+  "pr_url": "https://github.com/jshint/jshint/pull/2597",
+  "content": "# PR 2597: [[FIX]] maxcomplexity doesn't take into account `&&`\nBranches: complexity -> master\n\nFixes #840\n\n\n## Commit titles\n- [[FIX]] maxcomplexity doesn't take into account `&&`\n\n## Changed files\n- src/jshint.js\n- tests/unit/fixtures/max-cyclomatic-complexity-per-function.js\n- tests/unit/options.js\n## Issue comments\n- @lukeapage: interestingly neither does http://jscomplexity.org/\n\nI don't understand why not..\n- @jugglinmike: Thanks, Luke! And sorry for the egregious delay."
+}

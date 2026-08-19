@@ -1,0 +1,7 @@
+{
+  "owner": "ember-cli",
+  "repo": "ember-resolver",
+  "number": 835,
+  "pr_url": "https://github.com/ember-cli/ember-resolver/pull/835",
+  "content": "# PR 835: Drop support for Ember 3.x, add 4.8 to CI\nBranches: drop-ember-3 -> master\n\nWe already landed breaking changes dropping earlier Ember 3.x (#774), Ember CLI 2.x (#758), and Node versions (#757) quite some time ago; so we should *also* drop support for Ember 3 while we're here (3.28 is out of regular LTS for a bit now, and will go out of security releases in a few weeks).\n\n## Commit titles\n- Drop support for Ember 3.x, add 4.8 to CI\n\n## Changed files\n- .github/workflows/ci-build.yml\n- test-app/config/ember-try.js\n## Reviews\n- @bertdeblock [APPROVED]"
+}

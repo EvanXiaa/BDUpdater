@@ -1,0 +1,108 @@
+2025-08-30 20:58:37,876 | INFO | repair.gulp-expect-file | Starting analysis for gulp-expect-file
+2025-08-30 20:58:37,877 | INFO | repair.gulp-expect-file | Starting breaking change analysis for /async/results/gpt-4.1/gulp-expect-file
+2025-08-30 20:58:37,877 | INFO | repair.gulp-expect-file | ============================================================
+2025-08-30 20:58:37,877 | INFO | repair.gulp-expect-file | BEGIN pattern 0 (pattern_0)
+2025-08-30 20:58:37,877 | DEBUG | repair.gulp-expect-file | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{each,concat,detect,every,filter,groupBy,map,mapValues,reduce,reject,some,transform,times,auto,compose,seq,whilst,until,forever,parallel,race,retry,series,tryEach,waterfall}", "changelogId": 0}
+2025-08-30 20:58:38,030 | INFO | repair.gulp-expect-file | Tapir run successful for /async/results/gpt-4.1/gulp-expect-file
+2025-08-30 20:58:38,030 | DEBUG | repair.gulp-expect-file | Parsed detection output: [{'pattern_id': 0, 'file': 'lib/string-tester.js', 'line': 18, 'column': 23}, {'pattern_id': 0, 'file': 'lib/file-tester.js', 'line': 21, 'column': 17}, {'pattern_id': 0, 'file': 'lib/file-tester.js', 'line': 81, 'column': 9}, {'pattern_id': 0, 'file': 'index.js', 'line': 135, 'column': 19}]
+2025-08-30 20:58:38,031 | DEBUG | repair.gulp-expect-file | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315a700>, {'lib/string-tester.js': defaultdict(<class 'list'>, {0: [{'line': 18, 'column': 23}]}), 'lib/file-tester.js': defaultdict(<class 'list'>, {0: [{'line': 21, 'column': 17}, {'line': 81, 'column': 9}]}), 'index.js': defaultdict(<class 'list'>, {0: [{'line': 135, 'column': 19}]})})
+2025-08-30 20:58:38,031 | INFO | repair.gulp-expect-file | New context extracted from /async/results/gpt-4.1/gulp-expect-file/lib/string-tester.js
+2025-08-30 20:58:39,031 | DEBUG | repair.gulp-expect-file | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:39,033 | INFO | repair.gulp-expect-file | New context extracted from /async/results/gpt-4.1/gulp-expect-file/lib/file-tester.js
+2025-08-30 20:58:39,035 | INFO | repair.gulp-expect-file | New context extracted from /async/results/gpt-4.1/gulp-expect-file/lib/file-tester.js
+2025-08-30 20:58:40,142 | DEBUG | repair.gulp-expect-file | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:41,268 | DEBUG | repair.gulp-expect-file | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:41,270 | INFO | repair.gulp-expect-file | New context extracted from /async/results/gpt-4.1/gulp-expect-file/index.js
+2025-08-30 20:58:42,321 | DEBUG | repair.gulp-expect-file | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:42,322 | DEBUG | repair.gulp-expect-file | Updated package.json saved at /async/results/gpt-4.1/gulp-expect-file/package.json
+2025-08-30 20:58:42,323 | INFO | repair.gulp-expect-file | END pattern 0 (pattern_0)
+2025-08-30 20:58:42,323 | INFO | repair.gulp-expect-file | ============================================================
+2025-08-30 20:58:42,324 | INFO | repair.gulp-expect-file | BEGIN pattern 2 (pattern_2)
+2025-08-30 20:58:42,324 | DEBUG | repair.gulp-expect-file | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{drain,saturated,unsaturated,empty,error}", "changelogId": 2}
+2025-08-30 20:58:42,502 | INFO | repair.gulp-expect-file | Tapir run successful for /async/results/gpt-4.1/gulp-expect-file
+2025-08-30 20:58:42,503 | DEBUG | repair.gulp-expect-file | Parsed detection output: []
+2025-08-30 20:58:42,503 | DEBUG | repair.gulp-expect-file | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315a3e0>, {})
+2025-08-30 20:58:42,503 | DEBUG | repair.gulp-expect-file | Updated package.json saved at /async/results/gpt-4.1/gulp-expect-file/package.json
+2025-08-30 20:58:42,503 | INFO | repair.gulp-expect-file | END pattern 2 (pattern_2)
+2025-08-30 20:58:42,503 | INFO | repair.gulp-expect-file | ============================================================
+2025-08-30 20:58:42,503 | INFO | repair.gulp-expect-file | BEGIN pattern 3 (pattern_3)
+2025-08-30 20:58:42,503 | DEBUG | repair.gulp-expect-file | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{eachOfLimit*,each*,eachSeries*,compose*,seq*,waterfall*,auto*,autoInject*,whilst*,until*,forever*}", "changelogId": 3}
+2025-08-30 20:58:42,663 | INFO | repair.gulp-expect-file | Tapir run successful for /async/results/gpt-4.1/gulp-expect-file
+2025-08-30 20:58:42,663 | DEBUG | repair.gulp-expect-file | Parsed detection output: []
+2025-08-30 20:58:42,663 | DEBUG | repair.gulp-expect-file | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315a3e0>, {})
+2025-08-30 20:58:42,664 | DEBUG | repair.gulp-expect-file | Updated package.json saved at /async/results/gpt-4.1/gulp-expect-file/package.json
+2025-08-30 20:58:42,664 | INFO | repair.gulp-expect-file | END pattern 3 (pattern_3)
+2025-08-30 20:58:42,664 | INFO | repair.gulp-expect-file | ============================================================
+2025-08-30 20:58:42,664 | INFO | repair.gulp-expect-file | BEGIN pattern 4 (pattern_4)
+2025-08-30 20:58:42,664 | DEBUG | repair.gulp-expect-file | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{during,doDuring,whilst,doWhilst,until,doUntil}", "changelogId": 4}
+2025-08-30 20:58:42,815 | INFO | repair.gulp-expect-file | Tapir run successful for /async/results/gpt-4.1/gulp-expect-file
+2025-08-30 20:58:42,815 | DEBUG | repair.gulp-expect-file | Parsed detection output: []
+2025-08-30 20:58:42,815 | DEBUG | repair.gulp-expect-file | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315a3e0>, {})
+2025-08-30 20:58:42,815 | DEBUG | repair.gulp-expect-file | Updated package.json saved at /async/results/gpt-4.1/gulp-expect-file/package.json
+2025-08-30 20:58:42,815 | INFO | repair.gulp-expect-file | END pattern 4 (pattern_4)
+2025-08-30 20:58:42,815 | INFO | repair.gulp-expect-file | ============================================================
+2025-08-30 20:58:42,816 | INFO | repair.gulp-expect-file | BEGIN pattern 5 (pattern_5)
+2025-08-30 20:58:42,816 | DEBUG | repair.gulp-expect-file | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{queue,mapLimit,eachLimit,filterLimit,reduceLimit,concatLimit,eachOfLimit,forEachOfLimit,groupByLimit}", "changelogId": 5}
+2025-08-30 20:58:42,978 | INFO | repair.gulp-expect-file | Tapir run successful for /async/results/gpt-4.1/gulp-expect-file
+2025-08-30 20:58:42,979 | DEBUG | repair.gulp-expect-file | Parsed detection output: []
+2025-08-30 20:58:42,979 | DEBUG | repair.gulp-expect-file | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315a3e0>, {})
+2025-08-30 20:58:42,979 | DEBUG | repair.gulp-expect-file | Updated package.json saved at /async/results/gpt-4.1/gulp-expect-file/package.json
+2025-08-30 20:58:42,979 | INFO | repair.gulp-expect-file | END pattern 5 (pattern_5)
+2025-08-30 20:58:42,979 | INFO | repair.gulp-expect-file | ============================================================
+2025-08-30 20:58:42,979 | INFO | repair.gulp-expect-file | BEGIN pattern 6 (pattern_6)
+2025-08-30 20:58:42,979 | DEBUG | repair.gulp-expect-file | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{memoize}", "changelogId": 6}
+2025-08-30 20:58:43,133 | INFO | repair.gulp-expect-file | Tapir run successful for /async/results/gpt-4.1/gulp-expect-file
+2025-08-30 20:58:43,133 | DEBUG | repair.gulp-expect-file | Parsed detection output: []
+2025-08-30 20:58:43,133 | DEBUG | repair.gulp-expect-file | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315a3e0>, {})
+2025-08-30 20:58:43,134 | DEBUG | repair.gulp-expect-file | Updated package.json saved at /async/results/gpt-4.1/gulp-expect-file/package.json
+2025-08-30 20:58:43,134 | INFO | repair.gulp-expect-file | END pattern 6 (pattern_6)
+2025-08-30 20:58:43,134 | INFO | repair.gulp-expect-file | ============================================================
+2025-08-30 20:58:43,134 | INFO | repair.gulp-expect-file | BEGIN pattern 7 (pattern_7)
+2025-08-30 20:58:43,134 | DEBUG | repair.gulp-expect-file | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}", "changelogId": 7}
+2025-08-30 20:58:43,297 | INFO | repair.gulp-expect-file | Tapir run successful for /async/results/gpt-4.1/gulp-expect-file
+2025-08-30 20:58:43,297 | DEBUG | repair.gulp-expect-file | Parsed detection output: [{'pattern_id': 7, 'file': 'lib/string-tester.js', 'line': 20, 'column': 6}]
+2025-08-30 20:58:43,297 | DEBUG | repair.gulp-expect-file | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315a3e0>, {'lib/string-tester.js': defaultdict(<class 'list'>, {7: [{'line': 20, 'column': 6}]})})
+2025-08-30 20:58:43,297 | INFO | repair.gulp-expect-file | New context extracted from /async/results/gpt-4.1/gulp-expect-file/lib/string-tester.js
+2025-08-30 20:58:47,003 | DEBUG | repair.gulp-expect-file | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if (expectation instanceof Array) {\n    var expectations = expectation.map(this.parseExpectation.bind(this));\n    return function(target, callback) {\n      // async.applyEachSeries now returns a function accepting only a callback, and cannot bind arguments via partial application\n      // So we must wrap 'target' via closure over 'expectations'\n      const fn = async.applyEachSeries(expectations.map(fn => fn.bind(null, target)));\n      // If callback provided, call with it:\n      if (callback) {\n        fn(callback);\n      } else {\n        return fn(); // return promise\n      }\n    };\n  }",
+  "additional_req": "If downstream code expects the returned function to take (target, callback), this change preserves that by injecting 'target' via bind. If expectations expects different arity, further refactor may be necessary in 'parseExpectation' usage. No other code change is strictly required here.",
+  "dependencies": []
+}
+2025-08-30 20:58:47,003 | DEBUG | repair.gulp-expect-file | Added to whole mode list: file=/async/results/gpt-4.1/gulp-expect-file/lib/string-tester.js, context=dict, bc_desc={'Id': 7, 'BC_description': 'The methods async.applyEach and async.applyEachSeries have been changed. They now always re...
+2025-08-30 20:58:47,004 | INFO | repair.gulp-expect-file | Whole mode item: /async/results/gpt-4.1/gulp-expect-file/lib/string-tester.js
+2025-08-30 20:58:50,497 | DEBUG | repair.gulp-expect-file | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': '"use strict";\n\nvar async = require("async");\nvar wrapAssertion = require("./util").wrapAssertion;\n\nmodule.exports = StringTester;\n\nfunction StringTester(expectation) {\n  this.tester = this.parseExpectation(expectation);\n}\n\nStringTester.prototype.test = function(target, callback) {\n  this.tester(target, callback);\n};\n\nStringTester.prototype.parseExpectation = function(expectation) {\n  if (expectation instanceof Array) {\n    var expectations = expectation.map(this.parseExpectation.bind(this));\n    // async.applyEachSeries no longer supports argument partial application.\n    // So we wrap \'target\' via binding in each expectation.\n    return function(target, callback) {\n      // For each expectation, bind `target` in advance.\n      const fn = async.applyEachSeries(expectations.map(fn => fn.bind(null, target)));\n      // Now call fn with callback (or return promise if callback omitted)\n      if (callback) {\n        fn(callback);\n      } else {\n        return fn();\n      }\n    };\n  }\n\n  if (typeof expectation === "function") {\n    return wrapAssertion(expectation);\n  }\n\n  if (typeof expectation === "string") {\n    return wrapAssertion(function(target) {\n      return target.indexOf(expectation) >= 0;\n    }, "not containing " + JSON.stringify(expectation));\n  }\n  if (expectation instanceof RegExp) {\n    return wrapAssertion(function(target) {\n      return expectation.test(target);\n    }, "not matching " + expectation.toString());\n  }\n\n  throw new TypeError("Unknown expectation type");\n};', 'additional_req': "If downstream code expects the returned function to take (target, callback), this change preserves that interface by closing over 'target' at the point of use. No further context changes required unless 'expectations' may expect other parameters besides 'target' and 'callback'.", 'dependencies': []}
+2025-08-30 20:58:50,497 | INFO | repair.gulp-expect-file | Replace whole file: /async/results/gpt-4.1/gulp-expect-file/lib/string-tester.js
+2025-08-30 20:58:50,499 | DEBUG | repair.gulp-expect-file | Updated package.json saved at /async/results/gpt-4.1/gulp-expect-file/package.json
+2025-08-30 20:58:50,499 | INFO | repair.gulp-expect-file | END pattern 7 (pattern_7)
+2025-08-30 20:58:50,500 | INFO | repair.gulp-expect-file | ============================================================
+2025-08-30 20:58:50,500 | INFO | repair.gulp-expect-file | BEGIN pattern 8 (pattern_8)
+2025-08-30 20:58:50,500 | DEBUG | repair.gulp-expect-file | Pattern payload: {"type": "import", "pattern": "import {async.mjs}", "changelogId": 8}
+2025-08-30 20:58:50,683 | INFO | repair.gulp-expect-file | Tapir run successful for /async/results/gpt-4.1/gulp-expect-file
+2025-08-30 20:58:50,683 | DEBUG | repair.gulp-expect-file | Parsed detection output: []
+2025-08-30 20:58:50,683 | DEBUG | repair.gulp-expect-file | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x12315a5c0>, {})
+2025-08-30 20:58:50,683 | DEBUG | repair.gulp-expect-file | Updated package.json saved at /async/results/gpt-4.1/gulp-expect-file/package.json
+2025-08-30 20:58:50,683 | INFO | repair.gulp-expect-file | END pattern 8 (pattern_8)
+2025-08-30 20:58:50,684 | DEBUG | repair.gulp-expect-file | Updated package.json saved at /async/results/gpt-4.1/gulp-expect-file/package.json
+2025-08-30 20:58:50,684 | INFO | repair.gulp-expect-file | token consumed 11049
+2025-08-30 20:58:50,684 | INFO | repair.gulp-expect-file | parse consumption time: 11.480077541433275

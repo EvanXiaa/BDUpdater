@@ -1,0 +1,41 @@
+2025-09-03 23:25:27,243 | INFO | repair.slugid-1.1.0 | Starting analysis for slugid-1.1.0
+2025-09-03 23:25:27,243 | INFO | repair.slugid-1.1.0 | Starting breaking change analysis for /uuid/results/gpt-4.1/slugid-1.1.0
+2025-09-03 23:25:27,243 | INFO | repair.slugid-1.1.0 | ============================================================
+2025-09-03 23:25:27,244 | INFO | repair.slugid-1.1.0 | BEGIN pattern 0 (pattern_0)
+2025-09-03 23:25:27,244 | DEBUG | repair.slugid-1.1.0 | Pattern payload: {"type": "call", "pattern": "read {<uuid>,<uuid/**/*>}?**.{parse,unparse}", "changelogId": 0}
+2025-09-03 23:25:27,653 | INFO | repair.slugid-1.1.0 | Tapir run successful for /uuid/results/gpt-4.1/slugid-1.1.0
+2025-09-03 23:25:27,653 | DEBUG | repair.slugid-1.1.0 | Parsed detection output: [{'pattern_id': 0, 'file': 'slugid.js', 'line': 30, 'column': 16, 'confidence': 'high'}, {'pattern_id': 0, 'file': 'slugid.js', 'line': 47, 'column': 9, 'confidence': 'high'}]
+2025-09-03 23:25:27,653 | DEBUG | repair.slugid-1.1.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107736f20>, {'slugid.js': defaultdict(<class 'list'>, {0: [{'line': 30, 'column': 16, 'confidence': 'high'}, {'line': 47, 'column': 9, 'confidence': 'high'}]})})
+2025-09-03 23:25:27,655 | INFO | repair.slugid-1.1.0 | New context extracted from /uuid/results/gpt-4.1/slugid-1.1.0/slugid.js
+2025-09-03 23:25:27,655 | INFO | repair.slugid-1.1.0 | New context extracted from /uuid/results/gpt-4.1/slugid-1.1.0/slugid.js
+2025-09-03 23:25:42,374 | DEBUG | repair.slugid-1.1.0 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "const uuidParse = require('uuid-parse');\n\nexports.decode = function(slug) {\n  var base64 = slug\n                  .replace(/-/g, '+')\n                  .replace(/_/g, '/')\n                  + '==';\n  return uuidParse.unparse(new Buffer(base64, 'base64'));\n};",
+  "additional_req": "",
+  "dependencies": [
+    "uuid-parse@^1.1.0"
+  ]
+}
+2025-09-03 23:25:42,376 | INFO | repair.slugid-1.1.0 | Replaced code in /uuid/results/gpt-4.1/slugid-1.1.0/slugid.js at [1738, 1949]
+2025-09-03 23:25:51,170 | DEBUG | repair.slugid-1.1.0 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "exports.encode = function(uuid_) {\n  // Use 'uuid-parse' instead of removed uuid.parse()\n  const uuidParse = require('uuid-parse');\n  var bytes   = uuidParse.parse(uuid_);\n  var base64  = (new Buffer(bytes)).toString('base64');\n  var slug = base64\n              .replace(/\\+/g, '-')  // Replace + with - (see RFC 4648, sec. 5)\n              .replace(/\\//g, '_')  // Replace / with _ (see RFC 4648, sec. 5)\n              .substring(0, 22);    // Drop '==' padding\n  return slug;\n};",
+  "additional_req": "",
+  "dependencies": [
+    "uuid-parse@^1.0.0"
+  ]
+}
+2025-09-03 23:25:51,173 | INFO | repair.slugid-1.1.0 | Replaced code in /uuid/results/gpt-4.1/slugid-1.1.0/slugid.js at [1287, 1665]
+2025-09-03 23:25:51,175 | DEBUG | repair.slugid-1.1.0 | Updated package.json saved at /uuid/results/gpt-4.1/slugid-1.1.0/package.json
+2025-09-03 23:25:51,175 | INFO | repair.slugid-1.1.0 | END pattern 0 (pattern_0)
+2025-09-03 23:25:51,176 | INFO | repair.slugid-1.1.0 | ============================================================
+2025-09-03 23:25:51,176 | INFO | repair.slugid-1.1.0 | BEGIN pattern 0 (pattern_0)
+2025-09-03 23:25:51,176 | DEBUG | repair.slugid-1.1.0 | Pattern payload: {"type": "call", "pattern": "write {<uuid>,<uuid/**/*>}?**.{parse,unparse}", "changelogId": 0}
+2025-09-03 23:25:51,499 | INFO | repair.slugid-1.1.0 | Tapir run successful for /uuid/results/gpt-4.1/slugid-1.1.0
+2025-09-03 23:25:51,499 | DEBUG | repair.slugid-1.1.0 | Parsed detection output: []
+2025-09-03 23:25:51,499 | DEBUG | repair.slugid-1.1.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107736fc0>, {})
+2025-09-03 23:25:51,500 | DEBUG | repair.slugid-1.1.0 | Updated package.json saved at /uuid/results/gpt-4.1/slugid-1.1.0/package.json
+2025-09-03 23:25:51,500 | INFO | repair.slugid-1.1.0 | END pattern 0 (pattern_0)
+2025-09-03 23:25:51,500 | DEBUG | repair.slugid-1.1.0 | Updated package.json saved at /uuid/results/gpt-4.1/slugid-1.1.0/package.json
+2025-09-03 23:25:51,500 | INFO | repair.slugid-1.1.0 | token consumed 9805
+2025-09-03 23:25:51,500 | INFO | repair.slugid-1.1.0 | parse consumption time: 23.513071498833597

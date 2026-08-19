@@ -1,0 +1,23 @@
+{
+  "Id": 5,
+  "BC_description": "`during` and `doDuring` functions have been removed from the `async` module. Their functionality is now fully replaced by `whilst`, `doWhilst`, `until`, and `doUntil`, which have been enhanced to support asynchronous test functions. Code that uses `during` or `doDuring` will no longer work and must be updated to use the corresponding `whilst` or `doWhilst` equivalents. The replacement methods now accept async functions for their test conditions, enabling the same use cases as the removed functions while promoting a more consistent API.",
+  "Reference": [
+    "#850",
+    "#1557"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "during",
+      "doDuring"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "async"
+    ]
+  },
+  "Adaptation_method": "Before: async.during(whileTest, worker, callback);\nAfter: async.whilst(whileTest, worker, callback);\n\nBefore: async.doDuring(whileTest, worker, callback);\nAfter: async.doWhilst(whileTest, worker, callback);\n\nFor asynchronous test functions:\nAfter: await async.whilst(async () => condition(), async () => work());\nAfter: await async.doWhilst(async () => condition(), async () => work());",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}

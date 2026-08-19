@@ -1,0 +1,619 @@
+Extracting breaking changes for bluebird
+[{'role': 'system', 'content': 'You are a software engineer who recently discovered that a library used\n          in your project has released a new major version. \n          Your top priority is to identify breaking changes \n          in the new version before updating and assessing its impact on your project.\n              - you only care about the breaking changes in version v3.0.0'}, {'role': 'user', 'content': 'The first step is to identify relevant files that may reference breaking changes.\nBelow is a JSON list of file entries from the repository:\n[\n  "release_note.md",\n  "API.md",\n  "changelog.md",\n  "README.md",\n  "CONTRIBUTING.md",\n  "deprecated_apis.md",\n  "benchmark/README.md",\n  "tools/README.md",\n  "test/browser/index.html",\n  "docs/index.html",\n  "docs/README.md",\n  "docs/docs/working-with-callbacks.md",\n  "docs/docs/why-bluebird.md",\n  "docs/docs/new-in-bluebird-3.md",\n  "docs/docs/changelog.md",\n  "docs/docs/coming-from-other-languages.md",\n  "docs/docs/benchmarks.md",\n  "docs/docs/what-about-generators.md",\n  "docs/docs/why-performance.md",\n  "docs/docs/contribute.md",\n  "docs/docs/install.md",\n  "docs/docs/warning-explanations.md",\n  "docs/docs/error-explanations.md",\n  "docs/docs/getting-started.md",\n  "docs/docs/support.md",\n  "docs/docs/async-dialogs.md",\n  "docs/docs/why-promises.md",\n  "docs/docs/beginners-guide.md",\n  "docs/docs/deprecated_apis.md",\n  "docs/docs/anti-patterns.md",\n  "docs/docs/features.md",\n  "docs/docs/deprecated-apis.md",\n  "docs/docs/coming-from-other-libraries.md",\n  "docs/docs/api-reference.md",\n  "docs/docs/api/ispending.md",\n  "docs/docs/api/built-in-error-types.md",\n  "docs/docs/api/promise.noconflict.md",\n  "docs/docs/api/throw.md",\n  "docs/docs/api/delay.md",\n  "docs/docs/api/filter.md",\n  "docs/docs/api/promise.resolve.md",\n  "docs/docs/api/promise.all.md",\n  "docs/docs/api/spread.md",\n  "docs/docs/api/promise.onunhandledrejectionhandled.md",\n  "docs/docs/api/promise.onpossiblyunhandledrejection.md",\n  "docs/docs/api/then.md",\n  "docs/docs/api/promise.promisifyall.md",\n  "docs/docs/api/promise.config.md",\n  "docs/docs/api/generators.md",\n  "docs/docs/api/reason.md",\n  "docs/docs/api/map.md",\n  "docs/docs/api/environment-variables.md",\n  "docs/docs/api/bind.md",\n  "docs/docs/api/collections.md",\n  "docs/docs/api/tap.md",\n  "docs/docs/api/promise.props.md",\n  "docs/docs/api/promise.reduce.md",\n  "docs/docs/api/ascallback.md",\n  "docs/docs/api/get.md",\n  "docs/docs/api/return.md",\n  "docs/docs/api/new-promise.md",\n  "docs/docs/api/operationalerror.md",\n  "docs/docs/api/promise.bind.md",\n  "docs/docs/api/promise.delay.md",\n  "docs/docs/api/reflect.md",\n  "docs/docs/api/promise.coroutine.md",\n  "docs/docs/api/promise.try.md",\n  "docs/docs/api/catch.md",\n  "docs/docs/api/timeouterror.md",\n  "docs/docs/api/value.md",\n  "docs/docs/api/suppressunhandledrejections.md",\n  "docs/docs/api/props.md",\n  "docs/docs/api/done.md",\n  "docs/docs/api/promise.longstacktraces.md",\n  "docs/docs/api/promiseinspection.md",\n  "docs/docs/api/call.md",\n  "docs/docs/api/timers.md",\n  "docs/docs/api/deferred-migration.md",\n  "docs/docs/api/any.md",\n  "docs/docs/api/error.md",\n  "docs/docs/api/some.md",\n  "docs/docs/api/promise.using.md",\n  "docs/docs/api/progression-migration.md",\n  "docs/docs/api/isfulfilled.md",\n  "docs/docs/api/promise.fromcallback.md",\n  "docs/docs/api/promise.setscheduler.md",\n  "docs/docs/api/error-management-configuration.md",\n  "docs/docs/api/reduce.md",\n  "docs/docs/api/cancel.md",\n  "docs/docs/api/disposer.md",\n  "docs/docs/api/promise.race.md",\n  "docs/docs/api/promise.promisify.md",\n  "docs/docs/api/each.md",\n  "docs/docs/api/promise.join.md",\n  "docs/docs/api/isrejected.md",\n  "docs/docs/api/iscancelled.md",\n  "docs/docs/api/promise.any.md",\n  "docs/docs/api/promise.method.md",\n  "docs/docs/api/finally.md",\n  "docs/docs/api/promise.filter.md",\n  "docs/docs/api/core.md",\n  "docs/docs/api/resource-management.md",\n  "docs/docs/api/promisification.md",\n  "docs/docs/api/aggregateerror.md",\n  "docs/docs/api/timeout.md",\n  "docs/docs/api/promise.each.md",\n  "docs/docs/api/promise.reject.md",\n  "docs/docs/api/all.md",\n  "docs/docs/api/catchthrow.md",\n  "docs/docs/api/cancellation.md",\n  "docs/docs/api/catchreturn.md",\n  "docs/docs/api/promise.map.md",\n  "docs/docs/api/synchronous-inspection.md",\n  "docs/docs/api/race.md",\n  "docs/docs/api/promise.coroutine.addyieldhandler.md",\n  "docs/docs/api/cancellationerror.md",\n  "docs/docs/api/promise.some.md",\n  "docs/docs/api/utility.md",\n  "docs/_layouts/page.html",\n  "docs/_layouts/default.html",\n  "docs/_layouts/api.html"\n]\n### Task:\nReturn a **Python list** of file paths that are likely to contain any of the following:\n1. **API Change information** (e.g., `changelog.md`, `history.md`, "deprecation.md", "readme.md`))  \n2. **Release notes** (e.g., `releasenotes.md`, `release-notes.txt`)  \n3. **Version migration or upgrade guidance** (e.g., `migration-guide.md`, `upgrading.md`, `changes-in-version-3.md`)  \n4. **External links or references** related to (1)–(3) (e.g., `migrate-to-v2.html`)\n\n### Output:\nReturn only a raw Python list of matching file paths (e.g., `["docs/changelog.md", "RELEASE_NOTES.md"]`). Rank them by relevance.\n**Do not** include any explanations, formatting, or wrapper structures.\n**Only select files related to the target version.\n'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Candidate documentation files:
+['docs/docs/changelog.md', 'changelog.md', 'docs/docs/new-in-bluebird-3.md', 'release_note.md', 'API.md', 'README.md', 'docs/docs/api/deferred-migration.md']
+Tokens till now: 1685
+[{'role': 'system', 'content': "You're a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v3.0.0\n"}, {'role': 'user', 'content': "\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: []\n.\nNow you are provided with the file content of:\n\nchangelog.md\n[http://bluebirdjs.com/docs/changelog.html](http://bluebirdjs.com/docs/changelog.html)"}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': "You're a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v3.0.0\n"}, {'role': 'user', 'content': '\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as\').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: {"breaking_changes": [{"Id": 0, "BC_description": "The use of synchronous inspection methods `.isResolved()`, `.isFulfilled()`, `.isRejected()`, and `.isPending()` on Promise objects is no longer supported in v3.0.0. Calling these methods will throw an exception. Client code that depends on these methods for checking Promise state will break.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["isResolved", "isFulfilled", "isRejected", "isPending"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove usage of promise.isResolved(), promise.isFulfilled(), promise.isRejected(), and promise.isPending(). Redesign code to use Promise chaining, .then/.catch, or async/await for detecting completion, fulfillment, or rejection states.\\n\\nBefore:\\npromise.isFulfilled();\\n\\nAfter:\\n// use .then or .catch\\npromise.then(() => { /* fulfilled */ }, () => { /* rejected */ });\\n// or async/await\\ntry { await promise; /* fulfilled */ } catch(e) { /* rejected */ }", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 1, "BC_description": "The Promise.defer API has been removed in v3.0.0. Client code using Promise.defer() will not work and will throw an error.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["defer"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Replace Promise.defer() with manual new Promise construction.\\n\\nBefore:\\nvar deferred = Promise.defer();\\ndeferred.resolve(value);\\n\\ndeferred.promise.then(...);\\n\\nAfter:\\nvar deferred = {};\\ndeferred.promise = new Promise(function(resolve, reject) {\\n  deferred.resolve = resolve;\\n  deferred.reject = reject;\\n});\\ndeferred.resolve(value);\\ndeferred.promise.then(...);", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 2, "BC_description": "The Promise.prototype.catch method no longer accepts non-function values. Previously passing a string (error type name) as the first argument is not supported. Only functions can be passed.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["catch"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Change usage of .catch(\'ErrorType\', handler) to .catch(handler). To filter by error type, use .catch(err => { if (err instanceof ErrorType) ... }).\\n\\nBefore:\\npromise.catch(\'TypeError\', handler);\\n\\nAfter:\\npromise.catch(err => {\\n  if (err instanceof TypeError) handler(err);\\n});", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 3, "BC_description": "Long stack traces are no longer enabled by default in v3.0.0. Client code expecting long stack traces for debugging must now explicitly enable them by calling Bluebird.config({ longStackTraces: true }).", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "config", "className": [], "methodName": [], "propertyName": [], "moduleName": ["bluebird/config"]}, "Adaptation_method": "Enable long stack traces explicitly:\\n\\nBefore:\\n// long stack traces were enabled by default (in development)\\n\\nAfter:\\nPromise.config({ longStackTraces: true });", "RequireInfoFlag": false, "RequireInfo": ""}]}\n.\nNow you are provided with the file content of:\n\ndocs/docs/new-in-bluebird-3.md\n---\nid: new-in-bluebird-3\ntitle: New in bluebird 3.0\n---\n\n##Cancellation overhaul\n\nCancellation has been redesigned for bluebird 3.0. Any code that relies on 2.x cancellation semantics won\'t work in 3.0 or later. See [Cancellation](.) for more information.\n\n##Promisification API changes\n\nBoth promisification \\([Promise.promisify](.) and [Promise.promisifyAll](.)\\) methods and [Promise.fromCallback](.) now by default ignore multiple arguments passed to the callback adapter and instead only the first argument is used to resolve the promise. The behavior in 2.x is to construct an array of the arguments and resolve the promise with it when more than one argument is passed to the callback adapter. The problems with this approach and reasons for the change are discussed in [#307](.).\n\n[Promise.promisify](.)\'s second argument is now an options object, so any code using the second argument needs to change:\n\n```js\n// 2.x\nPromise.promisify(fn, ctx);\n// 3.0\nPromise.promisify(fn, {context: ctx});\n```\n\nBoth promisification \\([Promise.promisify](.) and [Promise.promisifyAll](.)\\) methods and [Promise.fromCallback](.) all take a new boolean option `multiArgs` which defaults to `false`. Enabling this option will make the adapter callback *always* construct an array of the passed arguments regardless of amount of arguments. This can be used to reliably get access to all arguments rather than just the first one.\n\n##Collection method changes\n\nAll collection methods now support objects that implement [ES6\'s *iterable*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) protocol along with regular arrays.\n\n[Promise.props](.) and [.props](.) now support [ES6 `Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) objects along with normal objects. Actual `Map` objects are only considered for their entries in the map instead of both entries and properties.\n\n[Promise.each](.) and [.each](.) don\'t return the original array anymore. They return a new array that contains returned values from the iterator callback function in respective positions to the old array, same as [Promise.map](.). The aliases `Promise.mapSeries` and `.mapSeries` have been added for these methods, respectively.\n\n##Warnings\n\nWarnings have been added to report usages which are very likely to be programmer errors. See [Promise.config](.) for how to enable warnings. See [Warning Explanations](warning-explanations.html) for list of the warnings and their explanations.\n\n##Feature additions\n\n- [.catch\\(\\)](.) now supports an object predicate as a filter: `.catch({code: \'ENOENT\'}, e => ...)`.\n- Added [.suppressUnhandledRejections\\(\\)](.).\n- Added [.catchThrow\\(\\)](.).\n- Added [.catchReturn\\(\\)](.).\n\n\n##Deprecations\n\n- `Promise.settle` has been deprecated. Use [.reflect](.) instead.\n- `Promise.spawn` has been deprecated. Use [Promise.coroutine](.) instead.\n- [Promise.try](.)\'s `ctx` and `arg` arguments have been deprecated.\n- `.nodeify` is now better known as [.asCallback](.)\n- `.fromNode` is now better known as [.fromCallback](.)\n\n\n##Summary of breaking changes\n\n- Promisifier APIs.\n- Cancellation redesign.\n- Promise progression has been completely removed.\n- [.spread](.)\'s second argument has been removed.\n- [Promise.each](.) and [.each](.) don\'t return the original array anymore. They return a new array that contains returned values from the iterator callback function in respective positions to the old array, same as [Promise.map](.).\n- [.done](.) causes an irrecoverable fatal error in Node.js environments now. See [#471](.) for rationale.\n- Errors created with [Promise.reject](.) or `reject` callback of [new Promise](.) are no longer marked as [OperationalError](.)s.\n'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': "You're a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v3.0.0\n"}, {'role': 'user', 'content': '\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as\').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: {"breaking_changes": [{"Id": 0, "BC_description": "The use of synchronous inspection methods `.isResolved()`, `.isFulfilled()`, `.isRejected()`, and `.isPending()` on Promise objects is no longer supported in v3.0.0. Calling these methods will throw an exception. Client code that depends on these methods for checking Promise state will break.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["isResolved", "isFulfilled", "isRejected", "isPending"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove usage of promise.isResolved(), promise.isFulfilled(), promise.isRejected(), and promise.isPending(). Redesign code to use Promise chaining, .then/.catch, or async/await for detecting completion, fulfillment, or rejection states.\\n\\nBefore:\\npromise.isFulfilled();\\n\\nAfter:\\n// use .then or .catch\\npromise.then(() => { /* fulfilled */ }, () => { /* rejected */ });\\n// or async/await\\ntry { await promise; /* fulfilled */ } catch(e) { /* rejected */ }", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 1, "BC_description": "The Promise.defer API has been removed in v3.0.0. Client code using Promise.defer() will not work and will throw an error.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["defer"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Replace Promise.defer() with manual new Promise construction.\\n\\nBefore:\\nvar deferred = Promise.defer();\\ndeferred.resolve(value);\\n\\ndeferred.promise.then(...);\\n\\nAfter:\\nvar deferred = {};\\ndeferred.promise = new Promise(function(resolve, reject) {\\n  deferred.resolve = resolve;\\n  deferred.reject = reject;\\n});\\ndeferred.resolve(value);\\ndeferred.promise.then(...);", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 2, "BC_description": "The Promise.prototype.catch method no longer accepts non-function values. Previously passing a string (error type name) as the first argument is not supported. Only functions can be passed.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["catch"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Change usage of .catch(\'ErrorType\', handler) to .catch(handler). To filter by error type, use .catch(err => { if (err instanceof ErrorType) ... }).\\n\\nBefore:\\npromise.catch(\'TypeError\', handler);\\n\\nAfter:\\npromise.catch(err => {\\n  if (err instanceof TypeError) handler(err);\\n});", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 3, "BC_description": "Long stack traces are no longer enabled by default in v3.0.0. Client code expecting long stack traces for debugging must now explicitly enable them by calling Bluebird.config({ longStackTraces: true }).", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "config", "className": [], "methodName": [], "propertyName": [], "moduleName": ["bluebird/config"]}, "Adaptation_method": "Enable long stack traces explicitly:\\n\\nBefore:\\n// long stack traces were enabled by default (in development)\\n\\nAfter:\\nPromise.config({ longStackTraces: true });", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 4, "BC_description": "Cancellation has been redesigned for bluebird 3.0. Any code that relies on 2.x cancellation semantics will not work in 3.0 or later.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["*"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Review and rewrite all code that relies on bluebird 2.x cancellation semantics to conform with the new cancellation model in bluebird 3.0. See official cancellation migration documentation for guidance.", "RequireInfoFlag": true, "RequireInfo": "Precise details of what cancellation semantics changed and which APIs or usage patterns are affected are not specified in this file. Official migration or adaptation instructions/examples for existing cancellation usage are required."}, {"Id": 5, "BC_description": "Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In 2.x, they resolved with an array of arguments if multiple values were provided. This is a behavior change that will break code expecting multiple results from promisified APIs.", "Reference": ["docs/docs/new-in-bluebird-3.md", "#307"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["promisify", "promisifyAll", "fromCallback"], "propertyName": [], "moduleName": []}, "Adaptation_method": "If you need the old behavior of receiving an array of all callback arguments (excluding the error argument), pass the option `{multiArgs: true}`:\\n\\nBefore (2.x):\\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\\n\\nAfter (3.0, to preserve old behavior):\\nPromise.promisify(fs.stat, {multiArgs: true})(file)\\n// or using fromCallback:\\nPromise.fromCallback(cb, {multiArgs: true})\\n\\nBy default, only the first argument will be returned, not an array.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 6, "BC_description": "`Promise.promisify`\'s second argument is now expected to be an options object (e.g., `{context: ctx}`) instead of a context directly. Old usage where context is passed as the second positional argument will not work.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["promisify"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Change use of second positional argument to pass an options object:\\n\\nBefore (2.x):\\nPromise.promisify(fn, ctx);\\n\\nAfter (3.0):\\nPromise.promisify(fn, {context: ctx});", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 7, "BC_description": "`Promise.each` and `.each()` no longer return the original input array, but instead return a new array containing the results from the iterator callback, matching the behavior of Promise.map. Code that depends on the return value being the original array will break.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["each"], "propertyName": [], "moduleName": []}, "Adaptation_method": "If application logic depends on the original input array being returned, refactor such code to retain a reference to the input array before passing to .each(), or switch to consuming the new returned array of mapped values as per new behavior.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 8, "BC_description": "The second argument to `.spread` is removed. Any code relying on a two-argument form of `.spread` will break.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["spread"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove the second argument from calls to .spread(). Migrate logic previously in the second argument to run after the spread handler, or refactor into the main handler as appropriate.\\n\\nBefore (2.x):\\npromise.spread(handler, secondArg);\\n\\nAfter (3.0):\\npromise.spread(handler);\\n// move logic from secondArg after .spread or into handler.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 9, "BC_description": "Promise progression has been completely removed in bluebird 3.0.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["progress"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove use of .progress() methods or progress event handlers. Refactor progress-specific logic to operate via alternative event mechanisms.", "RequireInfoFlag": true, "RequireInfo": "Details of all affected APIs and recommended alternatives for progress reporting are not provided in the source. Official migration advice for old .progress usage is needed."}, {"Id": 10, "BC_description": "Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.", "Reference": ["docs/docs/new-in-bluebird-3.md", "#471"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["done"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\\n\\nBefore:\\npromise.done();\\n\\nAfter:\\npromise.then(...).catch(...);", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 11, "BC_description": "Errors created with `Promise.reject()` or the `reject` callback of `new Promise` are no longer marked as Bluebird\'s `OperationalError`. Client code relying on error type checks may break.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["reject"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Update code that checks for error instanceof OperationalError to also handle ordinary Error objects as appropriate.", "RequireInfoFlag": false, "RequireInfo": ""}]}\n.\nNow you are provided with the file content of:\n\nAPI.md\n[http://bluebirdjs.com/docs/api-reference.html](http://bluebirdjs.com/docs/api-reference.html)'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': "You're a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v3.0.0\n"}, {'role': 'user', 'content': '\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as\').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: {"breaking_changes": [{"Id": 0, "BC_description": "The use of synchronous inspection methods `.isResolved()`, `.isFulfilled()`, `.isRejected()`, and `.isPending()` on Promise objects is no longer supported in v3.0.0. Calling these methods will throw an exception. Client code that depends on these methods for checking Promise state will break.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["isResolved", "isFulfilled", "isRejected", "isPending"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove usage of promise.isResolved(), promise.isFulfilled(), promise.isRejected(), and promise.isPending(). Redesign code to use Promise chaining, .then/.catch, or async/await for detecting completion, fulfillment, or rejection states.\\n\\nBefore:\\npromise.isFulfilled();\\n\\nAfter:\\n// use .then or .catch\\npromise.then(() => { /* fulfilled */ }, () => { /* rejected */ });\\n// or async/await\\ntry { await promise; /* fulfilled */ } catch(e) { /* rejected */ }", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 1, "BC_description": "The Promise.defer API has been removed in v3.0.0. Client code using Promise.defer() will not work and will throw an error.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["defer"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Replace Promise.defer() with manual new Promise construction.\\n\\nBefore:\\nvar deferred = Promise.defer();\\ndeferred.resolve(value);\\n\\ndeferred.promise.then(...);\\n\\nAfter:\\nvar deferred = {};\\ndeferred.promise = new Promise(function(resolve, reject) {\\n  deferred.resolve = resolve;\\n  deferred.reject = reject;\\n});\\ndeferred.resolve(value);\\ndeferred.promise.then(...);", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 2, "BC_description": "The Promise.prototype.catch method no longer accepts non-function values. Previously passing a string (error type name) as the first argument is not supported. Only functions can be passed.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["catch"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Change usage of .catch(\'ErrorType\', handler) to .catch(handler). To filter by error type, use .catch(err => { if (err instanceof ErrorType) ... }).\\n\\nBefore:\\npromise.catch(\'TypeError\', handler);\\n\\nAfter:\\npromise.catch(err => {\\n  if (err instanceof TypeError) handler(err);\\n});", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 3, "BC_description": "Long stack traces are no longer enabled by default in v3.0.0. Client code expecting long stack traces for debugging must now explicitly enable them by calling Bluebird.config({ longStackTraces: true }).", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "config", "className": [], "methodName": [], "propertyName": [], "moduleName": ["bluebird/config"]}, "Adaptation_method": "Enable long stack traces explicitly:\\n\\nBefore:\\n// long stack traces were enabled by default (in development)\\n\\nAfter:\\nPromise.config({ longStackTraces: true });", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 4, "BC_description": "Cancellation has been redesigned for bluebird 3.0. Any code that relies on 2.x cancellation semantics will not work in 3.0 or later.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["*"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Review and rewrite all code that relies on bluebird 2.x cancellation semantics to conform with the new cancellation model in bluebird 3.0. See official cancellation migration documentation for guidance.", "RequireInfoFlag": true, "RequireInfo": "Precise details of what cancellation semantics changed and which APIs or usage patterns are affected are not specified in this file. Official migration or adaptation instructions/examples for existing cancellation usage are required."}, {"Id": 5, "BC_description": "Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In 2.x, they resolved with an array of arguments if multiple values were provided. This is a behavior change that will break code expecting multiple results from promisified APIs.", "Reference": ["docs/docs/new-in-bluebird-3.md", "#307"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["promisify", "promisifyAll", "fromCallback"], "propertyName": [], "moduleName": []}, "Adaptation_method": "If you need the old behavior of receiving an array of all callback arguments (excluding the error argument), pass the option `{multiArgs: true}`:\\n\\nBefore (2.x):\\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\\n\\nAfter (3.0, to preserve old behavior):\\nPromise.promisify(fs.stat, {multiArgs: true})(file)\\n// or using fromCallback:\\nPromise.fromCallback(cb, {multiArgs: true})\\n\\nBy default, only the first argument will be returned, not an array.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 6, "BC_description": "`Promise.promisify`\'s second argument is now expected to be an options object (e.g., `{context: ctx}`) instead of a context directly. Old usage where context is passed as the second positional argument will not work.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["promisify"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Change use of second positional argument to pass an options object:\\n\\nBefore (2.x):\\nPromise.promisify(fn, ctx);\\n\\nAfter (3.0):\\nPromise.promisify(fn, {context: ctx});", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 7, "BC_description": "`Promise.each` and `.each()` no longer return the original input array, but instead return a new array containing the results from the iterator callback, matching the behavior of Promise.map. Code that depends on the return value being the original array will break.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["each"], "propertyName": [], "moduleName": []}, "Adaptation_method": "If application logic depends on the original input array being returned, refactor such code to retain a reference to the input array before passing to .each(), or switch to consuming the new returned array of mapped values as per new behavior.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 8, "BC_description": "The second argument to `.spread` is removed. Any code relying on a two-argument form of `.spread` will break.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["spread"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove the second argument from calls to .spread(). Migrate logic previously in the second argument to run after the spread handler, or refactor into the main handler as appropriate.\\n\\nBefore (2.x):\\npromise.spread(handler, secondArg);\\n\\nAfter (3.0):\\npromise.spread(handler);\\n// move logic from secondArg after .spread or into handler.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 9, "BC_description": "Promise progression has been completely removed in bluebird 3.0.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["progress"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove use of .progress() methods or progress event handlers. Refactor progress-specific logic to operate via alternative event mechanisms.", "RequireInfoFlag": true, "RequireInfo": "Details of all affected APIs and recommended alternatives for progress reporting are not provided in the source. Official migration advice for old .progress usage is needed."}, {"Id": 10, "BC_description": "Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.", "Reference": ["docs/docs/new-in-bluebird-3.md", "#471"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["done"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\\n\\nBefore:\\npromise.done();\\n\\nAfter:\\npromise.then(...).catch(...);", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 11, "BC_description": "Errors created with `Promise.reject()` or the `reject` callback of `new Promise` are no longer marked as Bluebird\'s `OperationalError`. Client code relying on error type checks may break.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["reject"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Update code that checks for error instanceof OperationalError to also handle ordinary Error objects as appropriate.", "RequireInfoFlag": false, "RequireInfo": ""}]}\n.\nNow you are provided with the file content of:\n\nREADME.md\nBluebird is a fully featured promise library with focus on innovative features and performance\nSee the [bluebird website](http://bluebirdjs.com/docs/getting-started.html) for further documentation, references and instructions.\nFor bluebird 2.x documentation and files, see the [2.x tree](https://github.com/petkaantonov/bluebird/tree/2.x).\nCopyright (c) 2013-2015 Petka Antonov'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': "You're a software engineer working with JavaScript library. \nNow, you need to analyze several files in the new version of the library and extract all JavaScript breaking changes (ignore Typescript related one).\n**A breaking changes means the changes that make client projects not compatible with the new version of the library and causes error in its execution. ** \nYou should always reply in pure JSON format.  \n **Scope**\n    - you only care about the breaking changes in version v3.0.0\n"}, {'role': 'user', 'content': '\nExtract breaking changes (BCs) from the provided file content, merge them with the existing BC list, and consolidate any duplicates.\nStrictly follow these rules:\n0. Evidence-First & Non-Hallucination\n    - Prefer explicitly marked BCs (“BREAKING CHANGE”, “Major”, “Incompatible”, etc.).\n    - If none exist, infer BCs ONLY from the provided content. \n    - Every breaking change description, example and claim MUST be evidence-backed according to the given context.\n1. **Changed Objects:** The purpose of the description is to help downstream projects locate affected code. \n   - Explicitly specify *ALL* affected or involved methods, properties, classes, modules and parameters. Do not guess any entities if not specified.\n   - Set `RequireInfoFlag` to `true` and clearly request comprehensive detail about all changed entities in the `RequireInfo` field whenever the exact change objects are unclear (e.g., If the provided documentation uses generalized terms like `like, such as\').\n2. **Adaptation Method:**\n   - Provide explicit adaptation instructions. Make your best effort Include Before → After code: At least one minimal example. You should try to search for library-provided example rather than guess it.\n   - Ban vague phrasing like `use customized alternatives`. \n   - For removed/replaced APIs: Specify exactly how the old API could be replaced and meanwhile preserve original behavior. \n   - If the adaptation instructions are unclear or incomplete, set `RequireInfoFlag` to `true` and clearly specify what additional details or examples are required in the `RequireInfo` field.\n3. **Terminology and Definitions:**\n   - Ensure all technical terms and context-specific terminology are explicitly defined.\n   - If terminology or parameters are unclear or undefined, set `RequireInfoFlag` to `true` and explicitly request definitions or clarifications in the `RequireInfo` field.\n**Important:**\n- Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the given context. Always prefer to request clarification if documentation is vague.\n- Always set `RequireInfoFlag` to `true` if **any** of the following are present:\n   - Incomplete enumerations are (e.g., “like”, “such as”, “etc.”), and you can not write a regex.\n   - Generalized adaptation instructions\n- Always include full references (URLs, issue numbers, commit SHAs) to the source of the breaking change.\n- Respond strictly with **valid JSON**, without any narrative or explanation.\nExisting breaking change list: {"breaking_changes": [{"Id": 0, "BC_description": "The use of synchronous inspection methods `.isResolved()`, `.isFulfilled()`, `.isRejected()`, and `.isPending()` on Promise objects is no longer supported in v3.0.0. Calling these methods will throw an exception. Client code that depends on these methods for checking Promise state will break.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["isResolved", "isFulfilled", "isRejected", "isPending"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove usage of promise.isResolved(), promise.isFulfilled(), promise.isRejected(), and promise.isPending(). Redesign code to use Promise chaining, .then/.catch, or async/await for detecting completion, fulfillment, or rejection states.\\n\\nBefore:\\npromise.isFulfilled();\\n\\nAfter:\\n// use .then or .catch\\npromise.then(() => { /* fulfilled */ }, () => { /* rejected */ });\\n// or async/await\\ntry { await promise; /* fulfilled */ } catch(e) { /* rejected */ }", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 1, "BC_description": "The Promise.defer API has been removed in v3.0.0. Client code using Promise.defer() will not work and will throw an error.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["defer"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Replace Promise.defer() with manual new Promise construction.\\n\\nBefore:\\nvar deferred = Promise.defer();\\ndeferred.resolve(value);\\n\\ndeferred.promise.then(...);\\n\\nAfter:\\nvar deferred = {};\\ndeferred.promise = new Promise(function(resolve, reject) {\\n  deferred.resolve = resolve;\\n  deferred.reject = reject;\\n});\\ndeferred.resolve(value);\\ndeferred.promise.then(...);", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 2, "BC_description": "The Promise.prototype.catch method no longer accepts non-function values. Previously passing a string (error type name) as the first argument is not supported. Only functions can be passed.", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["catch"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Change usage of .catch(\'ErrorType\', handler) to .catch(handler). To filter by error type, use .catch(err => { if (err instanceof ErrorType) ... }).\\n\\nBefore:\\npromise.catch(\'TypeError\', handler);\\n\\nAfter:\\npromise.catch(err => {\\n  if (err instanceof TypeError) handler(err);\\n});", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 3, "BC_description": "Long stack traces are no longer enabled by default in v3.0.0. Client code expecting long stack traces for debugging must now explicitly enable them by calling Bluebird.config({ longStackTraces: true }).", "Reference": ["http://bluebirdjs.com/docs/changelog.html"], "Changed_object": {"type": "config", "className": [], "methodName": [], "propertyName": [], "moduleName": ["bluebird/config"]}, "Adaptation_method": "Enable long stack traces explicitly:\\n\\nBefore:\\n// long stack traces were enabled by default (in development)\\n\\nAfter:\\nPromise.config({ longStackTraces: true });", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 4, "BC_description": "Cancellation has been redesigned for bluebird 3.0. Any code that relies on 2.x cancellation semantics will not work in 3.0 or later.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["*"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Review and rewrite all code that relies on bluebird 2.x cancellation semantics to conform with the new cancellation model in bluebird 3.0. See official cancellation migration documentation for guidance.", "RequireInfoFlag": true, "RequireInfo": "Precise details of what cancellation semantics changed and which APIs or usage patterns are affected are not specified in this file. Official migration or adaptation instructions/examples for existing cancellation usage are required."}, {"Id": 5, "BC_description": "Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In 2.x, they resolved with an array of arguments if multiple values were provided. This is a behavior change that will break code expecting multiple results from promisified APIs.", "Reference": ["docs/docs/new-in-bluebird-3.md", "#307"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["promisify", "promisifyAll", "fromCallback"], "propertyName": [], "moduleName": []}, "Adaptation_method": "If you need the old behavior of receiving an array of all callback arguments (excluding the error argument), pass the option `{multiArgs: true}`:\\n\\nBefore (2.x):\\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\\n\\nAfter (3.0, to preserve old behavior):\\nPromise.promisify(fs.stat, {multiArgs: true})(file)\\n// or using fromCallback:\\nPromise.fromCallback(cb, {multiArgs: true})\\n\\nBy default, only the first argument will be returned, not an array.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 6, "BC_description": "`Promise.promisify`\'s second argument is now expected to be an options object (e.g., `{context: ctx}`) instead of a context directly. Old usage where context is passed as the second positional argument will not work.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["promisify"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Change use of second positional argument to pass an options object:\\n\\nBefore (2.x):\\nPromise.promisify(fn, ctx);\\n\\nAfter (3.0):\\nPromise.promisify(fn, {context: ctx});", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 7, "BC_description": "`Promise.each` and `.each()` no longer return the original input array, but instead return a new array containing the results from the iterator callback, matching the behavior of Promise.map. Code that depends on the return value being the original array will break.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["each"], "propertyName": [], "moduleName": []}, "Adaptation_method": "If application logic depends on the original input array being returned, refactor such code to retain a reference to the input array before passing to .each(), or switch to consuming the new returned array of mapped values as per new behavior.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 8, "BC_description": "The second argument to `.spread` is removed. Any code relying on a two-argument form of `.spread` will break.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["spread"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove the second argument from calls to .spread(). Migrate logic previously in the second argument to run after the spread handler, or refactor into the main handler as appropriate.\\n\\nBefore (2.x):\\npromise.spread(handler, secondArg);\\n\\nAfter (3.0):\\npromise.spread(handler);\\n// move logic from secondArg after .spread or into handler.", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 9, "BC_description": "Promise progression has been completely removed in bluebird 3.0.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["progress"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove use of .progress() methods or progress event handlers. Refactor progress-specific logic to operate via alternative event mechanisms.", "RequireInfoFlag": true, "RequireInfo": "Details of all affected APIs and recommended alternatives for progress reporting are not provided in the source. Official migration advice for old .progress usage is needed."}, {"Id": 10, "BC_description": "Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.", "Reference": ["docs/docs/new-in-bluebird-3.md", "#471"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["done"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\\n\\nBefore:\\npromise.done();\\n\\nAfter:\\npromise.then(...).catch(...);", "RequireInfoFlag": false, "RequireInfo": ""}, {"Id": 11, "BC_description": "Errors created with `Promise.reject()` or the `reject` callback of `new Promise` are no longer marked as Bluebird\'s `OperationalError`. Client code relying on error type checks may break.", "Reference": ["docs/docs/new-in-bluebird-3.md"], "Changed_object": {"type": "call", "className": ["Promise"], "methodName": ["reject"], "propertyName": [], "moduleName": []}, "Adaptation_method": "Update code that checks for error instanceof OperationalError to also handle ordinary Error objects as appropriate.", "RequireInfoFlag": false, "RequireInfo": ""}]}\n.\nNow you are provided with the file content of:\n\ndocs/docs/api/deferred-migration.md\n---\nlayout: api\nid: deferred-migration\ntitle: Deferred migration\n---\n\n\n[← Back To API Reference](/docs/api-reference.html)\n<div class="api-code-section"><markdown>\n##Deferred migration\n\nDeferreds are deprecated in favor of the promise constructor. If you need deferreds for some reason, you can create them trivially using the constructor:\n\n```js\nfunction defer() {\n    var resolve, reject;\n    var promise = new Promise(function() {\n        resolve = arguments[0];\n        reject = arguments[1];\n    });\n    return {\n        resolve: resolve,\n        reject: reject,\n        promise: promise\n    };\n}\n```\n\nFor old code that still uses deferred objects, see [the deprecated API docs ](/bluebird/web/docs/deprecated_apis.html#promise-resolution).\n</markdown></div>\n\n<div id="disqus_thread"></div>\n<script type="text/javascript">\n    var disqus_title = "Deferred migration";\n    var disqus_shortname = "bluebirdjs";\n    var disqus_identifier = "disqus-id-deferred-migration";\n    \n    (function() {\n        var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;\n        dsq.src = "//" + disqus_shortname + ".disqus.com/embed.js";\n        (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);\n    })();\n</script>\n<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>'}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Extracted BC candidate list:
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "The use of synchronous inspection methods `.isResolved()`, `.isFulfilled()`, `.isRejected()`, and `.isPending()` on Promise objects is no longer supported in v3.0.0. Calling these methods will throw an exception. Client code that depends on these methods for checking Promise state will break.",
+      "Reference": [
+        "http://bluebirdjs.com/docs/changelog.html"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "isResolved",
+          "isFulfilled",
+          "isRejected",
+          "isPending"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Remove usage of promise.isResolved(), promise.isFulfilled(), promise.isRejected(), and promise.isPending(). Redesign code to use Promise chaining, .then/.catch, or async/await for detecting completion, fulfillment, or rejection states.\n\nBefore:\npromise.isFulfilled();\n\nAfter:\n// use .then or .catch\npromise.then(() => { /* fulfilled */ }, () => { /* rejected */ });\n// or async/await\ntry { await promise; /* fulfilled */ } catch(e) { /* rejected */ }",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "The Promise.defer API has been removed in v3.0.0. Client code using Promise.defer() will not work and will throw an error.",
+      "Reference": [
+        "http://bluebirdjs.com/docs/changelog.html",
+        "docs/docs/api/deferred-migration.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "defer"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Replace Promise.defer() with manual new Promise construction.\n\nBefore:\nvar deferred = Promise.defer();\ndeferred.resolve(value);\n\ndeferred.promise.then(...);\n\nAfter:\nvar deferred = {};\ndeferred.promise = new Promise(function(resolve, reject) {\n  deferred.resolve = resolve;\n  deferred.reject = reject;\n});\ndeferred.resolve(value);\ndeferred.promise.then(...);",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "The Promise.prototype.catch method no longer accepts non-function values. Previously passing a string (error type name) as the first argument is not supported. Only functions can be passed.",
+      "Reference": [
+        "http://bluebirdjs.com/docs/changelog.html"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "catch"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Change usage of .catch('ErrorType', handler) to .catch(handler). To filter by error type, use .catch(err => { if (err instanceof ErrorType) ... }).\n\nBefore:\npromise.catch('TypeError', handler);\n\nAfter:\npromise.catch(err => {\n  if (err instanceof TypeError) handler(err);\n});",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "Long stack traces are no longer enabled by default in v3.0.0. Client code expecting long stack traces for debugging must now explicitly enable them by calling Bluebird.config({ longStackTraces: true }).",
+      "Reference": [
+        "http://bluebirdjs.com/docs/changelog.html"
+      ],
+      "Changed_object": {
+        "type": "config",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "bluebird/config"
+        ]
+      },
+      "Adaptation_method": "Enable long stack traces explicitly:\n\nBefore:\n// long stack traces were enabled by default (in development)\n\nAfter:\nPromise.config({ longStackTraces: true });",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "Cancellation has been redesigned for bluebird 3.0. Any code that relies on 2.x cancellation semantics will not work in 3.0 or later.",
+      "Reference": [
+        "docs/docs/new-in-bluebird-3.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Review and rewrite all code that relies on bluebird 2.x cancellation semantics to conform with the new cancellation model in bluebird 3.0. See official cancellation migration documentation for guidance.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "Precise details of what cancellation semantics changed and which APIs or usage patterns are affected are not specified in this file. Official migration or adaptation instructions/examples for existing cancellation usage are required."
+    },
+    {
+      "Id": 5,
+      "BC_description": "Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In 2.x, they resolved with an array of arguments if multiple values were provided. This is a behavior change that will break code expecting multiple results from promisified APIs.",
+      "Reference": [
+        "docs/docs/new-in-bluebird-3.md",
+        "#307"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "promisify",
+          "promisifyAll",
+          "fromCallback"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "If you need the old behavior of receiving an array of all callback arguments (excluding the error argument), pass the option `{multiArgs: true}`:\n\nBefore (2.x):\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\n\nAfter (3.0, to preserve old behavior):\nPromise.promisify(fs.stat, {multiArgs: true})(file)\n// or using fromCallback:\nPromise.fromCallback(cb, {multiArgs: true})\n\nBy default, only the first argument will be returned, not an array.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 6,
+      "BC_description": "`Promise.promisify`'s second argument is now expected to be an options object (e.g., `{context: ctx}`) instead of a context directly. Old usage where context is passed as the second positional argument will not work.",
+      "Reference": [
+        "docs/docs/new-in-bluebird-3.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "promisify"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Change use of second positional argument to pass an options object:\n\nBefore (2.x):\nPromise.promisify(fn, ctx);\n\nAfter (3.0):\nPromise.promisify(fn, {context: ctx});",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 7,
+      "BC_description": "`Promise.each` and `.each()` no longer return the original input array, but instead return a new array containing the results from the iterator callback, matching the behavior of Promise.map. Code that depends on the return value being the original array will break.",
+      "Reference": [
+        "docs/docs/new-in-bluebird-3.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "each"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "If application logic depends on the original input array being returned, refactor such code to retain a reference to the input array before passing to .each(), or switch to consuming the new returned array of mapped values as per new behavior.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 8,
+      "BC_description": "The second argument to `.spread` is removed. Any code relying on a two-argument form of `.spread` will break.",
+      "Reference": [
+        "docs/docs/new-in-bluebird-3.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "spread"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Remove the second argument from calls to .spread(). Migrate logic previously in the second argument to run after the spread handler, or refactor into the main handler as appropriate.\n\nBefore (2.x):\npromise.spread(handler, secondArg);\n\nAfter (3.0):\npromise.spread(handler);\n// move logic from secondArg after .spread or into handler.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 9,
+      "BC_description": "Promise progression has been completely removed in bluebird 3.0.",
+      "Reference": [
+        "docs/docs/new-in-bluebird-3.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "progress"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Remove use of .progress() methods or progress event handlers. Refactor progress-specific logic to operate via alternative event mechanisms.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "Details of all affected APIs and recommended alternatives for progress reporting are not provided in the source. Official migration advice for old .progress usage is needed."
+    },
+    {
+      "Id": 10,
+      "BC_description": "Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.",
+      "Reference": [
+        "docs/docs/new-in-bluebird-3.md",
+        "#471"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "done"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\n\nBefore:\npromise.done();\n\nAfter:\npromise.then(...).catch(...);",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 11,
+      "BC_description": "Errors created with `Promise.reject()` or the `reject` callback of `new Promise` are no longer marked as Bluebird's `OperationalError`. Client code relying on error type checks may break.",
+      "Reference": [
+        "docs/docs/new-in-bluebird-3.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Promise"
+        ],
+        "methodName": [
+          "reject"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Update code that checks for error instanceof OperationalError to also handle ordinary Error objects as appropriate.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}
+parse consumption token: 53750
+parse consumption time: 70.98616175167263
+Validating BC list for bluebird
+This BC lacks clarity {
+  "Id": 4,
+  "BC_description": "Cancellation has been redesigned for bluebird 3.0. Any code that relies on 2.x cancellation semantics will not work in 3.0 or later.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "*"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Review and rewrite all code that relies on bluebird 2.x cancellation semantics to conform with the new cancellation model in bluebird 3.0. See official cancellation migration documentation for guidance.",
+  "RequireInfoFlag": true,
+  "RequireInfo": "Precise details of what cancellation semantics changed and which APIs or usage patterns are affected are not specified in this file. Official migration or adaptation instructions/examples for existing cancellation usage are required."
+}.
+[{'role': 'system', 'content': "\nTask:\nYou're a software engineer working with a JavaScript library bluebird. \nYou need to strictly adhere to the information provided and not use any outside knowledge of public packages.\nThe BC_description describes a breaking change in the new major version of the library.\nEvaluate whether the provided JSON fully aligns with the BC_description field. \nEvaluation Criteria:\n    • Clarity – ensure every entity mentioned is explicit.  \n    • Scopes: \n        – Focus on existing BC_description field, only analyze API you think is related to it, do not introduce irrelevant new API in the given text since the context may include noise. \n        - Changed_object should lists **all** affected APIs according to the BC_description.\n    • Migration – Provide explicit adaptation instructions. Prioritize direct code examples and avoid instructions like `use customized alternatives` unless there is no available alternatives.\n    • Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the new context. \n    \nOnce a discrepancy occurs, you may invoke one or more of the available tools shown below. Determine the tool according to the breaking change types. \nPrioritize using detailed reference from repo issues/pull_request if current information is insufficient.\n    -Hard rule: If the description or references mention an issue/PR (e.g., #2251, /pull/2299) of current library, you must invoke searchForIssue with all referenced IDs. While if the issue/PR is from other library, invoke searchForWebsite.\n    -If the description or references mention a commit, you must invoke searchForCommit.\n    -if the description provides no migration step nor reference, try use `issueByKeywords`,\n    -if the API entry points is implicit, use `fetchDirectoryStruc`.\nResponse Format  \n- If no pitfall is found, return an empty JSON object.  \n"}, {'role': 'user', 'content': "{'Id': 4, 'BC_description': 'Cancellation has been redesigned for bluebird 3.0. Any code that relies on 2.x cancellation semantics will not work in 3.0 or later.', 'Reference': ['docs/docs/new-in-bluebird-3.md'], 'Changed_object': {'type': 'call', 'className': ['Promise'], 'methodName': ['*'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': 'Review and rewrite all code that relies on bluebird 2.x cancellation semantics to conform with the new cancellation model in bluebird 3.0. See official cancellation migration documentation for guidance.', 'RequireInfoFlag': True, 'RequireInfo': 'Precise details of what cancellation semantics changed and which APIs or usage patterns are affected are not specified in this file. Official migration or adaptation instructions/examples for existing cancellation usage are required.'}"}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 4,
+  "BC_description": "Cancellation has been redesigned for bluebird 3.0. Any code that relies on 2.x cancellation semantics will not work in 3.0 or later.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "*"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Review and rewrite all code that relies on bluebird 2.x cancellation semantics to conform with the new cancellation model in bluebird 3.0. See official cancellation migration documentation for guidance.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+We still do validate once for raw bc {
+  "Id": 5,
+  "BC_description": "Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In 2.x, they resolved with an array of arguments if multiple values were provided. This is a behavior change that will break code expecting multiple results from promisified APIs.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#307"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "promisify",
+      "promisifyAll",
+      "fromCallback"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "If you need the old behavior of receiving an array of all callback arguments (excluding the error argument), pass the option `{multiArgs: true}`:\n\nBefore (2.x):\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\n\nAfter (3.0, to preserve old behavior):\nPromise.promisify(fs.stat, {multiArgs: true})(file)\n// or using fromCallback:\nPromise.fromCallback(cb, {multiArgs: true})\n\nBy default, only the first argument will be returned, not an array.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}.
+Validating by searchForIssue
+
+New description: {
+  "Id": 5,
+  "BC_description": "Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In 2.x, they resolved with an array of arguments if multiple values were provided. This is a behavior change that will break code expecting multiple results from promisified APIs.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#307"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "promisify",
+      "promisifyAll",
+      "fromCallback"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "If you need the old behavior of receiving an array of all callback arguments (excluding the error argument), pass the option `{multiArgs: true}`:\n\nBefore (2.x):\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\n\nAfter (3.0, to preserve old behavior):\nPromise.promisify(fs.stat, {multiArgs: true})(file)\n// or using fromCallback:\nPromise.fromCallback(cb, {multiArgs: true})\n\nBy default, only the first argument will be returned, not an array.",
+  "RequireInfoFlag": true,
+  "RequireInfo": ""
+}
+[{'role': 'system', 'content': "\nYou are a software engineer who has discovered that a critical library in your project has released a new major version.\nYour current task is to complement the Changed_object field in a JSON.\n    Carefully read the 'BC_description' and 'Adaptation_method' field. \n    Accordingly, Make the Changed_object description more sufficient and aligned with the information from the other fields. \n    Ensure all changed APIs in 'BC_description' are covered.\nReturn the refined JSON as the output. \n    "}, {'role': 'user', 'content': "{'Id': 5, 'BC_description': 'Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In 2.x, they resolved with an array of arguments if multiple values were provided. This is a behavior change that will break code expecting multiple results from promisified APIs.', 'Reference': ['docs/docs/new-in-bluebird-3.md', '#307'], 'Changed_object': {'type': 'call', 'className': ['Promise'], 'methodName': ['promisify', 'promisifyAll', 'fromCallback'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': 'If you need the old behavior of receiving an array of all callback arguments (excluding the error argument), pass the option `{multiArgs: true}`:\\n\\nBefore (2.x):\\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\\n\\nAfter (3.0, to preserve old behavior):\\nPromise.promisify(fs.stat, {multiArgs: true})(file)\\n// or using fromCallback:\\nPromise.fromCallback(cb, {multiArgs: true})\\n\\nBy default, only the first argument will be returned, not an array.', 'RequireInfoFlag': True, 'RequireInfo': ''}"}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 5,
+  "BC_description": "Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In Bluebird 2.x, if the callback received multiple values, the resolved result was an array of those values. In 3.x, only the first value is used by default. Code that expects an array as the resolved value will break unless the `{multiArgs: true}` option is provided.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#307"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "promisify",
+      "promisifyAll",
+      "fromCallback"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "If you need the previous behavior (an array of callback arguments excluding the error), pass {multiArgs: true} as an option:\n\nBefore (2.x):\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\n\nAfter (3.x):\nPromise.promisify(fs.stat, {multiArgs: true})(file)\n// or using fromCallback:\nPromise.fromCallback(cb, {multiArgs: true})\n\nBy default, only the first argument will be returned, so update usages accordingly to avoid bugs.",
+  "RequireInfoFlag": true,
+  "RequireInfo": "The BC_description refers to both Promise.promisify, Promise.promisifyAll, and Promise.fromCallback. However, Promise.promisifyAll returns multiple methods and could involve multiple class or instance contexts, potentially affecting usages outside of just Promise. Clarification is needed regarding which objects' methods when promisified via promisifyAll are affected and if the internal context ('this') in promisified methods is impacted. Also, need explicit confirmation that {multiArgs: true} restores behavior identically for all three methods and whether signature/option handling differs in edge cases."
+}
+This BC lacks clarity {
+  "Id": 5,
+  "BC_description": "Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In 2.x, they resolved with an array of arguments if multiple values were provided. This is a behavior change that will break code expecting multiple results from promisified APIs.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#307"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "promisify",
+      "promisifyAll",
+      "fromCallback"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "If you need the old behavior of receiving an array of all callback arguments (excluding the error argument), pass the option `{multiArgs: true}`:\n\nBefore (2.x):\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\n\nAfter (3.0, to preserve old behavior):\nPromise.promisify(fs.stat, {multiArgs: true})(file)\n// or using fromCallback:\nPromise.fromCallback(cb, {multiArgs: true})\n\nBy default, only the first argument will be returned, not an array.",
+  "RequireInfoFlag": true,
+  "RequireInfo": ""
+}.
+New description: {
+  "Id": 5,
+  "BC_description": "Both `Promise.promisify`, `Promise.promisifyAll`, and `Promise.fromCallback` now by default only use the first argument passed to the callback adapter to resolve the promise. In Bluebird 2.x, if the callback received multiple values, the resolved result was an array of those values. In 3.x, only the first value is used by default. Code that expects an array as the resolved value will break unless the `{multiArgs: true}` option is provided.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#307"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "promisify",
+      "promisifyAll",
+      "fromCallback"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "If you need the previous behavior (an array of callback arguments excluding the error), pass {multiArgs: true} as an option:\n\nBefore (2.x):\nPromise.promisify(fs.stat)(file) // resolves with [stats, somethingElse]\n\nAfter (3.x):\nPromise.promisify(fs.stat, {multiArgs: true})(file)\n// or using fromCallback:\nPromise.fromCallback(cb, {multiArgs: true})\n\nBy default, only the first argument will be returned, so update usages accordingly to avoid bugs.",
+  "RequireInfoFlag": true,
+  "RequireInfo": "The BC_description refers to both Promise.promisify, Promise.promisifyAll, and Promise.fromCallback. However, Promise.promisifyAll returns multiple methods and could involve multiple class or instance contexts, potentially affecting usages outside of just Promise. Clarification is needed regarding which objects' methods when promisified via promisifyAll are affected and if the internal context ('this') in promisified methods is impacted. Also, need explicit confirmation that {multiArgs: true} restores behavior identically for all three methods and whether signature/option handling differs in edge cases."
+}
+This BC lacks clarity {
+  "Id": 9,
+  "BC_description": "Promise progression has been completely removed in bluebird 3.0.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "progress"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Remove use of .progress() methods or progress event handlers. Refactor progress-specific logic to operate via alternative event mechanisms.",
+  "RequireInfoFlag": true,
+  "RequireInfo": "Details of all affected APIs and recommended alternatives for progress reporting are not provided in the source. Official migration advice for old .progress usage is needed."
+}.
+[{'role': 'system', 'content': "\nTask:\nYou're a software engineer working with a JavaScript library bluebird. \nYou need to strictly adhere to the information provided and not use any outside knowledge of public packages.\nThe BC_description describes a breaking change in the new major version of the library.\nEvaluate whether the provided JSON fully aligns with the BC_description field. \nEvaluation Criteria:\n    • Clarity – ensure every entity mentioned is explicit.  \n    • Scopes: \n        – Focus on existing BC_description field, only analyze API you think is related to it, do not introduce irrelevant new API in the given text since the context may include noise. \n        - Changed_object should lists **all** affected APIs according to the BC_description.\n    • Migration – Provide explicit adaptation instructions. Prioritize direct code examples and avoid instructions like `use customized alternatives` unless there is no available alternatives.\n    • Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the new context. \n    \nOnce a discrepancy occurs, you may invoke one or more of the available tools shown below. Determine the tool according to the breaking change types. \nPrioritize using detailed reference from repo issues/pull_request if current information is insufficient.\n    -Hard rule: If the description or references mention an issue/PR (e.g., #2251, /pull/2299) of current library, you must invoke searchForIssue with all referenced IDs. While if the issue/PR is from other library, invoke searchForWebsite.\n    -If the description or references mention a commit, you must invoke searchForCommit.\n    -if the description provides no migration step nor reference, try use `issueByKeywords`,\n    -if the API entry points is implicit, use `fetchDirectoryStruc`.\nResponse Format  \n- If no pitfall is found, return an empty JSON object.  \n"}, {'role': 'user', 'content': "{'Id': 9, 'BC_description': 'Promise progression has been completely removed in bluebird 3.0.', 'Reference': ['docs/docs/new-in-bluebird-3.md'], 'Changed_object': {'type': 'call', 'className': ['Promise'], 'methodName': ['progress'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': 'Remove use of .progress() methods or progress event handlers. Refactor progress-specific logic to operate via alternative event mechanisms.', 'RequireInfoFlag': True, 'RequireInfo': 'Details of all affected APIs and recommended alternatives for progress reporting are not provided in the source. Official migration advice for old .progress usage is needed.'}"}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 9,
+  "BC_description": "Promise progression has been completely removed in bluebird 3.0.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "progress"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Remove use of .progress() methods or progress event handlers. Refactor progress-specific logic to operate via alternative event mechanisms.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+We still do validate once for raw bc {
+  "Id": 10,
+  "BC_description": "Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#471"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "done"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\n\nBefore:\npromise.done();\n\nAfter:\npromise.then(...).catch(...);",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}.
+Validating by searchForIssue
+
+New description: {
+  "Id": 10,
+  "BC_description": "Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#471"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "done"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\n\nBefore:\npromise.done();\n\nAfter:\npromise.then(...).catch(...);",
+  "RequireInfoFlag": true,
+  "RequireInfo": ""
+}
+[{'role': 'system', 'content': "\nYou are a software engineer who has discovered that a critical library in your project has released a new major version.\nYour current task is to complement the Changed_object field in a JSON.\n    Carefully read the 'BC_description' and 'Adaptation_method' field. \n    Accordingly, Make the Changed_object description more sufficient and aligned with the information from the other fields. \n    Ensure all changed APIs in 'BC_description' are covered.\nReturn the refined JSON as the output. \n    "}, {'role': 'user', 'content': "{'Id': 10, 'BC_description': 'Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.', 'Reference': ['docs/docs/new-in-bluebird-3.md', '#471'], 'Changed_object': {'type': 'call', 'className': ['Promise'], 'methodName': ['done'], 'propertyName': [], 'moduleName': []}, 'Adaptation_method': 'Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\\n\\nBefore:\\npromise.done();\\n\\nAfter:\\npromise.then(...).catch(...);', 'RequireInfoFlag': True, 'RequireInfo': ''}"}]
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 10,
+  "BC_description": "Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#471"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "bluebird/Promise",
+      "Promise"
+    ],
+    "methodName": [
+      "done"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "bluebird"
+    ]
+  },
+  "Adaptation_method": "Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\n\nBefore:\npromise.done();\n\nAfter:\npromise.then(...).catch(...);",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+This BC lacks clarity {
+  "Id": 10,
+  "BC_description": "Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#471"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Promise"
+    ],
+    "methodName": [
+      "done"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\n\nBefore:\npromise.done();\n\nAfter:\npromise.then(...).catch(...);",
+  "RequireInfoFlag": true,
+  "RequireInfo": ""
+}.
+New description: {
+  "Id": 10,
+  "BC_description": "Calling `.done()` on a promise now causes an irrecoverable fatal error in Node.js environments. Previously, errors would be swallowed or handled non-fatally. Code that ignores this will now crash the process.",
+  "Reference": [
+    "docs/docs/new-in-bluebird-3.md",
+    "#471"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "bluebird/Promise",
+      "Promise"
+    ],
+    "methodName": [
+      "done"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "bluebird"
+    ]
+  },
+  "Adaptation_method": "Remove usage of .done(), or ensure that all promises ended with .done() have proper error handling in place.\n\nBefore:\npromise.done();\n\nAfter:\npromise.then(...).catch(...);",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+validation consumption token: 6846
+validation consumption time: 14.85680062416941
+Done: bluebird
+Skipping unsupported type 'config' (Id=3)
+Wrote 21 patterns to  /exp/jsfix/bluebird/gpt-4.1/tapir.json

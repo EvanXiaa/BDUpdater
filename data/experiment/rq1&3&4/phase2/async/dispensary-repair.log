@@ -1,0 +1,107 @@
+2025-08-30 21:22:54,252 | INFO | repair.dispensary | Starting analysis for dispensary
+2025-08-30 21:22:54,252 | INFO | repair.dispensary | Starting breaking change analysis for /async/results/gpt-4.1/dispensary
+2025-08-30 21:22:54,253 | INFO | repair.dispensary | ============================================================
+2025-08-30 21:22:54,253 | INFO | repair.dispensary | BEGIN pattern 0 (pattern_0)
+2025-08-30 21:22:54,253 | DEBUG | repair.dispensary | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{each,concat,detect,every,filter,groupBy,map,mapValues,reduce,reject,some,transform,times,auto,compose,seq,whilst,until,forever,parallel,race,retry,series,tryEach,waterfall}", "changelogId": 0}
+2025-08-30 21:22:54,504 | INFO | repair.dispensary | Tapir run successful for /async/results/gpt-4.1/dispensary
+2025-08-30 21:22:54,504 | DEBUG | repair.dispensary | Parsed detection output: [{'pattern_id': 0, 'file': 'src/dispensary.js', 'line': 128, 'column': 15}, {'pattern_id': 0, 'file': 'src/dispensary.js', 'line': 132, 'column': 13}, {'pattern_id': 0, 'file': 'tests/test.dispensary.js', 'line': 59, 'column': 13}, {'pattern_id': 0, 'file': 'tests/test.dispensary.js', 'line': 205, 'column': 24}]
+2025-08-30 21:22:54,504 | DEBUG | repair.dispensary | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1057de520>, {'src/dispensary.js': defaultdict(<class 'list'>, {0: [{'line': 128, 'column': 15}, {'line': 132, 'column': 13}]}), 'tests/test.dispensary.js': defaultdict(<class 'list'>, {0: [{'line': 59, 'column': 13}, {'line': 205, 'column': 24}]})})
+2025-08-30 21:22:54,505 | INFO | repair.dispensary | New context extracted from /async/results/gpt-4.1/dispensary/src/dispensary.js
+2025-08-30 21:22:54,506 | INFO | repair.dispensary | New context extracted from /async/results/gpt-4.1/dispensary/src/dispensary.js
+2025-08-30 21:22:55,525 | DEBUG | repair.dispensary | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:22:55,529 | INFO | repair.dispensary | New context extracted from /async/results/gpt-4.1/dispensary/tests/test.dispensary.js
+2025-08-30 21:22:55,531 | INFO | repair.dispensary | New context extracted from /async/results/gpt-4.1/dispensary/tests/test.dispensary.js
+2025-08-30 21:22:56,449 | DEBUG | repair.dispensary | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:22:57,369 | DEBUG | repair.dispensary | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:22:57,370 | DEBUG | repair.dispensary | Updated package.json saved at /async/results/gpt-4.1/dispensary/package.json
+2025-08-30 21:22:57,370 | INFO | repair.dispensary | END pattern 0 (pattern_0)
+2025-08-30 21:22:57,371 | INFO | repair.dispensary | ============================================================
+2025-08-30 21:22:57,371 | INFO | repair.dispensary | BEGIN pattern 2 (pattern_2)
+2025-08-30 21:22:57,371 | DEBUG | repair.dispensary | Pattern payload: {"type": "call", "pattern": "write {<async>,<async/**/*>}?**.{drain,saturated,unsaturated,empty,error}", "changelogId": 2}
+2025-08-30 21:22:57,564 | INFO | repair.dispensary | Tapir run successful for /async/results/gpt-4.1/dispensary
+2025-08-30 21:22:57,564 | DEBUG | repair.dispensary | Parsed detection output: [{'pattern_id': 2, 'file': 'src/dispensary.js', 'line': 173, 'column': 6}]
+2025-08-30 21:22:57,564 | DEBUG | repair.dispensary | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1057df100>, {'src/dispensary.js': defaultdict(<class 'list'>, {2: [{'line': 173, 'column': 6}]})})
+2025-08-30 21:22:57,565 | INFO | repair.dispensary | New context extracted from /async/results/gpt-4.1/dispensary/src/dispensary.js
+2025-08-30 21:23:00,195 | DEBUG | repair.dispensary | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "(resolve) => {\n      var files = [];\n      var queue = async.queue(this._getFile.bind(this),\n        this.maxHTTPRequests || 35);\n\n      // BREAKING CHANGE: async@v3.x event handlers must be registered via methods, not property assignment\n      queue.drain(() => {\n        log.debug('All downloads completed.');\n\n        for (let file of referenceFiles) {\n          if (file.index && libraries[file.index] &&\n              libraries[file.index].files) {\n            libraries[file.index].files.push(file);\n          } else {\n            throw new Error(`File or index not found: ${file}`);\n          }\n        }\n\n        resolve(libraries);\n      });\n\n      for (let i in libraries) {\n        let library = libraries[i];\n\n        if (!library.files) {\n          library.files = [];\n        }\n\n        files = files.concat(this._getAllFilesFromLibrary(library, i));\n      }\n\n      queue.push(files);\n    }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:23:00,200 | INFO | repair.dispensary | Replaced code in /async/results/gpt-4.1/dispensary/src/dispensary.js at [4314, 5111]
+2025-08-30 21:23:00,201 | DEBUG | repair.dispensary | Updated package.json saved at /async/results/gpt-4.1/dispensary/package.json
+2025-08-30 21:23:00,201 | INFO | repair.dispensary | END pattern 2 (pattern_2)
+2025-08-30 21:23:00,202 | INFO | repair.dispensary | ============================================================
+2025-08-30 21:23:00,202 | INFO | repair.dispensary | BEGIN pattern 3 (pattern_3)
+2025-08-30 21:23:00,202 | DEBUG | repair.dispensary | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{eachOfLimit*,each*,eachSeries*,compose*,seq*,waterfall*,auto*,autoInject*,whilst*,until*,forever*}", "changelogId": 3}
+2025-08-30 21:23:00,416 | INFO | repair.dispensary | Tapir run successful for /async/results/gpt-4.1/dispensary
+2025-08-30 21:23:00,417 | DEBUG | repair.dispensary | Parsed detection output: []
+2025-08-30 21:23:00,417 | DEBUG | repair.dispensary | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1057de840>, {})
+2025-08-30 21:23:00,417 | DEBUG | repair.dispensary | Updated package.json saved at /async/results/gpt-4.1/dispensary/package.json
+2025-08-30 21:23:00,417 | INFO | repair.dispensary | END pattern 3 (pattern_3)
+2025-08-30 21:23:00,417 | INFO | repair.dispensary | ============================================================
+2025-08-30 21:23:00,417 | INFO | repair.dispensary | BEGIN pattern 4 (pattern_4)
+2025-08-30 21:23:00,417 | DEBUG | repair.dispensary | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{during,doDuring,whilst,doWhilst,until,doUntil}", "changelogId": 4}
+2025-08-30 21:23:00,601 | INFO | repair.dispensary | Tapir run successful for /async/results/gpt-4.1/dispensary
+2025-08-30 21:23:00,601 | DEBUG | repair.dispensary | Parsed detection output: []
+2025-08-30 21:23:00,601 | DEBUG | repair.dispensary | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1057de840>, {})
+2025-08-30 21:23:00,601 | DEBUG | repair.dispensary | Updated package.json saved at /async/results/gpt-4.1/dispensary/package.json
+2025-08-30 21:23:00,601 | INFO | repair.dispensary | END pattern 4 (pattern_4)
+2025-08-30 21:23:00,601 | INFO | repair.dispensary | ============================================================
+2025-08-30 21:23:00,601 | INFO | repair.dispensary | BEGIN pattern 5 (pattern_5)
+2025-08-30 21:23:00,601 | DEBUG | repair.dispensary | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{queue,mapLimit,eachLimit,filterLimit,reduceLimit,concatLimit,eachOfLimit,forEachOfLimit,groupByLimit}", "changelogId": 5}
+2025-08-30 21:23:00,783 | INFO | repair.dispensary | Tapir run successful for /async/results/gpt-4.1/dispensary
+2025-08-30 21:23:00,783 | DEBUG | repair.dispensary | Parsed detection output: [{'pattern_id': 5, 'file': 'src/dispensary.js', 'line': 170, 'column': 18}]
+2025-08-30 21:23:00,783 | DEBUG | repair.dispensary | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1057de840>, {'src/dispensary.js': defaultdict(<class 'list'>, {5: [{'line': 170, 'column': 18}]})})
+2025-08-30 21:23:00,784 | INFO | repair.dispensary | New context extracted from /async/results/gpt-4.1/dispensary/src/dispensary.js
+2025-08-30 21:23:04,236 | DEBUG | repair.dispensary | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "(resolve) => {\n      var files = [];\n      // Patch: Ensure concurrency/limit is >=1 for async.queue per async v3 breaking change.\n      // Use Math.max to guarantee minimum of 1 if this.maxHTTPRequests == 0 or <1 (preserving 35 as fallback default if falsy)\n      var queue = async.queue(this._getFile.bind(this),\n        Math.max(1, this.maxHTTPRequests || 35));\n\n      // BREAKING CHANGE: async@v3.x event handlers must be registered via methods, not property assignment\n      queue.drain(() => {\n        log.debug('All downloads completed.');\n\n        for (let file of referenceFiles) {\n          if (file.index && libraries[file.index] &&\n              libraries[file.index].files) {\n            libraries[file.index].files.push(file);\n          } else {\n            throw new Error(`File or index not found: ${file}`);\n          }\n        }\n\n        resolve(libraries);\n      });\n\n      for (let i in libraries) {\n        let library = libraries[i];\n\n        if (!library.files) {\n          library.files = [];\n        }\n\n        files = files.concat(this._getAllFilesFromLibrary(library, i));\n      }\n\n      queue.push(files);\n    }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:23:04,237 | INFO | repair.dispensary | Replaced code in /async/results/gpt-4.1/dispensary/src/dispensary.js at [4314, 5218]
+2025-08-30 21:23:04,238 | DEBUG | repair.dispensary | Updated package.json saved at /async/results/gpt-4.1/dispensary/package.json
+2025-08-30 21:23:04,238 | INFO | repair.dispensary | END pattern 5 (pattern_5)
+2025-08-30 21:23:04,238 | INFO | repair.dispensary | ============================================================
+2025-08-30 21:23:04,238 | INFO | repair.dispensary | BEGIN pattern 6 (pattern_6)
+2025-08-30 21:23:04,238 | DEBUG | repair.dispensary | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{memoize}", "changelogId": 6}
+2025-08-30 21:23:04,437 | INFO | repair.dispensary | Tapir run successful for /async/results/gpt-4.1/dispensary
+2025-08-30 21:23:04,437 | DEBUG | repair.dispensary | Parsed detection output: []
+2025-08-30 21:23:04,438 | DEBUG | repair.dispensary | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1057de840>, {})
+2025-08-30 21:23:04,438 | DEBUG | repair.dispensary | Updated package.json saved at /async/results/gpt-4.1/dispensary/package.json
+2025-08-30 21:23:04,438 | INFO | repair.dispensary | END pattern 6 (pattern_6)
+2025-08-30 21:23:04,438 | INFO | repair.dispensary | ============================================================
+2025-08-30 21:23:04,438 | INFO | repair.dispensary | BEGIN pattern 7 (pattern_7)
+2025-08-30 21:23:04,438 | DEBUG | repair.dispensary | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}", "changelogId": 7}
+2025-08-30 21:23:04,607 | INFO | repair.dispensary | Tapir run successful for /async/results/gpt-4.1/dispensary
+2025-08-30 21:23:04,607 | DEBUG | repair.dispensary | Parsed detection output: []
+2025-08-30 21:23:04,607 | DEBUG | repair.dispensary | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1057de840>, {})
+2025-08-30 21:23:04,608 | DEBUG | repair.dispensary | Updated package.json saved at /async/results/gpt-4.1/dispensary/package.json
+2025-08-30 21:23:04,608 | INFO | repair.dispensary | END pattern 7 (pattern_7)
+2025-08-30 21:23:04,608 | INFO | repair.dispensary | ============================================================
+2025-08-30 21:23:04,608 | INFO | repair.dispensary | BEGIN pattern 8 (pattern_8)
+2025-08-30 21:23:04,608 | DEBUG | repair.dispensary | Pattern payload: {"type": "import", "pattern": "import {async.mjs}", "changelogId": 8}
+2025-08-30 21:23:04,782 | INFO | repair.dispensary | Tapir run successful for /async/results/gpt-4.1/dispensary
+2025-08-30 21:23:04,782 | DEBUG | repair.dispensary | Parsed detection output: []
+2025-08-30 21:23:04,782 | DEBUG | repair.dispensary | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1057de840>, {})
+2025-08-30 21:23:04,783 | DEBUG | repair.dispensary | Updated package.json saved at /async/results/gpt-4.1/dispensary/package.json
+2025-08-30 21:23:04,783 | INFO | repair.dispensary | END pattern 8 (pattern_8)
+2025-08-30 21:23:04,783 | DEBUG | repair.dispensary | Updated package.json saved at /async/results/gpt-4.1/dispensary/package.json
+2025-08-30 21:23:04,783 | INFO | repair.dispensary | token consumed 9397
+2025-08-30 21:23:04,783 | INFO | repair.dispensary | parse consumption time: 8.937583667226136

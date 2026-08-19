@@ -1,0 +1,34 @@
+{
+  "name": "alice-app",
+  "version": "0.0.9",
+  "description": "JS wrapper for the Alice App API",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec -t 5000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keydotco/alice-app-js.git"
+  },
+  "keywords": [
+    "alice",
+    "concierge"
+  ],
+  "author": "KEY Concierge Dev Team",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/keydotco/alice-app-js/issues"
+  },
+  "homepage": "https://github.com/keydotco/alice-app-js#readme",
+  "devDependencies": {
+    "chai": "4.1.1",
+    "chai-as-promised": "7.1.1",
+    "chai-http": "3.0.0",
+    "istanbul": "0.4.5",
+    "mocha": "3.5.0",
+    "nock": "9.0.14"
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}

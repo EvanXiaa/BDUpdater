@@ -1,0 +1,347 @@
+Extracting breaking changes for node-fetch
+[{'role': 'system', 'content': 'You are a software engineer who recently discovered that a library used\n          in your project has released a new major version. \n          Your top priority is to identify breaking changes \n          in the new version before updating and assessing its impact on your project.\n              - you only care about the breaking changes in version v2.0.0'}, {'role': 'user', 'content': 'The first step is to identify relevant files that may reference breaking changes.\nBelow is a JSON list of file entries from the repository:\n[\n  "release_note.md",\n  "LICENSE.md",\n  "UPGRADE-GUIDE.md",\n  "CHANGELOG.md",\n  "README.md",\n  "bcCommitMessages.txt"\n]\n### Task:\nReturn a **Python list** of file paths that are likely to contain any of the following:\n1. **API Change information** (e.g., `changelog.md`, `history.md`, "deprecation.md", "readme.md`))  \n2. **Release notes** (e.g., `releasenotes.md`, `release-notes.txt`)  \n3. **Version migration or upgrade guidance** (e.g., `migration-guide.md`, `upgrading.md`, `changes-in-version-3.md`)  \n4. **External links or references** related to (1)–(3) (e.g., `migrate-to-v2.html`)\n\n### Output:\nReturn only a raw Python list of matching file paths (e.g., `["docs/changelog.md", "RELEASE_NOTES.md"]`). Rank them by relevance.\n**Do not** include any explanations, formatting, or wrapper structures.\n**Only select files related to the target version.\n'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Candidate documentation files:
+['CHANGELOG.md', 'UPGRADE-GUIDE.md', 'release_note.md', 'bcCommitMessages.txt']
+Tokens till now: 442
+Extracted BC candidate list:
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "Node.js 0.10.x and 0.12.x are no longer supported in node-fetch v2.0.0. This means that any project running on these legacy Node.js versions will not be able to use this version of the library.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Upgrade the Node.js runtime to version 4.x or higher to use node-fetch v2.0.0.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Direct require of internal modules such as 'node-fetch/lib/response' is no longer supported. Users must now access Response, Request, and other classes via the main export or ES6 imports.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [
+          "Response",
+          "Request"
+        ],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch/lib/response",
+          "node-fetch/lib/request"
+        ]
+      },
+      "Adaptation_method": "Before: const Response = require('node-fetch/lib/response'); After: const { Response } = require('node-fetch'); or import { Response } from 'node-fetch';",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "The `response.text()` method no longer attempts to detect the response encoding and now always defaults to UTF-8 as per the Fetch specification. The previous behavior of encoding detection is moved to a new method `textConverted()`.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200",
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "text"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "If encoding detection is required, replace `response.text()` with `response.textConverted()`. For UTF-8 only, keep using `response.text()`.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "`response.json()` now throws a syntax error when the response status is 204 (No Content), instead of returning an empty object. This reverts a change introduced in v1.6.2 and aligns with the Fetch specification.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "json"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: const data = await response.json(); // returns {} for 204. After: wrap in try-catch or check status before calling: const data = response.status === 204 ? null : await response.json();",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "Internal methods of the library are no longer exposed, which may break code that directly accessed or relied on internal implementation details. Specifically, methods such as `_clone()`, `_decode()`, and `_convert()` on the `response` object are now inaccessible.",
+      "Reference": [
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "read",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "_clone",
+          "_decode",
+          "_convert"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Refactor code to avoid direct access to internal methods like `_clone()`, `_decode()`, and `_convert()`. Use only the public API as documented in the official API docs.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 5,
+      "BC_description": "Constructing a Request with method GET or HEAD and a non-null body now throws an error, in compliance with the Fetch specification. Previously, such requests were allowed.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Request"
+        ],
+        "methodName": [
+          "constructor"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: new Request('https://example.com', { method: 'GET', body: 'data' }); After: Ensure GET and HEAD requests have null or undefined body: new Request('https://example.com', { method: 'GET', body: null });",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 6,
+      "BC_description": "The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200",
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "getAll"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Replace `headers.getAll('set-cookie')` with `headers.get('set-cookie').split(',')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers."
+    },
+    {
+      "Id": 7,
+      "BC_description": "The user-provided `Content-Length` header is now overwritten by node-fetch if the library can determine the correct length, in accordance with the Fetch specification.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200"
+      ],
+      "Changed_object": {
+        "type": "write",
+        "className": [
+          "Request"
+        ],
+        "methodName": [],
+        "propertyName": [
+          "headers"
+        ],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Do not rely on manually set `Content-Length` headers. Ensure server logic does not validate or reject requests based on expectations of a specific `Content-Length` value set by the client.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 8,
+      "BC_description": "The `headers.get()` method now returns all values of a header as a comma-separated string, rather than only the first value. This aligns with the Fetch specification but breaks code expecting only the first value.",
+      "Reference": [
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "get"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: headers.get('Multi') returned 'header1'. After: headers.get('Multi') returns 'header1,header2'. To retrieve the first value, use: headers.get('Multi').split(',')[0].",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 9,
+      "BC_description": "All inputs to `Headers` methods (e.g., name and value in `set()`) are now stringified. Previously, `null` or `undefined` values were preserved or caused errors; now they are converted to the strings 'null' and 'undefined'.",
+      "Reference": [
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "set"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: headers.set('null-header', null); headers.get('null-header') returned null. After: it returns 'null'. To avoid unintended stringification, ensure that header names and values are already strings or explicitly handle null/undefined before passing to `set()`.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 10,
+      "BC_description": "Invalid HTTP header names and values (e.g., containing non-ASCII characters like 'H\u00e9y') are now rejected with an error during construction or setting, in compliance with the Fetch specification.",
+      "Reference": [
+        "UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "set",
+          "constructor"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch"
+        ]
+      },
+      "Adaptation_method": "Before: headers.set('H\u00e9y', 'ok') was allowed. After: it throws. Normalize header names and values to ASCII before setting them. For example, use 'Hey' instead of 'H\u00e9y'.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}
+parse consumption token: 0
+parse consumption time: 0
+Running UDBC exploration for node-fetch
+Loading existing merged results from  /exp/jsfix/node-fetch/qwen-plus-latest/merge_result.json
+Validating BC list for node-fetch
+This BC lacks clarity {
+  "Id": 6,
+  "BC_description": "The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.",
+  "Reference": [
+    "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200",
+    "UPGRADE-GUIDE.md"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Headers"
+    ],
+    "methodName": [
+      "getAll"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "node-fetch"
+    ]
+  },
+  "Adaptation_method": "Replace `headers.getAll('set-cookie')` with `headers.get('set-cookie').split(',')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.",
+  "RequireInfoFlag": true,
+  "RequireInfo": "The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers."
+}.
+[{'role': 'system', 'content': "\nTask:\nYou're a software engineer working with a JavaScript library node-fetch. \nYou need to strictly adhere to the information provided and not use any outside knowledge of public packages.\nThe BC_description describes a breaking change in the new major version of the library.\nEvaluate whether the provided JSON fully aligns with the BC_description field. \nEvaluation Criteria:\n    • Clarity – ensure every entity mentioned is explicit.  \n    • Scopes: \n        – Focus on existing BC_description field, only analyze API you think is related to it, do not introduce irrelevant new API in the given text since the context may include noise. \n        - Changed_object should lists **all** affected APIs according to the BC_description.\n    • Migration – Provide explicit adaptation instructions. Prioritize direct code examples and avoid instructions like `use customized alternatives` unless there is no available alternatives.\n    • Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the new context. \n    \nOnce a discrepancy occurs, you may invoke one or more of the available tools shown below. Determine the tool according to the breaking change types. \nPrioritize using detailed reference from repo issues/pull_request if current information is insufficient.\n    -Hard rule: If the description or references mention an issue/PR (e.g., #2251, /pull/2299) of current library, you must invoke searchForIssue with all referenced IDs. While if the issue/PR is from other library, invoke searchForWebsite.\n    -If the description or references mention a commit, you must invoke searchForCommit.\n    -if the description provides no migration step nor reference, try use `issueByKeywords`,\n    -if the API entry points is implicit, use `fetchDirectoryStruc`.\n"}, {'role': 'user', 'content': '{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `headers.get(\'set-cookie\').split(\',\')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.", \'RequireInfoFlag\': True, \'RequireInfo\': \'The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers.\'}'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Validating by searchForIssue
+
+[{'role': 'system', 'content': "\nTask:\nYou're a software engineer working with a JavaScript library node-fetch. \nYou need to strictly adhere to the information provided and not use any outside knowledge of public packages.\nThe BC_description describes a breaking change in the new major version of the library.\nEvaluate whether the provided JSON fully aligns with the BC_description field. \nEvaluation Criteria:\n    • Clarity – ensure every entity mentioned is explicit.  \n    • Scopes: \n        – Focus on existing BC_description field, only analyze API you think is related to it, do not introduce irrelevant new API in the given text since the context may include noise. \n        - Changed_object should lists **all** affected APIs according to the BC_description.\n    • Migration – Provide explicit adaptation instructions. Prioritize direct code examples and avoid instructions like `use customized alternatives` unless there is no available alternatives.\n    • Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the new context. \n    \nOnce a discrepancy occurs, you may invoke one or more of the available tools shown below. Determine the tool according to the breaking change types. \nPrioritize using detailed reference from repo issues/pull_request if current information is insufficient.\n    -Hard rule: If the description or references mention an issue/PR (e.g., #2251, /pull/2299) of current library, you must invoke searchForIssue with all referenced IDs. While if the issue/PR is from other library, invoke searchForWebsite.\n    -If the description or references mention a commit, you must invoke searchForCommit.\n    -if the description provides no migration step nor reference, try use `issueByKeywords`,\n    -if the API entry points is implicit, use `fetchDirectoryStruc`.\n"}, {'role': 'user', 'content': '{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `headers.get(\'set-cookie\').split(\',\')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.", \'RequireInfoFlag\': True, \'RequireInfo\': \'The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers.\'}'}, ChatCompletionMessage(content='', refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=[ChatCompletionMessageToolCall(id='call_0583d734668f411b8bc343', function=Function(arguments='{\n    "issueNumbers": [\n      2251\n    ]\n  }\n', name='searchForIssue'), type='function', index=0)]), {'role': 'tool', 'tool_call_id': 'call_0583d734668f411b8bc343', 'content': '{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `headers.get(\'set-cookie\').split(\',\')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.", \'RequireInfoFlag\': True, \'RequireInfo\': \'The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers.\'}'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Validating by fetchDirectoryStruc
+
+[{'role': 'system', 'content': "\nTask:\nYou're a software engineer working with a JavaScript library node-fetch. \nYou need to strictly adhere to the information provided and not use any outside knowledge of public packages.\nThe BC_description describes a breaking change in the new major version of the library.\nEvaluate whether the provided JSON fully aligns with the BC_description field. \nEvaluation Criteria:\n    • Clarity – ensure every entity mentioned is explicit.  \n    • Scopes: \n        – Focus on existing BC_description field, only analyze API you think is related to it, do not introduce irrelevant new API in the given text since the context may include noise. \n        - Changed_object should lists **all** affected APIs according to the BC_description.\n    • Migration – Provide explicit adaptation instructions. Prioritize direct code examples and avoid instructions like `use customized alternatives` unless there is no available alternatives.\n    • Do not hallucinate or guess unspecified information. Examples must be evidence-backed and based on the new context. \n    \nOnce a discrepancy occurs, you may invoke one or more of the available tools shown below. Determine the tool according to the breaking change types. \nPrioritize using detailed reference from repo issues/pull_request if current information is insufficient.\n    -Hard rule: If the description or references mention an issue/PR (e.g., #2251, /pull/2299) of current library, you must invoke searchForIssue with all referenced IDs. While if the issue/PR is from other library, invoke searchForWebsite.\n    -If the description or references mention a commit, you must invoke searchForCommit.\n    -if the description provides no migration step nor reference, try use `issueByKeywords`,\n    -if the API entry points is implicit, use `fetchDirectoryStruc`.\n"}, {'role': 'user', 'content': '{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `headers.get(\'set-cookie\').split(\',\')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.", \'RequireInfoFlag\': True, \'RequireInfo\': \'The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers.\', \'DirectoryStruc\': {\'reason\': \'\', \'context\': {\'old\': [\'index.js\', \'test/test.js\', \'test/server.js\', \'lib/response.js\', \'lib/request.js\', \'lib/fetch-error.js\', \'lib/body.js\', \'lib/headers.js\'], \'new\': [\'test.js\', \'browser.js\', \'lib/index.js\', \'lib/index.es.js\']}}}'}, ChatCompletionMessage(content='', refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=[ChatCompletionMessageToolCall(id='call_0583d734668f411b8bc343', function=Function(arguments='{\n    "issueNumbers": [\n      2251\n    ]\n  }\n', name='searchForIssue'), type='function', index=0)]), {'role': 'tool', 'tool_call_id': 'call_0583d734668f411b8bc343', 'content': '{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `headers.get(\'set-cookie\').split(\',\')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.", \'RequireInfoFlag\': True, \'RequireInfo\': \'The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers.\'}'}, ChatCompletionMessage(content='', refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=[ChatCompletionMessageToolCall(id='call_edd04b08e0b24f7995cd79', function=Function(arguments='{}', name='fetchDirectoryStruc'), type='function', index=0)]), {'role': 'tool', 'tool_call_id': 'call_edd04b08e0b24f7995cd79', 'content': '{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `headers.get(\'set-cookie\').split(\',\')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.", \'RequireInfoFlag\': True, \'RequireInfo\': \'The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers.\', \'DirectoryStruc\': {\'reason\': \'\', \'context\': {\'old\': [\'index.js\', \'test/test.js\', \'test/server.js\', \'lib/response.js\', \'lib/request.js\', \'lib/fetch-error.js\', \'lib/body.js\', \'lib/headers.js\'], \'new\': [\'test.js\', \'browser.js\', \'lib/index.js\', \'lib/index.es.js\']}}}'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+Validating by issueByKeywords
+
+[{'role': 'system', 'content': 'You\'re a software engineer working with a fully customized, non-public library. You need to strictly adhere to the information provided and not use any outside knowledge of public packages.\n                                            You are given a description of a breaking change that occurred during a \n                                            library update. \n                                            A breaking change refers to any modification that disrupts \n                                            compatibility for downstream clients.\n                                            {\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `headers.get(\'set-cookie\').split(\',\')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.", \'RequireInfoFlag\': True, \'RequireInfo\': \'The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers.\', \'DirectoryStruc\': {\'reason\': \'\', \'context\': {\'old\': [\'index.js\', \'test/test.js\', \'test/server.js\', \'lib/response.js\', \'lib/request.js\', \'lib/fetch-error.js\', \'lib/body.js\', \'lib/headers.js\'], \'new\': [\'test.js\', \'browser.js\', \'lib/index.js\', \'lib/index.es.js\']}}}\n                                            However, this description may be unclear, have incomplete affected scopes, or provide impractical adaptation methods.\n                                            To assist with clarification, a list of issues/pull_requests have been retrieved.\n                                            Select a number list that you want to check for refining the description ordered by relevance.\n                                            Return a plain python list of integers representing the number of the relevant commits. e.g. [123, 1567, 2333]\n                                            Do not include explanations—just output the list.\n                                        '}, {'role': 'user', 'content': '[{\'number\': 1757, \'title\': \'feat: optional get raw headers as string\', \'url\': \'https://github.com/node-fetch/node-fetch/pull/1757\', \'is_pull\': True}, {\'number\': 582, \'title\': "Document proper way to extract \'Set-Cookie\' response headers", \'url\': \'https://github.com/node-fetch/node-fetch/issues/582\', \'is_pull\': False}, {\'number\': 514, \'title\': "response.headers.get(\'set-cookie\') returns string instead of array.", \'url\': \'https://github.com/node-fetch/node-fetch/issues/514\', \'is_pull\': False}, {\'number\': 156, \'title\': \'"TypeError: Cannot read property \\\'toLowerCase\\\' of undefined" when calling headers.getAll()\', \'url\': \'https://github.com/node-fetch/node-fetch/issues/156\', \'is_pull\': False}, {\'number\': 1484, \'title\': \'chore: replace headers class\', \'url\': \'https://github.com/node-fetch/node-fetch/pull/1484\', \'is_pull\': True}]'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': 'You are a software engineer working with a fully customized, non-public library. You must rely strictly on the provided information and avoid using any outside knowledge, especially from public packages.\nYou are given a candidate breaking change description from a recent library update.\n> A **breaking change** refers to any modification that disrupts compatibility for downstream clients.\n---\nDescription:\n{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This affects multi-valued headers such as Set-Cookie.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `headers.get(\'set-cookie\').split(\',\')` if the header values are comma-separated. Note: this does not work for Set-Cookie per spec, as commas are part of valid cookie values. Use `headers.raw()` if available to access individual values; otherwise, consider using a different approach to parse multi-valued headers.", \'RequireInfoFlag\': True, \'RequireInfo\': \'The documentation does not confirm whether `headers.raw()` is available in node-fetch v2.0.0 to retrieve individual values of multi-valued headers like Set-Cookie. Clarification is required on the existence and usage of `raw()` or any alternative method to properly handle such headers.\', \'DirectoryStruc\': {\'reason\': \'\', \'context\': {\'old\': [\'index.js\', \'test/test.js\', \'test/server.js\', \'lib/response.js\', \'lib/request.js\', \'lib/fetch-error.js\', \'lib/body.js\', \'lib/headers.js\'], \'new\': [\'test.js\', \'browser.js\', \'lib/index.js\', \'lib/index.es.js\']}}}\n---\nThis description may be unclear, contain incomplete information about affected scopes, or lack practical guidance for code adaptation.\nTo assist with refining it, a set of related issues or pull requests is provided.\n### Your Tasks:\n1. **Identify Relevance**: Determine whether the provided issues/pull requests are related to the described breaking change.\n2. **Refine If Valid**: If the description is a true breaking change, refine it using the issue information. If not, flag it accordingly.\n3. **Refinement Guidelines** (if applicable):\n   - **Clarity**: Ensure all referenced entities (APIs, classes, functions) are explicitly named.\n   - **Scopes**: In `Changed_object`, clearly list all affected classes and methods. If the original description is vague (e.g., uses phrases like "such as", "like"), resolve these with concrete examples based on the issues.\n   - **Adaptation**: Provide explicit adaptation instructions. Prioritize direct code examples and avoid instructions like `use customized alternatives` unless there is no available alternatives.\n4. **Control Flags**:\n   - If refinement is complete or the issues provide no aids, set `RequireInfoFlag` to `false`.\n   - If you need content of external urls, set `RequireInfoFlag` to `true` and change RequireInfo to that.\n\n### Output:\nReturn a single **JSON object**, structured identically to the original format. Do not add explanations or additional commentary.\n---\nHere is the related issue and pull request information:\n'}, {'role': 'user', 'content': 'Title: feat: optional get raw headers as string\n\nBody:\n<!-- Thanks for contributing! -->\r\n\r\n## Purpose\r\n\r\nMost libraries expect raw headers to be a string instead of an array  so I added an optional argument which will return the raw headers as a string rather than a `string[]`.\r\n\r\n## Changes\r\n\r\nAdded an optional argument to the `headers.raw()` function to return the header values as a string in case this is set to `true.\r\n\r\n## Additional information\r\n\r\nI could also create a second function like: `headers.rawAsString()` instead of adding an argument to the existing function.\r\n\r\n___\r\n\r\n<!-- Mark the ones you have done and remove unnecessary ones. Add new tasks that fit (like TODOs). -->\r\n- [ ] I updated readme\r\n- [x] I added unit test(s)\r\n\r\n___\r\n\r\n<!-- Add `- fix #_NUMBER_` line for every PR/Issue this PR solves. Do not comma separate them. -->\r\n\r\nDoesn\'t fix but is related to #783\n\nComments:\njimmywarting: ideally ppl should just stop depending on raw headers all together.\r\nthe hope is for ppl to just stop depending node-fetch all together and use built in fetch when it\'s available. \r\n\r\nThe reason ppl wanted to have raw in the first place was cuz the fetch spec decided that they should normalize the headers to be joined by `,` if one header is appended more than once.\r\nsome ppl where not happy about this cuz it made reading set-cookies hard that could include `,` in the value.\r\n\r\nso ppl requested the `raw` and we implemented it...\r\n\r\nnow there is a new spec that mention iterating over headers that dose not combine the set-cookies but instead yields the everything.\r\n\r\nppl should really be using `[...response.headers]` or `Object.fromEntires(response.headers)` or even `Headers.prototype.getSetCookie`\r\n\r\nthat is what every other environment have agree upon of how it should work. \r\nit essentially match our raw method.\r\n\r\nI think that out raw method should be deprecated and ppl should stop using it and strive more towards cross compatible solutions with other env / fetch implementations. \r\n\r\nso i\'m generally -1 on this.\njimmywarting: there are some new Header methods / spec things we need to fix...\nmstruebing: Okay, I\'m using `Object.fromEntires(response.headers)` now but I thought that it would be useful to other people too who get into the same situation.\r\n\r\nDoes this mean I should just close this PR?\njimmywarting: i can close it for you.\r\n\r\nif you like you could make a suggestion in the readme that the best way to access the headers would be to either use:\r\n`[...response.headers]` or `Object.fromEntires(response.headers)` instead of using the legacy/non-standard raw method\r\n\r\nand perhaps maybe even put a deprecation warning on using the `raw` option. \r\n\r\ni did work on a more spec\'ed Header classed here https://www.npmjs.com/package/fetch-headers the idea was for node-fetch to adapt it and let headers live on a separate place. as it has very little to do with fetch/request/response and is mostly isolated from everything else. then node-fetch would extend it to include the `raw` option (just for backwards comp. reasons)\r\n\r\nif you feel like you are willing to bring in fetch-headers into node-fetch and replace our own than that would be appreciated as well. \r\n`fetch-headers` runs it own test against WPT so some test in node-fetch could be removed.\r\n\r\nthe missing thing is `getSetCookies`you must reply in JSON format. Follow this schema {\'type\': \'json_schema\', \'json_schema\': {\'name\': \'breaking_change\', \'strict\': True, \'schema\': {\'type\': \'object\', \'properties\': {\'Id\': {\'type\': \'integer\', \'description\': \'A unique identifier, assigned sequentially starting from 0.\'}, \'BC_description\': {\'type\': \'string\', \'description\': \'A clear, detailed, and comprehensive description of the breaking change.\'}, \'Reference\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'All references related to this change, including parsing sources, issue numbers, commit SHAs.\'}, \'Changed_object\': {\'type\': \'object\', \'properties\': {\'type\': {\'type\': \'string\', \'enum\': [\'environment\', \'config\', \'import\', \'call\', \'read\', \'write\'], \'description\': "The type of changed object: \'call\' for method call change (e.g.,method signature, arguments and option change), \'read\' and \'write\' for reading and setting properties, \'environment\' for environment changes, \'config\' for configuration changes in an external file (e.g., *.config.js) , and \'import\' for import/require related changes."}, \'className\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'Explicit class names impacted by the change. Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)\'}, \'methodName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Exact method names affected (required when type is \'call\').  Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, \'propertyName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit property names affected (required when type is \'read\' or \'write\'). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, \'moduleName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit module names affected (required when type is \'import\' or \'config\'). If type is \'config\', specify the configration file name (e.g., webpack.config.js). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}}, \'required\': [\'type\', \'className\', \'methodName\', \'propertyName\', \'moduleName\'], \'additionalProperties\': False, \'description\': \'All information about the changed API which could help locate the affected code in downstream clients*.\'}, \'Adaptation_method\': {\'type\': \'string\', \'description\': "A structured recommendation for adapting to the change. Prioritize direct code examples. (e.g., \'base.text() -> base.textConverted())\'"}, \'RequireInfoFlag\': {\'type\': \'boolean\', \'description\': "Set to true if any aspect of the breaking change, including affected entities, adaptation methods, or specific terminology, is not fully clear, explicitly defined, or completely specified in the provided documentation. If set to true, you must precisely specify the missing or unclear details in the \'RequireInfo\' field."}, \'RequireInfo\': {\'type\': \'string\', \'description\': "Explicitly describe the missing information, clarification, definitions, or additional details required to fully understand or accurately resolve the breaking change. This field must remain empty only if \'RequireInfoFlag\' is false."}}, \'required\': [\'Id\', \'Reference\', \'BC_description\', \'Changed_object\', \'Adaptation_method\', \'RequireInfo\', \'RequireInfoFlag\'], \'additionalProperties\': False}}}'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': 'You are a software engineer working with a fully customized, non-public library. You must rely strictly on the provided information and avoid using any outside knowledge, especially from public packages.\nYou are given a candidate breaking change description from a recent library update.\n> A **breaking change** refers to any modification that disrupts compatibility for downstream clients.\n---\nDescription:\n{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed in node-fetch v2.0.0. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. This change affects multi-valued headers such as Set-Cookie, where individual values may contain commas, making split-by-comma parsing unreliable. The `headers.raw()` method was previously available to access raw header values as an array, but its usage is discouraged and it may be deprecated in favor of standard-compliant alternatives like `[...response.headers]` or `response.headers.getSetCookie()`.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\', \'https://github.com/bitinn/node-fetch/pull/783\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `response.headers.getSetCookie()` if running in an environment that supports the `getSetCookie` method. If `getSetCookie` is not available, use `[...response.headers]` to iterate over all headers and filter for \'set-cookie\'. As a fallback, `headers.raw()` may still be used, but it is non-standard and discouraged. Example: `const setCookies = [...response.headers].filter(([k]) => k.toLowerCase() === \'set-cookie\').map(([_, v]) => v);`", \'RequireInfoFlag\': True, \'RequireInfo\': \'The availability and compatibility of the `Headers.prototype.getSetCookie` method in node-fetch v2.0.0 is not confirmed. Clarification is required on whether node-fetch v2.0.0 implements `getSetCookie`, or if users must rely on `headers.raw()` or manual iteration via `[[...response.headers]]` for accessing individual Set-Cookie header values.\'}\n---\nThis description may be unclear, contain incomplete information about affected scopes, or lack practical guidance for code adaptation.\nTo assist with refining it, a set of related issues or pull requests is provided.\n### Your Tasks:\n1. **Identify Relevance**: Determine whether the provided issues/pull requests are related to the described breaking change.\n2. **Refine If Valid**: If the description is a true breaking change, refine it using the issue information. If not, flag it accordingly.\n3. **Refinement Guidelines** (if applicable):\n   - **Clarity**: Ensure all referenced entities (APIs, classes, functions) are explicitly named.\n   - **Scopes**: In `Changed_object`, clearly list all affected classes and methods. If the original description is vague (e.g., uses phrases like "such as", "like"), resolve these with concrete examples based on the issues.\n   - **Adaptation**: Provide explicit adaptation instructions. Prioritize direct code examples and avoid instructions like `use customized alternatives` unless there is no available alternatives.\n4. **Control Flags**:\n   - If refinement is complete or the issues provide no aids, set `RequireInfoFlag` to `false`.\n   - If you need content of external urls, set `RequireInfoFlag` to `true` and change RequireInfo to that.\n\n### Output:\nReturn a single **JSON object**, structured identically to the original format. Do not add explanations or additional commentary.\n---\nHere is the related issue and pull request information:\n'}, {'role': 'user', 'content': 'Title: Document proper way to extract \'Set-Cookie\' response headers\n\nBody:\nThe `Set-Cookie` header is special, it is **not** correct to combine multiple `Set-Cookie` headers into a single value separated by commas because it can change the semantics.\r\n\r\nReference:\r\n* whatwg fetch, "Headers class": https://fetch.spec.whatwg.org/#headers-class (see the note directly below the structure definition of `Headers`)\r\n* RFC6265 section 3: https://tools.ietf.org/html/rfc6265#section-3\r\n\r\nI think the only correct way to parse this header with `node-fetch` is by using `raw()`. This is not at all obvious and should probably be documented.\r\n\r\nSome (untested!) example code:\r\n\r\n```\r\n        if (cookieJar && res.headers.has(\'Set-Cookie\')) {\r\n            for (const [k, vv] of Object.entries(res.headers.raw())) {\r\n                if (k.toLowerCase() === \'set-cookie\') {\r\n                    for (const v of vv) {\r\n                        await promisify(cookieJar.setCookie)(v, url);\r\n                    }\r\n                }\r\n            }\r\n        }\r\n```\n\nComments:\nrvolgers: Looking into it a bit more it\'s becoming clear that the Fetch API is just the wrong layer to handle this.\r\n\r\nBoth cookies and HTTP authentication should probably be implemented in the `agent` being used by `node-fetch`, not on top of `node-fetch`. This makes the situation a lot more similar to the browser, which is what the Fetch spec is designed for.\r\n\r\nIf you try to naively use `node-fetch` for such cases it will **not** do what you want. Besides the problems I\'ve already described you would have to handle redirects manually, otherwise `node-fetch` will send the `Authorization` or `Cookie` request headers intended for one origin to the one being redirected to. There may be other problems as well...\r\n\r\nEither way,  these problems should be documented.\nobedparla: +1 to this. I\'ve been digging like crazy through all cookie related issues and I\'m stil unsure how `node-fetch` it\'s handling cookies.\nbitinn: Yes, this is a known limit and `raw()` is your best bet. Fetch used to provide an API to get cookies as array but deprecated it. (See #251)\r\n\r\nBut I believe there are quite a few packages that handles cookies with node-fetch, search npm for some solutions.\r\n\r\nAnd for future readers: since `node-fetch` has 100% coverage, the best place to look up a solution is at:\r\n\r\nhttps://github.com/bitinn/node-fetch/blob/master/test/test.js\nNoitidart: What I did was a weird thing. I couldn\'t for some reason send `set-cookie` back to electron renderer process so I use `fs` to `fs.writeFile(\'...\', res.headers.get(\'set-cookie\'), \'utf8\')` then I read from this file the cookie value. So weird but it works.\nbitinn: this is now documented in readmeyou must reply in JSON format. Follow this schema {\'type\': \'json_schema\', \'json_schema\': {\'name\': \'breaking_change\', \'strict\': True, \'schema\': {\'type\': \'object\', \'properties\': {\'Id\': {\'type\': \'integer\', \'description\': \'A unique identifier, assigned sequentially starting from 0.\'}, \'BC_description\': {\'type\': \'string\', \'description\': \'A clear, detailed, and comprehensive description of the breaking change.\'}, \'Reference\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'All references related to this change, including parsing sources, issue numbers, commit SHAs.\'}, \'Changed_object\': {\'type\': \'object\', \'properties\': {\'type\': {\'type\': \'string\', \'enum\': [\'environment\', \'config\', \'import\', \'call\', \'read\', \'write\'], \'description\': "The type of changed object: \'call\' for method call change (e.g.,method signature, arguments and option change), \'read\' and \'write\' for reading and setting properties, \'environment\' for environment changes, \'config\' for configuration changes in an external file (e.g., *.config.js) , and \'import\' for import/require related changes."}, \'className\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'Explicit class names impacted by the change. Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)\'}, \'methodName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Exact method names affected (required when type is \'call\').  Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, \'propertyName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit property names affected (required when type is \'read\' or \'write\'). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, \'moduleName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit module names affected (required when type is \'import\' or \'config\'). If type is \'config\', specify the configration file name (e.g., webpack.config.js). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}}, \'required\': [\'type\', \'className\', \'methodName\', \'propertyName\', \'moduleName\'], \'additionalProperties\': False, \'description\': \'All information about the changed API which could help locate the affected code in downstream clients*.\'}, \'Adaptation_method\': {\'type\': \'string\', \'description\': "A structured recommendation for adapting to the change. Prioritize direct code examples. (e.g., \'base.text() -> base.textConverted())\'"}, \'RequireInfoFlag\': {\'type\': \'boolean\', \'description\': "Set to true if any aspect of the breaking change, including affected entities, adaptation methods, or specific terminology, is not fully clear, explicitly defined, or completely specified in the provided documentation. If set to true, you must precisely specify the missing or unclear details in the \'RequireInfo\' field."}, \'RequireInfo\': {\'type\': \'string\', \'description\': "Explicitly describe the missing information, clarification, definitions, or additional details required to fully understand or accurately resolve the breaking change. This field must remain empty only if \'RequireInfoFlag\' is false."}}, \'required\': [\'Id\', \'Reference\', \'BC_description\', \'Changed_object\', \'Adaptation_method\', \'RequireInfo\', \'RequireInfoFlag\'], \'additionalProperties\': False}}}'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': "\nYou are a software engineer who has discovered that a critical library in your project has released a new major version.\nYour current task is to complement the Changed_object field in a JSON.\n    Carefully read the 'BC_description' and 'Adaptation_method' field. \n    Accordingly, Make the Changed_object description more sufficient and aligned with the information from the other fields. \n    Ensure all changed APIs in 'BC_description' are covered.\nReturn the refined JSON as the output. \n    "}, {'role': 'user', 'content': '{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed in node-fetch v2.0.0. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. However, this behavior is incorrect for multi-valued headers like `Set-Cookie`, where individual values may contain commas, making split-by-comma parsing unreliable. The Fetch specification explicitly states that `Set-Cookie` headers should not be combined. The `headers.raw()` method remains available to access header values as an array and is currently the recommended way to correctly extract multiple `Set-Cookie` headers. The use of `response.headers.getSetCookie()` is not implemented in node-fetch v2.0.0, contrary to expectations from the Fetch API draft; thus, it is not available as a standard-compliant alternative.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\', \'https://github.com/bitinn/node-fetch/pull/783\', \'https://github.com/bitinn/node-fetch/issues/251\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `Object.entries(response.headers.raw())` to correctly access all `Set-Cookie` header values as an array. Example:\\n```js\\nif (res.headers.has(\'set-cookie\')) {\\n  for (const [key, values] of Object.entries(res.headers.raw())) {\\n    if (key.toLowerCase() === \'set-cookie\') {\\n      for (const value of values) {\\n        // Process each Set-Cookie header value\\n        await cookieJar.setCookie(value, url);\\n      }\\n    }\\n  }\\n}\\n```", \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}you must reply in JSON format. Follow this schema {\'type\': \'json_schema\', \'json_schema\': {\'name\': \'breaking_change\', \'strict\': True, \'schema\': {\'type\': \'object\', \'properties\': {\'Id\': {\'type\': \'integer\', \'description\': \'A unique identifier, assigned sequentially starting from 0.\'}, \'BC_description\': {\'type\': \'string\', \'description\': \'A clear, detailed, and comprehensive description of the breaking change.\'}, \'Reference\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'All references related to this change, including parsing sources, issue numbers, commit SHAs.\'}, \'Changed_object\': {\'type\': \'object\', \'properties\': {\'type\': {\'type\': \'string\', \'enum\': [\'environment\', \'config\', \'import\', \'call\', \'read\', \'write\'], \'description\': "The type of changed object: \'call\' for method call change (e.g.,method signature, arguments and option change), \'read\' and \'write\' for reading and setting properties, \'environment\' for environment changes, \'config\' for configuration changes in an external file (e.g., *.config.js) , and \'import\' for import/require related changes."}, \'className\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'Explicit class names impacted by the change. Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)\'}, \'methodName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Exact method names affected (required when type is \'call\').  Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, \'propertyName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit property names affected (required when type is \'read\' or \'write\'). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, \'moduleName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit module names affected (required when type is \'import\' or \'config\'). If type is \'config\', specify the configration file name (e.g., webpack.config.js). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}}, \'required\': [\'type\', \'className\', \'methodName\', \'propertyName\', \'moduleName\'], \'additionalProperties\': False, \'description\': \'All information about the changed API which could help locate the affected code in downstream clients*.\'}, \'Adaptation_method\': {\'type\': \'string\', \'description\': "A structured recommendation for adapting to the change. Prioritize direct code examples. (e.g., \'base.text() -> base.textConverted())\'"}, \'RequireInfoFlag\': {\'type\': \'boolean\', \'description\': "Set to true if any aspect of the breaking change, including affected entities, adaptation methods, or specific terminology, is not fully clear, explicitly defined, or completely specified in the provided documentation. If set to true, you must precisely specify the missing or unclear details in the \'RequireInfo\' field."}, \'RequireInfo\': {\'type\': \'string\', \'description\': "Explicitly describe the missing information, clarification, definitions, or additional details required to fully understand or accurately resolve the breaking change. This field must remain empty only if \'RequireInfoFlag\' is false."}}, \'required\': [\'Id\', \'Reference\', \'BC_description\', \'Changed_object\', \'Adaptation_method\', \'RequireInfo\', \'RequireInfoFlag\'], \'additionalProperties\': False}}}'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+[{'role': 'system', 'content': "\nYou are a software engineer who has discovered that a critical library in your project has released a new major version.\nYour current task is to complement the Changed_object field in a JSON.\n    Carefully read the 'BC_description' and 'Adaptation_method' field. \n    Accordingly, Make the Changed_object description more sufficient and aligned with the information from the other fields. \n    Ensure all changed APIs in 'BC_description' are covered.\nReturn the refined JSON as the output. \n    "}, {'role': 'user', 'content': '{\'Id\': 6, \'BC_description\': \'The `headers.getAll()` method has been removed in node-fetch v2.0.0. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. However, this behavior is incorrect for multi-valued headers like `Set-Cookie`, where individual values may contain commas, making split-by-comma parsing unreliable. The Fetch specification explicitly states that `Set-Cookie` headers should not be combined. The `headers.raw()` method remains available to access header values as an array and is currently the recommended way to correctly extract multiple `Set-Cookie` headers. The use of `response.headers.getSetCookie()` is not implemented in node-fetch v2.0.0, contrary to expectations from the Fetch API draft; thus, it is not available as a standard-compliant alternative.\', \'Reference\': [\'https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200\', \'UPGRADE-GUIDE.md\', \'https://github.com/bitinn/node-fetch/pull/783\', \'https://github.com/bitinn/node-fetch/issues/251\'], \'Changed_object\': {\'type\': \'call\', \'className\': [\'Headers\'], \'methodName\': [\'getAll\'], \'propertyName\': [], \'moduleName\': [\'node-fetch\']}, \'Adaptation_method\': "Replace `headers.getAll(\'set-cookie\')` with `Object.entries(response.headers.raw())` to correctly access all `Set-Cookie` header values as an array. Example:\\n```js\\nif (res.headers.has(\'set-cookie\')) {\\n  for (const [key, values] of Object.entries(res.headers.raw())) {\\n    if (key.toLowerCase() === \'set-cookie\') {\\n      for (const value of values) {\\n        // Process each Set-Cookie header value\\n        await cookieJar.setCookie(value, url);\\n      }\\n    }\\n  }\\n}\\n```", \'RequireInfoFlag\': False, \'RequireInfo\': \'\'}you must reply in JSON format. Follow this schema {\'type\': \'json_schema\', \'json_schema\': {\'name\': \'breaking_change\', \'strict\': True, \'schema\': {\'type\': \'object\', \'properties\': {\'Id\': {\'type\': \'integer\', \'description\': \'A unique identifier, assigned sequentially starting from 0.\'}, \'BC_description\': {\'type\': \'string\', \'description\': \'A clear, detailed, and comprehensive description of the breaking change.\'}, \'Reference\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'All references related to this change, including parsing sources, issue numbers, commit SHAs.\'}, \'Changed_object\': {\'type\': \'object\', \'properties\': {\'type\': {\'type\': \'string\', \'enum\': [\'environment\', \'config\', \'import\', \'call\', \'read\', \'write\'], \'description\': "The type of changed object: \'call\' for method call change (e.g.,method signature, arguments and option change), \'read\' and \'write\' for reading and setting properties, \'environment\' for environment changes, \'config\' for configuration changes in an external file (e.g., *.config.js) , and \'import\' for import/require related changes."}, \'className\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': \'Explicit class names impacted by the change. Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)\'}, \'methodName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Exact method names affected (required when type is \'call\').  Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, \'propertyName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit property names affected (required when type is \'read\' or \'write\'). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}, \'moduleName\': {\'type\': \'array\', \'items\': {\'type\': \'string\'}, \'description\': "Explicit module names affected (required when type is \'import\' or \'config\'). If type is \'config\', specify the configration file name (e.g., webpack.config.js). Wildcard is allowed for a set of objects. (e.g., node-fetch/**/*, ** matches all directories recursively, * matches all files)"}}, \'required\': [\'type\', \'className\', \'methodName\', \'propertyName\', \'moduleName\'], \'additionalProperties\': False, \'description\': \'All information about the changed API which could help locate the affected code in downstream clients*.\'}, \'Adaptation_method\': {\'type\': \'string\', \'description\': "A structured recommendation for adapting to the change. Prioritize direct code examples. (e.g., \'base.text() -> base.textConverted())\'"}, \'RequireInfoFlag\': {\'type\': \'boolean\', \'description\': "Set to true if any aspect of the breaking change, including affected entities, adaptation methods, or specific terminology, is not fully clear, explicitly defined, or completely specified in the provided documentation. If set to true, you must precisely specify the missing or unclear details in the \'RequireInfo\' field."}, \'RequireInfo\': {\'type\': \'string\', \'description\': "Explicitly describe the missing information, clarification, definitions, or additional details required to fully understand or accurately resolve the breaking change. This field must remain empty only if \'RequireInfoFlag\' is false."}}, \'required\': [\'Id\', \'Reference\', \'BC_description\', \'Changed_object\', \'Adaptation_method\', \'RequireInfo\', \'RequireInfoFlag\'], \'additionalProperties\': False}}}'}]
+HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+New description: {
+  "Id": 6,
+  "BC_description": "The `headers.getAll()` method has been removed in node-fetch v2.0.0. The `headers.get()` method now returns all values as a comma-delimited string, in accordance with the Fetch specification. However, this behavior is incorrect for multi-valued headers like `Set-Cookie`, where individual values may contain commas, making split-by-comma parsing unreliable. The Fetch specification explicitly states that `Set-Cookie` headers should not be combined. The `headers.raw()` method remains available to access header values as an array and is currently the recommended way to correctly extract multiple `Set-Cookie` headers. The use of `response.headers.getSetCookie()` is not implemented in node-fetch v2.0.0, contrary to expectations from the Fetch API draft; thus, it is not available as a standard-compliant alternative.",
+  "Reference": [
+    "https://github.com/bitinn/node-fetch/blob/master/CHANGELOG.md#v200",
+    "UPGRADE-GUIDE.md",
+    "https://github.com/bitinn/node-fetch/pull/783",
+    "https://github.com/bitinn/node-fetch/issues/251"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Headers"
+    ],
+    "methodName": [
+      "getAll"
+    ],
+    "propertyName": [],
+    "moduleName": [
+      "node-fetch"
+    ]
+  },
+  "Adaptation_method": "Replace `headers.getAll('set-cookie')` with `Object.entries(response.headers.raw())` to correctly access all `Set-Cookie` header values as an array. Example:\n```js\nif (res.headers.has('set-cookie')) {\n  for (const [key, values] of Object.entries(res.headers.raw())) {\n    if (key.toLowerCase() === 'set-cookie') {\n      for (const value of values) {\n        // Process each Set-Cookie header value\n        await cookieJar.setCookie(value, url);\n      }\n    }\n  }\n}\n```",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}
+validation consumption token: 20483
+validation consumption time: 71.70472070761025
+Done: node-fetch
+Skipping unsupported type 'environment' (Id=0)
+Wrote 20 patterns to  /exp/jsfix/node-fetch/qwen-plus-latest/tapir.json

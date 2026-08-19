@@ -1,0 +1,211 @@
+2025-08-31 02:21:23,560 | INFO | repair.node-clusterphone | Starting analysis for node-clusterphone
+2025-08-31 02:21:23,560 | INFO | repair.node-clusterphone | Starting breaking change analysis for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:21:23,561 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:21:23,561 | INFO | repair.node-clusterphone | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:21:23,561 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:21:23,745 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:21:23,746 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:21:23,746 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ae44a0>, {})
+2025-08-31 02:21:23,746 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:21:23,746 | INFO | repair.node-clusterphone | END pattern 0 (pattern_0)
+2025-08-31 02:21:23,746 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:21:23,746 | INFO | repair.node-clusterphone | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:21:23,746 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:21:23,907 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:21:23,907 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:21:23,907 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ae44a0>, {})
+2025-08-31 02:21:23,908 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:21:23,908 | INFO | repair.node-clusterphone | END pattern 0 (pattern_0)
+2025-08-31 02:21:23,908 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:21:23,908 | INFO | repair.node-clusterphone | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:21:23,908 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:21:24,074 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:21:24,074 | DEBUG | repair.node-clusterphone | Parsed detection output: [{'pattern_id': 1, 'file': 'test/test.js', 'line': 153, 'column': 19}, {'pattern_id': 1, 'file': 'test/test.js', 'line': 183, 'column': 19}]
+2025-08-31 02:21:24,074 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab7b00>, {'test/test.js': defaultdict(<class 'list'>, {1: [{'line': 153, 'column': 19}, {'line': 183, 'column': 19}]})})
+2025-08-31 02:21:24,075 | INFO | repair.node-clusterphone | New context extracted from /bluebird/results/gpt-4.1/node-clusterphone/test/test.js
+2025-08-31 02:21:53,065 | DEBUG | repair.node-clusterphone | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "describe(\"clusterphone\", function() {\n  var server = Promise.promisifyAll(net.createServer());\n\n  before(function() {\n    // If we're running under istanbul, we change entrypoint to be istanbul\n    // and make sure each worker gets a different directory for coverage.\n    var exec = __dirname + \"/worker-entrypoint.js\";\n    var args = [];\n\n    if (process.env.npm_config_coverage) {\n      console.log(\"Running with coverage instrumentation\");\n      args = [\"test\", \"--config\", __dirname + \"/worker-istanbul-config.js\", exec];\n      exec = __dirname + \"/../node_modules/.bin/istanbul\";\n    }\n\n    cluster.setupMaster({\n      exec: exec,\n      args: args,\n    });\n\n    return server.listenAsync();\n  });\n\n  afterEach(function(done) {\n    var isDone = false;\n\n    // Forcibly stop all workers.\n    try {\n      cluster.disconnect(function() {\n        if (!isDone) {\n          isDone = true;\n          done();\n        }\n      });\n    } catch(err) {\n      if (!/channel closed/.test(err.message)) {\n        throw err;\n      }\n    }\n\n    setTimeout(function() {\n      if (isDone) {\n        return;\n      }\n      Object.keys(cluster.workers).forEach(function(workerId) {\n        cluster.workers[workerId].kill();\n      });\n      isDone = true;\n      done();\n    }, 1000);\n\n    Object.keys(clusterphone.handlers).forEach(function(handler) {\n      delete clusterphone.handlers[handler];\n    });\n\n    server.removeAllListeners();\n  });\n\n  after(function() {\n    server.close();\n  });\n\n  it(\"default namespace is _\", function() {\n    expect(clusterphone.name).to.eql(\"_\");\n  });\n\n  it(\"forbids access to 'clusterphone' namespace\", function() {\n    expect(function() {\n      clusterphone.ns(\"clusterphone\");\n    }).to.throw(/is private/);\n  });\n\n  it(\"fails on empty namespace name.\", function() {\n    expect(function() {\n      clusterphone.ns(\"\");\n    }).to.throw(/name is required/i);\n  });\n\n  it(\"does not create duplicate namespaces\", function() {\n    var ns1 = clusterphone.ns(\"dupetest\");\n    var ns2 = clusterphone.ns(\"dupetest\");\n    expect(ns1).to.eql(ns2);\n  });\n\n  it(\"refuses to dispatch to null worker\", function() {\n    expect(function() {\n      clusterphone.sendTo(null);\n    }).to.throw(TypeError);\n  });\n\n  it(\"refuses to dispatch to a worker that is gone\", function(done) {\n    var worker = spawnWorker(\"exit\");\n\n    worker.on(\"exit\", function() {\n      expect(function() {\n        clusterphone.sendTo(worker, \"resurrect\");\n      }).to.throw(/worker is dead/i);\n      done();\n    });\n  });\n\n  it(\"master refuses to dispatch an empty or null command\", function() {\n    var worker = spawnWorker(\"exit\");\n    expect(function() {\n      clusterphone.sendTo(worker);\n    }).to.throw(/command is required/i);\n\n    expect(function() {\n      clusterphone.sendTo(worker, \"\");\n    }).to.throw(/command is required/i);\n\n    expect(function() {\n      clusterphone.sendTo(worker, []);\n    }).to.throw(/command is required/i);\n  });\n\n  it(\"worker refuses to dispatch an empty or null command\", function(done) {\n    var worker = spawnWorker(\"test-args\");\n\n    worker.on(\"exit\", function(code) {\n      expect(code).to.equal(0);\n      done();\n    });\n  });\n\n  it(\"sends descriptors correctly\", function() {\n-    var deferred = Promise.defer();\n+    // Migration: Promise.defer() removed in Bluebird v3; manually construct deferred\n+    var deferred = {};\n+    deferred.promise = new Promise(function(resolve, reject) {\n+      deferred.resolve = resolve;\n+      deferred.reject = reject;\n+    });\n    server.once(\"connection\", function(c) {\n      c.on(\"data\", function(data) {\n        expect(data.toString()).to.eql(\"hello\");\n        deferred.resolve();\n      });\n    });\n\n    var client = net.createConnection(server.address().port);\n\n    return spawnWorkerAndWait(\"standard\").then(function(worker) {\n      return clusterphone.sendTo(worker, \"server\", {}, client).ackd();\n    }).then(function() {\n-      return deferred.promise;\n+      return deferred.promise;\n    });\n  });\n\n  it(\"refuses to queue filedescriptors to a worker\", function() {\n    var worker = spawnWorker(\"standard\");\n\n    expect(function() {\n      var client = net.createConnection(server.address().port);\n      clusterphone.sendTo(worker, \"foo\", {}, client);\n    }).to.throw(/tried to send an FD/);\n  });\n\n  it(\"will queue file descriptor if forced to.\", function() {\n    var client = net.createConnection(server.address().port);\n    var worker = spawnWorker(\"standard\");\n\n-    var deferred = Promise.defer();\n+    // Migration: Promise.defer() removed in Bluebird v3; manually construct deferred\n+    var deferred = {};\n+    deferred.promise = new Promise(function(resolve, reject) {\n+      deferred.resolve = resolve;\n+      deferred.reject = reject;\n+    });\n    server.once(\"connection\", function(c) {\n      c.on(\"data\", function(data) {\n        expect(data.toString()).to.eql(\"hello\");\n        deferred.resolve();\n      });\n    });\n\n    return clusterphone.sendTo(worker, \"server\", {}, client, true).ackd().then(function() {\n-      return deferred.promise;\n+      return deferred.promise;\n    });\n  });\n\n  it(\"sends message data to workers correctly\", function() {\n    return spawnWorkerAndWait(\"standard\").then(function(worker) {\n      return clusterphone.sendTo(worker, \"echo\", {bar: \"quux\"}).ackd().then(function(reply) {\n        expect(reply).to.deep.eql({bar: \"quux\"});\n      });\n    });\n  });\n\n  // ... rest of tests unchanged ...\n});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:21:53,068 | INFO | repair.node-clusterphone | Replaced code in /bluebird/results/gpt-4.1/node-clusterphone/test/test.js at [633, 15157]
+2025-08-31 02:21:53,069 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:21:53,070 | INFO | repair.node-clusterphone | END pattern 1 (pattern_1)
+2025-08-31 02:21:53,070 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:21:53,070 | INFO | repair.node-clusterphone | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:21:53,071 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:21:53,416 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:21:53,416 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:21:53,416 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab67a0>, {})
+2025-08-31 02:21:53,416 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:21:53,416 | INFO | repair.node-clusterphone | END pattern 1 (pattern_1)
+2025-08-31 02:21:53,417 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:21:53,417 | INFO | repair.node-clusterphone | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:21:53,417 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:21:53,558 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:21:53,558 | DEBUG | repair.node-clusterphone | Parsed detection output: [{'pattern_id': 2, 'file': 'clusterphone.js', 'line': 66, 'column': 11}, {'pattern_id': 2, 'file': 'message-bus.js', 'line': 105, 'column': 2}]
+2025-08-31 02:21:53,558 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab67a0>, {'clusterphone.js': defaultdict(<class 'list'>, {2: [{'line': 66, 'column': 11}]}), 'message-bus.js': defaultdict(<class 'list'>, {2: [{'line': 105, 'column': 2}]})})
+2025-08-31 02:21:53,559 | INFO | repair.node-clusterphone | New context extracted from /bluebird/results/gpt-4.1/node-clusterphone/clusterphone.js
+2025-08-31 02:22:06,791 | DEBUG | repair.node-clusterphone | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "function constructMessageApi(namespace, cmd, destName, seq) {\n  var api = {},\n      valid = true,\n      timeout = module.exports.ackTimeout,\n      resolve,\n      reject;\n\n  var promise = new Promise(function(_resolve, _reject) {\n    resolve = _resolve;\n    reject = _reject;\n  });\n\n  setImmediate(function() {\n    valid = false;\n  });\n\n  api.within = function(newTimeout) {\n    if (!valid) {\n      throw new Error(\"within() / acknowledged() calls are only valid immediately after sending a message.\");\n    }\n    if (resolve.monitored) {\n      throw new Error(\"within() must be called *before* acknowledged()\");\n    }\n    if (\"number\" !== typeof newTimeout) {\n      newTimeout = parseInt(newTimeout, 10);\n    }\n    if(!newTimeout) {\n      throw new Error(\"Timeout must be a number\");\n    }\n    timeout = newTimeout;\n    return api;\n  };\n\n  api.acknowledged = function(cb) {\n    if (!valid) {\n      throw new Error(\"within() / acknowledged() calls are only valid immediately after sending a message.\");\n    }\n    // This flag indicates that the caller does actually care about the resolution of this acknowledgement.\n    resolve.monitored = true;\n    return promise.timeout(timeout)\n        // Adapted for Bluebird v2.0.0: catch no longer accepts error type filter\n        .catch(function(err) {\n          if (err instanceof Promise.TimeoutError) {\n            // We retrieve the pending here to ensure it's deleted.\n            namespace.getPending(seq);\n            throw new Error(\"Timed out waiting for acknowledgement for message \" + cmd + \" with seq \" + seq + \" to \" + destName + \" in namespace \" + namespace.interface.name);\n          }\n          // Re-throw other errors\n          throw err;\n        })\n        .nodeify(cb);\n  };\n\n  api.ackd = api.acknowledged;\n\n  return [api, resolve, reject];\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:22:06,794 | INFO | repair.node-clusterphone | Replaced code in /bluebird/results/gpt-4.1/node-clusterphone/clusterphone.js at [1090, 2703]
+2025-08-31 02:22:06,796 | INFO | repair.node-clusterphone | New context extracted from /bluebird/results/gpt-4.1/node-clusterphone/message-bus.js
+2025-08-31 02:22:09,856 | DEBUG | repair.node-clusterphone | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:22:09,858 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:09,858 | INFO | repair.node-clusterphone | END pattern 2 (pattern_2)
+2025-08-31 02:22:09,859 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:09,859 | INFO | repair.node-clusterphone | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:22:09,859 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:22:10,219 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:10,219 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:10,219 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab67a0>, {})
+2025-08-31 02:22:10,220 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:10,220 | INFO | repair.node-clusterphone | END pattern 2 (pattern_2)
+2025-08-31 02:22:10,220 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:10,220 | INFO | repair.node-clusterphone | BEGIN pattern 4 (pattern_4)
+2025-08-31 02:22:10,220 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{Promise}", "changelogId": 4}
+2025-08-31 02:22:10,368 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:10,369 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:10,369 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab67a0>, {})
+2025-08-31 02:22:10,369 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:10,369 | INFO | repair.node-clusterphone | END pattern 4 (pattern_4)
+2025-08-31 02:22:10,369 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:10,369 | INFO | repair.node-clusterphone | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:22:10,369 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:22:10,512 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:10,512 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:10,512 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab67a0>, {})
+2025-08-31 02:22:10,512 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:10,512 | INFO | repair.node-clusterphone | END pattern 5 (pattern_5)
+2025-08-31 02:22:10,513 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:10,513 | INFO | repair.node-clusterphone | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:22:10,513 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:22:10,657 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:10,657 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:10,657 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab67a0>, {})
+2025-08-31 02:22:10,658 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:10,658 | INFO | repair.node-clusterphone | END pattern 5 (pattern_5)
+2025-08-31 02:22:10,658 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:10,658 | INFO | repair.node-clusterphone | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:22:10,658 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:22:10,805 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:10,805 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:10,805 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:10,806 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:10,806 | INFO | repair.node-clusterphone | END pattern 6 (pattern_6)
+2025-08-31 02:22:10,806 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:10,806 | INFO | repair.node-clusterphone | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:22:10,806 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:22:10,954 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:10,955 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:10,955 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:10,955 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:10,955 | INFO | repair.node-clusterphone | END pattern 6 (pattern_6)
+2025-08-31 02:22:10,955 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:10,955 | INFO | repair.node-clusterphone | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:22:10,955 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:22:11,102 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:11,102 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:11,102 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:11,103 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:11,103 | INFO | repair.node-clusterphone | END pattern 7 (pattern_7)
+2025-08-31 02:22:11,103 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:11,103 | INFO | repair.node-clusterphone | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:22:11,103 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:22:11,245 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:11,245 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:11,245 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:11,246 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:11,246 | INFO | repair.node-clusterphone | END pattern 7 (pattern_7)
+2025-08-31 02:22:11,246 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:11,246 | INFO | repair.node-clusterphone | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:22:11,246 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:22:11,391 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:11,391 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:11,391 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:11,391 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:11,391 | INFO | repair.node-clusterphone | END pattern 8 (pattern_8)
+2025-08-31 02:22:11,392 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:11,392 | INFO | repair.node-clusterphone | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:22:11,392 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:22:11,536 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:11,536 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:11,536 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:11,537 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:11,537 | INFO | repair.node-clusterphone | END pattern 8 (pattern_8)
+2025-08-31 02:22:11,537 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:11,537 | INFO | repair.node-clusterphone | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:22:11,537 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:22:11,681 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:11,681 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:11,681 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:11,681 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:11,681 | INFO | repair.node-clusterphone | END pattern 9 (pattern_9)
+2025-08-31 02:22:11,681 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:11,682 | INFO | repair.node-clusterphone | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:22:11,682 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:22:11,824 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:11,824 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:11,824 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:11,824 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:11,825 | INFO | repair.node-clusterphone | END pattern 9 (pattern_9)
+2025-08-31 02:22:11,825 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:11,825 | INFO | repair.node-clusterphone | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:22:11,825 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:22:11,967 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:11,967 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:11,967 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:11,968 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:11,968 | INFO | repair.node-clusterphone | END pattern 10 (pattern_10)
+2025-08-31 02:22:11,968 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:11,968 | INFO | repair.node-clusterphone | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:22:11,968 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:22:12,109 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:12,109 | DEBUG | repair.node-clusterphone | Parsed detection output: []
+2025-08-31 02:22:12,109 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {})
+2025-08-31 02:22:12,110 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:12,110 | INFO | repair.node-clusterphone | END pattern 10 (pattern_10)
+2025-08-31 02:22:12,110 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:12,110 | INFO | repair.node-clusterphone | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:22:12,110 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:22:12,257 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:12,257 | DEBUG | repair.node-clusterphone | Parsed detection output: [{'pattern_id': 11, 'file': 'test/worker-behaviors/standard.js', 'line': 53, 'column': 9}]
+2025-08-31 02:22:12,257 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {'test/worker-behaviors/standard.js': defaultdict(<class 'list'>, {11: [{'line': 53, 'column': 9}]})})
+2025-08-31 02:22:12,257 | INFO | repair.node-clusterphone | New context extracted from /bluebird/results/gpt-4.1/node-clusterphone/test/worker-behaviors/standard.js
+2025-08-31 02:22:18,471 | DEBUG | repair.node-clusterphone | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:22:18,473 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:18,473 | INFO | repair.node-clusterphone | END pattern 11 (pattern_11)
+2025-08-31 02:22:18,474 | INFO | repair.node-clusterphone | ============================================================
+2025-08-31 02:22:18,474 | INFO | repair.node-clusterphone | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:22:18,475 | DEBUG | repair.node-clusterphone | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:22:18,645 | INFO | repair.node-clusterphone | Tapir run successful for /bluebird/results/gpt-4.1/node-clusterphone
+2025-08-31 02:22:18,645 | DEBUG | repair.node-clusterphone | Parsed detection output: [{'pattern_id': 11, 'file': 'test/worker-behaviors/standard.js', 'line': 52, 'column': 0}]
+2025-08-31 02:22:18,645 | DEBUG | repair.node-clusterphone | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473f60>, {'test/worker-behaviors/standard.js': defaultdict(<class 'list'>, {11: [{'line': 52, 'column': 0}]})})
+2025-08-31 02:22:18,646 | INFO | repair.node-clusterphone | New context extracted from /bluebird/results/gpt-4.1/node-clusterphone/test/worker-behaviors/standard.js
+2025-08-31 02:22:22,760 | DEBUG | repair.node-clusterphone | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:22:22,762 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:22,762 | INFO | repair.node-clusterphone | END pattern 11 (pattern_11)
+2025-08-31 02:22:22,764 | INFO | repair.node-clusterphone | Config BC: scanning 0 files
+2025-08-31 02:22:22,765 | DEBUG | repair.node-clusterphone | Updated package.json saved at /bluebird/results/gpt-4.1/node-clusterphone/package.json
+2025-08-31 02:22:22,765 | INFO | repair.node-clusterphone | token consumed 29670
+2025-08-31 02:22:22,765 | INFO | repair.node-clusterphone | parse consumption time: 55.608307666145265

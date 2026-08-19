@@ -1,0 +1,17 @@
+[
+  "CHANGELOG.md",
+  "Readme_zh-CN.md",
+  "Readme.md",
+  "CONTRIBUTING.md",
+  "bcCommitMessages.txt",
+  "SECURITY.md",
+  "docs/options-in-depth.md",
+  "docs/parsing-and-hooks.md",
+  "docs/terminology.md",
+  "docs/help-in-depth.md",
+  "docs/deprecated.md",
+  "docs/zh-CN/\u672f\u8bed\u8868.md",
+  "docs/zh-CN/\u4e0d\u518d\u63a8\u8350\u4f7f\u7528\u7684\u529f\u80fd.md",
+  "docs/zh-CN/\u53ef\u53d8\u53c2\u6570\u7684\u9009\u9879.md",
+  ".github/PULL_REQUEST_TEMPLATE.md"
+]

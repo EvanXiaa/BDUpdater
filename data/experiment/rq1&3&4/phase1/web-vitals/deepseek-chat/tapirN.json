@@ -1,0 +1,1 @@
+[{"type": "call", "pattern": "read {<web-vitals>,<web-vitals/**/*>}**.{onFID,FIDThresholds,FIDMetric}", "changelogId": 0}, {"type": "call", "pattern": "write {<web-vitals>,<web-vitals/**/*>}**.{onFID,FIDThresholds,FIDMetric}", "changelogId": 0}]

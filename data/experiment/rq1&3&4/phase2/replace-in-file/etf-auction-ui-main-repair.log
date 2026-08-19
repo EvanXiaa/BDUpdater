@@ -1,0 +1,106 @@
+2025-08-31 19:02:05,158 | INFO | repair.etf-auction-ui-main | Starting analysis for etf-auction-ui-main
+2025-08-31 19:02:05,158 | INFO | repair.etf-auction-ui-main | Starting breaking change analysis for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:05,159 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:05,159 | INFO | repair.etf-auction-ui-main | BEGIN pattern 2 (pattern_2)
+2025-08-31 19:02:05,159 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "call", "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}?**.{sync}", "changelogId": 2}
+2025-08-31 19:02:05,286 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:05,287 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: []
+2025-08-31 19:02:05,287 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110056700>, {})
+2025-08-31 19:02:05,287 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:05,287 | INFO | repair.etf-auction-ui-main | END pattern 2 (pattern_2)
+2025-08-31 19:02:05,287 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:05,287 | INFO | repair.etf-auction-ui-main | BEGIN pattern 2 (pattern_2)
+2025-08-31 19:02:05,287 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "call", "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}?**.{sync}", "changelogId": 2}
+2025-08-31 19:02:05,397 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:05,397 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: []
+2025-08-31 19:02:05,397 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110056700>, {})
+2025-08-31 19:02:05,397 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:05,397 | INFO | repair.etf-auction-ui-main | END pattern 2 (pattern_2)
+2025-08-31 19:02:05,398 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:05,398 | INFO | repair.etf-auction-ui-main | BEGIN pattern 3 (pattern_3)
+2025-08-31 19:02:05,398 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "call", "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}?**.{replace}", "changelogId": 3}
+2025-08-31 19:02:05,506 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:05,506 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: []
+2025-08-31 19:02:05,506 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110056700>, {})
+2025-08-31 19:02:05,506 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:05,506 | INFO | repair.etf-auction-ui-main | END pattern 3 (pattern_3)
+2025-08-31 19:02:05,506 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:05,506 | INFO | repair.etf-auction-ui-main | BEGIN pattern 3 (pattern_3)
+2025-08-31 19:02:05,506 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "call", "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}?**.{replace}", "changelogId": 3}
+2025-08-31 19:02:05,617 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:05,617 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: []
+2025-08-31 19:02:05,617 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110056700>, {})
+2025-08-31 19:02:05,617 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:05,617 | INFO | repair.etf-auction-ui-main | END pattern 3 (pattern_3)
+2025-08-31 19:02:05,617 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:05,617 | INFO | repair.etf-auction-ui-main | BEGIN pattern 5 (pattern_5)
+2025-08-31 19:02:05,617 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "call", "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile,replaceInFileSync}", "changelogId": 5}
+2025-08-31 19:02:05,725 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:05,725 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: []
+2025-08-31 19:02:05,725 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110056700>, {})
+2025-08-31 19:02:05,725 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:05,725 | INFO | repair.etf-auction-ui-main | END pattern 5 (pattern_5)
+2025-08-31 19:02:05,725 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:05,725 | INFO | repair.etf-auction-ui-main | BEGIN pattern 5 (pattern_5)
+2025-08-31 19:02:05,725 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "call", "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile,replaceInFileSync}", "changelogId": 5}
+2025-08-31 19:02:05,846 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:05,846 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: []
+2025-08-31 19:02:05,846 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110056700>, {})
+2025-08-31 19:02:05,847 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:05,847 | INFO | repair.etf-auction-ui-main | END pattern 5 (pattern_5)
+2025-08-31 19:02:05,847 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:05,847 | INFO | repair.etf-auction-ui-main | BEGIN pattern 6 (pattern_6)
+2025-08-31 19:02:05,847 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "call", "pattern": "read {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile,replaceInFileSync}", "changelogId": 6}
+2025-08-31 19:02:05,956 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:05,956 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: []
+2025-08-31 19:02:05,956 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110056700>, {})
+2025-08-31 19:02:05,957 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:05,957 | INFO | repair.etf-auction-ui-main | END pattern 6 (pattern_6)
+2025-08-31 19:02:05,957 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:05,957 | INFO | repair.etf-auction-ui-main | BEGIN pattern 6 (pattern_6)
+2025-08-31 19:02:05,957 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "call", "pattern": "write {<replace-in-file>,<replace-in-file/**/*>}?**.{replaceInFile,replaceInFileSync}", "changelogId": 6}
+2025-08-31 19:02:06,064 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:06,064 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: []
+2025-08-31 19:02:06,064 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110056700>, {})
+2025-08-31 19:02:06,064 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:06,064 | INFO | repair.etf-auction-ui-main | END pattern 6 (pattern_6)
+2025-08-31 19:02:06,064 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:06,064 | INFO | repair.etf-auction-ui-main | BEGIN pattern 0 (pattern_0)
+2025-08-31 19:02:06,064 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "import", "pattern": "import {replace-in-file/**/*,replace-in-file}", "changelogId": 0}
+2025-08-31 19:02:06,172 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:06,172 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: [{'pattern_id': 0, 'file': 'replacer.js', 'line': 1, 'column': 0}]
+2025-08-31 19:02:06,172 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x110056700>, {'replacer.js': defaultdict(<class 'list'>, {0: [{'line': 1, 'column': 0}]})})
+2025-08-31 19:02:06,173 | INFO | repair.etf-auction-ui-main | New context extracted from -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/replacer.js
+2025-08-31 19:02:08,369 | DEBUG | repair.etf-auction-ui-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "// The 'replace-in-file' package is now an ES Module and must be imported using named imports, as documented by the breaking change.\nimport { replaceInFile, replaceInFileSync } from \"replace-in-file\";\n// If your code used 'replace' as the API before, you should now use 'replaceInFile' or 'replaceInFileSync' as appropriate.",
+  "additional_req": "Review and update any usage of 'replace' in the codebase to use 'replaceInFile' or 'replaceInFileSync', according to the required functionality, since the package no longer provides a default export.",
+  "dependencies": [
+    "replace-in-file@^8.0.0"
+  ]
+}
+2025-08-31 19:02:08,370 | DEBUG | repair.etf-auction-ui-main | Added to whole mode list: file=-2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/replacer.js, context=dict, bc_desc={'Id': 0, 'BC_description': "The package has been converted to an ES module. As a result, it can no longer be required o...
+2025-08-31 19:02:08,370 | INFO | repair.etf-auction-ui-main | Whole mode item: -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/replacer.js
+2025-08-31 19:02:13,595 | DEBUG | repair.etf-auction-ui-main | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': '// The \'replace-in-file\' package is now an ES Module and does not support default imports.\n// You must import the relevant named export(s) from the module.\nimport { replaceInFile } from "replace-in-file";\nconst options = {\n  outOptions: {\n    files: "./out/*",\n    from: [/src="\\//g, /href="\\//g],\n    to: [\'src="\', \'href="\'],\n  },\n  chunksOptions: {\n    files: "./out/_next/static/chunks/*",\n    from: [/\\/\\_next\\//g],\n    to: [\'_next/\'],\n  }\n};\n\n\n(async function () {\n  try {\n    // \'replaceInFile\' is now the main async replacement API, equivalent to the former default import.\n    const outResults = await replaceInFile(options.outOptions);\n    const chunksResults = await replaceInFile(options.chunksOptions);\n    console.log("Replacement results:", outResults);\n    console.log("Replacement results:", chunksResults);\n  } catch (error) {\n    console.error("Error occurred:", error);\n  }\n})();\n', 'additional_req': "Ensure you are running this file using an environment that supports ES modules (e.g., using the 'type': 'module' in package.json, or .mjs extension). If other parts of your project import 'replace-in-file' using default or CommonJS style, they also need migration to named import syntax.", 'dependencies': ['replace-in-file@^8.0.0']}
+2025-08-31 19:02:13,595 | INFO | repair.etf-auction-ui-main | Replace whole file: -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/replacer.js
+2025-08-31 19:02:13,597 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:13,597 | INFO | repair.etf-auction-ui-main | END pattern 0 (pattern_0)
+2025-08-31 19:02:13,598 | INFO | repair.etf-auction-ui-main | ============================================================
+2025-08-31 19:02:13,598 | INFO | repair.etf-auction-ui-main | BEGIN pattern 1 (pattern_1)
+2025-08-31 19:02:13,598 | DEBUG | repair.etf-auction-ui-main | Pattern payload: {"type": "import", "pattern": "import {replace-in-file/**/*,replace-in-file}", "changelogId": 1}
+2025-08-31 19:02:13,719 | INFO | repair.etf-auction-ui-main | Tapir run successful for -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main
+2025-08-31 19:02:13,719 | DEBUG | repair.etf-auction-ui-main | Parsed detection output: [{'pattern_id': 1, 'file': 'replacer.js', 'line': 3, 'column': 0}]
+2025-08-31 19:02:13,719 | DEBUG | repair.etf-auction-ui-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1100544a0>, {'replacer.js': defaultdict(<class 'list'>, {1: [{'line': 3, 'column': 0}]})})
+2025-08-31 19:02:13,720 | INFO | repair.etf-auction-ui-main | New context extracted from -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/replacer.js
+2025-08-31 19:02:14,412 | DEBUG | repair.etf-auction-ui-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 19:02:14,413 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:14,413 | INFO | repair.etf-auction-ui-main | END pattern 1 (pattern_1)
+2025-08-31 19:02:14,415 | INFO | repair.etf-auction-ui-main | Config BC: scanning 0 files
+2025-08-31 19:02:14,416 | DEBUG | repair.etf-auction-ui-main | Updated package.json saved at -2024/replace-in-file/results/gpt-4.1/etf-auction-ui-main/package.json
+2025-08-31 19:02:14,416 | INFO | repair.etf-auction-ui-main | token consumed 5142
+2025-08-31 19:02:14,417 | INFO | repair.etf-auction-ui-main | parse consumption time: 8.112169958651066

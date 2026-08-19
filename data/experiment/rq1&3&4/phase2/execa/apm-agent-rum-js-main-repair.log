@@ -1,0 +1,700 @@
+2025-09-01 17:22:35,989 | INFO | repair.apm-agent-rum-js-main | Starting analysis for apm-agent-rum-js-main
+2025-09-01 17:22:35,989 | INFO | repair.apm-agent-rum-js-main | Starting breaking change analysis for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:22:35,990 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:22:35,990 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 1 (pattern_1)
+2025-09-01 17:22:35,990 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{stdout,stderr,all}", "changelogId": 1}
+2025-09-01 17:22:36,327 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:22:36,327 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:22:36,327 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:22:36,327 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:22:36,327 | INFO | repair.apm-agent-rum-js-main | END pattern 1 (pattern_1)
+2025-09-01 17:22:36,328 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:22:36,328 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 1 (pattern_1)
+2025-09-01 17:22:36,328 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{stdout,stderr,all}", "changelogId": 1}
+2025-09-01 17:22:36,554 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:22:36,554 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:22:36,554 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:22:36,554 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:22:36,555 | INFO | repair.apm-agent-rum-js-main | END pattern 1 (pattern_1)
+2025-09-01 17:22:36,555 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:22:36,555 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 2 (pattern_2)
+2025-09-01 17:22:36,555 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "call {<execa>,<execa/**/*>}**.{execa,execaSync}", "changelogId": 2}
+2025-09-01 17:22:36,781 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:22:36,782 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: [{'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 37, 'column': 39, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 38, 'column': 36, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 81, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 117, 'column': 29, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 123, 'column': 6, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 130, 'column': 27, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 135, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 142, 'column': 8, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 149, 'column': 8, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 156, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-post-release.mjs', 'line': 166, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-pre-release.mjs', 'line': 40, 'column': 39, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-pre-release.mjs', 'line': 41, 'column': 36, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-pre-release.mjs', 'line': 79, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-pre-release.mjs', 'line': 89, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-pre-release.mjs', 'line': 102, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-pre-release.mjs', 'line': 123, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-pre-release.mjs', 'line': 133, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-pre-release.mjs', 'line': 148, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-pre-release.mjs', 'line': 158, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-release.mjs', 'line': 39, 'column': 39, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-release.mjs', 'line': 40, 'column': 36, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-release.mjs', 'line': 109, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-release.mjs', 'line': 120, 'column': 8, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-release.mjs', 'line': 124, 'column': 8, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-release.mjs', 'line': 138, 'column': 10, 'confidence': 'high'}, {'pattern_id': 2, 'file': 'scripts/ci-release.mjs', 'line': 149, 'column': 10, 'confidence': 'high'}]
+2025-09-01 17:22:36,782 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {'scripts/ci-post-release.mjs': defaultdict(<class 'list'>, {2: [{'line': 37, 'column': 39, 'confidence': 'high'}, {'line': 38, 'column': 36, 'confidence': 'high'}, {'line': 81, 'column': 10, 'confidence': 'high'}, {'line': 117, 'column': 29, 'confidence': 'high'}, {'line': 123, 'column': 6, 'confidence': 'high'}, {'line': 130, 'column': 27, 'confidence': 'high'}, {'line': 135, 'column': 10, 'confidence': 'high'}, {'line': 142, 'column': 8, 'confidence': 'high'}, {'line': 149, 'column': 8, 'confidence': 'high'}, {'line': 156, 'column': 10, 'confidence': 'high'}, {'line': 166, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-pre-release.mjs': defaultdict(<class 'list'>, {2: [{'line': 40, 'column': 39, 'confidence': 'high'}, {'line': 41, 'column': 36, 'confidence': 'high'}, {'line': 79, 'column': 10, 'confidence': 'high'}, {'line': 89, 'column': 10, 'confidence': 'high'}, {'line': 102, 'column': 10, 'confidence': 'high'}, {'line': 123, 'column': 10, 'confidence': 'high'}, {'line': 133, 'column': 10, 'confidence': 'high'}, {'line': 148, 'column': 10, 'confidence': 'high'}, {'line': 158, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-release.mjs': defaultdict(<class 'list'>, {2: [{'line': 39, 'column': 39, 'confidence': 'high'}, {'line': 40, 'column': 36, 'confidence': 'high'}, {'line': 109, 'column': 10, 'confidence': 'high'}, {'line': 120, 'column': 8, 'confidence': 'high'}, {'line': 124, 'column': 8, 'confidence': 'high'}, {'line': 138, 'column': 10, 'confidence': 'high'}, {'line': 149, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 17:22:36,784 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:22:36,785 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:22:36,786 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:22:36,786 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:22:36,789 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:22:41,307 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:22:44,365 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:22:48,703 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:22:53,413 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:22:53,417 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:22:53,420 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:22:53,421 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:22:53,422 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:22:53,423 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:22:53,425 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:22:53,426 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:22:53,428 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:22:53,428 | INFO | repair.apm-agent-rum-js-main | File -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs has too many contexts extracted
+2025-09-01 17:22:53,428 | INFO | repair.apm-agent-rum-js-main | File size: 4812
+2025-09-01 17:22:55,972 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:22:55,974 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:22:55,976 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:22:55,977 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:22:55,979 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:22:55,979 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:23:01,501 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:23:05,312 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:23:12,663 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:23:17,534 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:23:17,537 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:23:17,537 | INFO | repair.apm-agent-rum-js-main | END pattern 2 (pattern_2)
+2025-09-01 17:23:17,538 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:23:17,538 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 3 (pattern_3)
+2025-09-01 17:23:17,538 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}", "changelogId": 3}
+2025-09-01 17:23:17,840 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:23:17,841 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: [{'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 81, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 81, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 117, 'column': 29, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 123, 'column': 6, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 123, 'column': 6, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 130, 'column': 27, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 135, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 135, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 142, 'column': 8, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 142, 'column': 8, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 149, 'column': 8, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 149, 'column': 8, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 156, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 156, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 166, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-post-release.mjs', 'line': 166, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 79, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 79, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 89, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 89, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 102, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 102, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 123, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 123, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 133, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 133, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 148, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 148, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 158, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-pre-release.mjs', 'line': 158, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 109, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 109, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 120, 'column': 8, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 120, 'column': 8, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 124, 'column': 8, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 124, 'column': 8, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 138, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 138, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 149, 'column': 10, 'confidence': 'high'}, {'pattern_id': 3, 'file': 'scripts/ci-release.mjs', 'line': 149, 'column': 10, 'confidence': 'high'}]
+2025-09-01 17:23:17,841 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f3a60>, {'scripts/ci-post-release.mjs': defaultdict(<class 'list'>, {3: [{'line': 81, 'column': 10, 'confidence': 'high'}, {'line': 81, 'column': 10, 'confidence': 'high'}, {'line': 117, 'column': 29, 'confidence': 'high'}, {'line': 123, 'column': 6, 'confidence': 'high'}, {'line': 123, 'column': 6, 'confidence': 'high'}, {'line': 130, 'column': 27, 'confidence': 'high'}, {'line': 135, 'column': 10, 'confidence': 'high'}, {'line': 135, 'column': 10, 'confidence': 'high'}, {'line': 142, 'column': 8, 'confidence': 'high'}, {'line': 142, 'column': 8, 'confidence': 'high'}, {'line': 149, 'column': 8, 'confidence': 'high'}, {'line': 149, 'column': 8, 'confidence': 'high'}, {'line': 156, 'column': 10, 'confidence': 'high'}, {'line': 156, 'column': 10, 'confidence': 'high'}, {'line': 166, 'column': 10, 'confidence': 'high'}, {'line': 166, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-pre-release.mjs': defaultdict(<class 'list'>, {3: [{'line': 79, 'column': 10, 'confidence': 'high'}, {'line': 79, 'column': 10, 'confidence': 'high'}, {'line': 89, 'column': 10, 'confidence': 'high'}, {'line': 89, 'column': 10, 'confidence': 'high'}, {'line': 102, 'column': 10, 'confidence': 'high'}, {'line': 102, 'column': 10, 'confidence': 'high'}, {'line': 123, 'column': 10, 'confidence': 'high'}, {'line': 123, 'column': 10, 'confidence': 'high'}, {'line': 133, 'column': 10, 'confidence': 'high'}, {'line': 133, 'column': 10, 'confidence': 'high'}, {'line': 148, 'column': 10, 'confidence': 'high'}, {'line': 148, 'column': 10, 'confidence': 'high'}, {'line': 158, 'column': 10, 'confidence': 'high'}, {'line': 158, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-release.mjs': defaultdict(<class 'list'>, {3: [{'line': 109, 'column': 10, 'confidence': 'high'}, {'line': 109, 'column': 10, 'confidence': 'high'}, {'line': 120, 'column': 8, 'confidence': 'high'}, {'line': 120, 'column': 8, 'confidence': 'high'}, {'line': 124, 'column': 8, 'confidence': 'high'}, {'line': 124, 'column': 8, 'confidence': 'high'}, {'line': 138, 'column': 10, 'confidence': 'high'}, {'line': 138, 'column': 10, 'confidence': 'high'}, {'line': 149, 'column': 10, 'confidence': 'high'}, {'line': 149, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 17:23:17,841 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:23:17,842 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:23:17,843 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:23:17,846 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:23:37,852 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "try {\n    await execa('git', ['push', '--tags'], {\n        stdin: process.stdin,\n        stdout: ['pipe', process.stdout],\n        stderr: ['pipe', process.stderr]\n    })\n  } catch (err) {\n    raiseError('Failed to push the tags. You might need to retag it manually.')\n  }",
+  "additional_req": "",
+  "dependencies": [
+    "execa@^9.0.0"
+  ]
+}
+2025-09-01 17:23:37,854 | INFO | repair.apm-agent-rum-js-main | Replaced code in -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs at [5685, 5929]
+2025-09-01 17:24:05,933 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "try {\n    // Read the lerna list output and generate the data structure\n    // name@version\n    let rawData = fs.readFileSync('lerna-list.txt', 'utf8')\n    let jsonData = JSON.parse(rawData)\n    let core\n    var ids = []\n    jsonData.forEach(element => {\n      if (element.name != '@elastic/apm-rum-core') {\n        ids.push(`${element.name}@${element.version}`)\n      } else {\n        core = `${element.name}@${element.version}`\n      }\n    })\n\n    // The existing release automation is not tagging the core module\n    // this was intentionally changed to support the new release automation of\n    // reviewing the changes and then raising a PR to bump the version.\n    // As a consequence, the tags need to be created explicitly rather than\n    // with the lerna automation.\n    // Let's tag the core module if it's not tagged yet.\n    try {\n      console.log(` >> Get sha commit for ${core} and check if it's tagged already.`)\n      const {stdout} = await execa('git', ['rev-list', '-n', '1', `${core}`], {\n        stdin: process.stdin,\n        stderr: ['pipe', process.stderr]  // migrated from .pipeStderr(process.stderr)\n      })\n      console.log(` >> ${core} = ${stdout}`)\n    } catch (err) {\n      console.log(` >> ${core} has not been tagged yet. Let's tag it now.`)\n      // otherwise tag, if something bad then this is a genuine error.\n      execa('git', ['tag', `${core}`], {\n        stdin: process.stdin,\n        stdout: ['pipe', process.stdout],  // migrated from .pipeStdout(process.stdout)\n        stderr: ['pipe', process.stderr]   // migrated from .pipeStderr(process.stderr)\n      })\n    }\n\n    console.log(` >> Get sha commit for ${core}`)\n    // Get the sha commit for core, if something bad then this is a genuine error.\n    const {stdout} = await execa('git', ['rev-list', '-n', '1', `${core}`], {\n      stdin: process.stdin,\n      stderr: ['pipe', process.stderr]    // migrated from .pipeStderr(process.stderr)\n    })\n    console.log(` >> ${core} = ${stdout}`)\n\n    // Checkout the commit, if something bad then this is a genuine error.\n    await execa('git', ['checkout', `${stdout}`], {\n      stdin: process.stdin,\n      stdout: ['pipe', process.stdout],  // migrated from .pipeStdout(process.stdout)\n      stderr: ['pipe', process.stderr]   // migrated from .pipeStderr(process.stderr)\n    })\n\n    ids.forEach(tag => {\n      // if it's already a tag then say that!\n      try {\n        execa('git', ['rev-parse', `${tag}`], {\n          stdin: process.stdin,\n          stdout: ['pipe', process.stdout],  // migrated from .pipeStdout(process.stdout)\n          stderr: ['pipe', process.stderr]   // migrated from .pipeStderr(process.stderr)\n        })\n        console.log(` >> ${tag} already exists. There is no need to tag it`)\n      } catch (err) {\n        console.log(` >> ${tag} does not exist.`)\n        // otherwise retag, if something bad then this is a genuine error.\n        execa('git', ['tag', `${tag}`], {\n          stdin: process.stdin,\n          stdout: ['pipe', process.stdout],  // migrated from .pipeStdout(process.stdout)\n          stderr: ['pipe', process.stderr]   // migrated from .pipeStderr(process.stderr)\n        })\n      }\n    })\n\n    // and push the tags, if something bad then this is a genuine error.\n    await execa('git', ['push', '--tags'], {\n      stdin: process.stdin,\n      stdout: ['pipe', process.stdout],    // migrated from .pipeStdout(process.stdout)\n      stderr: ['pipe', process.stderr]     // migrated from .pipeStderr(process.stderr)\n    })\n  } catch (err) {\n    console.log(`${err}`)\n    raiseError('Failed to tag all the versions.')\n  }",
+  "additional_req": "",
+  "dependencies": [
+    "execa@^9.0.0"
+  ]
+}
+2025-09-01 17:24:05,935 | INFO | repair.apm-agent-rum-js-main | Replaced code in -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs at [2731, 5610]
+2025-09-01 17:24:35,349 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "try {\n\n    console.log(` > List lerna versions`)\n\n    await execa('npx',\n      ['lerna', 'list', '-l', '--json'],\n      {\n        stdin: process.stdin,\n        stdout: { file: 'lerna-list.txt' },\n        stderr: ['pipe', process.stderr]\n      }\n    )\n  } catch (err) {\n    raiseError('Failed to list the current lerna versions')\n  }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:24:35,352 | INFO | repair.apm-agent-rum-js-main | Replaced code in -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs at [2270, 2572]
+2025-09-01 17:24:35,354 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:24:35,355 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:24:35,357 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:24:35,359 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:24:35,362 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:24:35,364 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:24:35,365 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:24:35,365 | INFO | repair.apm-agent-rum-js-main | File -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs has too many contexts extracted
+2025-09-01 17:24:35,365 | INFO | repair.apm-agent-rum-js-main | File size: 4812
+2025-09-01 17:25:15,445 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "/**\n * MIT License\n *\n * Copyright (c) 2017-present, Elasticsearch BV\n *\n * Permission is hereby granted, free of charge, to any person obtaining a copy\n * of this software and associated documentation files (the \"Software\"), to deal\n * in the Software without restriction, including without limitation the rights\n * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the Software, and to permit persons to whom the Software is\n * furnished to do so, subject to the following conditions:\n *\n * The above copyright notice and this permission notice shall be included in\n * all copies or substantial portions of the Software.\n *\n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n * THE SOFTWARE.\n *\n */\n\nimport { execa } from 'execa'\nimport * as process from 'node:process'\n// To read the version then use https://nodejs.org/api/esm.html#no-require-exports-or-moduleexports\nimport { createRequire } from 'node:module'\nconst require = createRequire(import.meta.url)\nconst { version } = require('../packages/rum/package.json')\n\nfunction raiseError(msg) {\n  console.log(msg)\n  process.exit(1)\n}\n\nasync function gitContext() {\n  try {\n    const { stdout: username } = await execa('git', ['config', 'user.name'])\n    const { stdout: email } = await execa('git', ['config', 'user.email'])\n    return {\n      username,\n      email\n    }\n  } catch (err) {\n    raiseError('Failed to extract git context')\n  }\n}\n\n// Script logic\nasync function main() {\n  const isDryRun =\n    process.env.DRY_RUN == null || process.env.DRY_RUN !== 'false'\n\n  // Extract git context\n  const ctx = await gitContext()\n  console.log(`Git User: username=${ctx.username}, email=${ctx.email}`)\n\n  if (isDryRun) {\n    await dryRunMode()\n  } else {\n    await prodMode()\n  }\n}\n\n// Script logic\nasync function dryRunMode() {\n  console.log('Running in dry-run mode')\n\n  const githubToken = process.env.GITHUB_TOKEN\n  if (githubToken == null || githubToken === '') {\n    raiseError(\"The 'GITHUB_TOKEN' env var isn't defined\")\n  }\n\n  const branch = `prerelease/${version}-next`\n\n  try {\n    // BC v9.0.0: pipeStdout/pipeStderr no longer accept direct streams; use stdout/stderr options\n    await execa('git', ['checkout', '-b', branch], {\n      stdin: process.stdin,\n      stdout: ['pipe', process.stdout],\n      stderr: ['pipe', process.stderr]\n    })\n  } catch (err) {\n    raiseError('Failed to create git branch')\n  }\n\n  try {\n    await execa('npx', ['lerna', 'version', '--yes', '--no-push'], {\n      stdin: process.stdin,\n      env: {\n        GH_TOKEN: githubToken\n      },\n      stdout: ['pipe', process.stdout],\n      stderr: ['pipe', process.stderr]\n    })\n  } catch (err) {\n    raiseError('Failed to version npm')\n  }\n\n  try {\n    await execa('git', ['--no-pager', 'diff', 'HEAD~1'], {\n      stdin: process.stdin,\n      stdout: ['pipe', process.stdout],\n      stderr: ['pipe', process.stderr]\n    })\n  } catch (err) {\n    raiseError('Failed to git diff')\n  }\n}\n\nasync function prodMode() {\n  console.log('Running in prod mode')\n\n  const githubToken = process.env.GITHUB_TOKEN\n  if (githubToken == null || githubToken === '') {\n    raiseError(\"The 'GITHUB_TOKEN' env var isn't defined\")\n  }\n\n  const branch = `prerelease/${version}-next`\n\n  try {\n    await execa('git', ['checkout', '-b', branch], {\n      stdin: process.stdin,\n      stdout: ['pipe', process.stdout],\n      stderr: ['pipe', process.stderr]\n    })\n  } catch (err) {\n    raiseError('Failed to create git branch')\n  }\n\n  try {\n    await execa('npx', ['lerna', 'version', '--yes', '--no-push'], {\n      stdin: process.stdin,\n      env: {\n        GH_TOKEN: githubToken\n      },\n      stdout: ['pipe', process.stdout],\n      stderr: ['pipe', process.stderr]\n    })\n  } catch (err) {\n    raiseError('Failed to version npm')\n  }\n\n  // As long as lerna version uses --no-push then it's required to push the commits\n  // this will avoid pushing the git tag too.\n  try {\n    await execa('git', ['push', 'origin', branch], {\n      stdin: process.stdin,\n      stdout: ['pipe', process.stdout],\n      stderr: ['pipe', process.stderr]\n    })\n  } catch (err) {\n    raiseError('Failed to push git branch')\n  }\n\n  try {\n    // Write stdout to file via options instead of pipeStdout(filePath)\n    await execa('gh', ['pr', 'create', '--fill-first', '--head', branch], {\n      stdin: process.stdin,\n      env: {\n        GH_TOKEN: githubToken\n      },\n      stdout: { file: '.pr.txt' },\n      stderr: ['pipe', process.stderr]\n    })\n  } catch (err) {\n    raiseError('Failed to create GitHub PR')\n  }\n}\n\n// Entrypoint\n;(async () => {\n  try {\n    await main()\n  } catch (err) {\n    console.log(err)\n  }\n})()",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:25:15,447 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:25:15,448 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:25:15,450 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:25:15,451 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:25:37,363 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "try {\n    await execa('npm', ['run', 'github-release'], {\n      stdin: process.stdin,\n      env: {\n        GITHUB_TOKEN: githubToken\n      },\n      stdout: ['pipe', process.stdout],  // migrated from .pipeStdout(process.stdout)\n      stderr: ['pipe', process.stderr]   // migrated from .pipeStderr(process.stderr)\n    })\n  } catch (err) {\n    raiseError('Failed to publish github release')\n  }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:25:37,365 | INFO | repair.apm-agent-rum-js-main | Replaced code in -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs at [4449, 4737]
+2025-09-01 17:25:44,013 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "try {\n    await execa('npx',\n      ['lerna', 'publish', 'from-package', '--no-push', '--no-git-tag-version', '--no-changelog', '--yes'],\n      {\n        stdin: process.stdin,\n        stdout: ['pipe', process.stdout], // Adapted for execa v9: use stdout option for writable stream\n        stderr: ['pipe', process.stderr]  // Adapted for execa v9: use stderr option for writable stream\n      }\n    )\n  } catch (err) {\n    raiseError('Failed to publish npm packages')\n  }",
+  "additional_req": "",
+  "dependencies": [
+    "execa@^9.0.0"
+  ]
+}
+2025-09-01 17:25:44,016 | INFO | repair.apm-agent-rum-js-main | Replaced code in -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs at [4134, 4445]
+2025-09-01 17:26:03,062 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async function dryRunMode() {\n  console.log('Running in dry-run mode')\n\n  const registryUrl = process.env.REGISTRY_URL || 'http://localhost:4873'\n  console.log(`Checking local registry url: ${registryUrl}`)\n  try {\n    await fetch(registryUrl)\n  } catch (err) {\n    raiseError(\"The local registry isn't available\")\n  }\n\n  try {\n    // Ref: https://github.com/npm/npm-registry-client/blob/856eefea40a2a88618835978e281300e3406924b/lib/adduser.js#L63-L68\n    const response = await fetch(\n      `${registryUrl}/-/user/org.couchdb.user:test`,\n      {\n        method: 'PUT',\n        headers: {\n          Accept: 'application/json',\n          'Content-Type': 'application/json'\n        },\n        body: JSON.stringify({\n          name: 'test',\n          password: 'test',\n          email: 'test@elastic.co'\n        })\n      }\n    )\n\n    let npmrcData = 'registry=http://localhost:4873\\n'\n    if (response.status === 201) {\n      const { token: token } = await response.json()\n      npmrcData += `//localhost:4873/:_authToken=${token}\\n`\n    } else {\n      raiseError('Failed to add user to private registry')\n    }\n\n    await appendFile(path.join(process.cwd(), '.npmrc'), '\\n' + npmrcData)\n  } catch (err) {\n    raiseError('Failed to login to private registry')\n  }\n\n  try {\n    await execa(\n      'npx',\n      ['lerna', 'publish', 'from-package', `--registry=${registryUrl}`, '--no-push', '--no-git-tag-version', '--no-changelog', '--yes'],\n      {\n        stdin: process.stdin,\n        stdout: ['pipe', process.stdout], // updated for execa v9\n        stderr: ['pipe', process.stderr]  // updated for execa v9\n      }\n    )\n  } catch (err) {\n    raiseError('Failed to publish npm packages')\n  }\n\n  await execa(\n    'git',\n    ['diff', process.cwd()],\n    {\n      stdout: ['pipe', process.stdout], // updated for execa v9\n      stderr: ['pipe', process.stderr]  // updated for execa v9\n    }\n  )\n\n  await execa(\n    'git',\n    ['log', '-1', '--stat', process.cwd()],\n    {\n      stdout: ['pipe', process.stdout], // updated for execa v9\n      stderr: ['pipe', process.stderr]  // updated for execa v9\n    }\n  )\n}",
+  "additional_req": "",
+  "dependencies": [
+    "execa@^9.0.0"
+  ]
+}
+2025-09-01 17:26:03,062 | INFO | repair.apm-agent-rum-js-main | Replaced code in -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs at [2050, 3901]
+2025-09-01 17:26:03,063 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:26:03,063 | INFO | repair.apm-agent-rum-js-main | END pattern 3 (pattern_3)
+2025-09-01 17:26:03,063 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:26:03,063 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 3 (pattern_3)
+2025-09-01 17:26:03,063 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}", "changelogId": 3}
+2025-09-01 17:26:03,367 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:26:03,367 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:26:03,367 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:26:03,368 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:26:03,368 | INFO | repair.apm-agent-rum-js-main | END pattern 3 (pattern_3)
+2025-09-01 17:26:03,368 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:26:03,368 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 4 (pattern_4)
+2025-09-01 17:26:03,368 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}", "changelogId": 4}
+2025-09-01 17:26:03,615 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:26:03,615 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:26:03,615 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:26:03,616 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:26:03,616 | INFO | repair.apm-agent-rum-js-main | END pattern 4 (pattern_4)
+2025-09-01 17:26:03,616 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:26:03,616 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 4 (pattern_4)
+2025-09-01 17:26:03,616 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}", "changelogId": 4}
+2025-09-01 17:26:03,859 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:26:03,860 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:26:03,860 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:26:03,860 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:26:03,860 | INFO | repair.apm-agent-rum-js-main | END pattern 4 (pattern_4)
+2025-09-01 17:26:03,860 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:26:03,860 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 5 (pattern_5)
+2025-09-01 17:26:03,860 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa}", "changelogId": 5}
+2025-09-01 17:26:04,112 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:26:04,113 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: [{'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 27, 'column': 0, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 37, 'column': 39, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 38, 'column': 36, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 81, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 119, 'column': 29, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 127, 'column': 6, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 136, 'column': 27, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 143, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 152, 'column': 8, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 161, 'column': 8, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 170, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-post-release.mjs', 'line': 182, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 26, 'column': 0, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 40, 'column': 39, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 41, 'column': 36, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 80, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 90, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 103, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 124, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 134, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 149, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-pre-release.mjs', 'line': 160, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-release.mjs', 'line': 28, 'column': 0, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-release.mjs', 'line': 39, 'column': 39, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-release.mjs', 'line': 40, 'column': 36, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-release.mjs', 'line': 109, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-release.mjs', 'line': 122, 'column': 8, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-release.mjs', 'line': 131, 'column': 8, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-release.mjs', 'line': 150, 'column': 10, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'scripts/ci-release.mjs', 'line': 163, 'column': 10, 'confidence': 'high'}]
+2025-09-01 17:26:04,113 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {'scripts/ci-post-release.mjs': defaultdict(<class 'list'>, {5: [{'line': 27, 'column': 0, 'confidence': 'high'}, {'line': 37, 'column': 39, 'confidence': 'high'}, {'line': 38, 'column': 36, 'confidence': 'high'}, {'line': 81, 'column': 10, 'confidence': 'high'}, {'line': 119, 'column': 29, 'confidence': 'high'}, {'line': 127, 'column': 6, 'confidence': 'high'}, {'line': 136, 'column': 27, 'confidence': 'high'}, {'line': 143, 'column': 10, 'confidence': 'high'}, {'line': 152, 'column': 8, 'confidence': 'high'}, {'line': 161, 'column': 8, 'confidence': 'high'}, {'line': 170, 'column': 10, 'confidence': 'high'}, {'line': 182, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-pre-release.mjs': defaultdict(<class 'list'>, {5: [{'line': 26, 'column': 0, 'confidence': 'high'}, {'line': 40, 'column': 39, 'confidence': 'high'}, {'line': 41, 'column': 36, 'confidence': 'high'}, {'line': 80, 'column': 10, 'confidence': 'high'}, {'line': 90, 'column': 10, 'confidence': 'high'}, {'line': 103, 'column': 10, 'confidence': 'high'}, {'line': 124, 'column': 10, 'confidence': 'high'}, {'line': 134, 'column': 10, 'confidence': 'high'}, {'line': 149, 'column': 10, 'confidence': 'high'}, {'line': 160, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-release.mjs': defaultdict(<class 'list'>, {5: [{'line': 28, 'column': 0, 'confidence': 'high'}, {'line': 39, 'column': 39, 'confidence': 'high'}, {'line': 40, 'column': 36, 'confidence': 'high'}, {'line': 109, 'column': 10, 'confidence': 'high'}, {'line': 122, 'column': 8, 'confidence': 'high'}, {'line': 131, 'column': 8, 'confidence': 'high'}, {'line': 150, 'column': 10, 'confidence': 'high'}, {'line': 163, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 17:26:04,113 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:04,114 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:04,115 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:04,115 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:04,116 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:04,118 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:08,594 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:12,686 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:15,450 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:20,158 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:22,618 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:22,620 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:26:22,621 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:26:22,622 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:26:22,623 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:26:22,624 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:26:22,624 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:26:22,625 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:26:22,626 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:26:22,626 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:26:22,626 | INFO | repair.apm-agent-rum-js-main | File -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs has too many contexts extracted
+2025-09-01 17:26:22,626 | INFO | repair.apm-agent-rum-js-main | File size: 5066
+2025-09-01 17:26:26,713 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:26,715 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:26:26,715 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:26:26,716 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:26:26,716 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:26:26,717 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:26:26,717 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:26:29,908 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:34,731 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:38,418 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:41,833 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:44,631 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:44,632 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:26:44,632 | INFO | repair.apm-agent-rum-js-main | END pattern 5 (pattern_5)
+2025-09-01 17:26:44,632 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:26:44,633 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 5 (pattern_5)
+2025-09-01 17:26:44,633 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa}", "changelogId": 5}
+2025-09-01 17:26:45,108 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:26:45,108 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:26:45,108 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:26:45,109 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:26:45,109 | INFO | repair.apm-agent-rum-js-main | END pattern 5 (pattern_5)
+2025-09-01 17:26:45,109 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:26:45,109 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 6 (pattern_6)
+2025-09-01 17:26:45,109 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "read", "pattern": "read {<execa>,<execa/**/*>}**.{killed,isTerminated}", "changelogId": 6}
+2025-09-01 17:26:45,465 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:26:45,465 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:26:45,465 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:26:45,466 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:26:45,466 | INFO | repair.apm-agent-rum-js-main | END pattern 6 (pattern_6)
+2025-09-01 17:26:45,466 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:26:45,466 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 7 (pattern_7)
+2025-09-01 17:26:45,466 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{cancel}", "changelogId": 7}
+2025-09-01 17:26:45,835 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:26:45,836 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:26:45,836 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:26:45,837 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:26:45,837 | INFO | repair.apm-agent-rum-js-main | END pattern 7 (pattern_7)
+2025-09-01 17:26:45,837 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:26:45,837 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 7 (pattern_7)
+2025-09-01 17:26:45,837 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{cancel}", "changelogId": 7}
+2025-09-01 17:26:46,214 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:26:46,214 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:26:46,214 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:26:46,215 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:26:46,215 | INFO | repair.apm-agent-rum-js-main | END pattern 7 (pattern_7)
+2025-09-01 17:26:46,215 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:26:46,215 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 8 (pattern_8)
+2025-09-01 17:26:46,215 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa,kill}", "changelogId": 8}
+2025-09-01 17:26:46,591 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:26:46,591 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: [{'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 27, 'column': 0, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 37, 'column': 39, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 38, 'column': 36, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 81, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 119, 'column': 29, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 127, 'column': 6, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 136, 'column': 27, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 143, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 152, 'column': 8, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 161, 'column': 8, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 170, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-post-release.mjs', 'line': 182, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-release.mjs', 'line': 28, 'column': 0, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-release.mjs', 'line': 39, 'column': 39, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-release.mjs', 'line': 40, 'column': 36, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-release.mjs', 'line': 109, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-release.mjs', 'line': 122, 'column': 8, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-release.mjs', 'line': 131, 'column': 8, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-release.mjs', 'line': 150, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-release.mjs', 'line': 163, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 26, 'column': 0, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 40, 'column': 39, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 41, 'column': 36, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 80, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 90, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 103, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 124, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 134, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 149, 'column': 10, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'scripts/ci-pre-release.mjs', 'line': 160, 'column': 10, 'confidence': 'high'}]
+2025-09-01 17:26:46,591 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {'scripts/ci-post-release.mjs': defaultdict(<class 'list'>, {8: [{'line': 27, 'column': 0, 'confidence': 'high'}, {'line': 37, 'column': 39, 'confidence': 'high'}, {'line': 38, 'column': 36, 'confidence': 'high'}, {'line': 81, 'column': 10, 'confidence': 'high'}, {'line': 119, 'column': 29, 'confidence': 'high'}, {'line': 127, 'column': 6, 'confidence': 'high'}, {'line': 136, 'column': 27, 'confidence': 'high'}, {'line': 143, 'column': 10, 'confidence': 'high'}, {'line': 152, 'column': 8, 'confidence': 'high'}, {'line': 161, 'column': 8, 'confidence': 'high'}, {'line': 170, 'column': 10, 'confidence': 'high'}, {'line': 182, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-release.mjs': defaultdict(<class 'list'>, {8: [{'line': 28, 'column': 0, 'confidence': 'high'}, {'line': 39, 'column': 39, 'confidence': 'high'}, {'line': 40, 'column': 36, 'confidence': 'high'}, {'line': 109, 'column': 10, 'confidence': 'high'}, {'line': 122, 'column': 8, 'confidence': 'high'}, {'line': 131, 'column': 8, 'confidence': 'high'}, {'line': 150, 'column': 10, 'confidence': 'high'}, {'line': 163, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-pre-release.mjs': defaultdict(<class 'list'>, {8: [{'line': 26, 'column': 0, 'confidence': 'high'}, {'line': 40, 'column': 39, 'confidence': 'high'}, {'line': 41, 'column': 36, 'confidence': 'high'}, {'line': 80, 'column': 10, 'confidence': 'high'}, {'line': 90, 'column': 10, 'confidence': 'high'}, {'line': 103, 'column': 10, 'confidence': 'high'}, {'line': 124, 'column': 10, 'confidence': 'high'}, {'line': 134, 'column': 10, 'confidence': 'high'}, {'line': 149, 'column': 10, 'confidence': 'high'}, {'line': 160, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 17:26:46,592 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:46,592 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:46,593 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:46,594 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:46,595 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:46,598 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:26:49,137 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:52,823 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:26:57,433 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:01,936 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:05,006 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:05,008 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:05,008 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:05,009 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:05,009 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:05,010 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:05,010 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:07,572 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:11,159 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:14,455 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:16,553 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:19,048 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:19,049 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:19,049 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:19,050 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:19,050 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:19,051 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:19,051 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:19,052 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:19,052 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:19,052 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:19,052 | INFO | repair.apm-agent-rum-js-main | File -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs has too many contexts extracted
+2025-09-01 17:27:19,052 | INFO | repair.apm-agent-rum-js-main | File size: 5066
+2025-09-01 17:27:23,864 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:23,867 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:27:23,867 | INFO | repair.apm-agent-rum-js-main | END pattern 8 (pattern_8)
+2025-09-01 17:27:23,868 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:27:23,868 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 8 (pattern_8)
+2025-09-01 17:27:23,868 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa,kill}", "changelogId": 8}
+2025-09-01 17:27:24,171 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:27:24,171 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:27:24,171 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:27:24,173 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:27:24,173 | INFO | repair.apm-agent-rum-js-main | END pattern 8 (pattern_8)
+2025-09-01 17:27:24,173 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:27:24,173 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 9 (pattern_9)
+2025-09-01 17:27:24,173 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa}", "changelogId": 9}
+2025-09-01 17:27:24,401 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:27:24,401 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: [{'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 27, 'column': 0, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 37, 'column': 39, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 38, 'column': 36, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 81, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 119, 'column': 29, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 127, 'column': 6, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 136, 'column': 27, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 143, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 152, 'column': 8, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 161, 'column': 8, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 170, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-post-release.mjs', 'line': 182, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 26, 'column': 0, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 40, 'column': 39, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 41, 'column': 36, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 80, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 90, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 103, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 124, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 134, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 149, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-pre-release.mjs', 'line': 160, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-release.mjs', 'line': 28, 'column': 0, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-release.mjs', 'line': 39, 'column': 39, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-release.mjs', 'line': 40, 'column': 36, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-release.mjs', 'line': 109, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-release.mjs', 'line': 122, 'column': 8, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-release.mjs', 'line': 131, 'column': 8, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-release.mjs', 'line': 150, 'column': 10, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'scripts/ci-release.mjs', 'line': 163, 'column': 10, 'confidence': 'high'}]
+2025-09-01 17:27:24,401 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {'scripts/ci-post-release.mjs': defaultdict(<class 'list'>, {9: [{'line': 27, 'column': 0, 'confidence': 'high'}, {'line': 37, 'column': 39, 'confidence': 'high'}, {'line': 38, 'column': 36, 'confidence': 'high'}, {'line': 81, 'column': 10, 'confidence': 'high'}, {'line': 119, 'column': 29, 'confidence': 'high'}, {'line': 127, 'column': 6, 'confidence': 'high'}, {'line': 136, 'column': 27, 'confidence': 'high'}, {'line': 143, 'column': 10, 'confidence': 'high'}, {'line': 152, 'column': 8, 'confidence': 'high'}, {'line': 161, 'column': 8, 'confidence': 'high'}, {'line': 170, 'column': 10, 'confidence': 'high'}, {'line': 182, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-pre-release.mjs': defaultdict(<class 'list'>, {9: [{'line': 26, 'column': 0, 'confidence': 'high'}, {'line': 40, 'column': 39, 'confidence': 'high'}, {'line': 41, 'column': 36, 'confidence': 'high'}, {'line': 80, 'column': 10, 'confidence': 'high'}, {'line': 90, 'column': 10, 'confidence': 'high'}, {'line': 103, 'column': 10, 'confidence': 'high'}, {'line': 124, 'column': 10, 'confidence': 'high'}, {'line': 134, 'column': 10, 'confidence': 'high'}, {'line': 149, 'column': 10, 'confidence': 'high'}, {'line': 160, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-release.mjs': defaultdict(<class 'list'>, {9: [{'line': 28, 'column': 0, 'confidence': 'high'}, {'line': 39, 'column': 39, 'confidence': 'high'}, {'line': 40, 'column': 36, 'confidence': 'high'}, {'line': 109, 'column': 10, 'confidence': 'high'}, {'line': 122, 'column': 8, 'confidence': 'high'}, {'line': 131, 'column': 8, 'confidence': 'high'}, {'line': 150, 'column': 10, 'confidence': 'high'}, {'line': 163, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 17:27:24,402 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:27:24,402 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:27:24,403 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:27:24,403 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:27:24,404 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:27:24,406 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:27:26,936 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:30,341 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:35,236 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:38,819 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:41,485 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:41,489 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:41,491 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:41,493 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:41,495 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:41,496 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:41,497 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:41,498 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:41,499 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:41,500 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:27:41,501 | INFO | repair.apm-agent-rum-js-main | File -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs has too many contexts extracted
+2025-09-01 17:27:41,501 | INFO | repair.apm-agent-rum-js-main | File size: 5066
+2025-09-01 17:27:45,193 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:45,195 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:45,196 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:45,198 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:45,199 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:45,202 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:45,203 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:27:49,263 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:54,384 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:27:57,967 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:01,141 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:05,238 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:05,241 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:05,241 | INFO | repair.apm-agent-rum-js-main | END pattern 9 (pattern_9)
+2025-09-01 17:28:05,241 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:28:05,241 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 9 (pattern_9)
+2025-09-01 17:28:05,241 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa}", "changelogId": 9}
+2025-09-01 17:28:05,661 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:28:05,661 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:28:05,661 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {})
+2025-09-01 17:28:05,663 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:05,663 | INFO | repair.apm-agent-rum-js-main | END pattern 9 (pattern_9)
+2025-09-01 17:28:05,663 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:28:05,665 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 10 (pattern_10)
+2025-09-01 17:28:05,665 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa}", "changelogId": 10}
+2025-09-01 17:28:05,982 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:28:05,982 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: [{'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 27, 'column': 0, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 37, 'column': 39, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 38, 'column': 36, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 81, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 119, 'column': 29, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 127, 'column': 6, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 136, 'column': 27, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 143, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 152, 'column': 8, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 161, 'column': 8, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 170, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-post-release.mjs', 'line': 182, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-release.mjs', 'line': 28, 'column': 0, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-release.mjs', 'line': 39, 'column': 39, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-release.mjs', 'line': 40, 'column': 36, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-release.mjs', 'line': 109, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-release.mjs', 'line': 122, 'column': 8, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-release.mjs', 'line': 131, 'column': 8, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-release.mjs', 'line': 150, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-release.mjs', 'line': 163, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 26, 'column': 0, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 40, 'column': 39, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 41, 'column': 36, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 80, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 90, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 103, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 124, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 134, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 149, 'column': 10, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'scripts/ci-pre-release.mjs', 'line': 160, 'column': 10, 'confidence': 'high'}]
+2025-09-01 17:28:05,982 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1078f2980>, {'scripts/ci-post-release.mjs': defaultdict(<class 'list'>, {10: [{'line': 27, 'column': 0, 'confidence': 'high'}, {'line': 37, 'column': 39, 'confidence': 'high'}, {'line': 38, 'column': 36, 'confidence': 'high'}, {'line': 81, 'column': 10, 'confidence': 'high'}, {'line': 119, 'column': 29, 'confidence': 'high'}, {'line': 127, 'column': 6, 'confidence': 'high'}, {'line': 136, 'column': 27, 'confidence': 'high'}, {'line': 143, 'column': 10, 'confidence': 'high'}, {'line': 152, 'column': 8, 'confidence': 'high'}, {'line': 161, 'column': 8, 'confidence': 'high'}, {'line': 170, 'column': 10, 'confidence': 'high'}, {'line': 182, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-release.mjs': defaultdict(<class 'list'>, {10: [{'line': 28, 'column': 0, 'confidence': 'high'}, {'line': 39, 'column': 39, 'confidence': 'high'}, {'line': 40, 'column': 36, 'confidence': 'high'}, {'line': 109, 'column': 10, 'confidence': 'high'}, {'line': 122, 'column': 8, 'confidence': 'high'}, {'line': 131, 'column': 8, 'confidence': 'high'}, {'line': 150, 'column': 10, 'confidence': 'high'}, {'line': 163, 'column': 10, 'confidence': 'high'}]}), 'scripts/ci-pre-release.mjs': defaultdict(<class 'list'>, {10: [{'line': 26, 'column': 0, 'confidence': 'high'}, {'line': 40, 'column': 39, 'confidence': 'high'}, {'line': 41, 'column': 36, 'confidence': 'high'}, {'line': 80, 'column': 10, 'confidence': 'high'}, {'line': 90, 'column': 10, 'confidence': 'high'}, {'line': 103, 'column': 10, 'confidence': 'high'}, {'line': 124, 'column': 10, 'confidence': 'high'}, {'line': 134, 'column': 10, 'confidence': 'high'}, {'line': 149, 'column': 10, 'confidence': 'high'}, {'line': 160, 'column': 10, 'confidence': 'high'}]})})
+2025-09-01 17:28:05,983 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:28:05,983 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:28:05,985 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:28:05,985 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:28:05,986 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:28:05,989 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-post-release.mjs
+2025-09-01 17:28:11,280 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:14,351 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:17,833 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:20,598 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:22,953 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:22,954 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:28:22,954 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:28:22,955 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:28:22,955 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:28:22,956 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:28:22,956 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-release.mjs
+2025-09-01 17:28:24,887 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:28,177 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:31,965 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:35,450 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:38,931 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:38,933 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:28:38,935 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:28:38,937 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:28:38,938 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:28:38,939 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:28:38,940 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:28:38,942 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:28:38,943 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:28:38,943 | INFO | repair.apm-agent-rum-js-main | New context extracted from -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs
+2025-09-01 17:28:38,944 | INFO | repair.apm-agent-rum-js-main | File -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/scripts/ci-pre-release.mjs has too many contexts extracted
+2025-09-01 17:28:38,944 | INFO | repair.apm-agent-rum-js-main | File size: 5066
+2025-09-01 17:28:45,893 | DEBUG | repair.apm-agent-rum-js-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-01 17:28:45,897 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:45,898 | INFO | repair.apm-agent-rum-js-main | END pattern 10 (pattern_10)
+2025-09-01 17:28:45,899 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:28:45,899 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 10 (pattern_10)
+2025-09-01 17:28:45,899 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa}", "changelogId": 10}
+2025-09-01 17:28:46,221 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:28:46,221 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:28:46,221 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1080fe160>, {})
+2025-09-01 17:28:46,222 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:46,222 | INFO | repair.apm-agent-rum-js-main | END pattern 10 (pattern_10)
+2025-09-01 17:28:46,222 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:28:46,222 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 11 (pattern_11)
+2025-09-01 17:28:46,222 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{send}", "changelogId": 11}
+2025-09-01 17:28:46,448 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:28:46,449 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:28:46,449 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1080fe160>, {})
+2025-09-01 17:28:46,449 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:46,449 | INFO | repair.apm-agent-rum-js-main | END pattern 11 (pattern_11)
+2025-09-01 17:28:46,449 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:28:46,449 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 11 (pattern_11)
+2025-09-01 17:28:46,449 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{send}", "changelogId": 11}
+2025-09-01 17:28:46,672 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:28:46,672 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:28:46,672 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1080fe160>, {})
+2025-09-01 17:28:46,673 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:46,673 | INFO | repair.apm-agent-rum-js-main | END pattern 11 (pattern_11)
+2025-09-01 17:28:46,673 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:28:46,673 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 12 (pattern_12)
+2025-09-01 17:28:46,673 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{pipe,pipe,pipe}", "changelogId": 12}
+2025-09-01 17:28:46,902 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:28:46,902 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:28:46,902 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1080fe160>, {})
+2025-09-01 17:28:46,903 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:46,903 | INFO | repair.apm-agent-rum-js-main | END pattern 12 (pattern_12)
+2025-09-01 17:28:46,903 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:28:46,903 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 12 (pattern_12)
+2025-09-01 17:28:46,903 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{pipe,pipe,pipe}", "changelogId": 12}
+2025-09-01 17:28:47,131 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:28:47,131 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:28:47,132 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1080fe160>, {})
+2025-09-01 17:28:47,132 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:47,132 | INFO | repair.apm-agent-rum-js-main | END pattern 12 (pattern_12)
+2025-09-01 17:28:47,132 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:28:47,132 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 13 (pattern_13)
+2025-09-01 17:28:47,132 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{kill}", "changelogId": 13}
+2025-09-01 17:28:47,359 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:28:47,360 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:28:47,360 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1080fe160>, {})
+2025-09-01 17:28:47,360 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:47,360 | INFO | repair.apm-agent-rum-js-main | END pattern 13 (pattern_13)
+2025-09-01 17:28:47,360 | INFO | repair.apm-agent-rum-js-main | ============================================================
+2025-09-01 17:28:47,361 | INFO | repair.apm-agent-rum-js-main | BEGIN pattern 13 (pattern_13)
+2025-09-01 17:28:47,361 | DEBUG | repair.apm-agent-rum-js-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{kill}", "changelogId": 13}
+2025-09-01 17:28:47,583 | INFO | repair.apm-agent-rum-js-main | Tapir run successful for -2024/execa/results/gpt-4.1/apm-agent-rum-js-main
+2025-09-01 17:28:47,584 | DEBUG | repair.apm-agent-rum-js-main | Parsed detection output: []
+2025-09-01 17:28:47,584 | DEBUG | repair.apm-agent-rum-js-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1080fe160>, {})
+2025-09-01 17:28:47,584 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:47,584 | INFO | repair.apm-agent-rum-js-main | END pattern 13 (pattern_13)
+2025-09-01 17:28:47,585 | DEBUG | repair.apm-agent-rum-js-main | Updated package.json saved at -2024/execa/results/gpt-4.1/apm-agent-rum-js-main/package.json
+2025-09-01 17:28:47,585 | INFO | repair.apm-agent-rum-js-main | token consumed 192425
+2025-09-01 17:28:47,586 | INFO | repair.apm-agent-rum-js-main | parse consumption time: 364.3044926226139

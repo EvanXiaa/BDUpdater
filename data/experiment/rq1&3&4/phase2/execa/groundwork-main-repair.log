@@ -1,0 +1,270 @@
+2025-09-08 04:23:16,129 | INFO | repair.groundwork-main | Starting analysis for groundwork-main
+2025-09-08 04:23:16,129 | INFO | repair.groundwork-main | Starting breaking change analysis for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:16,131 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:16,131 | INFO | repair.groundwork-main | BEGIN pattern 1 (pattern_1)
+2025-09-08 04:23:16,131 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{stdout,stderr,all}", "changelogId": 1}
+2025-09-08 04:23:16,366 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:16,367 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:16,367 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:23:16,367 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:16,367 | INFO | repair.groundwork-main | END pattern 1 (pattern_1)
+2025-09-08 04:23:16,367 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:16,367 | INFO | repair.groundwork-main | BEGIN pattern 1 (pattern_1)
+2025-09-08 04:23:16,367 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{stdout,stderr,all}", "changelogId": 1}
+2025-09-08 04:23:16,525 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:16,525 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:16,525 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:23:16,526 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:16,526 | INFO | repair.groundwork-main | END pattern 1 (pattern_1)
+2025-09-08 04:23:16,526 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:16,526 | INFO | repair.groundwork-main | BEGIN pattern 2 (pattern_2)
+2025-09-08 04:23:16,526 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "call {<execa>,<execa/**/*>}**.{execa,execaSync}", "changelogId": 2}
+2025-09-08 04:23:16,688 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:16,688 | DEBUG | repair.groundwork-main | Parsed detection output: [{'pattern_id': 2, 'file': 'publint.js', 'line': 31, 'column': 8, 'confidence': 'high'}]
+2025-09-08 04:23:16,688 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {'publint.js': defaultdict(<class 'list'>, {2: [{'line': 31, 'column': 8, 'confidence': 'high'}]})})
+2025-09-08 04:23:16,691 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:23:21,268 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:23:21,270 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:21,270 | INFO | repair.groundwork-main | END pattern 2 (pattern_2)
+2025-09-08 04:23:21,271 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:21,271 | INFO | repair.groundwork-main | BEGIN pattern 3 (pattern_3)
+2025-09-08 04:23:21,271 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}", "changelogId": 3}
+2025-09-08 04:23:21,450 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:21,450 | DEBUG | repair.groundwork-main | Parsed detection output: [{'pattern_id': 3, 'file': 'publint.js', 'line': 31, 'column': 8, 'confidence': 'high'}]
+2025-09-08 04:23:21,450 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb9c0>, {'publint.js': defaultdict(<class 'list'>, {3: [{'line': 31, 'column': 8, 'confidence': 'high'}]})})
+2025-09-08 04:23:21,450 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:23:34,397 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "async function publint(directories) {\n  if (!directories) {\n    const directories = await getPackagesAndTemplates();\n    if (process.argv[2] && directories.includes(process.argv[2])) {\n      return await publint([process.argv[2]]);\n    }\n    return await publint(directories);\n  }\n  const dir = directories.shift();\n  if (!dir) return;\n  // Adapted for execa@v9: use stdout option instead of pipeStdout(stream)\n  await execa('npx', ['publint', dir], { stdout: ['pipe', process.stdout] });\n  publint(directories);\n}",
+  "additional_req": "",
+  "dependencies": [
+    "execa@^9.0.0"
+  ]
+}
+2025-09-08 04:23:34,400 | INFO | repair.groundwork-main | Replaced code in -2024/execa/results/gpt-4.1/groundwork-main/publint.js at [707, 1135]
+2025-09-08 04:23:34,402 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:34,402 | INFO | repair.groundwork-main | END pattern 3 (pattern_3)
+2025-09-08 04:23:34,403 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:34,404 | INFO | repair.groundwork-main | BEGIN pattern 3 (pattern_3)
+2025-09-08 04:23:34,404 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll}", "changelogId": 3}
+2025-09-08 04:23:34,783 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:34,783 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:34,783 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:23:34,784 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:34,784 | INFO | repair.groundwork-main | END pattern 3 (pattern_3)
+2025-09-08 04:23:34,784 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:34,784 | INFO | repair.groundwork-main | BEGIN pattern 4 (pattern_4)
+2025-09-08 04:23:34,784 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}", "changelogId": 4}
+2025-09-08 04:23:35,089 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:35,089 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:35,089 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:23:35,090 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:35,091 | INFO | repair.groundwork-main | END pattern 4 (pattern_4)
+2025-09-08 04:23:35,091 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:35,091 | INFO | repair.groundwork-main | BEGIN pattern 4 (pattern_4)
+2025-09-08 04:23:35,091 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}?**.{pipeStdout,pipeStderr,pipeAll,pipe}", "changelogId": 4}
+2025-09-08 04:23:35,692 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:35,692 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:35,692 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:23:35,692 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:35,692 | INFO | repair.groundwork-main | END pattern 4 (pattern_4)
+2025-09-08 04:23:35,693 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:35,693 | INFO | repair.groundwork-main | BEGIN pattern 5 (pattern_5)
+2025-09-08 04:23:35,693 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa}", "changelogId": 5}
+2025-09-08 04:23:35,883 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:35,883 | DEBUG | repair.groundwork-main | Parsed detection output: [{'pattern_id': 5, 'file': 'publint.js', 'line': 3, 'column': 0, 'confidence': 'high'}, {'pattern_id': 5, 'file': 'publint.js', 'line': 32, 'column': 8, 'confidence': 'high'}]
+2025-09-08 04:23:35,883 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {'publint.js': defaultdict(<class 'list'>, {5: [{'line': 3, 'column': 0, 'confidence': 'high'}, {'line': 32, 'column': 8, 'confidence': 'high'}]})})
+2025-09-08 04:23:35,883 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:23:35,883 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:23:41,557 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:23:44,295 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:23:44,297 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:44,298 | INFO | repair.groundwork-main | END pattern 5 (pattern_5)
+2025-09-08 04:23:44,298 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:44,299 | INFO | repair.groundwork-main | BEGIN pattern 5 (pattern_5)
+2025-09-08 04:23:44,299 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa}", "changelogId": 5}
+2025-09-08 04:23:44,482 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:44,482 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:44,482 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:23:44,483 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:44,483 | INFO | repair.groundwork-main | END pattern 5 (pattern_5)
+2025-09-08 04:23:44,483 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:44,483 | INFO | repair.groundwork-main | BEGIN pattern 6 (pattern_6)
+2025-09-08 04:23:44,483 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "read", "pattern": "read {<execa>,<execa/**/*>}**.{killed,isTerminated}", "changelogId": 6}
+2025-09-08 04:23:44,637 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:44,637 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:44,637 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:23:44,637 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:44,637 | INFO | repair.groundwork-main | END pattern 6 (pattern_6)
+2025-09-08 04:23:44,637 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:44,637 | INFO | repair.groundwork-main | BEGIN pattern 7 (pattern_7)
+2025-09-08 04:23:44,638 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{cancel}", "changelogId": 7}
+2025-09-08 04:23:44,786 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:44,786 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:44,786 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:23:44,786 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:44,786 | INFO | repair.groundwork-main | END pattern 7 (pattern_7)
+2025-09-08 04:23:44,787 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:44,787 | INFO | repair.groundwork-main | BEGIN pattern 7 (pattern_7)
+2025-09-08 04:23:44,787 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{cancel}", "changelogId": 7}
+2025-09-08 04:23:44,939 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:44,939 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:44,939 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:23:44,940 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:44,941 | INFO | repair.groundwork-main | END pattern 7 (pattern_7)
+2025-09-08 04:23:44,941 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:44,941 | INFO | repair.groundwork-main | BEGIN pattern 8 (pattern_8)
+2025-09-08 04:23:44,941 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa,kill}", "changelogId": 8}
+2025-09-08 04:23:45,092 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:45,092 | DEBUG | repair.groundwork-main | Parsed detection output: [{'pattern_id': 8, 'file': 'publint.js', 'line': 3, 'column': 0, 'confidence': 'high'}, {'pattern_id': 8, 'file': 'publint.js', 'line': 32, 'column': 8, 'confidence': 'high'}]
+2025-09-08 04:23:45,092 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {'publint.js': defaultdict(<class 'list'>, {8: [{'line': 3, 'column': 0, 'confidence': 'high'}, {'line': 32, 'column': 8, 'confidence': 'high'}]})})
+2025-09-08 04:23:45,093 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:23:45,093 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:23:47,814 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:23:51,773 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:23:51,775 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:51,775 | INFO | repair.groundwork-main | END pattern 8 (pattern_8)
+2025-09-08 04:23:51,775 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:51,775 | INFO | repair.groundwork-main | BEGIN pattern 8 (pattern_8)
+2025-09-08 04:23:51,775 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa,kill}", "changelogId": 8}
+2025-09-08 04:23:51,957 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:51,957 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:23:51,957 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11072dbc0>, {})
+2025-09-08 04:23:51,957 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:23:51,957 | INFO | repair.groundwork-main | END pattern 8 (pattern_8)
+2025-09-08 04:23:51,958 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:23:51,958 | INFO | repair.groundwork-main | BEGIN pattern 9 (pattern_9)
+2025-09-08 04:23:51,958 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa}", "changelogId": 9}
+2025-09-08 04:23:52,113 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:23:52,113 | DEBUG | repair.groundwork-main | Parsed detection output: [{'pattern_id': 9, 'file': 'publint.js', 'line': 3, 'column': 0, 'confidence': 'high'}, {'pattern_id': 9, 'file': 'publint.js', 'line': 32, 'column': 8, 'confidence': 'high'}]
+2025-09-08 04:23:52,113 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11072dbc0>, {'publint.js': defaultdict(<class 'list'>, {9: [{'line': 3, 'column': 0, 'confidence': 'high'}, {'line': 32, 'column': 8, 'confidence': 'high'}]})})
+2025-09-08 04:23:52,114 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:23:52,114 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:23:56,043 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:24:03,548 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:24:03,551 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:03,551 | INFO | repair.groundwork-main | END pattern 9 (pattern_9)
+2025-09-08 04:24:03,552 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:24:03,552 | INFO | repair.groundwork-main | BEGIN pattern 9 (pattern_9)
+2025-09-08 04:24:03,552 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa}", "changelogId": 9}
+2025-09-08 04:24:03,768 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:24:03,770 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:24:03,770 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11072dbc0>, {})
+2025-09-08 04:24:03,771 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:03,771 | INFO | repair.groundwork-main | END pattern 9 (pattern_9)
+2025-09-08 04:24:03,774 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:24:03,774 | INFO | repair.groundwork-main | BEGIN pattern 10 (pattern_10)
+2025-09-08 04:24:03,774 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{execa}", "changelogId": 10}
+2025-09-08 04:24:03,930 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:24:03,930 | DEBUG | repair.groundwork-main | Parsed detection output: [{'pattern_id': 10, 'file': 'publint.js', 'line': 3, 'column': 0, 'confidence': 'high'}, {'pattern_id': 10, 'file': 'publint.js', 'line': 32, 'column': 8, 'confidence': 'high'}]
+2025-09-08 04:24:03,930 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11072dbc0>, {'publint.js': defaultdict(<class 'list'>, {10: [{'line': 3, 'column': 0, 'confidence': 'high'}, {'line': 32, 'column': 8, 'confidence': 'high'}]})})
+2025-09-08 04:24:03,930 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:24:03,930 | INFO | repair.groundwork-main | New context extracted from -2024/execa/results/gpt-4.1/groundwork-main/publint.js
+2025-09-08 04:24:07,008 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:24:10,191 | DEBUG | repair.groundwork-main | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-09-08 04:24:10,192 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:10,193 | INFO | repair.groundwork-main | END pattern 10 (pattern_10)
+2025-09-08 04:24:10,193 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:24:10,193 | INFO | repair.groundwork-main | BEGIN pattern 10 (pattern_10)
+2025-09-08 04:24:10,193 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{execa}", "changelogId": 10}
+2025-09-08 04:24:10,389 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:24:10,390 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:24:10,390 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11072e5c0>, {})
+2025-09-08 04:24:10,390 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:10,390 | INFO | repair.groundwork-main | END pattern 10 (pattern_10)
+2025-09-08 04:24:10,390 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:24:10,390 | INFO | repair.groundwork-main | BEGIN pattern 11 (pattern_11)
+2025-09-08 04:24:10,390 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{send}", "changelogId": 11}
+2025-09-08 04:24:10,551 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:24:10,551 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:24:10,551 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11072e5c0>, {})
+2025-09-08 04:24:10,552 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:10,552 | INFO | repair.groundwork-main | END pattern 11 (pattern_11)
+2025-09-08 04:24:10,552 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:24:10,552 | INFO | repair.groundwork-main | BEGIN pattern 11 (pattern_11)
+2025-09-08 04:24:10,552 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{send}", "changelogId": 11}
+2025-09-08 04:24:10,705 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:24:10,705 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:24:10,705 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11072e5c0>, {})
+2025-09-08 04:24:10,706 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:10,706 | INFO | repair.groundwork-main | END pattern 11 (pattern_11)
+2025-09-08 04:24:10,706 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:24:10,706 | INFO | repair.groundwork-main | BEGIN pattern 12 (pattern_12)
+2025-09-08 04:24:10,706 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{pipe,pipe,pipe}", "changelogId": 12}
+2025-09-08 04:24:10,857 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:24:10,858 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:24:10,858 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11072e5c0>, {})
+2025-09-08 04:24:10,858 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:10,858 | INFO | repair.groundwork-main | END pattern 12 (pattern_12)
+2025-09-08 04:24:10,858 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:24:10,858 | INFO | repair.groundwork-main | BEGIN pattern 12 (pattern_12)
+2025-09-08 04:24:10,858 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{pipe,pipe,pipe}", "changelogId": 12}
+2025-09-08 04:24:11,006 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:24:11,006 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:24:11,006 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:24:11,006 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:11,006 | INFO | repair.groundwork-main | END pattern 12 (pattern_12)
+2025-09-08 04:24:11,007 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:24:11,007 | INFO | repair.groundwork-main | BEGIN pattern 13 (pattern_13)
+2025-09-08 04:24:11,007 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "read {<execa>,<execa/**/*>}**.{kill}", "changelogId": 13}
+2025-09-08 04:24:11,160 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:24:11,160 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:24:11,160 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:24:11,160 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:11,160 | INFO | repair.groundwork-main | END pattern 13 (pattern_13)
+2025-09-08 04:24:11,160 | INFO | repair.groundwork-main | ============================================================
+2025-09-08 04:24:11,160 | INFO | repair.groundwork-main | BEGIN pattern 13 (pattern_13)
+2025-09-08 04:24:11,160 | DEBUG | repair.groundwork-main | Pattern payload: {"type": "call", "pattern": "write {<execa>,<execa/**/*>}**.{kill}", "changelogId": 13}
+2025-09-08 04:24:11,313 | INFO | repair.groundwork-main | Tapir run successful for -2024/execa/results/gpt-4.1/groundwork-main
+2025-09-08 04:24:11,313 | DEBUG | repair.groundwork-main | Parsed detection output: []
+2025-09-08 04:24:11,313 | DEBUG | repair.groundwork-main | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x106cbb060>, {})
+2025-09-08 04:24:11,313 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:11,314 | INFO | repair.groundwork-main | END pattern 13 (pattern_13)
+2025-09-08 04:24:11,314 | DEBUG | repair.groundwork-main | Updated package.json saved at -2024/execa/results/gpt-4.1/groundwork-main/package.json
+2025-09-08 04:24:11,314 | INFO | repair.groundwork-main | token consumed 21946
+2025-09-08 04:24:11,315 | INFO | repair.groundwork-main | parse consumption time: 50.3047084165737

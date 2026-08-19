@@ -1,0 +1,1 @@
+## [4.0.0](https://github.com/lquixada/cross-fetch/compare/v4.0.0-alpha.13...v4.0.0) (2023-07-03)

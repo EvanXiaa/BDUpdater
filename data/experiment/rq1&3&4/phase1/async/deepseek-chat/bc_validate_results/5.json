@@ -1,0 +1,31 @@
+{
+  "Id": 5,
+  "BC_description": "Calling callback(false) in async methods such as eachOfLimit, eachOf, compose, seq, waterfall, auto, autoInject, whilst, until, during, forever, and retry will now cancel the async flow, preventing further iteration and the final callback from being called. This may break code that previously relied on callback(false) not canceling the flow, especially in cases where the final callback is expected to be invoked for cleanup or parent callbacks.",
+  "Reference": [
+    "#1064",
+    "#1542"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [],
+    "methodName": [
+      "eachOfLimit",
+      "eachOf",
+      "compose",
+      "seq",
+      "waterfall",
+      "auto",
+      "autoInject",
+      "whilst",
+      "until",
+      "during",
+      "forever",
+      "retry"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "To avoid unintended cancellation, do not call callback(false) if you want the async flow to continue and the final callback to be executed. For example, in a waterfall function, replace callback(false) with callback(null) or handle the flow differently. If cancellation is intended, ensure your code accounts for the final callback not being called. Example fix for waterfall:\nasync.waterfall([\n  function(callback) { callback(); },\n  function(callback) { callback(null); // instead of callback(false) to avoid cancellation },\n  function(callback) { callback(); }\n], function(err) { /* this will now be called */ });",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}

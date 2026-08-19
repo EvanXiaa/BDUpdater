@@ -1,0 +1,24 @@
+## [2.0.0]! - 2016-09-30
+### Added
+- [`unambiguous`] rule: report modules that are not unambiguously ES modules.
+- `recommended` shared config. Roughly `errors` and `warnings` mixed together,
+with some `parserOptions` in the mix. ([#402])
+- `react` shared config: added `jsx: true` to `parserOptions.ecmaFeatures`.
+- Added [`no-webpack-loader-syntax`] rule: forbid custom Webpack loader syntax in imports. ([#586], thanks [@fson]!)
+- Add option `newlines-between: "ignore"` to [`order`] ([#519])
+- Added [`no-unassigned-import`] rule ([#529])
+
+### Breaking
+- [`import/extensions` setting] defaults to `['.js']`. ([#306])
+- [`import/ignore` setting] defaults to nothing, and ambiguous modules are ignored natively. This means importing from CommonJS modules will no longer be reported by [`default`], [`named`], or [`namespace`], regardless of `import/ignore`. ([#270])
+- [`newline-after-import`]: Removed need for an empty line after an inline `require` call ([#570])
+- [`order`]: Default value for `newlines-between` option is now `ignore` ([#519])
+
+### Changed
+- `imports-first` is renamed to [`first`]. `imports-first` alias will continue to
+exist, but may be removed in a future major release.
+- Case-sensitivity: now specifically (and optionally) reported by [`no-unresolved`].
+Other rules will ignore case-mismatches on paths on case-insensitive filesystems. ([#311])
+
+### Fixed
+- [`no-internal-modules`]: support `@`-scoped packages ([#577]+[#578], thanks [@spalger])

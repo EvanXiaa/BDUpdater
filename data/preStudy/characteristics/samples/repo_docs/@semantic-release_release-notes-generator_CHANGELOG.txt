@@ -1,0 +1,2 @@
+parserOpts: { ...loadedConfig.parser, ...parserOpts },
+writerOpts: { ...loadedConfig.writer, ...writerOpts },

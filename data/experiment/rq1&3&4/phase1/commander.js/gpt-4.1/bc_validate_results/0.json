@@ -1,0 +1,22 @@
+{
+  "Id": 0,
+  "BC_description": "In Commander v13.0.0, the default behavior of handling excess command-arguments has changed. Previously, when calling the `.parse()` method on a `Command` instance, extra positional arguments provided by users (those not explicitly declared using `.argument(...)` or consumed by the command's configuration) were ignored by default and did not produce an error. Now, the 'allowExcessArguments' setting defaults to `false`, and providing more command-arguments than expected causes a runtime error. This breaking change impacts the `parse` method, as well as the setup pattern for all commands that may rely on allowing excess arguments. If your code previously worked by receiving and ignoring extra arguments, you must either explicitly allow them with `.allowExcessArguments()` before parsing, or fully declare expected arguments using `.argument(...)`.",
+  "Reference": [
+    "https://github.com/tj/commander.js/pull/2223"
+  ],
+  "Changed_object": {
+    "type": "call",
+    "className": [
+      "Command"
+    ],
+    "methodName": [
+      "parse",
+      "allowExcessArguments"
+    ],
+    "propertyName": [],
+    "moduleName": []
+  },
+  "Adaptation_method": "To maintain the previous behavior and prevent errors due to excess arguments, add '.allowExcessArguments()' to your command definition before calling 'parse', as in:\n\nprogram.option('-p, --port <number>', 'port number');\nprogram.allowExcessArguments();\nprogram.action((options) => {\n  console.log(program.args);\n});\n\nAlternatively, explicitly specify accepted positional arguments using '.argument(...)' for each expected argument. Any excess arguments will then generate an error unless 'allowExcessArguments()' is enabled.",
+  "RequireInfoFlag": false,
+  "RequireInfo": ""
+}

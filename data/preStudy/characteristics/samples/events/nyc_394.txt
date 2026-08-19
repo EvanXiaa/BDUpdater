@@ -1,0 +1,7 @@
+{
+  "owner": "istanbuljs",
+  "repo": "nyc",
+  "number": 394,
+  "pr_url": "https://github.com/istanbuljs/nyc/pull/394",
+  "content": "# PR 394: fix: add a feature which allows us to bust the cache when breaking changes are introduced\nBranches: bust-cache -> master\n\nwhen we make potentially breaking changes to the cache, e.g.,\n\nhttps://github.com/istanbuljs/istanbul-lib-instrument/pull/22\n\nwe should increment the cache version, forcing an invalidation so that folks don't see issues like #392 \n\n\n## Commit titles\n- fix: add a feature which allows us to bust the cache when breaking changes are introduced\n- fix: use package.version for CACHE_VERSION based on @timoxley's review\n- fix: ignore line that will never load, because why not\n\n## Changed files\n- index.js\n## Issue comments\n- @timoxley: I have a feeling this CACHE_VERSION should be automatically derived from package versions.\n\nCost of accidentally not bumping this version, due to forgetting or not realising it broke, is high.\nCost of nyc having to rebuild the cache after each update is low.\n\ni.e. better to be safe and take a few extra seconds once every update than to potentially introduce fatal & hard to diagnose bugs."
+}

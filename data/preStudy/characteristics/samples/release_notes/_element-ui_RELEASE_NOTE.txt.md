@@ -1,0 +1,364 @@
+v1.0.5:
+- 修复 select 异步获取选项和绑定值时，输入框中显示 value 而不是 label 的问题，#1537
+- 修复 select 的初始值为一个空对象时会报错的问题，#1533
+- 修复 select 远程搜索有时不显示下拉框的问题，#1531
+- 修复 slider 拖动释放后，滑块有几率产生一小段位移的问题，#1546
+- 修复 ie9 下 steps 的样式问题，#1543
+- 新增 upload 对所有文件类型生成 url 的功能，#1530
+- 修复 timeselect 的样式，移除 flexbox, #1335
+- fixed select with async options and binding value displaying value instead of label, #1537
+- fixed select reports an error when initial binding value is an empty object, #1533
+- fixed remote filtering select not showing dropdown in some conditions, #1531
+- fixed slider sometimes drifting a small distance after releasing dragging, #1546
+- fixed steps style in ie9, #1543
+- added upload generating url for all file types, #1530
+- fixed timeselect style, removed flexbox, #1335
+
+v2.0.0:
+### 新特性
+- 综合
+  - 新增 `theme-chalk` 主题
+  - 增强以下组件的可访问性：alert、autocomplete、breadcrumb、button、checkbox、collapse、input、inputnumber、menu、progress、radio、rate、slider、switch 和 upload
+  - 新增布局组件 container、header、aside、main 和 footer
+  - 新增 typescript 类型声明
+  - 重绘了全部图标，并新增了部分图标
+  - 新增了一系列基于断点的工具类，用于当视口尺寸满足一定条件时隐藏元素
+  - 新增全局配置组件尺寸的功能。在引入 element 时，配置 `size` 字段可以改变所有组件的默认尺寸
+- button
+  - 新增 `round` 属性，用于圆角按钮 #6643
+- timeselect
+  - 可以用 `up`、`down` 导航，用 `enter` 选中时间 #6023
+- timepicker
+  - 可以用方向键导航，用 `enter` 选中时间 #6050
+  - 新增 `start-placeholder` 和 `end-placeholder`，用于设置范围选择时两个输入框的占位符 #7169
+  - 新增 `arrow-control` 属性，提供另一种交互形式，#7438
+- tree
+  - 子节点在首次被展开之前不进行渲染 #6257
+  - 新增 `check-descendants` 属性，设置 `lazy` 模式下勾选节点时，是否完全展开整个子树 #6235
+- tag
+  - 新增 `size` 属性 #7203
+- datepicker
+  - type 为 `datetimerange` 时可以使用 `timeformat` 格式化时间选择器 #6052
+  - 新增 `start-placeholder` 和 `end-placeholder`，用于设置范围选择时两个输入框的占位符 #7169
+  - 新增 `value-format` 属性，支持对绑定值的格式进行自定义，#7367
+  - 新增 `unlink-panels` 属性，用于在选择日期范围时取消两个日期面板之间的联动
+- messagebox
+  - 新增 `closeonhashchange` 属性 #6043
+  - 新增 `center` 属性，提供居中布局 #7029
+  - 新增 `roundbutton` 属性，使得内部按钮为圆角按钮 #7029
+  - 新增 `dangerouslyusehtmlstring` 属性，使得 `message` 支持传入 html 字符串<sup>*</sup> #6043
+  - 新增 `inputtype` 属性，用户指定内部输入框的类型，#7651
+- dialog
+  - 新增 `width`、`fullscreen`、`append-to-body` 属性，支持嵌套使用
+  - 新增 `center` 属性，提供居中布局 #7042
+  - 新增 `focus-after-closed`、`focus-after-open`属性，支持无障碍访问 #6511
+- colorpicker
+  - 增加手动输入色值的支持 #6167
+  - 新增 `size` 属性，用于控制组件的大小 #7026
+  - 新增 `disabled` 属性，用于禁用组件 #7026
+  - 新增 `popper-class` 属性，#7351
+- message
+  - 图标部分使用 icon 代替图片，从而支持通过 css 修改图标背景色 #6207
+  - 新增 `dangerouslyusehtmlstring` 属性，使得 `message` 属性支持传入 html 字符串<sup>*</sup> #6207
+  - 新增 `center` 属性，提供居中布局 #6875
+- notification
+  - 新增 `position` 属性，用于配置 notification 出现的位置 #6231
+  - 新增 `dangerouslyusehtmlstring` 属性，使得 `message` 属性支持传入 html 字符串<sup>*</sup> #6231
+  - 新增 `showclose` 属性，用于隐藏关闭按钮 #6402
+- rate
+  - 新增 `show-score` 属性，控制是否在右侧显示当前分数 #6295
+- tabs
+  - 新增 `tab-position` 属性，控制选项面板内容显示的上、下、左、右四个方向 #6096
+- radio
+  - 增加 `border` 属性和 `size` 属性 #6690
+- checkbox
+  - 增加 `border` 属性和 `size` 属性 #6690
+- alert
+  - 新增 `center` 属性，提供居中布局 #6876
+- menu
+  - 新增 `background-color`、`text-color` 和 `active-text-color` 属性，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色 #7064
+  - 新增 `open` 和 `close` 方法，支持手动打开和关闭 submenu，#7412
+- form
+  - 新增 `inline-message` 属性，设置后校验信息会以行内样式显示 #7032
+  - 新增 `status-icon` 属性，用于在输入框中显示校验结果反馈图标 #7032
+  - form 和 formitem 新增 `size` 属性，用于控制表单内组件的尺寸，#7428
+  - `validate` 方法在不传入 callback 的情况下返回 promise，#7405
+  - 新增 `clearvalidate` 方法，用于清空所有表单项的验证信息，#7623
+- input
+  - 新增 `suffix`、`prefix` 的 slot，以及 `suffixicon`、`prefixicon` 属性，用于给输入框内部增加前置和后置内容 #7032
+- breadcrumb
+  - 新增 `separator-class` 属性，可使用图标作为分隔符 #7203
+- steps
+  - 新增 `simple` 属性，用于开启简洁风格的步骤条 #7274
+- pagination
+  - 新增 `prev-text` 和 `next-text` 属性，用于自定义上一页和下一页的文本 #7005
+- loading
+  - 配置对象新增 `spinner` 和 `background` 字段，支持自定义加载图标和背景色，#7390
+- autocomplete
+  - 新增 `debounce` 属性，#7413
+- upload
+  - 新增 `limit` 和 `on-exceed` 属性，支持对上传文件的个数进行限制，#7405
+- datetimepicker
+  - 新增 `time-arrow-control` 属性，用于开启时间选择器的 `arrow-control`，#7438
+- layout
+  - 新增断点 `xl`，适用于宽度大于 1920px 的视口
+- table
+  - 新增 `span-method` 属性，用于合并行或列
+  - 新增 `clearsort` 方法，用于清空排序状态
+  - 新增 `clearfilter` 方法，用于清空过滤状态
+  - 对于可展开行，当该行展开时会获得一个 `.expanded` 类名，方便自定义样式
+  - 新增 `size` 属性，用于控制表格尺寸
+  - 新增 `togglerowexpansion` 方法，用于手动展开或关闭行
+  - 新增 `cell-class-name` 属性，用于指定单元格的类名
+  - 新增 `cell-style` 属性，用于指定单元格的样式
+  - 新增 `header-row-class-name` 属性，用于指定表头行的类名
+  - 新增 `header-row-style` 属性，用于指定表头行的样式
+  - 新增 `header-cell-class-name` 属性，用于指定表头单元格的类名
+  - 新增 `header-cell-style` 属性，用于指定表头单元格的样式
+  - tablecolumn 的 `prop` 属性支持 `object[key]` 格式
+  - tablecolumn 新增 `index` 属性，用于自定义索引值
+- select
+  - 新增 `reserve-keyword` 属性，用于在选择某个选项后保留当前的搜索关键词
+
+### 修复
+- datepicker
+  - 选择周数时，`v-model` 结果返回该周第二天的问题 #6038
+  - 在 `daterange` 类型中，第一次的输入会被清空的问题 #6021
+- datetimepicker
+  - 和 timepicker 相互影响的问题 #6090
+  - 选择时间小时和秒可超出限制的问题 #6076
+- timepicker
+  - 失去焦点时无法正确改变 `v-model` 值的问题 #6023
+- dialog
+  - 当含有下拉框时，下拉框的打开和关闭会造成文字虚晃的问题 #6088
+- select
+  - 提升性能，修复组件销毁时可能导致 vue dev-tool 卡死的问题 #6151
+- table
+  - 修复 table 在父元素从 `display: none` 变成其他状态时会隐藏的问题
+  - 修复 table 在父元素为 `display: flex` 时可能出现的宽度逐渐变大的问题
+  - 修复 `append` 具名 slot 和固定列并存时，动态获取表格数据会导致固定列消失的问题
+  - 修复 `expand-row-keys` 属性初始化无效的问题
+  - 修复 `data` 改变时过滤条件失效的问题
+  - 修复多级表头时固定列隐藏情况计算错误的问题
+  - 修复 `max-height` 变更后无法恢复的问题
+  - 修复一些样式上的计算错误
+
+### 非兼容性更新
+- 综合
+  - 移除 `theme-default`
+  - 最低兼容 vue 2.5.2 和 ie 10
+  - 表单组件的 `change` 事件和 pagination 的 `current-change` 事件现在仅响应用户交互
+  - button 和表单组件的 `size` 属性不再接受 `large` 值，可接受 `medium`、`small` 和 `mini`
+  - 为了方便使用第三方图标，button 的 `icon` 属性、input 的 `prefix-icon` 和 `suffix-icon` 属性、steps 的 `icon` 属性现在需要传入完整的图标类名
+- dialog
+  - 移除 `size` 属性。现在 dialog 的尺寸由 `width` 和 `fullscreen` 控制
+  - 移除通过 `v-model` 控制 dialog 显示和隐藏的功能
+- rate
+  - `text-template` 属性更名为 `score-template`
+- dropdown
+  - `menu-align` 属性变更为 `placement`，增加更多方位属性
+- transfer
+  - `footer-format` 属性更名为 `format`
+- switch
+  - 由于 `on-*` 属性在 jsx 中会被识别为事件，导致 switch 所有 `on-*` 属性在 jsx 中无法正常工作，所以 `on-*` 属性更名为 `active-*`，对应地，`off-*` 属性更名为 `inactive-*`。受到影响的属性有：`on-icon-class`、`off-icon-class`、`on-text`、`off-text`、`on-color`、`off-color`、`on-value`、`off-value`
+  - `active-text` 和 `inactive-text` 属性不再有默认值
+- tag
+  - `type` 属性现在支持 `success`、`info`、`warning` 和 `danger` 四个值
+- menu
+  - 移除 `theme` 属性。现在通过 `background-color`、`text-color` 和 `active-text-color` 属性进行颜色的自定义
+- input
+  - 移除 `icon` 属性。现在通过 `suffix-icon` 属性或者 `suffix` 具名 slot 来加入尾部图标
+  - 移除 `on-icon-click` 属性和 `click` 事件。现在如果需要为输入框中的图标添加点击事件，请以具名 slot 的方式添加图标
+  - `change` 事件现在仅在输入框失去焦点或用户按下回车时触发，与原生 input 元素一致。如果需要实时响应用户的输入，可以使用 `input` 事件
+- autocomplete
+  - 移除 `custom-item` 属性。现在通过 `scoped slot` 自定义输入建议列表项的内容
+  - 移除 `props` 属性，现在使用 `value-key` 属性指定输入建议对象中用于显示的键名
+- steps
+  - 移除 `center` 属性
+  - 现在步骤条将默认充满父容器
+  - datepicker
+  - `change` 事件参数现在为组件的绑定值，格式由 `value-format` 控制
+- table
+  - 移除通过 `inline-template` 自定义列模板的功能
+  - `sort-method` 现在和 `array.sort` 保持一致的逻辑，要求返回一个数字
+  - 将 `append` slot 移至 `tbody` 元素以外，以保证其只被渲染一次
+  - `expand` 事件更名为 `expand-change`，以保证 api 的命名一致性
+  - `row-class-name` 和 `row-style` 的函数参数改为对象，以保证 api 的一致性
+
+##
+<i><sup>*</sup> 在网站上动态渲染任意 html 是非常危险的，因为容易导致 [xss 攻击](https://en.wikipedia.org/wiki/cross-site_scripting)。因此请在 `dangerouslyusehtmlstring` 打开的情况下，确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。</i>
+
+##
+
+### new features
+- general
+  - a new theme: `theme-chalk`
+  - accessibility of the following components are improved: alert, autocomplete, breadcrumb, button, checkbox, collapse, input, inputnumber, menu, progress, radio, rate, slider, switch, upload
+  - added typescript typings
+  - all existing icons are redesigned. some new icons are added
+  - added a series of breakpoint-based utility classes that hide elements when the viewport size meets certain conditions
+  - added layout components: container, header, aside, main, footer
+  - now you can configure component sizes globally. when importing element, you can add a global config object with a `size` prop to configure default sizes for all components.
+- button
+  - added `round` attribute. it's used for round-cornered buttons #6643
+- timeselect
+  - now can be navigated by `up` and `down`, and hitting `enter` selects the time #6023
+- timepicker
+  - now can be navigated by arrow keys, and hitting `enter` selects the time #6050
+  - added `start-placeholder` and `end-placeholder`. they're placeholders for the two input boxes in range mode #7169
+  - added `arrow-control` attribute to spin the time with arrows #7438
+- tree
+  - now child nodes don't render before the first expand #6257
+  - added `check-descendants` attribute. it determines if child nodes are checked when checking their parent node in `lazy` mode #6235
+- tag
+  - added `size` attribute #7203
+- datepicker
+  - now `timeformat` can format the timepicker when type is set to `datetimerange` #6052
+  - added `start-placeholder` and `end-placeholder`. they're placeholders for the two input boxes in range mode #7169
+  - added `value-format` attribute to customize the format of the binding value, #7367
+  - added `unlink-panels` attribute to unlink the two date panels when selecting a date range
+- messagebox
+  - added `closeonhashchange` attribute #6043
+  - added `center` attribute so that the content can be centered #7029
+  - added `roundbutton` attribute to display round buttons #7029
+  - added `dangerouslyusehtmlstring` attribute. when set to `true`, `message` will be parsed as html string<sup>*</sup> #6043
+  - added `inputtype` attribute to assign type for the inner input box, #7651
+- dialog
+  - added `width`、`fullscreen`、`append-to-body` attributes. now dialog can be nested
+  - added `center` attribute so that the content can be centered #7042
+  - added `focus-after-closed`、`focus-after-open` to improve accessibility #6511
+- colorpicker
+  - now you can type colors in the input box #6167
+  - added `size` and `disabled` attributes #7026
+  - added `popper-class` attribute #7351
+- message
+  - now color of the icons can be overridden by css #6207
+  - added `dangerouslyusehtmlstring` attribute. when set to `true`, `message` will be parsed as html string<sup>*</sup> #6207
+  - added `center` attribute so that the content can be centered #6875
+- notification
+  - added `position` attribute to configure where notification pops up #6231
+  - added `dangerouslyusehtmlstring` attribute. when set to `true`, `message` will be parsed as html string<sup>*</sup> #6231
+  - added `showclose` attribute to hide the close button #6402
+- rate
+  - added `show-score` attribute to determine if current score is displayed #6295
+- tabs
+  - added `tab-position` attribute #6096
+- radio
+  - added `border` and `size` attributes #6690
+- checkbox
+  - added `border` and `size` attributes #6690
+- alert
+  - added `center` attribute so that the content can be centered #6876
+- menu
+  - added `background-color`, `text-color` and `active-text-color` attributes #7064
+  - added `open` and `close` methods to open and close submenu programmatically, #7412
+- form
+  - added `inline-message` attribute to determine if the validation message is displayed in inline style #7032
+  - added `status-icon` attribute to display a feedback icon when validated #7032
+  - form and formitem now have a `size` attribute. inner components will inherit this size if not specified on themselves, #7428
+  - `validate` method will now return a promise if the callback is omitted, #7405
+  - added `clearvalidate` method for clearing validating results for all form items, #7623
+- input
+  - added `suffix` and `prefix` named slots, `suffixicon` and `prefixicon` attributes to add contents inside the input box #7032
+- breadcrumb
+  - added `separator-class` attribute to support icons as item separators #7203
+- steps
+  - added `simple` attribute to activate simple-styled steps #7274
+- pagination
+  - added `prev-text` and `next-text` attributes to customize texts of previous page and next page #7005
+- loading
+  - now you can customize spinner icon and background color with `spinner` and `background` prop, #7390
+- autocomplete
+  - added `debounce` attribute, #7413
+- upload
+  - added `limit` and `on-exceed` attributes to limit the amount of files, #7405
+- datetimepicker
+  - added `time-arrow-control` attribute to activate `arrow-control` of the nesting timepicker, #7438
+- layout
+  - added a new breakpoint `xl` for viewport wider than 1920px
+- table
+  - added `span-method` attribute for merging cells
+  - added `clearsort` method to clear sorting programmatically
+  - added `clearfilter` method to clear filter programmatically
+  - for expandable rows, when a row is expanded, a `.expanded` class will be added to its class list, so that you can customize its style
+  - added `size` attribute
+  - added `togglerowexpansion` method to expand or collapse expandable rows programmatically
+  - added `cell-class-name` attribute to assign class name for cells
+  - added `cell-style` attribute to style cells
+  - added `header-row-class-name` attribute to assign class name for header rows
+  - added `header-row-style` attribute to style header rows
+  - added `header-cell-class-name` attribute to assign class name for header cells
+  - added `header-cell-style` attribute to style header cells
+  - tablecolumn's `prop` attribute now accepts `object[key]` notations
+  - added `index` attribute for tablecolumn to customize row indices
+- select
+  - added `reserve-keyword` attribute for reserving current search keyword after selecting an option
+
+### bug fixes
+- datepicker
+  - fixed `v-model` returning the second day of the selected week in week mode #6038
+  - fixed the first input being cleared in `daterange` type #6021
+- datetimepicker
+  - fixed datetimepicker and timepicker affecting each other when picked #6090
+  - fixed hour and second can be beyond limit when selecting time #6076
+- timepicker
+  - fixed `v-model` not update correctly when blurred #6023
+- dialog
+  - fixed texts having blurry edges when opening and closing nesting dropdowns #6088
+- select
+  - improved performance. now vue dev-tool won't crash when a large number of selects are destroyed #6151
+- table
+  - fixed a bug that table remains hiding when its parent element appears from `display: none`
+  - fixed table expanding its width when its parent element has `display: flex`
+  - fixed a bug that fixed columns of a table with `append` slot would disappear when data is dynamically fetched
+  - fixed `expand-row-keys` attribute not working with initial value
+  - fixed filter failing when `data` updates
+  - fixed a calculation error of fixed columns layout with grouped headers
+  - fixed a dynamic `max-height` bug
+  - fixed some style calculation errors
+
+### breaking changes
+- general
+  - removed `theme-default`
+  - compatible with vue 2.5.2+ and ie 10+
+  - `change` event of form components and `current-change` event of pagination now only trigger on user interaction
+  - `size` attribute of button and form components now accept `medium`, `small` and `mini`
+  - to facilitate the use of third-party icons, `icon` attribute of button and steps, `prefix-icon` and `suffix-icon` attributes of input now require a full class name
+- dialog
+  - removed `size` attribute. now the size of dialog can be configured by `width` and `fullscreen`
+  - now the visibility of dialog cannot be controlled by `v-model`
+- rate
+  - `text-template` is renamed to `score-template`
+- dropdown
+  - `menu-align` is renamed to `placement`. now it supports more positions
+- transfer
+  - `footer-format` is renamed to `format`
+- switch
+  - attributes starting with `on-*` will be parsed to events in jsx, making all `on-*` attributes of switch not
+  able to work in jsx. so `on-*` attributes are renamed to `active-*`, and accordingly `off-*` attributes are renamed to `inactive-*`. this change affects the following attributes: `on-icon-class`, `off-icon-class`, `on-text`, `off-text`, `on-color`, `off-color`, `on-value`, `off-value`
+  - `active-text` and `inactive-text` attributes now don't have default values
+- tag
+  - `type` attribute now accepts `success`, `info`, `warning` and `danger`
+- menu
+  - removed `theme` attribute. the color of menu can be configured using `background-color`, `text-color` and `active-text-color`
+- input
+  - removed `icon` attribute. now the suffix icon can be configured using `suffix-icon` attribute or `suffix` named slot
+  - removed `on-icon-click` attribute and `click` event. now to add click handler on icons, please use named slots
+  - `change` event now behaves like the native input element, which triggers only on blur or pressing enter. if you need to respond to user input in real time, you can use `input` event.
+- autocomplete
+  - removed `custom-item` attribute. now the template of input suggestions can be customized using `scoped slot`
+  - removed `props` attribute. now you can use `value-key` attribute to designate key name of the input suggestion object for display
+- steps
+  - removed `center` attribute
+  - now the steps will fill its parent container by default
+- datepicker
+  - the params of datepicker's `change` event is now the binding value itself. its format is controlled by `value-format`
+- table
+  - removed support for customizing column template using `inline-template`
+  - `sort-method` now aligns with `array.sort`. it should return a number instead of a boolean
+  - `append` slot is moved outside the `tbody` element to avoid multiple rendering
+  - `expand` event is renamed to `expand-change`
+  - the params of `row-class-name` and `row-style` method is now an object
+
+##
+<i><sup>*</sup> dynamically rendering arbitrary html on your website can be very dangerous because it can easily lead to [xss attacks](https://en.wikipedia.org/wiki/cross-site_scripting). so when `dangerouslyusehtmlstring` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.</i>

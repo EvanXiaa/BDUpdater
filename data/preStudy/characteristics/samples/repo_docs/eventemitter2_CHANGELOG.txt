@@ -1,0 +1,9 @@
+## [5.0.1] - 2018-01-09
+
+### Fixed
+- Allow `removeAllListeners` to recieve `undefined` as an argument. @majames
+
+## [4.1.2] - 2017-07-12
+### Added
+- Correct listeners and listenersAny typings @cartant
+- Changed Typescript definition to take array of strings for event name. @thisboyiscrazy

@@ -1,0 +1,173 @@
+2025-08-30 23:44:15,175 | INFO | repair.alice-app | Starting analysis for alice-app
+2025-08-30 23:44:15,175 | INFO | repair.alice-app | Starting breaking change analysis for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:15,176 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:15,176 | INFO | repair.alice-app | BEGIN pattern 2 (pattern_2)
+2025-08-30 23:44:15,176 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-30 23:44:15,389 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:15,389 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:15,389 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:15,390 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:15,390 | INFO | repair.alice-app | END pattern 2 (pattern_2)
+2025-08-30 23:44:15,390 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:15,390 | INFO | repair.alice-app | BEGIN pattern 2 (pattern_2)
+2025-08-30 23:44:15,390 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{text}", "changelogId": 2}
+2025-08-30 23:44:15,590 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:15,590 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:15,590 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {})
+2025-08-30 23:44:15,591 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:15,591 | INFO | repair.alice-app | END pattern 2 (pattern_2)
+2025-08-30 23:44:15,591 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:15,591 | INFO | repair.alice-app | BEGIN pattern 3 (pattern_3)
+2025-08-30 23:44:15,591 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-30 23:44:15,788 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:15,788 | DEBUG | repair.alice-app | Parsed detection output: [{'pattern_id': 3, 'file': 'lib/alice.js', 'line': 182, 'column': 49}]
+2025-08-30 23:44:15,788 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076534c0>, {'lib/alice.js': defaultdict(<class 'list'>, {3: [{'line': 182, 'column': 49}]})})
+2025-08-30 23:44:15,789 | INFO | repair.alice-app | New context extracted from /node-fetch/results/gpt-4.1/alice-app/lib/alice.js
+2025-08-30 23:44:17,735 | DEBUG | repair.alice-app | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "response => {\n  // node-fetch v2: response.json() throws on HTTP 204. Patch to preserve v1 behavior ({} on 204).\n  return response.json().catch(err => {\n    if (response.status === 204) {\n      return {};\n    }\n    throw err;\n  });\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 23:44:17,736 | INFO | repair.alice-app | Replaced code in /node-fetch/results/gpt-4.1/alice-app/lib/alice.js at [7986, 8013]
+2025-08-30 23:44:17,737 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:17,737 | INFO | repair.alice-app | END pattern 3 (pattern_3)
+2025-08-30 23:44:17,738 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:17,738 | INFO | repair.alice-app | BEGIN pattern 3 (pattern_3)
+2025-08-30 23:44:17,738 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{json}", "changelogId": 3}
+2025-08-30 23:44:18,004 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:18,004 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:18,004 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:18,004 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:18,004 | INFO | repair.alice-app | END pattern 3 (pattern_3)
+2025-08-30 23:44:18,004 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:18,004 | INFO | repair.alice-app | BEGIN pattern 4 (pattern_4)
+2025-08-30 23:44:18,005 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "call {<node-fetch>,<node-fetch/**/*>}?**.{*}", "changelogId": 4}
+2025-08-30 23:44:18,330 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:18,331 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:18,331 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:18,331 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:18,331 | INFO | repair.alice-app | END pattern 4 (pattern_4)
+2025-08-30 23:44:18,332 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:18,332 | INFO | repair.alice-app | BEGIN pattern 5 (pattern_5)
+2025-08-30 23:44:18,332 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-30 23:44:18,568 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:18,568 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:18,568 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:18,568 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:18,568 | INFO | repair.alice-app | END pattern 5 (pattern_5)
+2025-08-30 23:44:18,568 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:18,568 | INFO | repair.alice-app | BEGIN pattern 5 (pattern_5)
+2025-08-30 23:44:18,568 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Request}", "changelogId": 5}
+2025-08-30 23:44:18,858 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:18,859 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:18,859 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:18,859 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:18,859 | INFO | repair.alice-app | END pattern 5 (pattern_5)
+2025-08-30 23:44:18,859 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:18,859 | INFO | repair.alice-app | BEGIN pattern 6 (pattern_6)
+2025-08-30 23:44:18,859 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-30 23:44:19,055 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:19,056 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:19,056 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:19,056 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:19,056 | INFO | repair.alice-app | END pattern 6 (pattern_6)
+2025-08-30 23:44:19,056 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:19,056 | INFO | repair.alice-app | BEGIN pattern 6 (pattern_6)
+2025-08-30 23:44:19,056 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{getAll}", "changelogId": 6}
+2025-08-30 23:44:19,256 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:19,256 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:19,256 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:19,257 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:19,257 | INFO | repair.alice-app | END pattern 6 (pattern_6)
+2025-08-30 23:44:19,257 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:19,257 | INFO | repair.alice-app | BEGIN pattern 7 (pattern_7)
+2025-08-30 23:44:19,257 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-30 23:44:19,457 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:19,457 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:19,457 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:19,457 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:19,457 | INFO | repair.alice-app | END pattern 7 (pattern_7)
+2025-08-30 23:44:19,458 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:19,458 | INFO | repair.alice-app | BEGIN pattern 7 (pattern_7)
+2025-08-30 23:44:19,458 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{get}", "changelogId": 7}
+2025-08-30 23:44:19,650 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:19,650 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:19,650 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:19,651 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:19,651 | INFO | repair.alice-app | END pattern 7 (pattern_7)
+2025-08-30 23:44:19,651 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:19,651 | INFO | repair.alice-app | BEGIN pattern 8 (pattern_8)
+2025-08-30 23:44:19,651 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-30 23:44:19,851 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:19,851 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:19,851 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:19,852 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:19,852 | INFO | repair.alice-app | END pattern 8 (pattern_8)
+2025-08-30 23:44:19,852 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:19,852 | INFO | repair.alice-app | BEGIN pattern 8 (pattern_8)
+2025-08-30 23:44:19,852 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{set,get,delete}", "changelogId": 8}
+2025-08-30 23:44:20,049 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:20,050 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:20,050 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:20,050 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:20,050 | INFO | repair.alice-app | END pattern 8 (pattern_8)
+2025-08-30 23:44:20,050 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:20,050 | INFO | repair.alice-app | BEGIN pattern 9 (pattern_9)
+2025-08-30 23:44:20,050 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-30 23:44:20,249 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:20,249 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:20,249 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:20,249 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:20,249 | INFO | repair.alice-app | END pattern 9 (pattern_9)
+2025-08-30 23:44:20,249 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:20,249 | INFO | repair.alice-app | BEGIN pattern 9 (pattern_9)
+2025-08-30 23:44:20,249 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers,append,delete,get,has,set}", "changelogId": 9}
+2025-08-30 23:44:20,449 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:20,450 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:20,450 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:20,450 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:20,450 | INFO | repair.alice-app | END pattern 9 (pattern_9)
+2025-08-30 23:44:20,450 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:20,450 | INFO | repair.alice-app | BEGIN pattern 10 (pattern_10)
+2025-08-30 23:44:20,450 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "read {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-30 23:44:20,644 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:20,644 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:20,644 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:20,644 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:20,644 | INFO | repair.alice-app | END pattern 10 (pattern_10)
+2025-08-30 23:44:20,645 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:20,645 | INFO | repair.alice-app | BEGIN pattern 10 (pattern_10)
+2025-08-30 23:44:20,645 | DEBUG | repair.alice-app | Pattern payload: {"type": "call", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{Headers}", "changelogId": 10}
+2025-08-30 23:44:20,844 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:20,844 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:20,844 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:20,844 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:20,844 | INFO | repair.alice-app | END pattern 10 (pattern_10)
+2025-08-30 23:44:20,844 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:20,844 | INFO | repair.alice-app | BEGIN pattern 11 (pattern_11)
+2025-08-30 23:44:20,844 | DEBUG | repair.alice-app | Pattern payload: {"type": "write", "pattern": "write {<node-fetch>,<node-fetch/**/*>}?**.{body,bodyUsed,method,url,headers,redirect}", "changelogId": 11}
+2025-08-30 23:44:21,036 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:21,036 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:21,036 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:21,037 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:21,037 | INFO | repair.alice-app | END pattern 11 (pattern_11)
+2025-08-30 23:44:21,037 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:21,037 | INFO | repair.alice-app | BEGIN pattern 1 (pattern_1)
+2025-08-30 23:44:21,037 | DEBUG | repair.alice-app | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/response,node-fetch/lib/request,node-fetch/lib/headers,node-fetch/lib/*}", "changelogId": 1}
+2025-08-30 23:44:21,228 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:21,228 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:21,228 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:21,228 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:21,228 | INFO | repair.alice-app | END pattern 1 (pattern_1)
+2025-08-30 23:44:21,228 | INFO | repair.alice-app | ============================================================
+2025-08-30 23:44:21,228 | INFO | repair.alice-app | BEGIN pattern 4 (pattern_4)
+2025-08-30 23:44:21,228 | DEBUG | repair.alice-app | Pattern payload: {"type": "import", "pattern": "import {node-fetch/lib/*}", "changelogId": 4}
+2025-08-30 23:44:21,428 | INFO | repair.alice-app | Tapir run successful for /node-fetch/results/gpt-4.1/alice-app
+2025-08-30 23:44:21,428 | DEBUG | repair.alice-app | Parsed detection output: []
+2025-08-30 23:44:21,428 | DEBUG | repair.alice-app | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1076536a0>, {})
+2025-08-30 23:44:21,428 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:21,428 | INFO | repair.alice-app | END pattern 4 (pattern_4)
+2025-08-30 23:44:21,428 | DEBUG | repair.alice-app | Updated package.json saved at /node-fetch/results/gpt-4.1/alice-app/package.json
+2025-08-30 23:44:21,428 | INFO | repair.alice-app | token consumed 1294
+2025-08-30 23:44:21,428 | INFO | repair.alice-app | parse consumption time: 1.9462217083200812

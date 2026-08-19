@@ -1,0 +1,7 @@
+{
+  "owner": "prettier-solidity",
+  "repo": "prettier-plugin-solidity",
+  "number": 459,
+  "pr_url": "https://github.com/prettier-solidity/prettier-plugin-solidity/pull/459",
+  "content": "# PR 459: Breaking changes in v0.8.0\nBranches: breaking-changes-in-v0.8.0 -> master\n\nv0.8.0 added [breaking changes](https://docs.soliditylang.org/en/v0.8.0/080-breaking-changes.html#silent-changes-of-the-semantics) that conflicted with some desicions we made while formatting.\r\n\r\nThe ones affecting us are mainly:\r\n  - The type `byte` has been removed. It was an alias of `bytes1`.\r\n  - Exponentiation is right associative, i.e., the expression `a**b**c` is parsed as `a**(b**c)`. Before 0.8.0, it was parsed as `(a**b)**c`.\r\n\r\nSince we are not tracking the pragma of the file, we should simply avoid special formatting of these.\n\n## Commit titles\n- Fixing silent errors since v0.8.0\n- missing snapshot\n\n## Changed files\n- src/parser.js\n- tests/BinaryOperators/__snapshots__/jsfmt.spec.js.snap\n- tests/ExplicitVariableTypes/ExplicitVariableTypes.sol\n- tests/ExplicitVariableTypes/__snapshots__/jsfmt.spec.js.snap\n## Reviews\n- @fvictorio [APPROVED]\n- @mattiaerre [APPROVED]: 🙏"
+}

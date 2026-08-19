@@ -1,0 +1,42 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<commander>,<commander/**/*>}**.{parse}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "write {<commander>,<commander/**/*>}**.{parse}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "read {<commander>,<commander/**/*>}**.{Option}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "write {<commander>,<commander/**/*>}**.{Option}",
+    "changelogId": 1
+  },
+  {
+    "type": "call",
+    "pattern": "read {<commander>,<commander/**/*>}**.{parse}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "write {<commander>,<commander/**/*>}**.{parse}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "read {<commander>,<commander/**/*>}**.{wrap,formatItem,boxWrap}",
+    "changelogId": 3
+  },
+  {
+    "type": "call",
+    "pattern": "write {<commander>,<commander/**/*>}**.{wrap,formatItem,boxWrap}",
+    "changelogId": 3
+  }
+]

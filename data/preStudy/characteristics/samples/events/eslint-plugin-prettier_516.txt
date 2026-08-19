@@ -1,0 +1,7 @@
+{
+  "owner": "prettier",
+  "repo": "eslint-plugin-prettier",
+  "number": 516,
+  "pr_url": "https://github.com/prettier/eslint-plugin-prettier/pull/516",
+  "content": "# PR 516: feat!: upgrade to prettier v3\nBranches: feat/prettier_v3 -> next\n\n\n\n## Commit titles\n- feat!: upgrade to prettier v3\n- chore: enter alpha pre mode\n- Create orange-eyes-brush.md\n\n## Changed files\n- .changeset/orange-eyes-brush.md\n- .changeset/pre.json\n- eslint-plugin-prettier.js\n- package.json\n- worker.js\n- yarn.lock\n## Markdown changes\n### .changeset/orange-eyes-brush.md\n```diff\n@@ -0,0 +1,5 @@\n+---\n+\"eslint-plugin-prettier\": major\n+---\n+\n+feat!: upgrade to prettier v3\n```\n## Issue comments\n- @changeset-bot[bot]: ###  🦋  Changeset detected\n\nLatest commit: 084448e9ba6e1e6a0cfbff1613b53226e24fc9b2\n\n**The changes in this PR will be included in the next version bump.**\n\n<details><summary>This PR includes changesets to release 1 package</summary>\n\n  | Name                   | Type  |\n| ---------------------- | ----- |\n| eslint-plugin-prettier | Major |\n\n</details>\n\nNot sure what this means? [Click here  to learn what changesets are](https://github.com/changesets/changesets/blob/master/docs/adding-a-changeset.md).\n\n[Click here if you're a maintainer who wants to add another changeset to this PR](https://github.com/prettier/eslint-plugin-prettier/new/feat/prettier_v3?filename=.changeset/violet-lemons-accept.md&value=---%0A%22eslint-plugin-prettier%22%3A%20patch%0A---%0A%0Afeat!%3A%20upgrade%20to%20prettier%20v3%0A)"
+}

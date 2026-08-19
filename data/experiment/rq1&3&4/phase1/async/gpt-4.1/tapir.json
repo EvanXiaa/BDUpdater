@@ -1,0 +1,42 @@
+[
+  {
+    "type": "call",
+    "pattern": "call {<async>,<async/**/*>}?**.{each,concat,detect,every,filter,groupBy,map,mapValues,reduce,reject,some,transform,times,auto,compose,seq,whilst,until,forever,parallel,race,retry,series,tryEach,waterfall}",
+    "changelogId": 0
+  },
+  {
+    "type": "call",
+    "pattern": "write {<async>,<async/**/*>}?**.{drain,saturated,unsaturated,empty,error}",
+    "changelogId": 2
+  },
+  {
+    "type": "call",
+    "pattern": "call {<async>,<async/**/*>}?**.{eachOfLimit*,each*,eachSeries*,compose*,seq*,waterfall*,auto*,autoInject*,whilst*,until*,forever*}",
+    "changelogId": 3
+  },
+  {
+    "type": "call",
+    "pattern": "call {<async>,<async/**/*>}?**.{during,doDuring,whilst,doWhilst,until,doUntil}",
+    "changelogId": 4
+  },
+  {
+    "type": "call",
+    "pattern": "call {<async>,<async/**/*>}?**.{queue,mapLimit,eachLimit,filterLimit,reduceLimit,concatLimit,eachOfLimit,forEachOfLimit,groupByLimit}",
+    "changelogId": 5
+  },
+  {
+    "type": "call",
+    "pattern": "call {<async>,<async/**/*>}?**.{memoize}",
+    "changelogId": 6
+  },
+  {
+    "type": "call",
+    "pattern": "call {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}",
+    "changelogId": 7
+  },
+  {
+    "type": "import",
+    "pattern": "import {async.mjs}",
+    "changelogId": 8
+  }
+]

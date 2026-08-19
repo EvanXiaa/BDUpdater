@@ -1,0 +1,231 @@
+{
+  "breaking_changes": [
+    {
+      "Id": 0,
+      "BC_description": "Node.js 0.10.x and 0.12.x are no longer supported. Projects running on these Node versions will fail to use this library.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "environment",
+        "className": [],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "Upgrade your Node.js runtime to at least v4.x or higher to use v2.0.0 of node-fetch.",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 1,
+      "BC_description": "Directly requiring internal modules like 'node-fetch/lib/response' is now unsupported. Instead, you must use 'require('node-fetch').Response' for CommonJS, or ES6 import syntax.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [
+          "Response",
+          "Request",
+          "Headers",
+          "*"
+        ],
+        "methodName": [],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch/lib/response",
+          "node-fetch/lib/request",
+          "node-fetch/lib/headers",
+          "node-fetch/lib/*"
+        ]
+      },
+      "Adaptation_method": "// Before:\nconst Response = require('node-fetch/lib/response');\n\n// After:\nconst { Response } = require('node-fetch');\n// or\nimport { Response } from 'node-fetch';",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 2,
+      "BC_description": "The 'response.text()' method now always returns text as UTF-8 without attempting to detect encoding. For the previous behavior, 'response.textConverted()' should be used.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#text-no-longer-tries-to-detect-encoding"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "text"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nconst text = await response.text(); // automatic encoding detection\n\n// After (for UTF-8 only):\nconst text = await response.text();\n\n// After (if auto encoding detection needed, like v1):\nconst text = await response.textConverted();",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 3,
+      "BC_description": "response.json() now throws an error on HTTP 204 No Content response instead of returning an empty object.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Response"
+        ],
+        "methodName": [
+          "json"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before (v1):\nconst data = await response.json(); // data is {} on 204\n\n// After (v2):\ntry {\n  const data = await response.json();\n} catch (err) {\n  if (response.status === 204) {\n    // Handle no-content\n    // possibly set data = {} or handle specially\n  } else {\n    throw err;\n  }\n}",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 4,
+      "BC_description": "Internal methods of node-fetch are no longer exposed. Any code that imported and used undocumented internal methods will break. In v1.x, the user can access internal methods such as '_clone()', '_decode()', and '_convert()' on the 'response' object. In v2.x, these methods are completely inaccessible.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#internal-methods-hidden"
+      ],
+      "Changed_object": {
+        "type": "import",
+        "className": [
+          "*"
+        ],
+        "methodName": [
+          "*"
+        ],
+        "propertyName": [],
+        "moduleName": [
+          "node-fetch/lib/*"
+        ]
+      },
+      "Adaptation_method": "Remove all usages of undocumented/internal APIs from node-fetch/lib/*. Use only public, documented APIs exposed in the main 'node-fetch' module.",
+      "RequireInfoFlag": true,
+      "RequireInfo": "Precise enumeration of which internal methods were previously accessible and now are not is needed to fully enumerate affected APIs for downstream clients."
+    },
+    {
+      "Id": 5,
+      "BC_description": "An error is now thrown when constructing a Request object with a GET or HEAD method and a non-null body, following the specification.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Request"
+        ],
+        "methodName": [
+          "constructor"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before (v1):\nnew fetch.Request('https://example.com', { method: 'GET', body: 'data' }); // previously allowed\n\n// After (v2):\n// Remove 'body' when using GET or HEAD:\nnew fetch.Request('https://example.com', { method: 'GET' });",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 6,
+      "BC_description": "The 'headers.getAll()' method is removed. 'headers.get()' now returns all matching header values joined by comma, per spec.",
+      "Reference": [
+        "CHANGELOG.md#v2.0.0",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md",
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "getAll"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nconst values = headers.getAll('set-cookie');\n\n// After:\nconst values = headers.get('set-cookie').split(','); // returns all values as a comma-delimited string",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 7,
+      "BC_description": "The Headers 'get()' method now returns all matching header values joined by a comma string (not just the first match). Previous behavior can be emulated with 'get().split(',')[0]'.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "get"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nconst value = headers.get('Multi'); // 'header1'\n\n// After:\nconst value = headers.get('Multi'); // 'header1,header2'\nconst firstValue = headers.get('Multi').split(',')[0]; // 'header1'\n",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 8,
+      "BC_description": "All method parameters for Headers methods are now stringified. This means set/get/delete methods (and others) automatically convert non-string arguments to strings.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "set",
+          "get",
+          "delete"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before:\nheaders.set('null-header', null); // get('null-header') returns null\nheaders.set('undefined', undefined); // get(undefined) throws\n\n// After:\nheaders.set('null-header', null); // get('null-header') returns 'null'\nheaders.set('undefined', undefined); // get(undefined) returns 'undefined'\n",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    },
+    {
+      "Id": 9,
+      "BC_description": "Invalid HTTP header names and values are now rejected outright by Headers methods. Attempting to set/get headers with invalid (non-ASCII) characters like 'H\u00e9y' now throws an error.",
+      "Reference": [
+        "https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md#headers"
+      ],
+      "Changed_object": {
+        "type": "call",
+        "className": [
+          "Headers"
+        ],
+        "methodName": [
+          "set",
+          "get"
+        ],
+        "propertyName": [],
+        "moduleName": []
+      },
+      "Adaptation_method": "// Before (v1.x):\nheaders.set('H\u00e9y', 'ok'); // accepted\nheaders.get('H\u00e9y'); // accepted\nnew Headers({ 'H\u00e9y': 'ok' }); // accepted\n\n// After (v2.x):\nheaders.set('H\u00e9y', 'ok'); // throws\nheaders.get('H\u00e9y'); // throws\nnew Headers({ 'H\u00e9y': 'ok' }); // throws",
+      "RequireInfoFlag": false,
+      "RequireInfo": ""
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "type": "call",
+    "pattern": "read {<svgo>,<svgo/**/*>}**.{querySelectorAll,querySelector,matches}",
+    "changelogId": 4
+  },
+  {
+    "type": "call",
+    "pattern": "write {<svgo>,<svgo/**/*>}**.{querySelectorAll,querySelector,matches}",
+    "changelogId": 4
+  },
+  {
+    "type": "import",
+    "pattern": "import {svgo/lib/xast,svgo/lib/builtin,svgo/plugins/*,svgo/dist/svgo.browser}",
+    "changelogId": 3
+  },
+  {
+    "type": "import",
+    "pattern": "import svgo",
+    "changelogId": 5
+  }
+]

@@ -1,0 +1,127 @@
+2025-08-31 22:49:52,295 | INFO | repair.titanium-cli-7.0.0 | Starting analysis for titanium-cli-7.0.0
+2025-08-31 22:49:52,295 | INFO | repair.titanium-cli-7.0.0 | Starting breaking change analysis for -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0
+2025-08-31 22:49:52,295 | INFO | repair.titanium-cli-7.0.0 | ============================================================
+2025-08-31 22:49:52,295 | INFO | repair.titanium-cli-7.0.0 | BEGIN pattern 0 (pattern_0)
+2025-08-31 22:49:52,295 | DEBUG | repair.titanium-cli-7.0.0 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{parse,allowExcessArguments}", "changelogId": 0}
+2025-08-31 22:49:52,860 | INFO | repair.titanium-cli-7.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0
+2025-08-31 22:49:52,861 | DEBUG | repair.titanium-cli-7.0.0 | Parsed detection output: []
+2025-08-31 22:49:52,861 | DEBUG | repair.titanium-cli-7.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37f60>, {})
+2025-08-31 22:49:52,862 | DEBUG | repair.titanium-cli-7.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/package.json
+2025-08-31 22:49:52,862 | INFO | repair.titanium-cli-7.0.0 | END pattern 0 (pattern_0)
+2025-08-31 22:49:52,862 | INFO | repair.titanium-cli-7.0.0 | ============================================================
+2025-08-31 22:49:52,862 | INFO | repair.titanium-cli-7.0.0 | BEGIN pattern 0 (pattern_0)
+2025-08-31 22:49:52,862 | DEBUG | repair.titanium-cli-7.0.0 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{parse,allowExcessArguments}", "changelogId": 0}
+2025-08-31 22:49:53,412 | INFO | repair.titanium-cli-7.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0
+2025-08-31 22:49:53,412 | DEBUG | repair.titanium-cli-7.0.0 | Parsed detection output: []
+2025-08-31 22:49:53,412 | DEBUG | repair.titanium-cli-7.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37f60>, {})
+2025-08-31 22:49:53,412 | DEBUG | repair.titanium-cli-7.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/package.json
+2025-08-31 22:49:53,412 | INFO | repair.titanium-cli-7.0.0 | END pattern 0 (pattern_0)
+2025-08-31 22:49:53,412 | INFO | repair.titanium-cli-7.0.0 | ============================================================
+2025-08-31 22:49:53,413 | INFO | repair.titanium-cli-7.0.0 | BEGIN pattern 1 (pattern_1)
+2025-08-31 22:49:53,413 | DEBUG | repair.titanium-cli-7.0.0 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{Option}", "changelogId": 1}
+2025-08-31 22:49:53,971 | INFO | repair.titanium-cli-7.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0
+2025-08-31 22:49:53,971 | DEBUG | repair.titanium-cli-7.0.0 | Parsed detection output: [{'pattern_id': 1, 'file': 'src/util/apply-command-config.js', 'line': 1, 'column': 0}, {'pattern_id': 1, 'file': 'src/util/apply-command-config.js', 'line': 26, 'column': 28}, {'pattern_id': 1, 'file': 'src/util/apply-command-config.js', 'line': 46, 'column': 28}, {'pattern_id': 1, 'file': 'src/cli.js', 'line': 3, 'column': 0}, {'pattern_id': 1, 'file': 'src/cli.js', 'line': 712, 'column': 20}, {'pattern_id': 1, 'file': 'src/cli.js', 'line': 716, 'column': 20}, {'pattern_id': 1, 'file': 'src/cli.js', 'line': 721, 'column': 20}, {'pattern_id': 1, 'file': 'src/cli.js', 'line': 730, 'column': 20}]
+2025-08-31 22:49:53,971 | DEBUG | repair.titanium-cli-7.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37f60>, {'src/util/apply-command-config.js': defaultdict(<class 'list'>, {1: [{'line': 1, 'column': 0}, {'line': 26, 'column': 28}, {'line': 46, 'column': 28}]}), 'src/cli.js': defaultdict(<class 'list'>, {1: [{'line': 3, 'column': 0}, {'line': 712, 'column': 20}, {'line': 716, 'column': 20}, {'line': 721, 'column': 20}, {'line': 730, 'column': 20}]})})
+2025-08-31 22:49:53,972 | INFO | repair.titanium-cli-7.0.0 | New context extracted from -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/apply-command-config.js
+2025-08-31 22:49:53,973 | INFO | repair.titanium-cli-7.0.0 | New context extracted from -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/apply-command-config.js
+2025-08-31 22:49:53,973 | INFO | repair.titanium-cli-7.0.0 | New context extracted from -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/apply-command-config.js
+2025-08-31 22:50:12,968 | DEBUG | repair.titanium-cli-7.0.0 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if (conf.options) {\n\tfor (const [name, meta] of Object.entries(conf.options)) {\n\t\tif (name === 'sdk') {\n\t\t\t// --log-level and --sdk are now a global options\n\t\t\tcli.debugLogger.trace(`Skipping \"${cmdName}\" option: --${name}`);\n\t\t\tcontinue;\n\t\t}\n\n\t\tconst long = `--${name}`;\n\t\t// Ensure only a single-character short flag is used with Commander v13.0.0\n\t\tconst shortFlag = (meta.abbr && meta.abbr.length === 1)\n\t\t\t? `-${meta.abbr}`\n\t\t\t: undefined;\n\t\t// Build the flag specification string, dropping any invalid multi-letter short flags\n\t\tconst flagsString = shortFlag\n\t\t\t? `${shortFlag}, ${long} [value]`\n\t\t\t: `${long} [value]`;\n\t\tconst opt = new Option(flagsString, meta.desc);\n\t\tif (meta.hidden) {\n\t\t\topt.hideHelp(true);\n\t\t}\n\t\tif (meta.default !== undefined) {\n\t\t\topt.default(meta.default);\n\t\t}\n\n\t\tif (optionExists(cmd, name)) {\n\t\t\tcli.debugLogger.trace(`Option \"${name}\" already exists, skipping`);\n\t\t\tcontinue;\n\t\t}\n\n\t\tcli.debugLogger.trace(`Adding \"${cmdName}\" option: ${flagsString}`);\n\t\tcmd.addOption(opt);\n\n\t\tif (typeof meta.callback === 'function') {\n\t\t\tcmd.on(`option:${opt.attributeName()}`, value => {\n\t\t\t\tcli.debugLogger.trace(`Firing --${name} option callback: ${value ?? opt.defaultValue}`);\n\t\t\t\tconst result = meta.callback(value ?? opt.defaultValue);\n\t\t\t\tcmd.setOptionValue(opt.name(), result ?? value ?? opt.defaultValue);\n\t\t\t});\n\t\t}\n\n\t\tconf.options[name] = new Proxy(meta, {\n\t\t\tset(obj, prop, value) {\n\t\t\t\tconst orig = obj[prop];\n\t\t\t\tobj[prop] = value;\n\n\t\t\t\tif (prop === 'required' && orig !== value) {\n\t\t\t\t\tcli.debugLogger.trace(`--${name} changed: ${prop}=${value}`);\n\t\t\t\t\topt[prop] = value;\n\t\t\t\t}\n\n\t\t\t\treturn true;\n\t\t\t}\n\t\t});\n\t}\n\n\tif (conf.options['log-level'] && !conf.options.timestamp) {\n\t\tcli.debugLogger.trace(`Adding \"${cmdName}\" option: --timestamp`);\n\t\tcmd.option('--timestamp', 'displays a timestamp in front of log lines');\n\t\tcmd.on('option:timestamp', () => {\n\t\t\tif (cli.ready) {\n\t\t\t\tcli.logger.timestampEnabled(true);\n\t\t\t}\n\t\t});\n\t}\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:50:12,972 | INFO | repair.titanium-cli-7.0.0 | Replaced code in -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/apply-command-config.js at [1076, 2815]
+2025-08-31 22:50:24,334 | DEBUG | repair.titanium-cli-7.0.0 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "Please confirm the allowed formats and possible lengths of `meta.abbr`. Commander.js v13.0.0 will throw if `meta.abbr` is more than one character (making `-ab`) or otherwise invalid. We need to know if `meta.abbr` is guaranteed to be a single character before upgrading.",
+  "dependencies": []
+}
+2025-08-31 22:50:24,336 | DEBUG | repair.titanium-cli-7.0.0 | Added to whole mode list: file=-2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/apply-command-config.js, context=Node, bc_desc={'Id': 1, 'BC_description': "Starting with Commander.js v13.0.0, constructing an Option with unsupported option flag for...
+2025-08-31 22:50:28,117 | DEBUG | repair.titanium-cli-7.0.0 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:50:28,125 | INFO | repair.titanium-cli-7.0.0 | New context extracted from -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/cli.js
+2025-08-31 22:50:28,131 | INFO | repair.titanium-cli-7.0.0 | New context extracted from -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/cli.js
+2025-08-31 22:50:39,592 | DEBUG | repair.titanium-cli-7.0.0 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:50:43,895 | DEBUG | repair.titanium-cli-7.0.0 | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:50:43,895 | INFO | repair.titanium-cli-7.0.0 | Whole mode item: -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/apply-command-config.js
+2025-08-31 22:51:11,628 | DEBUG | repair.titanium-cli-7.0.0 | AI whole-file repair suggestion: {'repairFlag': True, 'modified_code': 'import { Argument, Command, Option } from \'commander\';\nimport { ticonfig } from \'./ticonfig.js\';\nimport { TiError } from \'./tierror.js\';\n\n/**\n * Takes a Titanium CLI command config with flags, options, args, and\n * subcommands and adds them to the current Commander.js command context.\n *\n * @param {CLI} cli - The CLI instance.\n * @param {String} cmdName - The name of the command.\n * @param {Command} cmd - The Commander.js command instance.\n * @param {Object} conf - The CLI command config to apply.\n */\nexport function applyCommandConfig(cli, cmdName, cmd, conf) {\n\tif (conf.title) {\n\t\tcmd.title = conf.title;\n\t}\n\n\tif (conf.alias) {\n\t\tcmd.alias(conf.alias);\n\t}\n\n\tif (conf.flags) {\n\t\tfor (const [name, meta] of Object.entries(conf.flags)) {\n\t\t\t// Ensure only a single-character short flag is used with Commander v13.0.0\n\t\t\tconst shortFlag = (meta.abbr && meta.abbr.length === 1) ? `-${meta.abbr}` : undefined;\n\t\t\t// Build the flag specification string, dropping any invalid multi-letter short flags\n\t\t\tconst flagsString = shortFlag\n\t\t\t\t? `${shortFlag}, --${name}`\n\t\t\t\t: `--${name}`;\n\t\t\tcli.debugLogger.trace(`Adding "${cmdName}" flag: ${flagsString}`);\n\t\t\tconst opt = new Option(flagsString, meta.desc);\n\t\t\tif (meta.default) {\n\t\t\t\topt.default(meta.default);\n\t\t\t}\n\t\t\tif (meta.hidden) {\n\t\t\t\topt.hideHelp(true);\n\t\t\t}\n\t\t\tcmd.addOption(opt);\n\t\t}\n\t}\n\n\tif (conf.options) {\n\tfor (const [name, meta] of Object.entries(conf.options)) {\n\t\tif (name === \'sdk\') {\n\t\t\t// --log-level and --sdk are now a global options\n\t\t\tcli.debugLogger.trace(`Skipping "${cmdName}" option: --${name}`);\n\t\t\tcontinue;\n\t\t}\n\n\t\tconst long = `--${name}`;\n\t\t// Ensure only a single-character short flag is used with Commander v13.0.0\n\t\tconst shortFlag = (meta.abbr && meta.abbr.length === 1)\n\t\t\t? `-${meta.abbr}`\n\t\t\t: undefined;\n\t\t// Build the flag specification string, dropping any invalid multi-letter short flags\n\t\tconst flagsString = shortFlag\n\t\t\t? `${shortFlag}, ${long} [value]`\n\t\t\t: `${long} [value]`;\n\t\tconst opt = new Option(flagsString, meta.desc);\n\t\tif (meta.hidden) {\n\t\t\topt.hideHelp(true);\n\t\t}\n\t\tif (meta.default !== undefined) {\n\t\t\topt.default(meta.default);\n\t\t}\n\n\t\tif (optionExists(cmd, name)) {\n\t\t\tcli.debugLogger.trace(`Option "${name}" already exists, skipping`);\n\t\t\tcontinue;\n\t\t}\n\n\t\tcli.debugLogger.trace(`Adding "${cmdName}" option: ${flagsString}`);\n\t\tcmd.addOption(opt);\n\n\t\tif (typeof meta.callback === \'function\') {\n\t\t\tcmd.on(`option:${opt.attributeName()}`, value => {\n\t\t\t\tcli.debugLogger.trace(`Firing --${name} option callback: ${value ?? opt.defaultValue}`);\n\t\t\t\tconst result = meta.callback(value ?? opt.defaultValue);\n\t\t\t\tcmd.setOptionValue(opt.name(), result ?? value ?? opt.defaultValue);\n\t\t\t});\n\t\t}\n\n\t\tconf.options[name] = new Proxy(meta, {\n\t\t\tset(obj, prop, value) {\n\t\t\t\tconst orig = obj[prop];\n\t\t\t\tobj[prop] = value;\n\n\t\t\t\tif (prop === \'required\' && orig !== value) {\n\t\t\t\t\tcli.debugLogger.trace(`--${name} changed: ${prop}=${value}`);\n\t\t\t\t\topt[prop] = value;\n\t\t\t\t}\n\n\t\t\t\treturn true;\n\t\t\t}\n\t\t});\n\t}\n\n\tif (conf.options[\'log-level\'] && !conf.options.timestamp) {\n\t\tcli.debugLogger.trace(`Adding "${cmdName}" option: --timestamp`);\n\t\tcmd.option(\'--timestamp\', \'displays a timestamp in front of log lines\');\n\t\tcmd.on(\'option:timestamp\', () => {\n\t\t\tif (cli.ready) {\n\t\t\t\tcli.logger.timestampEnabled(true);\n\t\t\t}\n\t\t});\n\t}\n}\n\n\tif (Array.isArray(conf.args)) {\n\t\tfor (const meta of conf.args) {\n\t\t\tconst v = meta.variadic ? \'...\' : \'\';\n\t\t\tconst fmt = meta.required ? `<${meta.name}${v}>` : `[${meta.name}${v}]`;\n\t\t\tconst arg = new Argument(fmt, meta.desc);\n\t\t\tif (meta.default !== undefined) {\n\t\t\t\targ.default(meta.default);\n\t\t\t}\n\t\t\tif (Array.isArray(meta.values)) {\n\t\t\t\targ.choices(meta.values);\n\t\t\t}\n\t\t\tcli.debugLogger.trace(`Adding "${cmdName}" arg: ${fmt}`);\n\t\t\tcmd.addArgument(arg);\n\t\t}\n\t}\n\n\tif (conf.subcommands) {\n\t\tfor (const [name, subconf] of Object.entries(conf.subcommands)) {\n\t\t\tcli.debugLogger.trace(\n\t\t\t\t`Adding subcommand "${name}"${\n\t\t\t\t\tconf.defaultSubcommand === name ? \' (default)\' : \'\'\n\t\t\t\t} to "${cmdName}"\n\t\t\t);\n\n\t\t\tconst subcmd = new Command(name);\n\t\t\tsubcmd\n\t\t\t\t.addHelpText(\'beforeAll\', () => {\n\t\t\t\t\tcli.logger.bannerEnabled(true);\n\t\t\t\t\tcli.logger.skipBanner(false);\n\t\t\t\t\tcli.logger.banner();\n\t\t\t\t})\n\t\t\t\t.configureHelp({\n\t\t\t\t\thelpWidth: ticonfig.get(\'cli.width\', 80),\n\t\t\t\t\tshowGlobalOptions: true,\n\t\t\t\t\tsortSubcommands: true\n\t\t\t\t})\n\t\t\t\t.configureOutput({\n\t\t\t\t\toutputError: msg => {\n\t\t\t\t\t\t// explicitly set the subcommand so the global error\n\t\t\t\t\t\t// handler can print the correct help screen\n\t\t\t\t\t\tcli.command = subcmd;\n\t\t\t\t\t\tthrow new TiError(msg.replace(/^error:\\s*/, \'\'));\n\t\t\t\t\t}\n\t\t\t\t})\n\t\t\t\t.action((...args) => cli.executeCommand(args));\n\n\t\t\tcli.applyConfig(name, subcmd, subconf);\n\n\t\t\tsubcmd.conf = subconf;\n\n\t\t\t// subcommand shares parent command\'s module\n\t\t\tsubcmd.module = cmd.module;\n\n\t\t\tcmd.addCommand(subcmd, {\n\t\t\t\tisDefault: conf.defaultSubcommand === name,\n\t\t\t\thidden: !!subconf.hidden\n\t\t\t});\n\t\t}\n\t}\n}\n\nfunction optionExists(ctx, name) {\n\tconst exists = ctx.options.find(o => o.name() === name);\n\tif (exists) {\n\t\treturn true;\n\t}\n\tif (ctx.parent) {\n\t\treturn optionExists(ctx.parent, name);\n\t}\n\treturn false;\n}', 'additional_req': '', 'dependencies': []}
+2025-08-31 22:51:11,630 | INFO | repair.titanium-cli-7.0.0 | Replace whole file: -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/apply-command-config.js
+2025-08-31 22:51:11,634 | DEBUG | repair.titanium-cli-7.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/package.json
+2025-08-31 22:51:11,634 | INFO | repair.titanium-cli-7.0.0 | END pattern 1 (pattern_1)
+2025-08-31 22:51:11,635 | INFO | repair.titanium-cli-7.0.0 | ============================================================
+2025-08-31 22:51:11,635 | INFO | repair.titanium-cli-7.0.0 | BEGIN pattern 1 (pattern_1)
+2025-08-31 22:51:11,636 | DEBUG | repair.titanium-cli-7.0.0 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{Option}", "changelogId": 1}
+2025-08-31 22:51:12,273 | INFO | repair.titanium-cli-7.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0
+2025-08-31 22:51:12,273 | DEBUG | repair.titanium-cli-7.0.0 | Parsed detection output: []
+2025-08-31 22:51:12,273 | DEBUG | repair.titanium-cli-7.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37380>, {})
+2025-08-31 22:51:12,274 | DEBUG | repair.titanium-cli-7.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/package.json
+2025-08-31 22:51:12,274 | INFO | repair.titanium-cli-7.0.0 | END pattern 1 (pattern_1)
+2025-08-31 22:51:12,274 | INFO | repair.titanium-cli-7.0.0 | ============================================================
+2025-08-31 22:51:12,274 | INFO | repair.titanium-cli-7.0.0 | BEGIN pattern 2 (pattern_2)
+2025-08-31 22:51:12,274 | DEBUG | repair.titanium-cli-7.0.0 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{parse}", "changelogId": 2}
+2025-08-31 22:51:12,842 | INFO | repair.titanium-cli-7.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0
+2025-08-31 22:51:12,842 | DEBUG | repair.titanium-cli-7.0.0 | Parsed detection output: []
+2025-08-31 22:51:12,842 | DEBUG | repair.titanium-cli-7.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37380>, {})
+2025-08-31 22:51:12,843 | DEBUG | repair.titanium-cli-7.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/package.json
+2025-08-31 22:51:12,843 | INFO | repair.titanium-cli-7.0.0 | END pattern 2 (pattern_2)
+2025-08-31 22:51:12,843 | INFO | repair.titanium-cli-7.0.0 | ============================================================
+2025-08-31 22:51:12,843 | INFO | repair.titanium-cli-7.0.0 | BEGIN pattern 2 (pattern_2)
+2025-08-31 22:51:12,843 | DEBUG | repair.titanium-cli-7.0.0 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{parse}", "changelogId": 2}
+2025-08-31 22:51:13,376 | INFO | repair.titanium-cli-7.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0
+2025-08-31 22:51:13,376 | DEBUG | repair.titanium-cli-7.0.0 | Parsed detection output: []
+2025-08-31 22:51:13,376 | DEBUG | repair.titanium-cli-7.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37380>, {})
+2025-08-31 22:51:13,377 | DEBUG | repair.titanium-cli-7.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/package.json
+2025-08-31 22:51:13,377 | INFO | repair.titanium-cli-7.0.0 | END pattern 2 (pattern_2)
+2025-08-31 22:51:13,385 | INFO | repair.titanium-cli-7.0.0 | ============================================================
+2025-08-31 22:51:13,385 | INFO | repair.titanium-cli-7.0.0 | BEGIN pattern 3 (pattern_3)
+2025-08-31 22:51:13,385 | DEBUG | repair.titanium-cli-7.0.0 | Pattern payload: {"type": "call", "pattern": "read {<commander>,<commander/**/*>}?**.{wrap}", "changelogId": 3}
+2025-08-31 22:51:13,936 | INFO | repair.titanium-cli-7.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0
+2025-08-31 22:51:13,936 | DEBUG | repair.titanium-cli-7.0.0 | Parsed detection output: [{'pattern_id': 3, 'file': 'src/util/tihelp.js', 'line': 98, 'column': 23}, {'pattern_id': 3, 'file': 'src/util/tihelp.js', 'line': 113, 'column': 36}]
+2025-08-31 22:51:13,936 | DEBUG | repair.titanium-cli-7.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37380>, {'src/util/tihelp.js': defaultdict(<class 'list'>, {3: [{'line': 98, 'column': 23}, {'line': 113, 'column': 36}]})})
+2025-08-31 22:51:13,938 | INFO | repair.titanium-cli-7.0.0 | New context extracted from -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/tihelp.js
+2025-08-31 22:51:13,938 | INFO | repair.titanium-cli-7.0.0 | New context extracted from -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/tihelp.js
+2025-08-31 22:51:23,624 | DEBUG | repair.titanium-cli-7.0.0 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if (commandDescription.length > 0) {\n\t\t\toutput = output.concat([helper.boxWrap(commandDescription, helpWidth), '']);\n\t\t}",
+  "additional_req": "",
+  "dependencies": [
+    "commander@^13.0.0"
+  ]
+}
+2025-08-31 22:51:23,627 | INFO | repair.titanium-cli-7.0.0 | Replaced code in -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/tihelp.js at [3543, 3663]
+2025-08-31 22:51:31,690 | DEBUG | repair.titanium-cli-7.0.0 | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "if (description) {\n    // Replace deprecated wrap() with formatItem() for term/description pairs\n    return helper.formatItem(term, termWidth + itemSeparatorWidth, description, helper);\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 22:51:31,692 | INFO | repair.titanium-cli-7.0.0 | Replaced code in -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/src/util/tihelp.js at [3033, 3242]
+2025-08-31 22:51:31,694 | DEBUG | repair.titanium-cli-7.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/package.json
+2025-08-31 22:51:31,694 | INFO | repair.titanium-cli-7.0.0 | END pattern 3 (pattern_3)
+2025-08-31 22:51:31,695 | INFO | repair.titanium-cli-7.0.0 | ============================================================
+2025-08-31 22:51:31,695 | INFO | repair.titanium-cli-7.0.0 | BEGIN pattern 3 (pattern_3)
+2025-08-31 22:51:31,695 | DEBUG | repair.titanium-cli-7.0.0 | Pattern payload: {"type": "call", "pattern": "write {<commander>,<commander/**/*>}?**.{wrap}", "changelogId": 3}
+2025-08-31 22:51:32,289 | INFO | repair.titanium-cli-7.0.0 | Tapir run successful for -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0
+2025-08-31 22:51:32,289 | DEBUG | repair.titanium-cli-7.0.0 | Parsed detection output: []
+2025-08-31 22:51:32,289 | DEBUG | repair.titanium-cli-7.0.0 | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x11ba37ba0>, {})
+2025-08-31 22:51:32,289 | DEBUG | repair.titanium-cli-7.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/package.json
+2025-08-31 22:51:32,289 | INFO | repair.titanium-cli-7.0.0 | END pattern 3 (pattern_3)
+2025-08-31 22:51:32,290 | DEBUG | repair.titanium-cli-7.0.0 | Updated package.json saved at -2024/commander.js/results/gpt-4.1/titanium-cli-7.0.0/package.json
+2025-08-31 22:51:32,290 | INFO | repair.titanium-cli-7.0.0 | token consumed 50630
+2025-08-31 22:51:32,290 | INFO | repair.titanium-cli-7.0.0 | parse consumption time: 95.36255429219455

@@ -1,0 +1,7 @@
+{
+  "owner": "prettier",
+  "repo": "prettier",
+  "number": 3455,
+  "pr_url": "https://github.com/prettier/prettier/pull/3455",
+  "content": "# PR 3455: Update tsep and apply breaking changes\nBranches: tsnode-namespacing -> master\n\nThis has not officially been released yet, but I am opening the PR to get an advanced review.\r\n\r\nFor that reason, it reverts tsep back to using a commit hash as the version. I will update this once an applicable version of tsep has been released.\r\n\r\nThe relevant PR is here: https://github.com/eslint/typescript-eslint-parser/pull/388\n\n## Commit titles\n- Update tsep and apply breaking changes\n\n## Changed files\n- package.json\n- src/clean-ast.js\n- src/fast-path.js\n- src/printer.js\n- yarn.lock\n## Issue comments\n- @JamesHenry: I'll probably do the release later today, was just coordinating it across all relevant projects. So, I'll update this PR and let you know\n- @JamesHenry: @duailibe PTAL, this is ready to go\n## Reviews\n- @duailibe [APPROVED]: LGTM\r\n\r\nWill you wait for the tsep release or do it in a follow-up PR? If you're not gonna wait, should we wait after 1.9.2 is out?\n- @existentialism [APPROVED]\n- @azz [APPROVED]"
+}

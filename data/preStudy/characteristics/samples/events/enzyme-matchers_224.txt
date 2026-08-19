@@ -1,0 +1,7 @@
+{
+  "owner": "FormidableLabs",
+  "repo": "enzyme-matchers",
+  "number": 224,
+  "pr_url": "https://github.com/FormidableLabs/enzyme-matchers/pull/224",
+  "content": "# PR 224: Fix requiring adapter for peerDependency\nBranches: task/adapter-require-fix -> master\n\nFixes #217 \n\n## Commit titles\n- Fix requiring adapter for peerDependency\n\n## Changed files\n- package.json\n- packages/jest-environment-enzyme/package.json\n- packages/jest-environment-enzyme/src/setup.js\n- yarn.lock"
+}

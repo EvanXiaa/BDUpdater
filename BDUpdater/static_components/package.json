@@ -1,0 +1,26 @@
+{
+  "name": "bdupdater-tapir-static-components",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bundled TAPIR runtime used by the BDUpdater agent skill",
+  "main": "tapirMain.js",
+  "bin": {
+    "tapir": "index.js"
+  },
+  "dependencies": {
+    "acorn": "^8.15.0",
+    "ast-types": "^0.14.2",
+    "async": "^3.1.0",
+    "commander": "^5.0.0",
+    "data-to-latex": "^0.4.3",
+    "fs-extra": "^8.1.0",
+    "lodash": "4.17.15",
+    "recast": "^0.23.11",
+    "recast-x": "^1.0.5",
+    "rimraf": "^3.0.0",
+    "table": "^5.4.6",
+    "ts-node": "^8.6.2",
+    "typescript": "^4.9.5",
+    "winston": "^3.2.1"
+  }
+}

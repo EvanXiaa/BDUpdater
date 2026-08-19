@@ -1,0 +1,99 @@
+2025-08-30 21:34:56,248 | INFO | repair.citgm | Starting analysis for citgm
+2025-08-30 21:34:56,248 | INFO | repair.citgm | Starting breaking change analysis for /async/results/gpt-4.1/citgm
+2025-08-30 21:34:56,249 | INFO | repair.citgm | ============================================================
+2025-08-30 21:34:56,249 | INFO | repair.citgm | BEGIN pattern 0 (pattern_0)
+2025-08-30 21:34:56,249 | DEBUG | repair.citgm | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{each,concat,detect,every,filter,groupBy,map,mapValues,reduce,reject,some,transform,times,auto,compose,seq,whilst,until,forever,parallel,race,retry,series,tryEach,waterfall}", "changelogId": 0}
+2025-08-30 21:34:56,747 | INFO | repair.citgm | Tapir run successful for /async/results/gpt-4.1/citgm
+2025-08-30 21:34:56,747 | DEBUG | repair.citgm | Parsed detection output: [{'pattern_id': 0, 'file': 'lib/package-manager/test.js', 'line': 74, 'column': 14}]
+2025-08-30 21:34:56,747 | DEBUG | repair.citgm | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6ac0>, {'lib/package-manager/test.js': defaultdict(<class 'list'>, {0: [{'line': 74, 'column': 14}]})})
+2025-08-30 21:34:56,750 | INFO | repair.citgm | New context extracted from /async/results/gpt-4.1/citgm/lib/package-manager/test.js
+2025-08-30 21:34:58,023 | DEBUG | repair.citgm | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:34:58,024 | DEBUG | repair.citgm | Updated package.json saved at /async/results/gpt-4.1/citgm/package.json
+2025-08-30 21:34:58,025 | INFO | repair.citgm | END pattern 0 (pattern_0)
+2025-08-30 21:34:58,025 | INFO | repair.citgm | ============================================================
+2025-08-30 21:34:58,025 | INFO | repair.citgm | BEGIN pattern 2 (pattern_2)
+2025-08-30 21:34:58,025 | DEBUG | repair.citgm | Pattern payload: {"type": "call", "pattern": "write {<async>,<async/**/*>}?**.{drain,saturated,unsaturated,empty,error}", "changelogId": 2}
+2025-08-30 21:34:58,366 | INFO | repair.citgm | Tapir run successful for /async/results/gpt-4.1/citgm
+2025-08-30 21:34:58,366 | DEBUG | repair.citgm | Parsed detection output: [{'pattern_id': 2, 'file': 'bin/citgm-all.js', 'line': 208, 'column': 4}, {'pattern_id': 2, 'file': 'bin/citgm-all.js', 'line': 242, 'column': 2}, {'pattern_id': 2, 'file': 'lib/reporter/tap.js', 'line': 13, 'column': 4}]
+2025-08-30 21:34:58,366 | DEBUG | repair.citgm | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6b60>, {'bin/citgm-all.js': defaultdict(<class 'list'>, {2: [{'line': 208, 'column': 4}, {'line': 242, 'column': 2}]}), 'lib/reporter/tap.js': defaultdict(<class 'list'>, {2: [{'line': 13, 'column': 4}]})})
+2025-08-30 21:34:58,367 | INFO | repair.citgm | New context extracted from /async/results/gpt-4.1/citgm/bin/citgm-all.js
+2025-08-30 21:34:58,368 | INFO | repair.citgm | New context extracted from /async/results/gpt-4.1/citgm/bin/citgm-all.js
+2025-08-30 21:35:03,045 | DEBUG | repair.citgm | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "function launch() {\n  const collection = Object.keys(lookup).map(mapCallback);\n\n  const q = async.queue(runTask, app.parallel || 1);\n  q.push(collection);\n  function done() {\n    // With async@3.x, you can unregister a handler by not passing any arg, but setting to null is no-op now\n    // We don't need to unregister because we're finishing the process, but to match previous logic:\n    // No direct equivalent for q.drain = null; -- omit or clarify here\n    // q.drain = null;\n    reporter.logger(log, modules);\n\n    if (app.markdown) {\n      reporter.markdown(log.bypass, modules);\n    }\n\n    if (app.tap) {\n      // If tap is a string it should be a path to write output to\n      // If not use `log.bypass` which is currently process.stdout.write\n      // TODO check that we can write to that path, perhaps require a flag to\n      // Overwrite\n      const tap = typeof app.tap === 'string' ? app.tap : log.bypass;\n      reporter.tap(tap, modules, app.append);\n    }\n\n    if (app.junit) {\n      const junit = typeof app.junit === 'string' ? app.junit : log.bypass;\n      reporter.junit(junit, modules, app.append);\n    }\n\n    process.exit(reporter.util.hasFailures(modules));\n  }\n\n  function abort() {\n    q.pause();\n    q.kill();\n    process.exitCode = 1;\n    process.removeListener('SIGINT', abort);\n    process.removeListener('SIGHUP', abort);\n    process.removeListener('SIGBREAK', abort);\n    done();\n  }\n\n  // BREAKING CHANGE: switch from property to method for event registration in async@3.x\n  q.drain(done);\n\n  process.on('SIGINT', abort);\n  process.on('SIGHUP', abort);\n  process.on('SIGBREAK', abort);\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:35:03,046 | INFO | repair.citgm | Replaced code in /async/results/gpt-4.1/citgm/bin/citgm-all.js at [5038, 6283]
+2025-08-30 21:35:03,047 | INFO | repair.citgm | New context extracted from /async/results/gpt-4.1/citgm/lib/reporter/tap.js
+2025-08-30 21:35:04,100 | DEBUG | repair.citgm | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:35:04,102 | DEBUG | repair.citgm | Updated package.json saved at /async/results/gpt-4.1/citgm/package.json
+2025-08-30 21:35:04,102 | INFO | repair.citgm | END pattern 2 (pattern_2)
+2025-08-30 21:35:04,103 | INFO | repair.citgm | ============================================================
+2025-08-30 21:35:04,103 | INFO | repair.citgm | BEGIN pattern 3 (pattern_3)
+2025-08-30 21:35:04,103 | DEBUG | repair.citgm | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{eachOfLimit*,each*,eachSeries*,compose*,seq*,waterfall*,auto*,autoInject*,whilst*,until*,forever*}", "changelogId": 3}
+2025-08-30 21:35:04,457 | INFO | repair.citgm | Tapir run successful for /async/results/gpt-4.1/citgm
+2025-08-30 21:35:04,458 | DEBUG | repair.citgm | Parsed detection output: []
+2025-08-30 21:35:04,458 | DEBUG | repair.citgm | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6ac0>, {})
+2025-08-30 21:35:04,458 | DEBUG | repair.citgm | Updated package.json saved at /async/results/gpt-4.1/citgm/package.json
+2025-08-30 21:35:04,458 | INFO | repair.citgm | END pattern 3 (pattern_3)
+2025-08-30 21:35:04,459 | INFO | repair.citgm | ============================================================
+2025-08-30 21:35:04,459 | INFO | repair.citgm | BEGIN pattern 4 (pattern_4)
+2025-08-30 21:35:04,459 | DEBUG | repair.citgm | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{during,doDuring,whilst,doWhilst,until,doUntil}", "changelogId": 4}
+2025-08-30 21:35:04,767 | INFO | repair.citgm | Tapir run successful for /async/results/gpt-4.1/citgm
+2025-08-30 21:35:04,767 | DEBUG | repair.citgm | Parsed detection output: []
+2025-08-30 21:35:04,767 | DEBUG | repair.citgm | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6ac0>, {})
+2025-08-30 21:35:04,767 | DEBUG | repair.citgm | Updated package.json saved at /async/results/gpt-4.1/citgm/package.json
+2025-08-30 21:35:04,767 | INFO | repair.citgm | END pattern 4 (pattern_4)
+2025-08-30 21:35:04,767 | INFO | repair.citgm | ============================================================
+2025-08-30 21:35:04,768 | INFO | repair.citgm | BEGIN pattern 5 (pattern_5)
+2025-08-30 21:35:04,768 | DEBUG | repair.citgm | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{queue,mapLimit,eachLimit,filterLimit,reduceLimit,concatLimit,eachOfLimit,forEachOfLimit,groupByLimit}", "changelogId": 5}
+2025-08-30 21:35:05,092 | INFO | repair.citgm | Tapir run successful for /async/results/gpt-4.1/citgm
+2025-08-30 21:35:05,092 | DEBUG | repair.citgm | Parsed detection output: [{'pattern_id': 5, 'file': 'bin/citgm-all.js', 'line': 205, 'column': 12}]
+2025-08-30 21:35:05,092 | DEBUG | repair.citgm | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6ac0>, {'bin/citgm-all.js': defaultdict(<class 'list'>, {5: [{'line': 205, 'column': 12}]})})
+2025-08-30 21:35:05,093 | INFO | repair.citgm | New context extracted from /async/results/gpt-4.1/citgm/bin/citgm-all.js
+2025-08-30 21:35:06,203 | DEBUG | repair.citgm | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 21:35:06,205 | DEBUG | repair.citgm | Updated package.json saved at /async/results/gpt-4.1/citgm/package.json
+2025-08-30 21:35:06,205 | INFO | repair.citgm | END pattern 5 (pattern_5)
+2025-08-30 21:35:06,205 | INFO | repair.citgm | ============================================================
+2025-08-30 21:35:06,206 | INFO | repair.citgm | BEGIN pattern 6 (pattern_6)
+2025-08-30 21:35:06,206 | DEBUG | repair.citgm | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{memoize}", "changelogId": 6}
+2025-08-30 21:35:06,554 | INFO | repair.citgm | Tapir run successful for /async/results/gpt-4.1/citgm
+2025-08-30 21:35:06,554 | DEBUG | repair.citgm | Parsed detection output: []
+2025-08-30 21:35:06,554 | DEBUG | repair.citgm | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6ac0>, {})
+2025-08-30 21:35:06,554 | DEBUG | repair.citgm | Updated package.json saved at /async/results/gpt-4.1/citgm/package.json
+2025-08-30 21:35:06,554 | INFO | repair.citgm | END pattern 6 (pattern_6)
+2025-08-30 21:35:06,555 | INFO | repair.citgm | ============================================================
+2025-08-30 21:35:06,555 | INFO | repair.citgm | BEGIN pattern 7 (pattern_7)
+2025-08-30 21:35:06,555 | DEBUG | repair.citgm | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}", "changelogId": 7}
+2025-08-30 21:35:06,869 | INFO | repair.citgm | Tapir run successful for /async/results/gpt-4.1/citgm
+2025-08-30 21:35:06,869 | DEBUG | repair.citgm | Parsed detection output: []
+2025-08-30 21:35:06,869 | DEBUG | repair.citgm | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x107ab6ac0>, {})
+2025-08-30 21:35:06,870 | DEBUG | repair.citgm | Updated package.json saved at /async/results/gpt-4.1/citgm/package.json
+2025-08-30 21:35:06,870 | INFO | repair.citgm | END pattern 7 (pattern_7)
+2025-08-30 21:35:06,870 | INFO | repair.citgm | ============================================================
+2025-08-30 21:35:06,870 | INFO | repair.citgm | BEGIN pattern 8 (pattern_8)
+2025-08-30 21:35:06,870 | DEBUG | repair.citgm | Pattern payload: {"type": "import", "pattern": "import {async.mjs}", "changelogId": 8}
+2025-08-30 21:35:07,182 | INFO | repair.citgm | Tapir run successful for /async/results/gpt-4.1/citgm
+2025-08-30 21:35:07,182 | DEBUG | repair.citgm | Parsed detection output: []
+2025-08-30 21:35:07,182 | DEBUG | repair.citgm | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x108247ce0>, {})
+2025-08-30 21:35:07,182 | DEBUG | repair.citgm | Updated package.json saved at /async/results/gpt-4.1/citgm/package.json
+2025-08-30 21:35:07,182 | INFO | repair.citgm | END pattern 8 (pattern_8)
+2025-08-30 21:35:07,183 | DEBUG | repair.citgm | Updated package.json saved at /async/results/gpt-4.1/citgm/package.json
+2025-08-30 21:35:07,183 | INFO | repair.citgm | token consumed 7849
+2025-08-30 21:35:07,183 | INFO | repair.citgm | parse consumption time: 8.111823876388371

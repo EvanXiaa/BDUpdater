@@ -1,0 +1,213 @@
+2025-08-31 02:22:22,782 | INFO | repair.shen | Starting analysis for shen
+2025-08-31 02:22:22,782 | INFO | repair.shen | Starting breaking change analysis for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:22:22,783 | INFO | repair.shen | ============================================================
+2025-08-31 02:22:22,783 | INFO | repair.shen | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:22:22,783 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:22:22,959 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:22:22,959 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:22:22,959 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120472980>, {})
+2025-08-31 02:22:22,959 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:22:22,960 | INFO | repair.shen | END pattern 0 (pattern_0)
+2025-08-31 02:22:22,960 | INFO | repair.shen | ============================================================
+2025-08-31 02:22:22,960 | INFO | repair.shen | BEGIN pattern 0 (pattern_0)
+2025-08-31 02:22:22,960 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{isResolved,isFulfilled,isRejected,isPending}", "changelogId": 0}
+2025-08-31 02:22:23,117 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:22:23,118 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:22:23,118 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120472980>, {})
+2025-08-31 02:22:23,118 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:22:23,118 | INFO | repair.shen | END pattern 0 (pattern_0)
+2025-08-31 02:22:23,118 | INFO | repair.shen | ============================================================
+2025-08-31 02:22:23,118 | INFO | repair.shen | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:22:23,118 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:22:23,267 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:22:23,267 | DEBUG | repair.shen | Parsed detection output: [{'pattern_id': 1, 'file': 'lib/delay.js', 'line': 10, 'column': 16}, {'pattern_id': 1, 'file': 'test/cascade-test.js', 'line': 92, 'column': 16}, {'pattern_id': 1, 'file': 'test/branch-test.js', 'line': 50, 'column': 16}]
+2025-08-31 02:22:23,267 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120472980>, {'lib/delay.js': defaultdict(<class 'list'>, {1: [{'line': 10, 'column': 16}]}), 'test/cascade-test.js': defaultdict(<class 'list'>, {1: [{'line': 92, 'column': 16}]}), 'test/branch-test.js': defaultdict(<class 'list'>, {1: [{'line': 50, 'column': 16}]})})
+2025-08-31 02:22:23,267 | INFO | repair.shen | New context extracted from /bluebird/results/gpt-4.1/shen/lib/delay.js
+2025-08-31 02:22:39,861 | DEBUG | repair.shen | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "var delay = function(genFunc, timeout) {\n  return function *(next) {\n    next = (utils.isGenerator(next)) ? next :\n      (function *(nextCo) { yield nextCo; }).call(this);\n    var timer = {};\n    timer.promise = new Promise(function(resolve, reject) {\n      timer.resolve = resolve;\n      timer.reject = reject;\n    });\n    setTimeout(function() {\n      timer.resolve({});\n    }, timeout);\n    yield timer.promise;\n    return yield genFunc.call(this, next);\n  };\n};",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:22:39,863 | INFO | repair.shen | Replaced code in /bluebird/results/gpt-4.1/shen/lib/delay.js at [75, 425]
+2025-08-31 02:22:39,866 | INFO | repair.shen | New context extracted from /bluebird/results/gpt-4.1/shen/test/cascade-test.js
+2025-08-31 02:23:06,180 | DEBUG | repair.shen | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "describe('Cascade', function() {\n  \n  it('should be a function', function() {\n    shen.cascade.should.be.type('function');\n  });\n\n  it('should return a generator', function() {\n    var genFunc = shen.cascade();\n    genFunc.constructor.name.should.equal('GeneratorFunction');\n  });\n\n  it('should return a generator that returns a value to co', function(done) {\n    var list = [];\n    var genFunc = shen.cascade(\n      function *() {\n        //its right here\n        list.push(1);\n        list.push(3);\n        return list;\n      });\n\n    co(genFunc)(function(err, value) {\n      //list === [1, 2, 3];\n      value.should.have.property('0', 1);\n      value.should.have.property('1', 3);\n      done();\n    });\n  });\n\n  it('should yield values downstream and return upsteam', function(done) {\n    var list = [];\n    var genFunc = shen.cascade(\n      function *(next) {\n        list.push(1);\n        return yield next;\n      }, function *(next) {\n        list.push(2)\n        return yield next;\n      }, function *() {\n        list.push(3);\n        return list;\n      });\n\n    co(genFunc)(function(err, value) {\n      //list === [1, 2, 3];\n      value.should.have.property('0', 1);\n      value.should.have.property('1', 2);\n      value.should.have.property('2', 3);\n      \n      done();\n    });\n  });\n\n\n  //\n  it('should pass along context up and down', function(done) {\n    \n    var genFunc = shen.cascade(\n      function *(next) {\n        this.name = 'berry';\n        yield next;\n        return this;\n      }, function *(next) {\n        yield next;\n        this.msg2 = 'word';\n      }, function *() {\n        this.msg1 = 'hello';\n        return this;\n      });\n\n    co(genFunc).call( { foo:'bar' }, function(err, value) {\n      //list === [1, 2, 3];\n      value.name.should.equal('berry');\n      value.msg1.should.equal('hello');\n      value.msg2.should.equal('word');\n      done();\n    });\n  });\n\n\n\n  it('should resolve promises in sync', function(done) {\n    // Replaced Promise.defer() as it's removed in Bluebird v3\n    var defer = {};\n    defer.promise = new Promise(function(resolve, reject) {\n      defer.resolve = resolve;\n      defer.reject = reject;\n    });\n    var genFunc = shen.cascade(\n      function *(next) {\n        var val = yield defer.promise;\n        val.should.equal('resolved');\n      });\n    co(genFunc)(done);\n    //resolve the promise asyncronously\n    setTimeout(function() {\n      defer.resolve('resolved');\n    }, 500);\n  });\n\n  it('should pass returned values to the next function', function(done) {\n    var list = [];\n    var genFunc = shen.cascade(\n      function *(next) {\n        list.push(1);\n        var b = yield next;\n        list.push(3);\n        return b;\n      },\n      shen.cascade(\n        function *(next) {\n          list.push(2);\n          return yield next;\n        },\n        function *() {\n          list.push(7);\n          return 'ret';\n        }));\n\n    co(genFunc)(function(err, val) {\n      list.should.have.property('0', 1);\n      list.should.have.property('1', 2);\n      list.should.have.property('2', 7);\n      list.should.have.property('3', 3);\n      val.should.equal('ret');\n      done();\n    });\n\n  });\n\n  xit('sould cascade up and down a a koa app', function(done) {\n  \n  \n  });\n\n});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:23:06,182 | INFO | repair.shen | Replaced code in /bluebird/results/gpt-4.1/shen/test/cascade-test.js at [252, 3319]
+2025-08-31 02:23:06,184 | INFO | repair.shen | New context extracted from /bluebird/results/gpt-4.1/shen/test/branch-test.js
+2025-08-31 02:23:19,181 | DEBUG | repair.shen | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "describe('Branch', function() {\n  \n  it('should be a function', function() {\n    shen.branch.should.be.type('function');\n  });\n\n  it('should return a generator', function() {\n    var genFunc = shen.branch();\n    genFunc.constructor.name.should.equal('GeneratorFunction');\n  });\n\n  it('should yield to the second argument', function(done) {\n    var stub;\n    var genFunc = shen.branch(\n      function *(path1, path2) {\n        yield path1;\n        stub.should.equal(5);\n      },\n      function *(next) {\n        stub = 5;\n      },\n      function *() {\n        stub = 6;\n      });\n    co(genFunc)(done);\n  });\n\n  it('should yield to the third argument', function(done) {\n    var stub;\n    var genFunc = shen.branch(\n      function *(path1, path2) {\n        yield path2;\n        stub.should.equal(6);\n      },\n      function *(next) {\n        stub = 5;\n      },\n      function *() {\n        stub = 6;\n      });\n    co(genFunc)(done);\n  });\n\n   it('should resolve promises in sync', function(done) {\n-    var defer = Promise.defer();\n+    // Adapted from Promise.defer() removal in v3+: manual deferred construction\n+    var defer = {};\n+    defer.promise = new Promise(function(resolve, reject) {\n+      defer.resolve = resolve;\n+      defer.reject = reject;\n+    });\n    var genFunc = shen.branch(\n      function *(path1) {\n        var val = yield path1;\n        return val;\n      }, function *(next) {\n        val = yield defer.promise;\n        return val;\n      }, function *() {\n        //this never runs\n      });\n    co(genFunc)(function(err, val) {\n      val.should.equal('resolved');\n      done();\n    });\n    //resolve the promise asyncronously\n    setTimeout(function() {\n      defer.resolve('resolved');\n    }, 0);\n  });\n\n  it('should work nested in cascade', function(done) {\n    var genFunc = shen.cascade(function *(next) {\n        return yield next;\n      },\n      shen.branch(\n        function *(path1, path2) {\n          return yield path2;\n        },\n        shen.cascade(\n          function *(next) {\n            return yield next;\n          },\n          function *() {\n            return 'returned path 1';\n          }),\n        function *(next) {\n          //doesn't get run\n          return yield next;\n        }),\n      function *() {\n        return 'returned path 2';\n      });\n\n      co(genFunc)(function(err, value) {\n        value.should.equal('returned path 2');\n        done();\n      });\n  });\n\n});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:23:19,182 | INFO | repair.shen | Replaced code in /bluebird/results/gpt-4.1/shen/test/branch-test.js at [137, 2328]
+2025-08-31 02:23:19,183 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:19,183 | INFO | repair.shen | END pattern 1 (pattern_1)
+2025-08-31 02:23:19,183 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:19,183 | INFO | repair.shen | BEGIN pattern 1 (pattern_1)
+2025-08-31 02:23:19,183 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{defer}", "changelogId": 1}
+2025-08-31 02:23:19,503 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:19,503 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:19,503 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473560>, {})
+2025-08-31 02:23:19,504 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:19,504 | INFO | repair.shen | END pattern 1 (pattern_1)
+2025-08-31 02:23:19,504 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:19,504 | INFO | repair.shen | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:23:19,504 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:23:19,644 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:19,644 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:19,644 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473560>, {})
+2025-08-31 02:23:19,644 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:19,644 | INFO | repair.shen | END pattern 2 (pattern_2)
+2025-08-31 02:23:19,644 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:19,644 | INFO | repair.shen | BEGIN pattern 2 (pattern_2)
+2025-08-31 02:23:19,644 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{catch}", "changelogId": 2}
+2025-08-31 02:23:19,821 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:19,821 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:19,821 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473560>, {})
+2025-08-31 02:23:19,821 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:19,822 | INFO | repair.shen | END pattern 2 (pattern_2)
+2025-08-31 02:23:19,822 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:19,822 | INFO | repair.shen | BEGIN pattern 4 (pattern_4)
+2025-08-31 02:23:19,822 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "call {<bluebird>,<bluebird/**/*>}?**.{Promise}", "changelogId": 4}
+2025-08-31 02:23:19,998 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:19,998 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:19,998 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473560>, {})
+2025-08-31 02:23:19,999 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:19,999 | INFO | repair.shen | END pattern 4 (pattern_4)
+2025-08-31 02:23:19,999 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:19,999 | INFO | repair.shen | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:23:19,999 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:23:20,202 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:20,203 | DEBUG | repair.shen | Parsed detection output: [{'pattern_id': 5, 'file': 'test/parallel-test.js', 'line': 8, 'column': 14}]
+2025-08-31 02:23:20,203 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473560>, {'test/parallel-test.js': defaultdict(<class 'list'>, {5: [{'line': 8, 'column': 14}]})})
+2025-08-31 02:23:20,204 | INFO | repair.shen | New context extracted from /bluebird/results/gpt-4.1/shen/test/parallel-test.js
+2025-08-31 02:23:30,145 | DEBUG | repair.shen | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "var request = Promise.promisify(require('request'), {multiArgs: true});",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:23:30,149 | INFO | repair.shen | Replaced code in /bluebird/results/gpt-4.1/shen/test/parallel-test.js at [252, 304]
+2025-08-31 02:23:30,150 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:30,151 | INFO | repair.shen | END pattern 5 (pattern_5)
+2025-08-31 02:23:30,152 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:30,152 | INFO | repair.shen | BEGIN pattern 5 (pattern_5)
+2025-08-31 02:23:30,152 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify,promisifyAll,fromCallback}", "changelogId": 5}
+2025-08-31 02:23:30,417 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:30,417 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:30,417 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204739c0>, {})
+2025-08-31 02:23:30,417 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:30,417 | INFO | repair.shen | END pattern 5 (pattern_5)
+2025-08-31 02:23:30,417 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:30,417 | INFO | repair.shen | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:23:30,417 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:23:30,558 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:30,558 | DEBUG | repair.shen | Parsed detection output: [{'pattern_id': 6, 'file': 'test/parallel-test.js', 'line': 8, 'column': 14}]
+2025-08-31 02:23:30,558 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1204739c0>, {'test/parallel-test.js': defaultdict(<class 'list'>, {6: [{'line': 8, 'column': 14}]})})
+2025-08-31 02:23:30,558 | INFO | repair.shen | New context extracted from /bluebird/results/gpt-4.1/shen/test/parallel-test.js
+2025-08-31 02:23:34,509 | DEBUG | repair.shen | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-31 02:23:34,510 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:34,510 | INFO | repair.shen | END pattern 6 (pattern_6)
+2025-08-31 02:23:34,510 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:34,510 | INFO | repair.shen | BEGIN pattern 6 (pattern_6)
+2025-08-31 02:23:34,511 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{promisify}", "changelogId": 6}
+2025-08-31 02:23:34,685 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:34,685 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:34,685 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:34,686 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:34,686 | INFO | repair.shen | END pattern 6 (pattern_6)
+2025-08-31 02:23:34,686 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:34,686 | INFO | repair.shen | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:23:34,686 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:23:34,858 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:34,858 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:34,858 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:34,858 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:34,858 | INFO | repair.shen | END pattern 7 (pattern_7)
+2025-08-31 02:23:34,858 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:34,858 | INFO | repair.shen | BEGIN pattern 7 (pattern_7)
+2025-08-31 02:23:34,858 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{each}", "changelogId": 7}
+2025-08-31 02:23:35,024 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:35,025 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:35,025 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:35,025 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:35,025 | INFO | repair.shen | END pattern 7 (pattern_7)
+2025-08-31 02:23:35,025 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:35,025 | INFO | repair.shen | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:23:35,025 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:23:35,187 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:35,187 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:35,187 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:35,187 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:35,187 | INFO | repair.shen | END pattern 8 (pattern_8)
+2025-08-31 02:23:35,188 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:35,188 | INFO | repair.shen | BEGIN pattern 8 (pattern_8)
+2025-08-31 02:23:35,188 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{spread}", "changelogId": 8}
+2025-08-31 02:23:35,372 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:35,372 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:35,372 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:35,373 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:35,373 | INFO | repair.shen | END pattern 8 (pattern_8)
+2025-08-31 02:23:35,373 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:35,373 | INFO | repair.shen | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:23:35,373 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:23:35,532 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:35,532 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:35,532 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:35,533 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:35,533 | INFO | repair.shen | END pattern 9 (pattern_9)
+2025-08-31 02:23:35,533 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:35,533 | INFO | repair.shen | BEGIN pattern 9 (pattern_9)
+2025-08-31 02:23:35,533 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{progress}", "changelogId": 9}
+2025-08-31 02:23:35,685 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:35,685 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:35,685 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:35,686 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:35,686 | INFO | repair.shen | END pattern 9 (pattern_9)
+2025-08-31 02:23:35,686 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:35,686 | INFO | repair.shen | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:23:35,686 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:23:35,835 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:35,835 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:35,835 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:35,835 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:35,835 | INFO | repair.shen | END pattern 10 (pattern_10)
+2025-08-31 02:23:35,835 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:35,835 | INFO | repair.shen | BEGIN pattern 10 (pattern_10)
+2025-08-31 02:23:35,835 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{done}", "changelogId": 10}
+2025-08-31 02:23:35,991 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:35,992 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:35,992 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:35,992 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:35,992 | INFO | repair.shen | END pattern 10 (pattern_10)
+2025-08-31 02:23:35,992 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:35,992 | INFO | repair.shen | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:23:35,992 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "read {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:23:36,139 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:36,139 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:36,139 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:36,139 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:36,139 | INFO | repair.shen | END pattern 11 (pattern_11)
+2025-08-31 02:23:36,139 | INFO | repair.shen | ============================================================
+2025-08-31 02:23:36,139 | INFO | repair.shen | BEGIN pattern 11 (pattern_11)
+2025-08-31 02:23:36,139 | DEBUG | repair.shen | Pattern payload: {"type": "call", "pattern": "write {<bluebird>,<bluebird/**/*>}?**.{reject}", "changelogId": 11}
+2025-08-31 02:23:36,287 | INFO | repair.shen | Tapir run successful for /bluebird/results/gpt-4.1/shen
+2025-08-31 02:23:36,287 | DEBUG | repair.shen | Parsed detection output: []
+2025-08-31 02:23:36,287 | DEBUG | repair.shen | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x120473740>, {})
+2025-08-31 02:23:36,287 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:36,287 | INFO | repair.shen | END pattern 11 (pattern_11)
+2025-08-31 02:23:36,288 | INFO | repair.shen | Config BC: scanning 0 files
+2025-08-31 02:23:36,288 | DEBUG | repair.shen | Updated package.json saved at /bluebird/results/gpt-4.1/shen/package.json
+2025-08-31 02:23:36,288 | INFO | repair.shen | token consumed 31728
+2025-08-31 02:23:36,288 | INFO | repair.shen | parse consumption time: 69.79711579252034

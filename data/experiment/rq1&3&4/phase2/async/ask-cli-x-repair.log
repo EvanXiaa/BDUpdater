@@ -1,0 +1,204 @@
+2025-08-30 20:58:00,257 | INFO | repair.ask-cli-x | Starting analysis for ask-cli-x
+2025-08-30 20:58:00,257 | INFO | repair.ask-cli-x | Starting breaking change analysis for /async/results/gpt-4.1/ask-cli-x
+2025-08-30 20:58:00,257 | INFO | repair.ask-cli-x | ============================================================
+2025-08-30 20:58:00,257 | INFO | repair.ask-cli-x | BEGIN pattern 0 (pattern_0)
+2025-08-30 20:58:00,257 | DEBUG | repair.ask-cli-x | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{each,concat,detect,every,filter,groupBy,map,mapValues,reduce,reject,some,transform,times,auto,compose,seq,whilst,until,forever,parallel,race,retry,series,tryEach,waterfall}", "changelogId": 0}
+2025-08-30 20:58:01,834 | INFO | repair.ask-cli-x | Tapir run successful for /async/results/gpt-4.1/ask-cli-x
+2025-08-30 20:58:01,834 | DEBUG | repair.ask-cli-x | Parsed detection output: [{'pattern_id': 0, 'file': 'lib/builtins/deploy-delegates/cfn-deployer/helper.js', 'line': 179, 'column': 21}, {'pattern_id': 0, 'file': 'lib/clients/aws-client/s3-client.js', 'line': 293, 'column': 37}, {'pattern_id': 0, 'file': 'lib/clients/smapi-client/resources/isp.js', 'line': 122, 'column': 36}, {'pattern_id': 0, 'file': 'lib/commands/api/account-linking/set-account-linking/ui.js', 'line': 51, 'column': 27}, {'pattern_id': 0, 'file': 'lib/commands/api/account-linking/set-account-linking/ui.js', 'line': 51, 'column': 27}, {'pattern_id': 0, 'file': 'lib/commands/api/account-linking/set-account-linking/ui.js', 'line': 56, 'column': 28}, {'pattern_id': 0, 'file': 'lib/commands/api/account-linking/set-account-linking/ui.js', 'line': 56, 'column': 28}, {'pattern_id': 0, 'file': 'lib/commands/api/history/intent-requests-history/helper.js', 'line': 43, 'column': 23}, {'pattern_id': 0, 'file': 'lib/commands/api/isp/list-isp-for-vendor/index.js', 'line': 39, 'column': 28}, {'pattern_id': 0, 'file': 'lib/commands/init/ui.js', 'line': 74, 'column': 11}, {'pattern_id': 0, 'file': 'lib/commands/abstract-command.js', 'line': 180, 'column': 15}, {'pattern_id': 0, 'file': 'lib/controllers/skill-code-controller/index.js', 'line': 33, 'column': 8}, {'pattern_id': 0, 'file': 'lib/utils/stream-utility.js', 'line': 41, 'column': 12}, {'pattern_id': 0, 'file': 'lib/utils/string-utils.js', 'line': 53, 'column': 14}, {'pattern_id': 0, 'file': 'lib/utils/string-utils.js', 'line': 56, 'column': 14}, {'pattern_id': 0, 'file': 'test/unit/commands/v2new/ui-test.js', 'line': 267, 'column': 23}, {'pattern_id': 0, 'file': 'test/unit/commands/v2new/ui-test.js', 'line': 285, 'column': 23}, {'pattern_id': 0, 'file': 'test/unit/commands/v2new/ui-test.js', 'line': 357, 'column': 23}, {'pattern_id': 0, 'file': 'test/unit/commands/v2new/ui-test.js', 'line': 375, 'column': 23}]
+2025-08-30 20:58:01,834 | DEBUG | repair.ask-cli-x | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b6ca0>, {'lib/builtins/deploy-delegates/cfn-deployer/helper.js': defaultdict(<class 'list'>, {0: [{'line': 179, 'column': 21}]}), 'lib/clients/aws-client/s3-client.js': defaultdict(<class 'list'>, {0: [{'line': 293, 'column': 37}]}), 'lib/clients/smapi-client/resources/isp.js': defaultdict(<class 'list'>, {0: [{'line': 122, 'column': 36}]}), 'lib/commands/api/account-linking/set-account-linking/ui.js': defaultdict(<class 'list'>, {0: [{'line': 51, 'column': 27}, {'line': 51, 'column': 27}, {'line': 56, 'column': 28}, {'line': 56, 'column': 28}]}), 'lib/commands/api/history/intent-requests-history/helper.js': defaultdict(<class 'list'>, {0: [{'line': 43, 'column': 23}]}), 'lib/commands/api/isp/list-isp-for-vendor/index.js': defaultdict(<class 'list'>, {0: [{'line': 39, 'column': 28}]}), 'lib/commands/init/ui.js': defaultdict(<class 'list'>, {0: [{'line': 74, 'column': 11}]}), 'lib/commands/abstract-command.js': defaultdict(<class 'list'>, {0: [{'line': 180, 'column': 15}]}), 'lib/controllers/skill-code-controller/index.js': defaultdict(<class 'list'>, {0: [{'line': 33, 'column': 8}]}), 'lib/utils/stream-utility.js': defaultdict(<class 'list'>, {0: [{'line': 41, 'column': 12}]}), 'lib/utils/string-utils.js': defaultdict(<class 'list'>, {0: [{'line': 53, 'column': 14}, {'line': 56, 'column': 14}]}), 'test/unit/commands/v2new/ui-test.js': defaultdict(<class 'list'>, {0: [{'line': 267, 'column': 23}, {'line': 285, 'column': 23}, {'line': 357, 'column': 23}, {'line': 375, 'column': 23}]})})
+2025-08-30 20:58:01,836 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/builtins/deploy-delegates/cfn-deployer/helper.js
+2025-08-30 20:58:03,241 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:03,244 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/clients/aws-client/s3-client.js
+2025-08-30 20:58:04,256 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:04,258 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/clients/smapi-client/resources/isp.js
+2025-08-30 20:58:05,178 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:05,180 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/commands/api/account-linking/set-account-linking/ui.js
+2025-08-30 20:58:06,554 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:06,555 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/commands/api/history/intent-requests-history/helper.js
+2025-08-30 20:58:07,783 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:07,786 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/commands/api/isp/list-isp-for-vendor/index.js
+2025-08-30 20:58:08,909 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:08,911 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/commands/init/ui.js
+2025-08-30 20:58:10,236 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:10,238 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/commands/abstract-command.js
+2025-08-30 20:58:11,382 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:11,384 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/controllers/skill-code-controller/index.js
+2025-08-30 20:58:12,419 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:12,420 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/utils/stream-utility.js
+2025-08-30 20:58:13,408 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:13,409 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/utils/string-utils.js
+2025-08-30 20:58:13,410 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/utils/string-utils.js
+2025-08-30 20:58:14,949 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:15,829 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:15,834 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/test/unit/commands/v2new/ui-test.js
+2025-08-30 20:58:15,838 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/test/unit/commands/v2new/ui-test.js
+2025-08-30 20:58:15,840 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/test/unit/commands/v2new/ui-test.js
+2025-08-30 20:58:15,843 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/test/unit/commands/v2new/ui-test.js
+2025-08-30 20:58:16,992 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:17,896 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:18,944 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:19,764 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:19,767 | DEBUG | repair.ask-cli-x | Updated package.json saved at /async/results/gpt-4.1/ask-cli-x/package.json
+2025-08-30 20:58:19,767 | INFO | repair.ask-cli-x | END pattern 0 (pattern_0)
+2025-08-30 20:58:19,768 | INFO | repair.ask-cli-x | ============================================================
+2025-08-30 20:58:19,768 | INFO | repair.ask-cli-x | BEGIN pattern 2 (pattern_2)
+2025-08-30 20:58:19,769 | DEBUG | repair.ask-cli-x | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{drain,saturated,unsaturated,empty,error}", "changelogId": 2}
+2025-08-30 20:58:21,265 | INFO | repair.ask-cli-x | Tapir run successful for /async/results/gpt-4.1/ask-cli-x
+2025-08-30 20:58:21,265 | DEBUG | repair.ask-cli-x | Parsed detection output: [{'pattern_id': 2, 'file': 'lib/view/multi-tasks-view.js', 'line': 62, 'column': 20}, {'pattern_id': 2, 'file': 'lib/view/multi-tasks-view.js', 'line': 64, 'column': 20}]
+2025-08-30 20:58:21,265 | DEBUG | repair.ask-cli-x | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b72e0>, {'lib/view/multi-tasks-view.js': defaultdict(<class 'list'>, {2: [{'line': 62, 'column': 20}, {'line': 64, 'column': 20}]})})
+2025-08-30 20:58:21,266 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/view/multi-tasks-view.js
+2025-08-30 20:58:22,330 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": false,
+  "modified_code": "",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:22,333 | DEBUG | repair.ask-cli-x | Updated package.json saved at /async/results/gpt-4.1/ask-cli-x/package.json
+2025-08-30 20:58:22,333 | INFO | repair.ask-cli-x | END pattern 2 (pattern_2)
+2025-08-30 20:58:22,334 | INFO | repair.ask-cli-x | ============================================================
+2025-08-30 20:58:22,334 | INFO | repair.ask-cli-x | BEGIN pattern 3 (pattern_3)
+2025-08-30 20:58:22,334 | DEBUG | repair.ask-cli-x | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{eachOfLimit*,each*,eachSeries*,compose*,seq*,waterfall*,auto*,autoInject*,whilst*,until*,forever*}", "changelogId": 3}
+2025-08-30 20:58:23,667 | INFO | repair.ask-cli-x | Tapir run successful for /async/results/gpt-4.1/ask-cli-x
+2025-08-30 20:58:23,667 | DEBUG | repair.ask-cli-x | Parsed detection output: []
+2025-08-30 20:58:23,667 | DEBUG | repair.ask-cli-x | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7420>, {})
+2025-08-30 20:58:23,667 | DEBUG | repair.ask-cli-x | Updated package.json saved at /async/results/gpt-4.1/ask-cli-x/package.json
+2025-08-30 20:58:23,667 | INFO | repair.ask-cli-x | END pattern 3 (pattern_3)
+2025-08-30 20:58:23,668 | INFO | repair.ask-cli-x | ============================================================
+2025-08-30 20:58:23,668 | INFO | repair.ask-cli-x | BEGIN pattern 4 (pattern_4)
+2025-08-30 20:58:23,668 | DEBUG | repair.ask-cli-x | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{during,doDuring,whilst,doWhilst,until,doUntil}", "changelogId": 4}
+2025-08-30 20:58:24,996 | INFO | repair.ask-cli-x | Tapir run successful for /async/results/gpt-4.1/ask-cli-x
+2025-08-30 20:58:24,996 | DEBUG | repair.ask-cli-x | Parsed detection output: [{'pattern_id': 4, 'file': 'lib/clients/smapi-client/index.js', 'line': 104, 'column': 8}, {'pattern_id': 4, 'file': 'lib/utils/retry-utility.js', 'line': 36, 'column': 4}]
+2025-08-30 20:58:24,996 | DEBUG | repair.ask-cli-x | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7420>, {'lib/clients/smapi-client/index.js': defaultdict(<class 'list'>, {4: [{'line': 104, 'column': 8}]}), 'lib/utils/retry-utility.js': defaultdict(<class 'list'>, {4: [{'line': 36, 'column': 4}]})})
+2025-08-30 20:58:24,997 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/clients/smapi-client/index.js
+2025-08-30 20:58:27,671 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "listWithAutoPagination(callApiTrack, callArgv, responseAccessor, responseHandle, callback) {\n        const result = {};\n        result[responseAccessor] = [];\n        const queryParams = {\n            maxResults: CONSTANTS.SMAPI.DEFAULT_MAX_RESULT_PER_PAGE,\n        };\n        const smapiMethod = R.path(callApiTrack, this);\n\n        async.doWhilst(\n            (loopCallback) => {\n                smapiMethod(...callArgv, queryParams, (err, res) => {\n                    if (err) {\n                        return loopCallback(err, null);\n                    }\n                    if (res.statusCode >= 300) {\n                        // TODO stringify the body\n                        return loopCallback(res.body, null);\n                    }\n                    const parseResult = responseHandle(res);\n                    queryParams.nextToken = parseResult.nextToken;\n                    result[responseAccessor] = result[responseAccessor].concat(parseResult.listResult);\n                    loopCallback(null, result);\n                });\n            },\n            (value, cb) => cb(null, queryParams.nextToken), // Refactored: test argument is now asynchronous as required in async v3.x\n            (err, res) => callback(err, err ? null : res)\n        );\n    }",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:27,673 | INFO | repair.ask-cli-x | Replaced code in /async/results/gpt-4.1/ask-cli-x/lib/clients/smapi-client/index.js at [4387, 5561]
+2025-08-30 20:58:27,675 | INFO | repair.ask-cli-x | New context extracted from /async/results/gpt-4.1/ask-cli-x/lib/utils/retry-utility.js
+2025-08-30 20:58:32,614 | DEBUG | repair.ask-cli-x | AI repair suggestion: {
+  "repairFlag": true,
+  "modified_code": "function retry(retryConfig, retryCall, shouldRetryCondition, callback) {\n    let lastResponse;\n    if (!retryConfig) {\n        return callback('[Error]: Invalid retry configuration. Retry configuration with values - base, factor and maxRetry needs to be specified');\n    }\n    if (!retryConfig.base || retryConfig.base < 0) {\n        return callback('[Error]: Invalid retry configuration: base. Base is a required configuration and its value needs to be greater than 0');\n    }\n    if (!retryConfig.factor || retryConfig.factor < 0) {\n        return callback('[Error]: Invalid retry configuration: factor. Factor is a required configuration and its value needs to be greater than 0');\n    }\n    if (!retryConfig.maxRetry) {\n        return callback('[Error]: Invalid retry configuration: maxRetry. '\n            + 'MaxRetry is a required configuration and its value needs to be greater than 0');\n    }\n    if (!(Number.isInteger(retryConfig.maxRetry) && retryConfig.maxRetry > 0)) {\n        return callback('[Error]: Invalid retry configuration: maxRetry. Value needs to be an integer and greater than 0');\n    }\n    let pollCount = -1;\n    async.doWhilst(\n        (loopCallback) => {\n            let retryInterval = retryConfig.base * (Math.pow(retryConfig.factor, pollCount++));\n            // The very first call is not a retry and hence should not be penalised with a timeout.\n            if (pollCount === 0) {\n                retryInterval = 0;\n            }\n            setTimeout(\n                () => {\n                    retryCall((err, res) => {\n                        lastResponse = res;\n                        loopCallback(err, err ? null : res);\n                    });\n                },\n                retryInterval\n            );\n        },\n        /*\n        BREAKING CHANGE PATCH:\n        Refactor test argument of async.doWhilst to be asynchronous:\n        Old (synchronous): () => condition\n        New (async): (value, cb) => cb(null, condition)\n        Here, previous test: () => { if (...) { return shouldRetryCondition(lastResponse); } return false; }\n        - The test receives the value from the iteratee and a callback.\n        - We call cb(null, shouldRetryCondition(lastResponse)) if applicable.\n        */\n        (value, cb) => {\n            if (!retryConfig.maxRetry || retryConfig.maxRetry > pollCount) {\n                cb(null, shouldRetryCondition(lastResponse));\n            } else {\n                cb(null, false);\n            }\n        },\n        (err, res) => {\n            if (retryConfig.maxRetry && retryConfig.maxRetry <= pollCount) {\n                return callback('[Error]: Retry attempt exceeded.', res);\n            }\n            callback(err, err ? null : res);\n        }\n    );\n}",
+  "additional_req": "",
+  "dependencies": []
+}
+2025-08-30 20:58:32,616 | INFO | repair.ask-cli-x | Replaced code in /async/results/gpt-4.1/ask-cli-x/lib/utils/retry-utility.js at [796, 3013]
+2025-08-30 20:58:32,618 | DEBUG | repair.ask-cli-x | Updated package.json saved at /async/results/gpt-4.1/ask-cli-x/package.json
+2025-08-30 20:58:32,618 | INFO | repair.ask-cli-x | END pattern 4 (pattern_4)
+2025-08-30 20:58:32,619 | INFO | repair.ask-cli-x | ============================================================
+2025-08-30 20:58:32,619 | INFO | repair.ask-cli-x | BEGIN pattern 5 (pattern_5)
+2025-08-30 20:58:32,619 | DEBUG | repair.ask-cli-x | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{queue,mapLimit,eachLimit,filterLimit,reduceLimit,concatLimit,eachOfLimit,forEachOfLimit,groupByLimit}", "changelogId": 5}
+2025-08-30 20:58:33,942 | INFO | repair.ask-cli-x | Tapir run successful for /async/results/gpt-4.1/ask-cli-x
+2025-08-30 20:58:33,943 | DEBUG | repair.ask-cli-x | Parsed detection output: []
+2025-08-30 20:58:33,943 | DEBUG | repair.ask-cli-x | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7420>, {})
+2025-08-30 20:58:33,943 | DEBUG | repair.ask-cli-x | Updated package.json saved at /async/results/gpt-4.1/ask-cli-x/package.json
+2025-08-30 20:58:33,943 | INFO | repair.ask-cli-x | END pattern 5 (pattern_5)
+2025-08-30 20:58:33,944 | INFO | repair.ask-cli-x | ============================================================
+2025-08-30 20:58:33,944 | INFO | repair.ask-cli-x | BEGIN pattern 6 (pattern_6)
+2025-08-30 20:58:33,944 | DEBUG | repair.ask-cli-x | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{memoize}", "changelogId": 6}
+2025-08-30 20:58:35,247 | INFO | repair.ask-cli-x | Tapir run successful for /async/results/gpt-4.1/ask-cli-x
+2025-08-30 20:58:35,248 | DEBUG | repair.ask-cli-x | Parsed detection output: []
+2025-08-30 20:58:35,248 | DEBUG | repair.ask-cli-x | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7420>, {})
+2025-08-30 20:58:35,250 | DEBUG | repair.ask-cli-x | Updated package.json saved at /async/results/gpt-4.1/ask-cli-x/package.json
+2025-08-30 20:58:35,250 | INFO | repair.ask-cli-x | END pattern 6 (pattern_6)
+2025-08-30 20:58:35,250 | INFO | repair.ask-cli-x | ============================================================
+2025-08-30 20:58:35,250 | INFO | repair.ask-cli-x | BEGIN pattern 7 (pattern_7)
+2025-08-30 20:58:35,250 | DEBUG | repair.ask-cli-x | Pattern payload: {"type": "call", "pattern": "call {<async>,<async/**/*>}?**.{applyEach,applyEachSeries}", "changelogId": 7}
+2025-08-30 20:58:36,544 | INFO | repair.ask-cli-x | Tapir run successful for /async/results/gpt-4.1/ask-cli-x
+2025-08-30 20:58:36,544 | DEBUG | repair.ask-cli-x | Parsed detection output: []
+2025-08-30 20:58:36,544 | DEBUG | repair.ask-cli-x | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7420>, {})
+2025-08-30 20:58:36,545 | DEBUG | repair.ask-cli-x | Updated package.json saved at /async/results/gpt-4.1/ask-cli-x/package.json
+2025-08-30 20:58:36,545 | INFO | repair.ask-cli-x | END pattern 7 (pattern_7)
+2025-08-30 20:58:36,545 | INFO | repair.ask-cli-x | ============================================================
+2025-08-30 20:58:36,545 | INFO | repair.ask-cli-x | BEGIN pattern 8 (pattern_8)
+2025-08-30 20:58:36,545 | DEBUG | repair.ask-cli-x | Pattern payload: {"type": "import", "pattern": "import {async.mjs}", "changelogId": 8}
+2025-08-30 20:58:37,868 | INFO | repair.ask-cli-x | Tapir run successful for /async/results/gpt-4.1/ask-cli-x
+2025-08-30 20:58:37,868 | DEBUG | repair.ask-cli-x | Parsed detection output: []
+2025-08-30 20:58:37,868 | DEBUG | repair.ask-cli-x | Arranged locations: defaultdict(<function arrangeLocations.<locals>.<lambda> at 0x1229b7420>, {})
+2025-08-30 20:58:37,869 | DEBUG | repair.ask-cli-x | Updated package.json saved at /async/results/gpt-4.1/ask-cli-x/package.json
+2025-08-30 20:58:37,869 | INFO | repair.ask-cli-x | END pattern 8 (pattern_8)
+2025-08-30 20:58:37,869 | DEBUG | repair.ask-cli-x | Updated package.json saved at /async/results/gpt-4.1/ask-cli-x/package.json
+2025-08-30 20:58:37,869 | INFO | repair.ask-cli-x | token consumed 32519
+2025-08-30 20:58:37,870 | INFO | repair.ask-cli-x | parse consumption time: 26.55813358630985

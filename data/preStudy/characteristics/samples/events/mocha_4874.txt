@@ -1,0 +1,7 @@
+{
+  "owner": "mochajs",
+  "repo": "mocha",
+  "number": 4874,
+  "pr_url": "https://github.com/mochajs/mocha/pull/4874",
+  "content": "# PR 4874: ESM: remove code for Node v12\nBranches: juergba/esm-cleanup -> master\n\n### Description\r\n\r\nNode version v12 has been dropped in #4845.\r\n\r\nWe remove ESM code which adressed Node versions <= 12.\r\n\n\n## Commit titles\n- chore(esm): remove code for Node v12\n- various\n\n## Changed files\n- lib/nodejs/esm-utils.js\n- test/integration/diffs.spec.js\n- test/integration/glob.spec.js\n- test/integration/no-diff.spec.js\n## Issue comments\n- @coveralls: [![Coverage Status](https://coveralls.io/builds/48415653/badge)](https://coveralls.io/builds/48415653)\n\nCoverage decreased (-0.008%) to 94.328% when pulling **15353fe82677ff84999155f402abaf0b7a2559cf on juergba/esm-cleanup** into **59f619227428e22265b26d3788505d6e081c0e2a on master**.\n## Reviews\n- @outsideris [APPROVED]"
+}

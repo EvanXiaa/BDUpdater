@@ -1,0 +1,7 @@
+{
+  "owner": "floatdrop",
+  "repo": "gulp-watch",
+  "number": 233,
+  "pr_url": "https://github.com/floatdrop/gulp-watch/pull/233",
+  "content": "# PR 233: Passing a directory path implicitly watches directory contents, undoes accidental breaking change and fixes #229\nBranches: dir-depth -> master\n\nAlso refactor event filtering and add logging for unexpected watched files.\n\n\n## Commit titles\n- Passing a directory path implicitly watches directory contents, undoes accidental breaking change and fixes #229\n- Fix absolute paths outside opts.cwd\n- Always resolve globs, fixes opts.cwd\n- Tests: improve cwd option tests\n\n## Changed files\n- index.js\n- package.json\n- test/test-cwd.js\n- test/test-dir.js\n## Review comments\n- @UltCombo: TODO: https://github.com/floatdrop/gulp-watch/issues/229#issuecomment-226092111\n- @UltCombo: NOTE: this is the correct behavior; it aligns with gulp-watch <= 4.3.5 as well as gulp 4's `gulp.watch`.\n- @UltCombo: Done. https://github.com/floatdrop/gulp-watch/issues/229#issuecomment-226969325"
+}
